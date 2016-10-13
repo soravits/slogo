@@ -1,3 +1,5 @@
+I worked with Addison Howenstine and Alex Zastaldani
+
 ### Part One
 
 ##### Question One
