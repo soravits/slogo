@@ -20,13 +20,13 @@ Both: The controller also makes the program more flexible because the data being
 1. Use Cases:
     1. User changes background color: Chooses color from a combo box. Class with turtle settings uses change listener and updates the UI. 
     2. User changes the language: Chooses language from a combo box. Sends new language to controller (maybe using change listener). Back end has a change listener and updates when language in controller changes. 
-    3. User types a command: When run button is pressed, controller gets object from command line and back end gets object from controller. Back end parses command and controller waits for new data. New data is passed to cooresponding UI.
-    4. User edits variables in workspace: User selects and changes variable. Next time run is clicked, backend updates its workspace.
+    3. User types a command: When run button is pressed, controller gets object from command line and back end gets object from controller. Back end parses command and controller waits for new data. New data is passed to corresponding UI.
+    4. User edits variables in workspace: User selects and changes variable. Next time run is clicked, back end updates its workspace.
     5. User accesses HTML page: Clicks button/link. Another window opens with HTML page.
 	
 2. Binding will help implement our designs because it uses the observer pattern, meaning that a change in the model will automatically update the view rather than having to manually update the view. 
 
-3. Kayla: Excited to change image of the turtle because it gives the user the freedom to make the animation what they want it to be. Diane: Excited to implement the visualiztion of the turtle. 
+3. Kayla: Excited to change image of the turtle because it gives the user the freedom to make the animation what they want it to be. Diane: Excited to implement the visualization of the turtle. 
 
-4. Kayla: Worried about presenting errors in a user friendly way because current design involves highlighting lines with errors and creating a mirrored box that tells the user the error. Diane: Worried about figuring out what data and in what format is needed from the backend. 
+4. Kayla: Worried about presenting errors in a user friendly way because current design involves highlighting lines with errors and creating a mirrored box that tells the user the error. Diane: Worried about figuring out what data and in what format is needed from the back end. 
 
