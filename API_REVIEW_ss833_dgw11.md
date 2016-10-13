@@ -3,7 +3,7 @@
 
 #### Authors: Soravit Sophastienphong, Tripp Whaley
 #### Project: SLogo
-#### Team Numbers: 4, 12
+#### Team Numbers: 17, 12
 
 ### Soravit Sophastienphong
 #### Part 1
