@@ -1,3 +1,7 @@
+
+I worked with Addison Howenstine and Alex Zastaldani
+
+
 ### Part One
 
 ##### Question One
@@ -13,7 +17,7 @@
 
 ##### Question Three
 
-* Not a method –– don’t do anything –– throwing a null
+* Not a method ï¿½ï¿½ donï¿½t do anything ï¿½ï¿½ throwing a null
 * Calling an unknown variable
 * Throw a specific error and have the front end use try/catch to check for this error and throw
 
@@ -40,8 +44,8 @@
 ##### Question Three
 
 * Parsing working well with the backend internal methods
-* Use observers/observable to integrate the front end and back end to work such that the back end doesn’t need to worry about the front end
+* Use observers/observable to integrate the front end and back end to work such that the back end doesnï¿½t need to worry about the front end
 
 ##### Question Four
 
-* Control methods – for loops
+* Control methods ï¿½ for loops
