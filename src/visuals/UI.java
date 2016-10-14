@@ -17,7 +17,8 @@ import javafx.scene.paint.Color;
 
 public class UI {
 	
-	private ResourceBundle resources;
+	private ResourceBundle uiResources;
+	private HelpWindowUI helpWindowUI;
 	private int xSize, ySize;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
@@ -27,7 +28,7 @@ public class UI {
 	 * constructor to set the size of the window and set the resource bundle to use
 	 */
 	public UI(int xSize, int ySize) {
-		this.resources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+		this.uiResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 		this.xSize = xSize;
 		this.ySize = ySize;
 	}
@@ -41,6 +42,9 @@ public class UI {
 		Group root = new Group();
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
+		
+		helpWindowUI = new HelpWindowUI(uiResources);
+		root.getChildren().add(helpWindowUI.getRoot());
 		
 		return scene;
 		
