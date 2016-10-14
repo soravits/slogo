@@ -1,19 +1,22 @@
+package visuals;
 import javafx.scene.Group;
 
 /**
- * The purpose of this class is to create the root that visualizes the console.
+ * The purpose of this class is to create the root that visualizes the turtle.
  * This root can then be passed to UI to be displayed in the scene
  * 
  * @author Diane Hadley
  */
 
-public interface Console {
+
+public interface Turtle{
 	
 	
 	/*
-	 * returns root with all visualization of console
+	 * returns root with all visualization of turtle
 	 * 
 	 */	
 	public Group getRoot();
+	
 	
 }

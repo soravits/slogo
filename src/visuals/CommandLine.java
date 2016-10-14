@@ -1,3 +1,4 @@
+package visuals;
 import java.util.List;
 import javafx.scene.Group;
 
