@@ -4,7 +4,7 @@ Soravit Sophastienphong, Brian Keohane, Diane Hadley, Pim Chuaylua
 
 ## Introduction
 
-By writing this program, the team will allow any user the ability to write and run Logo code in an integrated development environment. One of the primary design goals of the project is to encapsulate data between the front end and the back end such that making changes to view will not heavily affect the functionality of the model and vice-versa. Additionally, we want our program to be robust and flexible such that we could add additional features without making major changes to the existing code. In the view, we have a JavaFX window with the command line through which the program receives user input. The view sends this input to the controller in the back-end, which parses the text, interprets the command, and updates the state of the model before sending the data back to the front-end to update the model graphically. When the back-end gets a command from the front-end, it checks whether the command is valid considering the available commands. If the command is invalid, then it sends the data back to the front-end to display an error message and move on to the next input. For the most part, the implementation details of each respective external and internal API will be hidden from others, but the data sent between the view and model will be the most open parts of the programís design.
+By writing this program, the team will allow any user the ability to write and run Logo code in an integrated development environment. One of the primary design goals of the project is to encapsulate data between the front end and the back end such that making changes to view will not heavily affect the functionality of the model and vice-versa. Additionally, we want our program to be robust and flexible such that we could add additional features without making major changes to the existing code. In the view, we have a JavaFX window with the command line through which the program receives user input. The view sends this input to the controller in the back-end, which parses the text, interprets the command, and updates the state of the model before sending the data back to the front-end to update the model graphically. When the back-end gets a command from the front-end, it checks whether the command is valid considering the available commands. If the command is invalid, then it sends the data back to the front-end to display an error message and move on to the next input. For the most part, the implementation details of each respective external and internal API will be hidden from others, but the data sent between the view and model will be the most open parts of the program‚Äôs design.
 
 ## Design Overview
 
@@ -14,7 +14,7 @@ Our program is divided up into four APIs: **View Internal**, **View External**, 
 
 *View External* - View External API is mainly responsible of sending data to the back end and receiving data from the backend. 
 
-*Model Internal* - Internally, commands are dealt with via communication between the Controller and the Model. This utilizes the Command Design Pattern. Inside of the controller, the correct command will be constructed after parsing (a black box for now). There will be a command superclass (CommandController) with the interface method ëexecute(Command)í, so the Model (Interpreter?) class will call the CommandController.execute(Command) method. This execute function varies in implementation for each different command, but each command should be constructed by passing in the Model (to be updated) and all of the parameters specified in the expression tree. We still need to work out how to fit this design pattern into the overall architecture of the program. 
+*Model Internal* - Internally, commands are dealt with via communication between the Controller and the Model. This utilizes the Command Design Pattern. Inside of the controller, the correct command will be constructed after parsing (a black box for now). There will be a command superclass (CommandController) with the interface method ‚Äòexecute(Command)‚Äô, so the Model (Interpreter?) class will call the CommandController.execute(Command) method. This execute function varies in implementation for each different command, but each command should be constructed by passing in the Model (to be updated) and all of the parameters specified in the expression tree. We still need to work out how to fit this design pattern into the overall architecture of the program. 
 Each command class will update the model using public setters (Internal API). Additionally, this allows for easy updating of the command history (and the potential to undo commands, which may be useful as a possible extension). 
 
 *Model External* - 
@@ -37,11 +37,11 @@ Various Parts of our GUI Include....
 
 *Language dropdown* - the user can choose the language from the list that he wants to use for the command line
 
-*Turtle screen* - the results of the command line execution are displayed in this screen if the command controls the turtle. The screen will continue showing the turtle and its movements from more commands until the user clicks ìReset turtleî.
+*Turtle screen* - the results of the command line execution are displayed in this screen if the command controls the turtle. The screen will continue showing the turtle and its movements from more commands until the user clicks ‚ÄúReset turtle‚Äù.
 
 *Console* - the results from math operations and non-turtle operations (any operation that prints an answer) are displayed in this space
 
-*Workspace* - the variables that the users work with are shown; they can also be changed when clicked. The Workspace will store all variables until the user clicks ìReset all.î
+*Workspace* - the variables that the users work with are shown; they can also be changed when clicked. The Workspace will store all variables until the user clicks ‚ÄúReset all.‚Äù
 
 *Background color dropdown* - the users can choose the turtle background color from the list here. 
 
@@ -67,7 +67,7 @@ Turtle.getRoot() allows UI to get the root created in Turtle, add the root to th
 
 **View External**
 
-View External API is mainly responsible of sending data to the back end and receiving data from the backend. The data that this API sends to the back end are as follows: language, a data structure containing command lines, changes being made to the variables in the workspace, a reset command called by users. The data to be received from the backend are as follows: result of command line execution with the destinations where they are going to be displayed (either console, workspace or turtle screen). Additionally, this API is able to observe if thereís an error (e.g. from invalid command line) in the backend and then send this to the Internal View API to display the error from the interface. 
+View External API is mainly responsible of sending data to the back end and receiving data from the backend. The data that this API sends to the back end are as follows: language, a data structure containing command lines, changes being made to the variables in the workspace, a reset command called by users. The data to be received from the backend are as follows: result of command line execution with the destinations where they are going to be displayed (either console, workspace or turtle screen). Additionally, this API is able to observe if there‚Äôs an error (e.g. from invalid command line) in the backend and then send this to the Internal View API to display the error from the interface. 
 
 
 **Model Internal**
@@ -116,19 +116,19 @@ Object results = Data.getResults();
 Data.sendToUI(results);
 
 
-*Internal Model Additonal Use Case - User asks to add 2 numbers and store them in variable ëyí*
+*Internal Model Additonal Use Case - User asks to add 2 numbers and store them in variable ‚Äòy‚Äô*
 
 Parse command and create class CommandAdd(num1, num2)
 Call CommandController.executeCommand(command)
 This runs CommandAdd.execute() which returns sum of the 2 numbers
 Next in the expression tree is assigning the number to the variable
-CommandController.executeCommand(CommandVar(num1, ëyí))
+CommandController.executeCommand(CommandVar(num1, ‚Äòy‚Äô))
 ReturnState = CommandVar.execute()
 
 
-*External Model Additional Use Case - The user enters ìdogî, which is an invalid command.*
+*External Model Additional Use Case - The user enters ‚Äúdog‚Äù, which is an invalid command.*
 
-Once the interpreter attempts to instantiate a new instance of dog through its expression tree with interpretCommand(Node n), it will throw an error that the class doesnít actually exist to the front-end. 
+Once the interpreter attempts to instantiate a new instance of dog through its expression tree with interpretCommand(Node n), it will throw an error that the class doesn‚Äôt actually exist to the front-end. 
 
 
 
@@ -140,10 +140,10 @@ Additionally, we also considered if it was excessive to make a class for every s
 
 In terms of the front end, we are still figuring out how Data will give information from the backend to the UI. We have discussed having separate methods for getting each type of command/data which allows the corresponding classes to get the data easily. However, this forces Data to sort where the data needs to go, which is an additional job for an already busy class. The current implementation has Data return all the information from the backend. DataSorter calls the method to get this information and then determines where the information should go. This reduces the size of Data but might be an unnecessary additional step. 
 
-Lastly, there are some inconsistencies in our interfaces/APIís that need to be ironed out in the coming days (the front-end doing work that it does not need to, etc.). We also need to figure out whether or not we should use binding to automatically update the front-end view as the Model values change. We have not figured out yet where to set-up these binding relationships (if needed). There are definitely design patterns that we could incorporate to make our design better (Command, Mediator, etc.), but we will have to discuss them further and see if we can plan well enough before people start implementing.
+Lastly, there are some inconsistencies in our interfaces/API‚Äôs that need to be ironed out in the coming days (the front-end doing work that it does not need to, etc.). We also need to figure out whether or not we should use binding to automatically update the front-end view as the Model values change. We have not figured out yet where to set-up these binding relationships (if needed). There are definitely design patterns that we could incorporate to make our design better (Command, Mediator, etc.), but we will have to discuss them further and see if we can plan well enough before people start implementing.
 
 
 ## Team Responsibilities
 
-Weíve divided the team into two parts, front-end and back-end. In the back-end, Soravit is responsible for the integration between the view and the model, most importantly the controller and the parser while Brian is responsible for developing the model, implementing the commands, and error-checking. In the front end, Diane is responsible for the visualization/UI . Pim is responsible for how command lines are sent to the backend and results of execution of command lines are received from the backend.
+We‚Äôve divided the team into two parts, front-end and back-end. In the back-end, Soravit is responsible for the integration between the view and the model, most importantly the controller and the parser while Brian is responsible for developing the model, implementing the commands, and error-checking. In the front end, Diane is responsible for the visualization/UI . Pim is responsible for how command lines are sent to the backend and results of execution of command lines are received from the backend.
 
