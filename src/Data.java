@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 /**
  *View External API is mainly responsible of sending data to the back end and receiving data from the backend. 
@@ -6,10 +6,7 @@ import java.util.ArrayList;
  */
 public interface Data {
 
-    /**
-     *Add each command the user types to some data structure in the object
-     */
-	public void addCommandToList(String commandString);
+    
 	
 	/**
      *Add the language to the object
