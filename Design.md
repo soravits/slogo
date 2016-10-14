@@ -1,10 +1,27 @@
 Soravit Sophastienphong, Brian Keohane, Diane Hadley, Pim Chuaylua
 
-#Slogo: Design Document
+# Slogo: Design Document
 
-##Introduction
+## Introduction
+
 By writing this program, the team will allow any user the ability to write and run Logo code in an integrated development environment. One of the primary design goals of the project is to encapsulate data between the front end and the back end such that making changes to view will not heavily affect the functionality of the model and vice-versa. Additionally, we want our program to be robust and flexible such that we could add additional features without making major changes to the existing code. In the view, we have a JavaFX window with the command line through which the program receives user input. The view sends this input to the controller in the back-end, which parses the text, interprets the command, and updates the state of the model before sending the data back to the front-end to update the model graphically. When the back-end gets a command from the front-end, it checks whether the command is valid considering the available commands. If the command is invalid, then it sends the data back to the front-end to display an error message and move on to the next input. For the most part, the implementation details of each respective external and internal API will be hidden from others, but the data sent between the view and model will be the most open parts of the program’s design.
 
-##Design Overview
-Our program is divided up into four APIs: View Internal, View External, Model Internal, and Model External. 
+## Design Overview
+
+Our program is divided up into four APIs: **View Internal**, View External, Model Internal, and Model External. 
 View Internal - This API is responsible for the styling of the user interface and settings for changing anything related to how the program looks. This includes windows for the turtle, the command line, the console, and the workspace. The classes in the front end containing the internal API are Turtle, CommandLine, Console, Workspace, TurtleSettings, GeneralSettings, DisplayError, HelpWindow, and Data. Turtle, CommandLine, Console, and Workspace will all have public methods getRoot() that the UI will call and add to the current root in order to complete the visualization. CommandLine will also have a method getCommand() which will return a List and Data will call this method. TurtleSettings will contain public methods getBackgroundColor(), getPenColor(), getTurtleImage(), and getRoot() which the UI will call to implement those settings in the scene and insert the comboboxes for those settings. GeneralSettings will contain public method getLanguage() which Data will call and getRoot() which UI will call. DisplayError will contain public method displayErrorDialogBox, which the methods in TurtleSettings will call. HelpWindow will contain public method getRoot(). Data will pass information to the DataSorterr after a command is performed. It will contain the public method getResultsFromController(). DataSorter will then pass information to each corresponding part of the visualization. It will contain public methods getTurtleData(), getConsoleDate(), and getWorkspaceData(). 
+
+View External - View External API is mainly responsible of sending data to the back end and receiving data from the backend. 
+Model Internal - 
+Internally, commands are dealt with via communication between the Controller and the Model. This utilizes the Command Design Pattern. Inside of the controller, the correct command will be constructed after parsing (a black box for now). There will be a command superclass (CommandController) with the interface method ‘execute(Command)’, so the Model (Interpreter?) class will call the CommandController.execute(Command) method. This execute function varies in implementation for each different command, but each command should be constructed by passing in the Model (to be updated) and all of the parameters specified in the expression tree. We still need to work out how to fit this design pattern into the overall architecture of the program. 
+Each command class will update the model using public setters (Internal API). Additionally, this allows for easy updating of the command history (and the potential to undo commands, which may be useful as a possible extension). 
+Model External - 
+There are two ways in which the Model and View interact: through a controller (or adapter) and directly via a Model Manager class. This is still very much incomplete; we are trying to figure out a way to update the view using ChangeListeners (without needing gets and sets for information).
+The ModelManager class has a number of getters and setters that pass information between itself, the View and the Controller. These include:
+	getTurtleState();
+	getVariables();
+	getCommandHistory();
+	getLineState();
+And the corresponding setters for these are called in the command classes that extend the general CommandController class (specified above).
+
+Part of this API essentially acts as the controller and is responsible for the interaction between the front-end and the back-end of the program. The controller creates an instance of a Parser that parses the string received from the view and creates an expression tree for each command. Each tree is sent to the Interpreter class, which stores it in a priority queue and interprets the commands to call methods from the internal model. The classes in this API include but are not limited to: Controller, Parser, and Interpreter. The data structures used are trees and queues. 
