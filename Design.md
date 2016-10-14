@@ -29,21 +29,33 @@ Part of this API essentially acts as the controller and is responsible for the i
 
 ## User Interface
 
-The link to our front end design can be found <a href="https://gomockingbird.com/projects/lfxknge/0T48t0" title="here."></a>
+The link to our front end design can be found [here](https://gomockingbird.com/projects/lfxknge/0T48t0)
 
 Various Parts of our GUI Include....
-*Help - opens a new window that contains a list of commands and what they do. 
-*Language dropdown - the user can choose the language from the list that he wants to use for the command line
-*Turtle screen - the results of the command line execution are displayed in this screen if the command controls the turtle. The screen will continue showing the turtle and its movements from more commands until the user clicks “Reset turtle”.
-*Console - the results from math operations and non-turtle operations (any operation that prints an answer) are displayed in this space
-*Workspace - the variables that the users work with are shown; they can also be changed when clicked. The Workspace will store all variables until the user clicks “Reset all.”
-*Background color dropdown - the users can choose the turtle background color from the list here. 
-*Pen color - the users can choose the pen color for the turtle from the list here
-*Reset turtle - clear the turtle screen, clear all the past command lines that have to do with the turtle
-*Reset all - clear turtle screen, console, workspace and history
-*Get history -  displays the history of the command lines the users have typed
-*Command lines space - The users type the command lines here; they can type more than one command lines
-*Enter - when pressing enter, all command lines are submitted to be executed once
+
+*Help* - opens a new window that contains a list of commands and what they do. 
+
+*Language dropdown* - the user can choose the language from the list that he wants to use for the command line
+
+*Turtle screen* - the results of the command line execution are displayed in this screen if the command controls the turtle. The screen will continue showing the turtle and its movements from more commands until the user clicks “Reset turtle”.
+
+*Console* - the results from math operations and non-turtle operations (any operation that prints an answer) are displayed in this space
+
+*Workspace* - the variables that the users work with are shown; they can also be changed when clicked. The Workspace will store all variables until the user clicks “Reset all.”
+
+*Background color dropdown* - the users can choose the turtle background color from the list here. 
+
+*Pen color* - the users can choose the pen color for the turtle from the list here
+
+*Reset turtle* - clear the turtle screen, clear all the past command lines that have to do with the turtle
+
+*Reset all* - clear turtle screen, console, workspace and history
+
+*Get history* -  displays the history of the command lines the users have typed
+
+*Command lines space* - The users type the command lines here; they can type more than one command lines
+
+*Enter* - when pressing enter, all command lines are submitted to be executed once
 
 
 ## API Details
@@ -59,12 +71,14 @@ View External API is mainly responsible of sending data to the back end and rece
 
 
 **Model Internal**
+
 Inside the model, communication occurs between the Interpreter class, the Command Class, and the Model Class. From the controller and using a Queue of actions (stored using an expression tree), the correct Command Class is instantiated, then passed to the Command Controller. This Command Controller calls the public method executeCommand(), and each command has the method execute() that is called and implements the correct implementation.
 A variety of public methods that update, remove, and overwrite data in the different State Classes (TurtleState, LineState, etc.) are also part of this API. These methods are useful because they make it easy to add on extensions such as multiple turtles, different line-styles, etc. 
 To check for errors, the method in Interpreter that gets all of the variables to pass to the Command will throw a NullVariableException if set of variables does not contain the specified variable input. Another error we will throw is an InvalidCommandError; this will be thrown when the string being parsed cannot be found in the resource file. We anticipate that additional errors will need to be thrown, but we have not figure them out yet. They should be able to be added easily enough.
 
 
 **Model External**
+
 In order for the back-end of our project to communicate with the front-end, we need to have a controller that can facilitate the exchange of data between the two. This is imperative to allowing our program to support the feature stated in the assignment specification of receiving, parsing, and executing a set of commands. This API will take advantage of powerful Java techniques including regular expressions and reflection to parse commands, interpret them, and apply them to our model. Moreover, since this API defines the way user input is parsed, then it can be extended to account for additional types of expressions and commands. With regard to the classes needed for this API, we will start with the Parser class. This class is important in allowing us to determine the validity of the received input and translate it to English. It is also responsible for creating the expression tree for each command. The Interpreter class then stores these expression trees in a queue to be translated into actual method calls. The Controller class is important because it instantiates instances of the Parser and Interpreter class and acts as a facilitator of the two.
 The way that the front-end gets information from the back-end is via the gets in the Model class public API. 
 
@@ -76,18 +90,18 @@ General Use Case: The user types 'fd 50' in the command window, and sees the tur
 Data.addCommand(userCommandInput) (Data Class getting the command the users type in string on the UI)
 String s=Data.getCommand(); (The backend gets the the string from Data Class (External View))
 
-The following steps occur in the back-end model
-parser.parseInput(s) (Parser Class)<br />
-parser.createCommandTree(s) (Parser Class)
-Class<?> newClass = Class.forName(commandQueue.dequeue().getValue()); (Interpreter Class)
-Constructor<?> constructor = newClass.getConstructor(Integer.class); (Interpreter Class)
-Command CommandFD = new CommandFD(50, myModel);
-CommandController.executeCommand(CommandFD);
-CommandFD.execute();
-Data.addResultsFromController() (Data class gets information from backend and stores in an object)
-Object o = Data.getResultsFromController (In DataSorter. Gets information from Data and then sorts it)
-Object o = DataSorter.getTurtleData (in Turtle. Private methods add to root)
-Group turtleRoot = Turtle.getRoot() (UI displays turtle)
+The following steps occur in the back-end model:
+1. parser.parseInput(s) (Parser Class)<br />
+2. parser.createCommandTree(s) (Parser Class)
+3. Class<?> newClass = Class.forName(commandQueue.dequeue().getValue()); (Interpreter Class)
+4. Constructor<?> constructor = newClass.getConstructor(Integer.class); (Interpreter Class)
+5. Command CommandFD = new CommandFD(50, myModel);
+6. CommandController.executeCommand(CommandFD);
+7. CommandFD.execute();
+8. Data.addResultsFromController() (Data class gets information from backend and stores in an object)
+9. Object o = Data.getResultsFromController (In DataSorter. Gets information from Data and then sorts it)
+10. Object o = DataSorter.getTurtleData (in Turtle. Private methods add to root)
+11. Group turtleRoot = Turtle.getRoot() (UI displays turtle)
 
 
 *Internal View Additional Use Case - The user sets the color of the turtle background*
