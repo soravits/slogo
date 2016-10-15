@@ -1,10 +1,21 @@
-
-
-.helpcontrol{
-  -fx-font-size: 15; 
+.root{
   -fx-base: #ffffff;
-  -fx-background-radius: 5;
-  -fx-pref-width: 120;
-  -fx-pref-height: 40;
+  -fx-background-radius: 3;
 }
 
+.helpcontrol{
+  -fx-font-size: 15;  
+  -fx-pref-width: 120;
+  -fx-pref-height: 35;
+}
+
+.turtleclass{
+  -fx-pref-height: 20;
+}
+
+.generalcontrol{
+  -fx-font-size: 15;  
+  -fx-pref-width: 200;
+  -fx-pref-height: 35;
+
+}

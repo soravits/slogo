@@ -9,8 +9,6 @@ import javafx.scene.paint.Color;
  * 
  * The purpose of this class is to display the interface that the user interacts with.
  * 
- * 
- * 
  * @author Diane Hadley
  */
 
@@ -20,6 +18,10 @@ public class UI {
 	private ResourceBundle uiResources;
 	private HelpWindowUI helpWindowUI;
 	private Turtle turtle;
+	private TurtleSettings turtleSettings;
+	private GeneralSettings generalSettings;
+	
+	private Group root = new Group();
 	private int xSize, ySize;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
@@ -40,22 +42,30 @@ public class UI {
 	 */
 	public Scene init(){
 		
-		Group root = new Group();
+		
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
 		helpWindowUI = new HelpWindowUI(uiResources);
-		root.getChildren().add(helpWindowUI.getRoot());
-		
-		turtle = new Turtle();
-		root.getChildren().add(turtle.getRoot());
+		turtleSettings = new TurtleSettings(uiResources, this);
+		root.getChildren().add(turtleSettings.getRoot());
 		
 		
+		turtle = new Turtle(turtleSettings);	
+		generalSettings = new GeneralSettings(uiResources);
+		
+		
+		
+		
+		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
+				generalSettings.getRoot());
 		return scene;
-		
 		
 	}
 	
+	public void addTurtleToRoot(){
+		turtle.getRoot();
+	}
 	
 	
 }
