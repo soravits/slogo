@@ -22,6 +22,8 @@ public class HelpWindowUI{
 	private Group root = new Group();
 	private ResourceBundle helpResources;
 	
+	private static final String HTML_FILE_NAME = "resources/HelpWindow.html";
+	
 	private Button helpButton;
 	private final int helpButtonX = 10;
 	private final int helpButtonY = 10;
@@ -46,7 +48,6 @@ public class HelpWindowUI{
 	}
 	
 	private void makeButton(){
-
 		helpButton = new Button(helpResources.getString("HelpButton"));
 		addActionToButton();
 		root.getChildren().add(formatControl(helpButton, helpButtonX, helpButtonY));
@@ -63,9 +64,10 @@ public class HelpWindowUI{
 	
 	private void openHelpWindow(){
 		WebView helpWindow = new WebView();
-		URL url = getClass().getResource("resources/helpWindow.html");
+		URL url = getClass().getClassLoader().getResource(HTML_FILE_NAME);
 		helpWindow.getEngine().load(url.toString());
 		Stage stage = new Stage();
+		stage.setResizable(true);
 		Scene scene = new Scene(helpWindow);		
 		stage.setScene(scene);
 		stage.show();
