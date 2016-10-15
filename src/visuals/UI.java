@@ -19,6 +19,7 @@ public class UI {
 	
 	private ResourceBundle uiResources;
 	private HelpWindowUI helpWindowUI;
+	private Turtle turtle;
 	private int xSize, ySize;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
@@ -45,6 +46,10 @@ public class UI {
 		
 		helpWindowUI = new HelpWindowUI(uiResources);
 		root.getChildren().add(helpWindowUI.getRoot());
+		
+		turtle = new Turtle();
+		root.getChildren().add(turtle.getRoot());
+		
 		
 		return scene;
 		
