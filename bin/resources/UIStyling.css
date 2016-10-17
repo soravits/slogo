@@ -9,13 +9,17 @@
   -fx-pref-height: 35;
 }
 
+.helpcontrol:hover{
+  -fx-base: #f0efef;
+}
+
 .turtleclass{
   -fx-pref-height: 20;
 }
 
 .generalcontrol{
   -fx-font-size: 15;  
-  -fx-pref-width: 200;
+  -fx-pref-width: 150;
   -fx-pref-height: 35;
 
 }

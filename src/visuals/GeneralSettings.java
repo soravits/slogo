@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
-import javafx.scene.shape.Rectangle;
 
 
 /**
@@ -56,14 +55,14 @@ public class GeneralSettings{
 	private void makeLanguageComboBox(){
 		
 		ObservableList<String> languageOptions = FXCollections.observableArrayList(
-				generalResources.getString("Chinese"), generalResources.getString("English"),
+				generalResources.getString("English"), generalResources.getString("Chinese"),
 				generalResources.getString("French"), generalResources.getString("German"),
 				generalResources.getString("Italian"), generalResources.getString("Portuguese"),
 				generalResources.getString("Russian"), generalResources.getString("Spanish"));		
 		
 		
 		languageComboBox = new ComboBox<String>(languageOptions);
-		//backgroundComboBox.setValue(turtleResources.getString());
+		languageComboBox.setValue(generalResources.getString("English"));
 		
 		
 		

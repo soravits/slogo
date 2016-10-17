@@ -1,4 +1,6 @@
 package visuals;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -7,11 +9,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Control;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Callback;
 
 /**
  * 
@@ -29,12 +35,13 @@ public class TurtleSettings{
 	private Group root = new Group();
 	private ResourceBundle turtleResources;	
 	private UI ui;
-	//private Turtle turtle;
-	private ComboBox<Rectangle> backgroundComboBox;
+	private ComboBox<Color> backgroundComboBox;
+	
+	private static int COLOR_RECT_WIDTH = 75;
+	private static int COLOR_RECT_HEIGHT = 20;
 	
 	public TurtleSettings(ResourceBundle resources, UI ui){
 		this.turtleResources = resources;
-		//this.turtle = turtle;
 		this.ui = ui;
 	}
 	
@@ -55,10 +62,8 @@ public class TurtleSettings{
 	 * 
 	 */
 	public Paint getBackgroundColor(){
-		Rectangle colorRect = backgroundComboBox.getSelectionModel().getSelectedItem();
-		return colorRect.getFill();
-//		Color color = Color.WHITE;
-//		return color;
+		Color color = backgroundComboBox.getSelectionModel().getSelectedItem();
+		return color;
 	}
 	
 	
@@ -68,6 +73,8 @@ public class TurtleSettings{
 	public Color getPenColor(){
 		Color color = Color.WHITE;
 		return color;
+		
+		//check type of object its saved in
 	}
 	
 	
@@ -82,17 +89,38 @@ public class TurtleSettings{
 	}
 	
 	private void makeBackgroundColorComboBox(){
-			
-		ObservableList<Rectangle> backgroundOptions = makeColorList();			
+		backgroundComboBox = new ComboBox<Color>();
+		backgroundComboBox.getItems().addAll(Color.WHITE, Color.BLACK, Color.RED, 
+				Color.BLUE, Color.ORANGE, Color.GREEN,
+				Color.ALICEBLUE, Color.ANTIQUEWHITE, 
+				Color.AQUA, Color.AQUAMARINE, Color.AZURE);
 		
+		backgroundComboBox.setCellFactory(new Callback<ListView<Color>, ListCell<Color>>(){
+			@Override public ListCell<Color> call(ListView<Color> p) {
+				return new ListCell<Color>() {
+					private final Rectangle r;
+					{
+						setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+						r = new Rectangle(COLOR_RECT_WIDTH, COLOR_RECT_HEIGHT);
+					}
+					@Override protected void updateItem(Color color, boolean empty) {
+						super.updateItem(color, empty);
+						if (color == null || empty) {
+							setGraphic(null);
+						}
+						else{
+							r.setFill(color);
+							setGraphic(r);
+						}
+					}
+				};
+			}
+		});
 		
-		backgroundComboBox = new ComboBox<Rectangle>(backgroundOptions);
-		//backgroundComboBox.setValue(turtleResources.getString("TurtleBackgroundColor"));
-		
-		backgroundComboBox.setValue(backgroundOptions.get(0));
-		
-		backgroundComboBox.valueProperty().addListener(new ChangeListener<Rectangle>() {
-			@Override public void changed(ObservableValue rect, Rectangle r1, Rectangle r2) {
+		backgroundComboBox.setValue(Color.WHITE);
+				
+		backgroundComboBox.valueProperty().addListener(new ChangeListener<Color>() {
+			@Override public void changed(ObservableValue color, Color c1, Color c2) {
 				ui.addTurtleToRoot();
 			}
 		});
@@ -112,24 +140,5 @@ public class TurtleSettings{
 		return control;
 	}
 	
-	private ObservableList<Rectangle> makeColorList(){
-		
-		ObservableList<Rectangle> colors = FXCollections.observableArrayList();
-		
-		Rectangle rect = new Rectangle();
-		rect.setWidth(75);
-		rect.setHeight(20);
-		rect.setFill(Color.BLUE);	
-		colors.add(rect);
-		
-		Rectangle rect2 = new Rectangle();
-		rect2.setWidth(75);
-		rect2.setHeight(20);
-		rect2.setFill(Color.RED);	
-		colors.add(rect2);
-		
-		return colors;
-		
-	}
 	
 }

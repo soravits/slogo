@@ -41,21 +41,16 @@ public class UI {
 	 * Creates a root and initiates the scene. Main calls this method to start the program.
 	 */
 	public Scene init(){
-		
-		
+				
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
 		helpWindowUI = new HelpWindowUI(uiResources);
 		turtleSettings = new TurtleSettings(uiResources, this);
-		root.getChildren().add(turtleSettings.getRoot());
-		
+		root.getChildren().add(turtleSettings.getRoot());		
 		
 		turtle = new Turtle(turtleSettings);	
 		generalSettings = new GeneralSettings(uiResources);
-		
-		
-		
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot());
