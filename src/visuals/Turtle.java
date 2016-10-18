@@ -34,6 +34,7 @@ public class Turtle{
 	
 	public Turtle(TurtleSettings settings){
 		this.turtleSettings = settings;
+		makeCanvas();
 	}
 	
 	
@@ -42,29 +43,24 @@ public class Turtle{
 	 * 
 	 */	
 	public Pane getRoot(){
-		makeCanvas();
+		setCanvas();
 		return root;
 	}
 	
-	private void makeCanvas(){
-		
+	private void makeCanvas(){		
 		Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-
 		root.setLayoutX(TURTLE_X);
 		root.setLayoutY(TURTLE_Y);
-		
-		Paint color = turtleSettings.getBackgroundColor();
-		
+		GraphicsContext turtleView = turtleCanvas.getGraphicsContext2D();	
+		root.getChildren().add(turtleCanvas);		
+	}
+	
+	
+	private void setCanvas(){
+		Paint color = turtleSettings.getBackgroundColor();		
 		BackgroundFill backgroundColor = new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY);
 		Background background = new Background(backgroundColor);	
 		root.setBackground(background);
-		
-		GraphicsContext turtleView = turtleCanvas.getGraphicsContext2D();
-		
-
-		
-		
-		root.getChildren().add(turtleCanvas);		
 	}
 	
 }

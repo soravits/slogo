@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 /**
@@ -36,23 +37,33 @@ public class TurtleSettings{
 	private ResourceBundle turtleResources;	
 	private UI ui;
 	private ComboBox<Color> backgroundComboBox;
+	private ComboBox<Color> penComboBox;
 	
 	private static int COLOR_RECT_WIDTH = 75;
 	private static int COLOR_RECT_HEIGHT = 20;
+	
+	private static int COLOR_COMBOBOX_X = 550;
+	private static int BACKGROUND_COLOR_COMBOBOX_Y = 100;
+	private static int PEN_COLOR_COMBOBOX_Y = 175;
 	
 	public TurtleSettings(ResourceBundle resources, UI ui){
 		this.turtleResources = resources;
 		this.ui = ui;
 	}
-	
-	
+		
 	
 	/*
 	 * returns the root with all visualizations of 
 	 * how the user can update turtle settings
 	 */
 	public Group getRoot(){
-		makeBackgroundColorComboBox();
+		getBackgroundColorComboBox();
+		addText(COLOR_COMBOBOX_X, BACKGROUND_COLOR_COMBOBOX_Y - 10, 
+				turtleResources.getString("TurtleBackgroundColor"));
+		
+		getPenColorComboBox();
+		addText(COLOR_COMBOBOX_X, PEN_COLOR_COMBOBOX_Y - 10, 
+				turtleResources.getString("TurtlePenColor"));		
 		return root;
 	}
 	
@@ -63,6 +74,7 @@ public class TurtleSettings{
 	 */
 	public Paint getBackgroundColor(){
 		Color color = backgroundComboBox.getSelectionModel().getSelectedItem();
+		//Color color = Color.WHITE;
 		return color;
 	}
 	
@@ -74,28 +86,51 @@ public class TurtleSettings{
 		Color color = Color.WHITE;
 		return color;
 		
-		//check type of object its saved in
 	}
 	
 	
 	/*
 	 * returns an ImageView of an image that was selected by the user
 	 */
-	public ImageView getTurtleImage(){
-		
+	public ImageView getTurtleImage(){		
 		ImageView turtle = new ImageView();
 		return turtle;
 		
 	}
 	
-	private void makeBackgroundColorComboBox(){
+	private void getBackgroundColorComboBox(){
 		backgroundComboBox = new ComboBox<Color>();
-		backgroundComboBox.getItems().addAll(Color.WHITE, Color.BLACK, Color.RED, 
+		makeColorComboBox(backgroundComboBox, Color.WHITE, BACKGROUND_COLOR_COMBOBOX_Y);
+	}
+	
+	private void getPenColorComboBox(){
+		penComboBox = new ComboBox<Color>();
+		makeColorComboBox(penComboBox, Color.BLACK, PEN_COLOR_COMBOBOX_Y);
+	}
+	
+	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int y){	
+		addColorsToComboBox(comboBox);
+		createGraphicsForComboBox(comboBox);	
+		comboBox.setValue(initColor);
+		
+		comboBox.valueProperty().addListener(new ChangeListener<Color>() {
+			@Override public void changed(ObservableValue color, Color c1, Color c2) {
+				ui.addTurtleToRoot();
+			}
+		});		
+		root.getChildren().add(setControlLayout(comboBox, COLOR_COMBOBOX_X, y));		
+	}
+	
+	
+	private void addColorsToComboBox(ComboBox<Color> comboBox){
+		comboBox.getItems().addAll(Color.WHITE, Color.BLACK, Color.RED, 
 				Color.BLUE, Color.ORANGE, Color.GREEN,
 				Color.ALICEBLUE, Color.ANTIQUEWHITE, 
 				Color.AQUA, Color.AQUAMARINE, Color.AZURE);
-		
-		backgroundComboBox.setCellFactory(new Callback<ListView<Color>, ListCell<Color>>(){
+	}
+	
+	private void createGraphicsForComboBox(ComboBox<Color> comboBox){
+		comboBox.setCellFactory(new Callback<ListView<Color>, ListCell<Color>>(){
 			@Override public ListCell<Color> call(ListView<Color> p) {
 				return new ListCell<Color>() {
 					private final Rectangle r;
@@ -116,20 +151,13 @@ public class TurtleSettings{
 				};
 			}
 		});
-		
-		backgroundComboBox.setValue(Color.WHITE);
-				
-		backgroundComboBox.valueProperty().addListener(new ChangeListener<Color>() {
-			@Override public void changed(ObservableValue color, Color c1, Color c2) {
-				ui.addTurtleToRoot();
-			}
-		});
-		
-		
-		
-		root.getChildren().add(setControlLayout(backgroundComboBox, 550, 100));
 	}
 	
+	
+	private void addText(int x, int y, String text) {
+		Text t = new Text(x, y, text);
+		root.getChildren().add(t);
+	}
 	
 	
 	private Control setControlLayout(Control control, int x, int y) {
