@@ -1,12 +1,8 @@
 package visuals;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
@@ -74,7 +70,6 @@ public class TurtleSettings{
 	 */
 	public Paint getBackgroundColor(){
 		Color color = backgroundComboBox.getSelectionModel().getSelectedItem();
-		//Color color = Color.WHITE;
 		return color;
 	}
 	
@@ -83,7 +78,7 @@ public class TurtleSettings{
 	 * returns the selected pen color
 	 */
 	public Color getPenColor(){
-		Color color = Color.WHITE;
+		Color color = penComboBox.getSelectionModel().getSelectedItem();
 		return color;
 		
 	}
