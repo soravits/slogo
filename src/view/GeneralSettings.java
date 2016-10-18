@@ -1,4 +1,4 @@
-package visuals;
+package view;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -16,7 +16,7 @@ import javafx.scene.control.Control;
  * and to return the results of these settings
  * 
  * 
- * @author Diane
+ * @author Diane Hadley
  *
  */
 
@@ -26,6 +26,8 @@ public class GeneralSettings{
 	private ComboBox<String> languageComboBox;
 	private ResourceBundle generalResources;
 	
+	private static int LANGUAGE_COMBOBOX_X = 140;
+	private static int LANGUAGE_COMBOBOX_Y = 10;
 	
 	public GeneralSettings(ResourceBundle resources){
 		generalResources = resources;
@@ -59,14 +61,10 @@ public class GeneralSettings{
 				generalResources.getString("French"), generalResources.getString("German"),
 				generalResources.getString("Italian"), generalResources.getString("Portuguese"),
 				generalResources.getString("Russian"), generalResources.getString("Spanish"));		
-		
-		
+			
 		languageComboBox = new ComboBox<String>(languageOptions);
 		languageComboBox.setValue(generalResources.getString("English"));
-		
-		
-		
-		root.getChildren().add(setControlLayout(languageComboBox, 140, 10));
+		root.getChildren().add(setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y));
 	}
 	
 	private Control setControlLayout(Control control, int x, int y) {

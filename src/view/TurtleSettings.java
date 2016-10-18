@@ -1,4 +1,4 @@
-package visuals;
+package view;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -37,14 +37,15 @@ public class TurtleSettings{
 	
 	private static int COLOR_RECT_WIDTH = 75;
 	private static int COLOR_RECT_HEIGHT = 20;
-	
-	private static int COLOR_COMBOBOX_X = 550;
 	private static int BACKGROUND_COLOR_COMBOBOX_Y = 100;
 	private static int PEN_COLOR_COMBOBOX_Y = 175;
 	
-	public TurtleSettings(ResourceBundle resources, UI ui){
+	private int colorComboBoxX;
+	
+	public TurtleSettings(ResourceBundle resources, int turtleWidth, UI ui){
 		this.turtleResources = resources;
 		this.ui = ui;
+		this.colorComboBoxX = turtleWidth + 20;
 	}
 		
 	
@@ -54,11 +55,11 @@ public class TurtleSettings{
 	 */
 	public Group getRoot(){
 		getBackgroundColorComboBox();
-		addText(COLOR_COMBOBOX_X, BACKGROUND_COLOR_COMBOBOX_Y - 10, 
+		addText(colorComboBoxX, BACKGROUND_COLOR_COMBOBOX_Y - 10, 
 				turtleResources.getString("TurtleBackgroundColor"));
 		
 		getPenColorComboBox();
-		addText(COLOR_COMBOBOX_X, PEN_COLOR_COMBOBOX_Y - 10, 
+		addText(colorComboBoxX, PEN_COLOR_COMBOBOX_Y - 10, 
 				turtleResources.getString("TurtlePenColor"));		
 		return root;
 	}
@@ -113,7 +114,7 @@ public class TurtleSettings{
 				ui.addTurtleToRoot();
 			}
 		});		
-		root.getChildren().add(setControlLayout(comboBox, COLOR_COMBOBOX_X, y));		
+		root.getChildren().add(setControlLayout(comboBox, colorComboBoxX, y));		
 	}
 	
 	

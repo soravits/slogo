@@ -1,4 +1,4 @@
-package visuals;
+package view;
 import java.util.ResourceBundle;
 
 import javafx.scene.Group;
@@ -20,9 +20,13 @@ public class UI {
 	private Turtle turtle;
 	private TurtleSettings turtleSettings;
 	private GeneralSettings generalSettings;
+	private CommandLine commandLine;
 	
 	private Group root = new Group();
 	private int xSize, ySize;
+	
+	private static int TURTLE_CANVAS_HEIGHT = 400;
+	private static int TURTLE_CANVAS_WIDTH = 530;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
@@ -46,14 +50,15 @@ public class UI {
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
 		helpWindowUI = new HelpWindowUI(uiResources);
-		turtleSettings = new TurtleSettings(uiResources, this);
+		turtleSettings = new TurtleSettings(uiResources, TURTLE_CANVAS_WIDTH, this);
 		root.getChildren().add(turtleSettings.getRoot());		
 		
-		turtle = new Turtle(turtleSettings);	
-		generalSettings = new GeneralSettings(uiResources);
+		turtle = new Turtle(turtleSettings, TURTLE_CANVAS_WIDTH, TURTLE_CANVAS_HEIGHT);	
+		generalSettings = new GeneralSettings(uiResources);	
+		commandLine = new CommandLine(TURTLE_CANVAS_HEIGHT, ySize);
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
-				generalSettings.getRoot());
+				generalSettings.getRoot(), commandLine.getRoot());
 		return scene;
 		
 	}

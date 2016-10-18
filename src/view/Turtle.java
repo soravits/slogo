@@ -1,4 +1,4 @@
-package visuals;
+package view;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -6,7 +6,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 /**
@@ -24,16 +23,18 @@ public class Turtle{
 	
 	private static int TURTLE_X = 10;
 	private static int TURTLE_Y = 55;
-	private static int CANVAS_WIDTH = 530;
-	private static int CANVAS_HEIGHT = 400;
+	private int canvasWidth;
+	private int canvasHeight;
 	
 	
 	/*
 	 * initiates Turtle and sets instance of TurtleSettings
 	 */
 	
-	public Turtle(TurtleSettings settings){
+	public Turtle(TurtleSettings settings, int turtleWidth, int turtleHeight){
 		this.turtleSettings = settings;
+		this.canvasWidth = turtleWidth;
+		this.canvasHeight = turtleHeight;		
 		makeCanvas();
 	}
 	
@@ -48,7 +49,7 @@ public class Turtle{
 	}
 	
 	private void makeCanvas(){		
-		Canvas turtleCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+		Canvas turtleCanvas = new Canvas(canvasWidth, canvasHeight);
 		root.setLayoutX(TURTLE_X);
 		root.setLayoutY(TURTLE_Y);
 		GraphicsContext turtleView = turtleCanvas.getGraphicsContext2D();	
