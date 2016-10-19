@@ -21,12 +21,16 @@ public class UI {
 	private TurtleSettings turtleSettings;
 	private GeneralSettings generalSettings;
 	private CommandLine commandLine;
+	private Workspace workspace;
+	private Console console;
 	
 	private Group root = new Group();
 	private int xSize, ySize;
 	
 	private static int TURTLE_CANVAS_HEIGHT = 400;
 	private static int TURTLE_CANVAS_WIDTH = 530;
+	private static int WORKSPACE_HEIGHT = 400;
+	private static int COMMAND_LINE_WIDTH = 670;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
@@ -55,10 +59,13 @@ public class UI {
 		
 		turtle = new Turtle(turtleSettings, TURTLE_CANVAS_WIDTH, TURTLE_CANVAS_HEIGHT);	
 		generalSettings = new GeneralSettings(uiResources);	
-		commandLine = new CommandLine(TURTLE_CANVAS_HEIGHT, ySize);
+		commandLine = new CommandLine(TURTLE_CANVAS_HEIGHT, ySize, COMMAND_LINE_WIDTH, uiResources);
+		workspace = new Workspace(TURTLE_CANVAS_WIDTH, WORKSPACE_HEIGHT, xSize, uiResources);
+		console = new Console(WORKSPACE_HEIGHT, COMMAND_LINE_WIDTH, ySize, xSize, uiResources);
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
-				generalSettings.getRoot(), commandLine.getRoot());
+				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
+				console.getRoot());
 		return scene;
 		
 	}

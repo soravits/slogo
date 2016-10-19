@@ -1,7 +1,7 @@
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import visuals.UI;
+import view.UI;
 
 /**
  * @author Diane Hadley

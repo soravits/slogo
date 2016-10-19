@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 
@@ -29,8 +30,10 @@ public class GeneralSettings{
 	private static int LANGUAGE_COMBOBOX_X = 140;
 	private static int LANGUAGE_COMBOBOX_Y = 10;
 	
+	
 	public GeneralSettings(ResourceBundle resources){
-		generalResources = resources;
+		this.generalResources = resources;
+		
 	}
 	
 
@@ -39,7 +42,6 @@ public class GeneralSettings{
 	 * how the user can update settings
 	 */
 	public Group getRoot(){
-		
 		makeLanguageComboBox();
 		return root;
 	}
@@ -67,6 +69,8 @@ public class GeneralSettings{
 		root.getChildren().add(setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y));
 	}
 	
+	
+	
 	private Control setControlLayout(Control control, int x, int y) {
 		control.setLayoutX(x);
 		control.setLayoutY(y);
@@ -74,6 +78,7 @@ public class GeneralSettings{
 		control.getStyleClass().add("generalcontrol");
 		return control;
 	}
+	
 	
 	
 }

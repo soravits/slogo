@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Control;
@@ -37,15 +38,16 @@ public class TurtleSettings{
 	
 	private static int COLOR_RECT_WIDTH = 75;
 	private static int COLOR_RECT_HEIGHT = 20;
-	private static int BACKGROUND_COLOR_COMBOBOX_Y = 100;
-	private static int PEN_COLOR_COMBOBOX_Y = 175;
+	private static int FIRST_CONTROL_Y = 100;
+	private static int CONTROL_Y_SPACING = 60;
 	
-	private int colorComboBoxX;
+	
+	private int controlX;
 	
 	public TurtleSettings(ResourceBundle resources, int turtleWidth, UI ui){
 		this.turtleResources = resources;
 		this.ui = ui;
-		this.colorComboBoxX = turtleWidth + 20;
+		this.controlX = turtleWidth + 20;
 	}
 		
 	
@@ -55,12 +57,14 @@ public class TurtleSettings{
 	 */
 	public Group getRoot(){
 		getBackgroundColorComboBox();
-		addText(colorComboBoxX, BACKGROUND_COLOR_COMBOBOX_Y - 10, 
+		addText(controlX, FIRST_CONTROL_Y - 10, 
 				turtleResources.getString("TurtleBackgroundColor"));
 		
 		getPenColorComboBox();
-		addText(colorComboBoxX, PEN_COLOR_COMBOBOX_Y - 10, 
-				turtleResources.getString("TurtlePenColor"));		
+		addText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, 
+				turtleResources.getString("TurtlePenColor"));	
+		makeResetButton();
+		makeImageButton();
 		return root;
 	}
 	
@@ -96,15 +100,15 @@ public class TurtleSettings{
 	
 	private void getBackgroundColorComboBox(){
 		backgroundComboBox = new ComboBox<Color>();
-		makeColorComboBox(backgroundComboBox, Color.WHITE, BACKGROUND_COLOR_COMBOBOX_Y);
+		makeColorComboBox(backgroundComboBox, Color.WHITE, 0);
 	}
 	
 	private void getPenColorComboBox(){
 		penComboBox = new ComboBox<Color>();
-		makeColorComboBox(penComboBox, Color.BLACK, PEN_COLOR_COMBOBOX_Y);
+		makeColorComboBox(penComboBox, Color.BLACK, 1);
 	}
 	
-	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int y){	
+	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int yMultiplier){	
 		addColorsToComboBox(comboBox);
 		createGraphicsForComboBox(comboBox);	
 		comboBox.setValue(initColor);
@@ -114,7 +118,7 @@ public class TurtleSettings{
 				ui.addTurtleToRoot();
 			}
 		});		
-		root.getChildren().add(setControlLayout(comboBox, colorComboBoxX, y));		
+		root.getChildren().add(setControlLayout(comboBox, controlX, yMultiplier));		
 	}
 	
 	
@@ -156,9 +160,19 @@ public class TurtleSettings{
 	}
 	
 	
-	private Control setControlLayout(Control control, int x, int y) {
+	private void makeResetButton(){
+		Button reset = new Button(turtleResources.getString("ResetTurtle"));
+		root.getChildren().add(setControlLayout(reset, controlX, 3));
+	}
+	
+	private void makeImageButton(){
+		Button image = new Button(turtleResources.getString("Image"));
+		root.getChildren().add(setControlLayout(image, controlX, 2));
+	}
+	
+	private Control setControlLayout(Control control, int x, int yMultiplier) {
 		control.setLayoutX(x);
-		control.setLayoutY(y);
+		control.setLayoutY(FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier);
 		control.setFocusTraversable(false);
 		control.getStyleClass().add("turtlecontrol");
 		return control;
