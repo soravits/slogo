@@ -1,0 +1,10 @@
+
+
+.helpcontrol{
+  -fx-font-size: 15; 
+  -fx-base: #ffffff;
+  -fx-background-radius: 5;
+  -fx-pref-width: 120;
+  -fx-pref-height: 40;
+}
+
