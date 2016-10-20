@@ -1,5 +1,4 @@
 package view;
-import java.util.ResourceBundle;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import javafx.scene.paint.Color;
 
 public class UI {
 	
-	private ResourceBundle uiResources;
 	private HelpWindowUI helpWindowUI;
 	private Turtle turtle;
 	private TurtleSettings turtleSettings;
@@ -27,19 +25,12 @@ public class UI {
 	private Group root = new Group();
 	private int xSize, ySize;
 	
-	private static int TURTLE_CANVAS_HEIGHT = 400;
-	private static int TURTLE_CANVAS_WIDTH = 530;
-	private static int WORKSPACE_HEIGHT = 400;
-	private static int COMMAND_LINE_WIDTH = 670;
-	
-	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
 	/**
 	 * constructor to set the size of the window and set the resource bundle to use
 	 */
 	public UI(int xSize, int ySize) {
-		this.uiResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 		this.xSize = xSize;
 		this.ySize = ySize;
 	}
@@ -53,15 +44,22 @@ public class UI {
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
-		helpWindowUI = new HelpWindowUI(uiResources);
-		turtleSettings = new TurtleSettings(uiResources, TURTLE_CANVAS_WIDTH, this);
+		
+		helpWindowUI = new HelpWindowUI();
+		
+		turtleSettings = new TurtleSettings(this);
+		
 		root.getChildren().add(turtleSettings.getRoot());		
 		
-		turtle = new Turtle(turtleSettings, TURTLE_CANVAS_WIDTH, TURTLE_CANVAS_HEIGHT);	
-		generalSettings = new GeneralSettings(uiResources);	
-		commandLine = new CommandLine(TURTLE_CANVAS_HEIGHT, ySize, COMMAND_LINE_WIDTH, uiResources);
-		workspace = new Workspace(TURTLE_CANVAS_WIDTH, WORKSPACE_HEIGHT, xSize, uiResources);
-		console = new Console(WORKSPACE_HEIGHT, COMMAND_LINE_WIDTH, ySize, xSize, uiResources);
+		turtle = new Turtle(turtleSettings);	
+		
+		generalSettings = new GeneralSettings();
+		
+		commandLine = new CommandLine(ySize);
+		
+		workspace = new Workspace(xSize);
+	
+		console = new Console(ySize, xSize);
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 

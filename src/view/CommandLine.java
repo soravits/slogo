@@ -3,8 +3,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
@@ -19,12 +17,10 @@ import javafx.scene.text.Text;
 
 
 
-public class CommandLine{
+public class CommandLine extends UIBuilder{
 	
 	private Group root = new Group();
 	private TextArea textArea = new TextArea();
-	
-	private ResourceBundle commandResources;
 
 	private int commandLineHeight;
 	private int commandLineWidth;
@@ -36,14 +32,13 @@ public class CommandLine{
 	
 	private static int COMMAND_LINE_X = 10;
 	
-
 	
-	public CommandLine(int turtleHeight, int sceneHeight, int commandLineWidth, ResourceBundle resources){
-		this.commandLineHeight = sceneHeight - turtleHeight - 120;
-		this.commandLineY = turtleHeight + 110; 
-		this.commandLineWidth = commandLineWidth;
-		this.commandResources = resources;
-		this.buttonsY = turtleHeight + 65;
+	public CommandLine(int sceneHeight){
+		super();
+		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
+		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
+		this.commandLineWidth = COMMAND_LINE_WIDTH;
+		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
 	}
 	
 	
@@ -53,8 +48,9 @@ public class CommandLine{
 	 */	
 	public Group getRoot(){
 		makeCommandLine();
-		makeButtons();
-		getText();
+		getButtons();
+		root.getChildren().add(getText(COMMAND_LINE_X, commandLineY - 10, 
+				uiResources.getString("CommandLine")));
 		return root;
 	}
 	
@@ -78,31 +74,15 @@ public class CommandLine{
 		root.getChildren().add(textArea);
 	}
 	
-	private void makeButtons(){
-		Button reset = new Button(commandResources.getString("ResetAll"));
-		Button history = new Button(commandResources.getString("History"));
-		Button submit = new Button(commandResources.getString("Submit"));
-		root.getChildren().addAll(setControlLayout(reset, 0), 
-				setControlLayout(history, 1), setControlLayout(submit, 2));
+	private void getButtons(){
+		
+		root.getChildren().addAll(
+			makeButton(FIRST_BUTTON_X, buttonsY, uiResources.getString("ResetAll"), "generalcontrol"),
+			makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, uiResources.getString("History"), "generalcontrol"),
+			makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, uiResources.getString("Submit"), "generalcontrol")				
+		);
 	}
 	
-	private void getText(){
-		Text commandLine = new Text(commandResources.getString("CommandLine"));
-		commandLine.setX(COMMAND_LINE_X);
-		commandLine.setY(commandLineY - 10);
-		root.getChildren().add(commandLine);		
-	}
-	
-	
-	private Control setControlLayout(Control control, int xMultiplier) {
-		control.setLayoutX(FIRST_BUTTON_X + BUTTON_SPACING*xMultiplier);
-		control.setLayoutY(buttonsY);
-		control.setFocusTraversable(false);
-		control.getStyleClass().add("generalcontrol");
-		return control;
-	}
-	
-	
-	
+
 	
 }

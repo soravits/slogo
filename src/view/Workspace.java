@@ -1,9 +1,8 @@
 package view;
-import java.util.ResourceBundle;
 
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
+
 
 /**
  * The purpose of this class is to create the root that visualizes the workspace.
@@ -13,25 +12,21 @@ import javafx.scene.text.Text;
  */
 
 
-public class Workspace{
+public class Workspace extends UIBuilder{
 	
 	private Group root = new Group();
 	private int workspaceX;
 	private int workspaceWidth;
 	private int workspaceHeight;
-	private ResourceBundle workspaceResources;
 	
 	private static int WORKSPACE_Y = 55;
 	
 	
-	public Workspace(int turtleWidth, int workspaceHeight, int sceneWidth, ResourceBundle resources){
-		this.workspaceX = turtleWidth + 160;
-		this.workspaceWidth = sceneWidth - turtleWidth - 170;
-		this.workspaceHeight = workspaceHeight; 
-		this.workspaceResources = resources;
-	
-		
-		
+	public Workspace(int sceneWidth){
+		super();
+		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
+		this.workspaceWidth = sceneWidth - TURTLE_CANVAS_WIDTH - 170;
+		this.workspaceHeight = WORKSPACE_HEIGHT; 
 	}
 	
 	
@@ -41,7 +36,9 @@ public class Workspace{
 	 */	
 	public Group getRoot(){
 		makeWorkspace();
-		getText();
+		root.getChildren().add(
+				getText(workspaceX, WORKSPACE_Y - 10, uiResources.getString("Workspace"))
+		);
 		return root;
 	}
 	
@@ -55,14 +52,6 @@ public class Workspace{
 		workspace.setPrefHeight(workspaceHeight);
 		
 		root.getChildren().add(workspace);
-	}
-	
-	
-	private void getText(){
-		Text workspace = new Text(workspaceResources.getString("Workspace"));
-		workspace.setX(workspaceX);
-		workspace.setY(WORKSPACE_Y - 10);
-		root.getChildren().add(workspace);	
 	}
 	
 }

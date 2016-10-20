@@ -16,7 +16,7 @@ import javafx.scene.paint.Paint;
  */
 
 
-public class Turtle{
+public class Turtle extends UIBuilder{
 	
 	private Pane root = new Pane();
 	private TurtleSettings turtleSettings;
@@ -31,10 +31,11 @@ public class Turtle{
 	 * initiates Turtle and sets instance of TurtleSettings
 	 */
 	
-	public Turtle(TurtleSettings settings, int turtleWidth, int turtleHeight){
+	public Turtle(TurtleSettings settings){
+		super();
 		this.turtleSettings = settings;
-		this.canvasWidth = turtleWidth;
-		this.canvasHeight = turtleHeight;		
+		this.canvasWidth = TURTLE_CANVAS_WIDTH;
+		this.canvasHeight = TURTLE_CANVAS_HEIGHT;		
 		makeCanvas();
 	}
 	

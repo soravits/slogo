@@ -1,15 +1,9 @@
 package view;
-import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
-
 
 /**
  * 
@@ -21,18 +15,17 @@ import javafx.scene.control.Control;
  *
  */
 
-public class GeneralSettings{
+public class GeneralSettings extends UIBuilder{
 	
 	private Group root = new Group();
 	private ComboBox<String> languageComboBox;
-	private ResourceBundle generalResources;
 	
 	private static int LANGUAGE_COMBOBOX_X = 140;
 	private static int LANGUAGE_COMBOBOX_Y = 10;
 	
 	
-	public GeneralSettings(ResourceBundle resources){
-		this.generalResources = resources;
+	public GeneralSettings(){
+		super();
 		
 	}
 	
@@ -59,26 +52,14 @@ public class GeneralSettings{
 	private void makeLanguageComboBox(){
 		
 		ObservableList<String> languageOptions = FXCollections.observableArrayList(
-				generalResources.getString("English"), generalResources.getString("Chinese"),
-				generalResources.getString("French"), generalResources.getString("German"),
-				generalResources.getString("Italian"), generalResources.getString("Portuguese"),
-				generalResources.getString("Russian"), generalResources.getString("Spanish"));		
+				uiResources.getString("English"), uiResources.getString("Chinese"),
+				uiResources.getString("French"), uiResources.getString("German"),
+				uiResources.getString("Italian"), uiResources.getString("Portuguese"),
+				uiResources.getString("Russian"), uiResources.getString("Spanish"));		
 			
 		languageComboBox = new ComboBox<String>(languageOptions);
-		languageComboBox.setValue(generalResources.getString("English"));
-		root.getChildren().add(setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y));
+		languageComboBox.setValue(uiResources.getString("English"));
+		root.getChildren().add(setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y, "generalcontrol"));
 	}
-	
-	
-	
-	private Control setControlLayout(Control control, int x, int y) {
-		control.setLayoutX(x);
-		control.setLayoutY(y);
-		control.setFocusTraversable(false);
-		control.getStyleClass().add("generalcontrol");
-		return control;
-	}
-	
-	
 	
 }

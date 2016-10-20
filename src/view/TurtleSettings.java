@@ -28,10 +28,9 @@ import javafx.util.Callback;
  */
 
 
-public class TurtleSettings{
+public class TurtleSettings extends UIBuilder{
 	
 	private Group root = new Group();
-	private ResourceBundle turtleResources;	
 	private UI ui;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;
@@ -44,10 +43,10 @@ public class TurtleSettings{
 	
 	private int controlX;
 	
-	public TurtleSettings(ResourceBundle resources, int turtleWidth, UI ui){
-		this.turtleResources = resources;
+	public TurtleSettings(UI ui){
+		super();
 		this.ui = ui;
-		this.controlX = turtleWidth + 20;
+		this.controlX = TURTLE_CANVAS_WIDTH + 20;
 	}
 		
 	
@@ -57,14 +56,16 @@ public class TurtleSettings{
 	 */
 	public Group getRoot(){
 		getBackgroundColorComboBox();
-		addText(controlX, FIRST_CONTROL_Y - 10, 
-				turtleResources.getString("TurtleBackgroundColor"));
-		
 		getPenColorComboBox();
-		addText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, 
-				turtleResources.getString("TurtlePenColor"));	
-		makeResetButton();
-		makeImageButton();
+		root.getChildren().addAll(
+			getText(controlX, FIRST_CONTROL_Y - 10, uiResources.getString("TurtleBackgroundColor")),
+			getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, uiResources.getString("TurtlePenColor"))	
+		);
+		
+		root.getChildren().addAll(
+			makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, uiResources.getString("ResetTurtle"), "turtlecontrol"),
+			makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, uiResources.getString("Image"), "turtlecontrol")
+		);
 		return root;
 	}
 	
@@ -118,7 +119,7 @@ public class TurtleSettings{
 				ui.addTurtleToRoot();
 			}
 		});		
-		root.getChildren().add(setControlLayout(comboBox, controlX, yMultiplier));		
+		root.getChildren().add(setControlLayout(comboBox, controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
 	}
 	
 	
@@ -151,31 +152,6 @@ public class TurtleSettings{
 				};
 			}
 		});
-	}
-	
-	
-	private void addText(int x, int y, String text) {
-		Text t = new Text(x, y, text);
-		root.getChildren().add(t);
-	}
-	
-	
-	private void makeResetButton(){
-		Button reset = new Button(turtleResources.getString("ResetTurtle"));
-		root.getChildren().add(setControlLayout(reset, controlX, 3));
-	}
-	
-	private void makeImageButton(){
-		Button image = new Button(turtleResources.getString("Image"));
-		root.getChildren().add(setControlLayout(image, controlX, 2));
-	}
-	
-	private Control setControlLayout(Control control, int x, int yMultiplier) {
-		control.setLayoutX(x);
-		control.setLayoutY(FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier);
-		control.setFocusTraversable(false);
-		control.getStyleClass().add("turtlecontrol");
-		return control;
 	}
 	
 	
