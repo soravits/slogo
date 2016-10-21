@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 
@@ -75,12 +76,28 @@ public class CommandLine extends UIBuilder{
 	}
 	
 	private void getButtons(){
+		Button reset = makeButton(FIRST_BUTTON_X, buttonsY, uiResources.getString("ResetAll"), "generalcontrol");
+		reset.setOnAction((event) -> {
+			//TODO: add action
+		});	
 		
-		root.getChildren().addAll(
-			makeButton(FIRST_BUTTON_X, buttonsY, uiResources.getString("ResetAll"), "generalcontrol"),
-			makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, uiResources.getString("History"), "generalcontrol"),
-			makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, uiResources.getString("Submit"), "generalcontrol")				
-		);
+		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
+				uiResources.getString("History"), "generalcontrol");
+		history.setOnAction((event) -> {
+			//TODO: add action
+		});	
+		
+		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
+				uiResources.getString("Submit"), "generalcontrol");
+		submit.setOnAction((event) -> {
+			//TODO: add action
+		});	
+		
+		root.getChildren().addAll(reset, history, submit);
+			
+			
+							
+		
 	}
 	
 
