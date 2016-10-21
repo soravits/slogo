@@ -1,11 +1,8 @@
-package visuals;
+package view;
 import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -17,10 +14,9 @@ import javafx.stage.Stage;
  * @author Diane Hadley
  */
 
-public class HelpWindowUI{
+public class HelpWindowUI extends UIBuilder{
 	
 	private Group root = new Group();
-	private ResourceBundle helpResources;
 	
 	private static final String HTML_FILE_NAME = "resources/HelpWindow.html";
 	
@@ -33,8 +29,8 @@ public class HelpWindowUI{
 	/**
 	 * initiates HelpWindow and assigns resource bundle for instance
 	 */
-	public HelpWindowUI(ResourceBundle resources){
-		helpResources = resources;
+	public HelpWindowUI(){
+		super();
 	}
 	
 	/**
@@ -42,15 +38,16 @@ public class HelpWindowUI{
 	 * 
 	 */		
 	public Group getRoot(){		
-		makeButton();
+		getButton();
 		return root;
 		
 	}
 	
-	private void makeButton(){
-		helpButton = new Button(helpResources.getString("HelpButton"));
+	private void getButton(){
+		
+		helpButton = makeButton(helpButtonX, helpButtonY, uiResources.getString("HelpButton"), "helpcontrol");
 		addActionToButton();
-		root.getChildren().add(formatControl(helpButton, helpButtonX, helpButtonY));
+		root.getChildren().add(helpButton);
 		
 		
 	}
@@ -73,14 +70,6 @@ public class HelpWindowUI{
 		stage.show();
 		
 		
-	}
-	
-	private Control formatControl(Control control, int x, int y) {
-		control.setLayoutX(x);
-		control.setLayoutY(y);
-		control.setFocusTraversable(false);
-		control.getStyleClass().add("helpcontrol");
-		return control;
 	}
 	
 }

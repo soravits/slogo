@@ -1,7 +1,7 @@
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import visuals.UI;
+import view.UI;
 
 /**
  * @author Diane Hadley
@@ -13,6 +13,7 @@ public class Main extends Application {
 	private UI ui;
 	public static int XSIZE = 1000;
 	public static int YSIZE = 700;
+	public static String TITLE = "SLogo";
 	
 	
 	/** 
@@ -20,6 +21,7 @@ public class Main extends Application {
 	 */
 	public void start(Stage stage) {
 		ui = new UI(XSIZE, YSIZE);	
+		stage.setTitle(TITLE);
 		stage.setScene(ui.init());
 		stage.setResizable(false);
 		stage.show();
