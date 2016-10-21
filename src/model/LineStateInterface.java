@@ -10,20 +10,17 @@ import java.util.List;
  */
 public interface LineStateInterface {
 
-    /*
-     * Change the styling of the line
+    /**
+     * Create line from position 1 to position 2 and add it to the Collection of Lines
+     * @param pos1
+     * @param pos2
      */
-    public void changeLineType(Object lineType);
+    public void createLine(Position pos1, Position pos2);
     
-    /*
-     * Add the current position of the turtle to the linked list of connected points
+    /**
+     * return Iterator for each line
      */
-    public void addPointToLine(Position currentPosition);
-    
-    /*
-     * Remove a position from the line if the 
-     */
-    public void removePointFromLine(Position position);
+    public void getLineIterator();
     
     /*
      * Clear all of the points from the line
