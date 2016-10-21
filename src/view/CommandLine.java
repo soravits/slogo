@@ -33,13 +33,16 @@ public class CommandLine extends UIBuilder{
 	
 	private static int COMMAND_LINE_X = 10;
 	
+	private DataIn DataIn;
 	
-	public CommandLine(int sceneHeight){
+	
+	public CommandLine(int sceneHeight,DataIn DataIn){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
+		this.DataIn=DataIn;
 	}
 	
 	
@@ -60,6 +63,8 @@ public class CommandLine extends UIBuilder{
 	 * returns list of objects which are each a line of input in the command line
 	 */
 	public List<Object> getCommand(){
+		
+		//Pim will complete this with observer
 		return null;
 	}
 	
@@ -84,20 +89,25 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-			//TODO: add action
+			//get queue from dataout
+			//keep displaying until its done
 		});	
 		
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
-			//TODO: add action
+			//set commandLine
+			if (!textArea.getText().trim().equals("")) {
+				DataIn.addCommand(textArea.getText());
+				System.out.println(DataIn.getCommand());
+				//update variables from workspace
+				//update turtle position
+				UI.console.updateResults(UI.DataOut.getConsoleResults());
+			}
+			
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
-			
-			
-							
-		
 	}
 	
 

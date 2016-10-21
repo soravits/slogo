@@ -1,3 +1,5 @@
+import view.DataIn;
+
 /**
  * The purpose of this class is to receive the data from the view and send it to the Parser to be handled. It will
  * also take the tree that is returned by the parser and send it to the interpreter. Essentially, the Controller
@@ -14,6 +16,6 @@ public interface Controller {
      * Interpreter as necessary, and sends the data to the Parser.
      * @param d The data object containing the string to be parsed and other important settings related to the back-end
      */
-    public void update(Data d);
+    public void update(DataIn d);
 
 }

@@ -20,10 +20,12 @@ public class UI {
 	private GeneralSettings generalSettings;
 	private CommandLine commandLine;
 	private Workspace workspace;
-	private Console console;
-	
 	private Group root = new Group();
 	private int xSize, ySize;
+	
+	public static DataIn DataIn;
+	public static DataOut DataOut;
+	public static Console console;
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -44,6 +46,9 @@ public class UI {
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
+		DataIn=new DataIn();
+		DataOut=new DataOut();
+		
 		
 		helpWindowUI = new HelpWindowUI();
 		
@@ -55,11 +60,11 @@ public class UI {
 		
 		generalSettings = new GeneralSettings();
 		
-		commandLine = new CommandLine(ySize);
+		commandLine = new CommandLine(ySize,DataIn);
 		
 		workspace = new Workspace(xSize);
 	
-		console = new Console(ySize, xSize);
+		console = new Console(ySize, xSize,DataOut);
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
