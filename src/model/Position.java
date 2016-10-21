@@ -32,7 +32,7 @@ public class Position {
      * Add to current value of y position
      * @param xUpdate
      */
-    public void updateX(double xUpdate){
+    public void setX(double xUpdate){
         xPosition = xUpdate;
     }
     
@@ -48,8 +48,22 @@ public class Position {
      * Overwrite current value of y position with new value
      * @param yUpdate
      */
-    public void updateY(double yUpdate){
+    public void setY(double yUpdate){
         yPosition = yUpdate;
+    }
+    
+    /**
+     * @return current X value of the position
+     */
+    public double getX(){
+        return xPosition;
+    }
+    
+    /**
+     * @return current Y value of the position
+     */
+    public double getY(){
+        return yPosition;
     }
     
     /**
