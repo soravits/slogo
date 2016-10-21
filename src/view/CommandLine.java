@@ -1,11 +1,8 @@
 package view;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -59,8 +56,8 @@ public class CommandLine extends UIBuilder{
 	/*
 	 * returns list of objects which are each a line of input in the command line
 	 */
-	public List<Object> getCommand(){
-		return null;
+	public String getCommand(){
+		return textArea.getText();
 	}
 	
 	private void makeCommandLine(){
@@ -69,9 +66,6 @@ public class CommandLine extends UIBuilder{
 		textArea.setLayoutX(COMMAND_LINE_X);
 		textArea.setPrefWidth(commandLineWidth);
 		textArea.setPrefHeight(commandLineHeight);
-		
-		//Make scrollable
-		
 		root.getChildren().add(textArea);
 	}
 	

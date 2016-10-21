@@ -1,4 +1,6 @@
 package view;
+import java.io.File;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
@@ -11,6 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -30,6 +35,7 @@ public class TurtleSettings extends UIBuilder{
 	private UI ui;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;
+	private Stage stage;
 	
 	private static int COLOR_RECT_WIDTH = 75;
 	private static int COLOR_RECT_HEIGHT = 20;
@@ -39,10 +45,11 @@ public class TurtleSettings extends UIBuilder{
 	
 	private int controlX;
 	
-	public TurtleSettings(UI ui){
+	public TurtleSettings(UI ui, Stage stage){
 		super();
 		this.ui = ui;
 		this.controlX = TURTLE_CANVAS_WIDTH + 20;
+		this.stage = stage;
 	}
 		
 	
@@ -158,10 +165,22 @@ public class TurtleSettings extends UIBuilder{
 		Button image = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
-			//TODO: add action
+			chooseImage();
+			//Make turtle call getTurtleImage which will get image from chooseImage
+			//Change Listener?
 		});	
 		
 		root.getChildren().addAll(reset, image);
+	}
+	
+	private void chooseImage(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Image File");
+		ExtensionFilter filter = new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif");
+		fileChooser.getExtensionFilters().add(filter);
+		File selectedFile = fileChooser.showOpenDialog(stage);
+		
+		
 	}
 	
 }
