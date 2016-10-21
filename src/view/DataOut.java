@@ -15,8 +15,13 @@ public class DataOut {
 		commandHistory.add(command);
 	}
 	
-	public LinkedList<String> getCommandHistory() {
-		return (LinkedList<String>) commandHistory;
+	public Queue<String> getCommandHistory() {
+		//for testing
+		commandHistory.add("command 1");
+		commandHistory.add("command 2");
+		commandHistory.add("command 3");
+		commandHistory.add("command 4");
+		return commandHistory;
 	}
 	
 	public void setConsoleResults(LinkedList<String> results) {
@@ -28,12 +33,15 @@ public class DataOut {
 		consoleResults.add("result 1");
 		consoleResults.add("result 2");
 		consoleResults.add("result 3");
-		consoleResults.add("result 9");
+		consoleResults.add("result 4");
 		return consoleResults;
 	}
 	
 	public void update() {
 		//get updated data from controller
+		//data needed for console
+		//data needed for workspace
+		//data needed for turtle
 	}
 
 }

@@ -102,7 +102,12 @@ public class CommandLine extends UIBuilder{
 				System.out.println(DataIn.getCommand());
 				//update variables from workspace
 				//update turtle position
+				
+				//update console
 				UI.console.updateResults(UI.DataOut.getConsoleResults());
+				
+				//update command history
+				UI.console.updateResults(UI.DataOut.getCommandHistory());
 			}
 			
 		});	
