@@ -1,20 +1,16 @@
 package view;
-import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Control;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 /**
@@ -62,10 +58,7 @@ public class TurtleSettings extends UIBuilder{
 			getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, uiResources.getString("TurtlePenColor"))	
 		);
 		
-		root.getChildren().addAll(
-			makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, uiResources.getString("ResetTurtle"), "turtlecontrol"),
-			makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, uiResources.getString("Image"), "turtlecontrol")
-		);
+		getButtons();
 		return root;
 	}
 	
@@ -154,5 +147,21 @@ public class TurtleSettings extends UIBuilder{
 		});
 	}
 	
+	
+	private void getButtons(){
+		Button reset = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, 
+				uiResources.getString("ResetTurtle"), "turtlecontrol");
+		reset.setOnAction((event) -> {
+			//TODO: add action
+		});	
+		
+		Button image = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
+				uiResources.getString("Image"), "turtlecontrol");
+		image.setOnAction((event) -> {
+			//TODO: add action
+		});	
+		
+		root.getChildren().addAll(reset, image);
+	}
 	
 }
