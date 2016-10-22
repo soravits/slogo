@@ -20,7 +20,7 @@ public class UI {
 	private TurtleSettings turtleSettings;
 	private GeneralSettings generalSettings;
 	private CommandLine commandLine;
-	private Workspace workspace;
+	
 	private Group root = new Group();
 	private int xSize, ySize;
 	private Stage stage;
@@ -28,6 +28,7 @@ public class UI {
 	public static DataIn DataIn;
 	public static DataOut DataOut;
 	public static Console console;
+	public static Workspace workspace;
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -65,7 +66,7 @@ public class UI {
 		
 		commandLine = new CommandLine(ySize,DataIn);
 		
-		workspace = new Workspace(xSize);
+		workspace = new Workspace(xSize,DataOut);
 	
 		console = new Console(ySize, xSize,DataOut);
 		

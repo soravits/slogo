@@ -35,7 +35,6 @@ public class CommandLine extends UIBuilder{
 	
 	private DataIn DataIn;
 	
-	
 	public CommandLine(int sceneHeight,DataIn DataIn){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
@@ -85,32 +84,37 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-			CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,UI.DataOut);
-			CommandHistoryWindow.displayHistory();
-			
-			//get queue from dataout
-			//keep displaying until its done
+			displayCommandHistory();
 		});	
 		
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
-			//set commandLine
-			if (!commandIsEmpty()) {
-				
-				DataIn.setCommand(textArea.getText());
-				System.out.println(DataIn.getCommand());
-				//update variables from workspace
-				//update turtle position
-				
-				//update console
-				UI.console.displayResults();
-				
-			}
-			
+			updateDataIn();
+			displayDataOut();
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
+	}
+	
+	private void updateDataIn() {
+		//set command line
+		DataIn.setCommand(textArea.getText());
+		System.out.println(DataIn.getCommand());
+		//update variables from workspace
+		//update turtle position
+	}
+	
+	private void displayDataOut() {
+		if (!commandIsEmpty()) {
+			UI.console.displayResults();
+			UI.workspace.displayResults();
+		}
+	}
+	
+	private void displayCommandHistory() {
+		CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,UI.DataOut);
+		CommandHistoryWindow.displayHistory();
 	}
 	
 	private boolean commandIsEmpty() {

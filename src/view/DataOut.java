@@ -12,6 +12,7 @@ public class DataOut {
 	DataOut() {
 		this.commandHistory=new LinkedList<String>();
 		this.consoleResults=new LinkedList<String>();
+		this.variableMap=new HashMap<String,Double>();
 	}
 	public void setCommandToHistory(String command) {
 		commandHistory.add(command);
@@ -44,8 +45,11 @@ public class DataOut {
 		//TODO
 	}
 	
-	public HashMap<String,Double> getVariableMap() {
-		//TODO
+	public HashMap<String,Double> getVariables() {
+		variableMap.put("a",3.0);
+		variableMap.put("b",4.0);
+		variableMap.put("c",5.0);
+		
 		return variableMap;
 	}
 	

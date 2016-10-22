@@ -35,11 +35,11 @@ public class DataIn {
 		return null;
 	}
 	
-	public void setVariableVal() {
+	public void setVariables() {
 		//TODO
 	}
 	
-	public HashMap<String,Double> getVariableVal() {
+	public HashMap<String,Double> getVariables() {
 		//TODO
 		return null;
 	}
