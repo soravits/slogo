@@ -28,4 +28,15 @@ public interface LineStateInterface {
      */
     public void clearLine();
     
+   /**
+    * @return the current state of the pen. If pen is down, lines are being written
+    */
+    public boolean isPenDown();
+    
+    /**
+     * Set the current state of the pen. Determines whether or not to draw lines
+     * @param penDown
+     */
+    public void setPenDown(boolean penDown);
+    
 }

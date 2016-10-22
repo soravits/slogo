@@ -12,7 +12,7 @@ public class TurtleState implements TurtleStateInterface{
         turtleShow = true;
     }
 
-    public TurtleState(PositionInterface position, double angle, boolean isShowing){
+    public TurtleState(Position position, double angle, boolean isShowing){
         turtlePosition = position;
         turtleAngle = angle;
         turtleShow = isShowing;

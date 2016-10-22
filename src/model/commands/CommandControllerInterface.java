@@ -1,4 +1,5 @@
-package model;
+package model.commands;
+
 /**
  * This interface specifies the way in which the command taken from the interpreter is executed
  * via a unique command class. Each command is packaged with the necessary data and variables,
