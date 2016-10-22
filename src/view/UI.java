@@ -3,6 +3,7 @@ package view;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -22,6 +23,7 @@ public class UI {
 	private Workspace workspace;
 	private Group root = new Group();
 	private int xSize, ySize;
+	private Stage stage;
 	
 	public static DataIn DataIn;
 	public static DataOut DataOut;
@@ -32,9 +34,10 @@ public class UI {
 	/**
 	 * constructor to set the size of the window and set the resource bundle to use
 	 */
-	public UI(int xSize, int ySize) {
+	public UI(int xSize, int ySize, Stage stage) {
 		this.xSize = xSize;
 		this.ySize = ySize;
+		this.stage = stage;
 	}
 
 	
@@ -52,7 +55,7 @@ public class UI {
 		
 		helpWindowUI = new HelpWindowUI();
 		
-		turtleSettings = new TurtleSettings(this);
+		turtleSettings = new TurtleSettings(this, stage);
 		
 		root.getChildren().add(turtleSettings.getRoot());		
 		

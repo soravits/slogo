@@ -20,7 +20,7 @@ public class Main extends Application {
 	 * sets up visualization window
 	 */
 	public void start(Stage stage) {
-		ui = new UI(XSIZE, YSIZE);	
+		ui = new UI(XSIZE, YSIZE, stage);	
 		stage.setTitle(TITLE);
 		stage.setScene(ui.init());
 		stage.setResizable(false);

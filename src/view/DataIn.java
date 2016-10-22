@@ -1,5 +1,7 @@
 package view;
 
+import java.util.HashMap;
+
 
 /**
  *View External API is mainly responsible of sending data to the back end and receiving data from the backend. 
@@ -12,15 +14,38 @@ public class DataIn {
 	public String getCommand() {
 		return command;
 	}
-	public void addCommand(String command) {
+	public void setCommand(String command) {
 		this.command=command;
 	}
 	
-	public void addLanguage(String language) {
+	public void setLanguage(String language) {
 		//getting language from settings
 	}
 	
 	public String getLanguage() {
 		return language;
+	}
+	
+	public void setTurtlePos() {
+		//TODO
+	}
+	
+	public Object getTurtlePos() {
+		//TODO
+		return null;
+	}
+	
+	public void setVariableVal() {
+		//TODO
+	}
+	
+	public HashMap<String,Double> getVariableVal() {
+		//TODO
+		return null;
+	}
+	
+	
+	public void update() {
+		//update all fields using data from UI
 	}
 }

@@ -1,17 +1,19 @@
 package view;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class DataOut {
 	private Queue<String> commandHistory;
 	private Queue<String> consoleResults;
+	private HashMap<String,Double> variableMap;
 	
 	DataOut() {
 		this.commandHistory=new LinkedList<String>();
 		this.consoleResults=new LinkedList<String>();
 	}
-	public void addCommandToHistory(String command) {
+	public void setCommandToHistory(String command) {
 		commandHistory.add(command);
 	}
 	
@@ -24,8 +26,8 @@ public class DataOut {
 		return commandHistory;
 	}
 	
-	public void setConsoleResults(LinkedList<String> results) {
-		//set consoleresults from the back
+	public void setConsoleResults(Queue<String> results) {
+		this.consoleResults=results;
 	}
 	
 	public Queue<String> getConsoleResults() {
@@ -37,11 +39,18 @@ public class DataOut {
 		return consoleResults;
 	}
 	
+	public void setVariableMap(HashMap<String,Double> variableMap) {
+		this.variableMap=variableMap;
+		//TODO
+	}
+	
+	public HashMap<String,Double> getVariableMap() {
+		//TODO
+		return variableMap;
+	}
+	
 	public void update() {
-		//get updated data from controller
-		//data needed for console
-		//data needed for workspace
-		//data needed for turtle
+		//update all fieds using data from controller
 	}
 
 }

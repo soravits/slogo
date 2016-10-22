@@ -28,7 +28,6 @@ public class Console extends UIBuilder{
 		this.consoleWidth = sceneWidth - COMMAND_LINE_WIDTH - 30;
 		this.consoleX = COMMAND_LINE_WIDTH + 20;
 		this.consoleY = WORKSPACE_HEIGHT + 110;
-		this.console=console;
 		this.DataOut=DataOut;
 	}
 	
@@ -57,7 +56,8 @@ public class Console extends UIBuilder{
 	}
 	
 	//testing
-	public void updateResults(Queue<String> results) {
+	public void displayResults() {
+		Queue<String> results= DataOut.getConsoleResults();
 		while (!results.isEmpty()) {
 			console.appendText(results.poll()+"\n");
 		}

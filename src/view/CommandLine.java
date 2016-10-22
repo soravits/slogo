@@ -1,11 +1,11 @@
 package view;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -62,10 +62,9 @@ public class CommandLine extends UIBuilder{
 	/*
 	 * returns list of objects which are each a line of input in the command line
 	 */
-	public List<Object> getCommand(){
-		
-		//Pim will complete this with observer
-		return null;
+
+	public String getCommand(){
+		return textArea.getText();
 	}
 	
 	private void makeCommandLine(){
@@ -74,9 +73,6 @@ public class CommandLine extends UIBuilder{
 		textArea.setLayoutX(COMMAND_LINE_X);
 		textArea.setPrefWidth(commandLineWidth);
 		textArea.setPrefHeight(commandLineHeight);
-		
-		//Make scrollable
-		
 		root.getChildren().add(textArea);
 	}
 	
@@ -89,6 +85,9 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
+			CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,UI.DataOut);
+			CommandHistoryWindow.displayHistory();
+			
 			//get queue from dataout
 			//keep displaying until its done
 		});	
@@ -97,22 +96,25 @@ public class CommandLine extends UIBuilder{
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			//set commandLine
-			if (!textArea.getText().trim().equals("")) {
-				DataIn.addCommand(textArea.getText());
+			if (!commandIsEmpty()) {
+				
+				DataIn.setCommand(textArea.getText());
 				System.out.println(DataIn.getCommand());
 				//update variables from workspace
 				//update turtle position
 				
 				//update console
-				UI.console.updateResults(UI.DataOut.getConsoleResults());
+				UI.console.displayResults();
 				
-				//update command history
-				UI.console.updateResults(UI.DataOut.getCommandHistory());
 			}
 			
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
+	}
+	
+	private boolean commandIsEmpty() {
+		return textArea.getText().trim().equals("");
 	}
 	
 
