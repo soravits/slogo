@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,15 +21,11 @@ public interface LineStateInterface {
     /**
      * return Iterator for each line
      */
-    public void getLineIterator();
+    public Iterator<LineModel> getLines();
     
-    /*
+    /**
      * Clear all of the points from the line
      */
     public void clearLine();
     
-    /*
-     * Get the current list of points that the line must travel through
-     */
-    public List<Position> getLinePoints();
 }

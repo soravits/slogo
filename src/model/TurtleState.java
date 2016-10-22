@@ -2,7 +2,7 @@ package model;
 
 public class TurtleState implements TurtleStateInterface{
 
-    private Position turtlePosition;
+    private PositionInterface turtlePosition;
     private double turtleAngle;
     private boolean turtleShow;
 
@@ -12,7 +12,7 @@ public class TurtleState implements TurtleStateInterface{
         turtleShow = true;
     }
 
-    public TurtleState(Position position, double angle, boolean isShowing){
+    public TurtleState(PositionInterface position, double angle, boolean isShowing){
         turtlePosition = position;
         turtleAngle = angle;
         turtleShow = isShowing;
