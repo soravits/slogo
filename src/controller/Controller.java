@@ -1,5 +1,6 @@
 package controller;
 
+import model.State;
 import view.UI;
 
 /**
@@ -20,7 +21,7 @@ public class Controller {
     public Controller(UI ui){
         this.ui = ui;
         state = new State();
-        parser = new Parser();
+        parser = new Parser(state);
     }
 
     public void updateState(State state){
