@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 
 /**
- *View External API is mainly responsible of sending data to the back end and receiving data from the backend. 
+ *View External API is mainly responsible of sending data to the back end. 
  * @author Pim
  */
 public class DataIn {

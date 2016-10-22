@@ -1,5 +1,10 @@
 package view;
 
+/**
+ *View External API is mainly responsible of receiving data from the backend to be displayed on UI. 
+ * @author Pim
+ */
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -46,9 +51,9 @@ public class DataOut {
 	}
 	
 	public HashMap<String,Double> getVariables() {
-		variableMap.put("a",3.0);
-		variableMap.put("b",4.0);
-		variableMap.put("c",5.0);
+		variableMap.put("var1",3.0);
+		variableMap.put("var2",4.0);
+		variableMap.put("var3",5.0);
 		
 		return variableMap;
 	}

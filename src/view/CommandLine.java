@@ -92,6 +92,7 @@ public class CommandLine extends UIBuilder{
 		submit.setOnAction((event) -> {
 			updateDataIn();
 			displayDataOut();
+			textArea.setText("");
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
