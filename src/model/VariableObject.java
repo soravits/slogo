@@ -3,9 +3,9 @@ package model;
 public class VariableObject {
     
     private String variableName;
-    private Object variableValue;
+    private double variableValue;
     
-    public VariableObject(Object name, Object value){
+    public VariableObject(Object name, double value){
         variableName = name.toString();
         variableValue = value;
     }
@@ -14,7 +14,7 @@ public class VariableObject {
         return variableName;
     }
 
-    public Object getVariableValue () {
+    public double getVariableValue () {
         return variableValue;
     }
     
@@ -22,7 +22,7 @@ public class VariableObject {
         int prime = 31;
         int hashCode = 1;
         hashCode = prime * hashCode + variableName.hashCode();
-        hashCode = prime * hashCode + variableValue.hashCode();
+        hashCode = prime * hashCode + (int) variableValue;
         return hashCode;
     }
 
@@ -30,7 +30,7 @@ public class VariableObject {
         if (obj == null | obj.getClass() != getClass()){
             return false;
         }
-        Variable other = (Variable) obj;
+        VariableObject other = (VariableObject) obj;
         return ((this == obj) |  (other.getVariableName().equals(variableName)));       
     }
     
