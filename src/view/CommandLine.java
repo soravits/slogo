@@ -1,5 +1,5 @@
 package view;
-
+import controller.Controller;
 import javafx.scene.Group;
 import view.data.DataIn;
 import view.data.DataOut;
@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
+import view.data.DataIn;
+import view.data.DataOut;
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -36,14 +37,16 @@ public class CommandLine extends UIBuilder{
 	private static int COMMAND_LINE_X = 10;
 	
 	private DataIn DataIn;
+	private DataOut DataOut;
 	
-	public CommandLine(int sceneHeight,DataIn DataIn){
+	public CommandLine(int sceneHeight,DataIn DataIn,DataOut DataOut){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
 		this.DataIn=DataIn;
+		this.DataOut=DataOut;
 	}
 	
 	
@@ -104,8 +107,7 @@ public class CommandLine extends UIBuilder{
 		//set command line
 		DataIn.setCommand(textArea.getText());
 		System.out.println(DataIn.getCommand());
-		//update variables from workspace
-		//update turtle position
+		//DataIn.parseCommand(UI.Controller);
 	}
 	
 	private void displayDataOut() {
@@ -116,7 +118,7 @@ public class CommandLine extends UIBuilder{
 	}
 	
 	private void displayCommandHistory() {
-		CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,UI.DataOut);
+		CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,DataOut);
 		CommandHistoryWindow.displayHistory();
 	}
 	

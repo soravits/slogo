@@ -1,6 +1,7 @@
 package view;
 import java.util.Queue;
-
+import view.data.DataIn;
+import view.data.DataOut;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 import view.data.DataIn;
