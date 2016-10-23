@@ -1,7 +1,6 @@
 package view;
 
 import java.util.ResourceBundle;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.text.Text;

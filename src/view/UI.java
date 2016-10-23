@@ -8,8 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import view.data.DataIn;
-import view.data.DataOut;
+
 
 /**
  * 
@@ -23,7 +22,6 @@ public class UI {
 	
 	private HelpWindowUI helpWindowUI;
 	private Turtle turtle;
-	private TurtleSettings turtleSettings;
 	
 	private CommandLine commandLine;
 	
@@ -31,7 +29,7 @@ public class UI {
 	private int xSize, ySize;
 	private Stage stage;
 	
-	public static GeneralSettings generalSettings;
+	public GeneralSettings generalSettings;
 	public static DataIn DataIn;
 	public static DataOut DataOut;
 	public static Controller Controller;
@@ -50,6 +48,8 @@ public class UI {
 	}
 
 	
+	
+	
 	/**
 	 * Creates a root and initiates the scene. Main calls this method to start the program.
 	 */
@@ -63,15 +63,16 @@ public class UI {
 		Controller=new Controller(DataIn);
 		helpWindowUI = new HelpWindowUI();
 		
-		turtleSettings = new TurtleSettings(this, stage);
+		//turtleSettings = new TurtleSettings(this, stage);
 		
-		root.getChildren().add(turtleSettings.getRoot());		
+		//root.getChildren().add(turtleSettings.getRoot());		
 		
-		turtle = new Turtle(turtleSettings);	
+		turtle = new Turtle(stage);	
+		root.getChildren().add(turtle.getTurtleSettings().getRoot());
 		
 		generalSettings = new GeneralSettings();
 		
-		commandLine = new CommandLine(ySize,DataIn,DataOut);
+		commandLine = new CommandLine(ySize, DataIn, DataOut, this);
 		
 		workspace = new Workspace(xSize,DataOut);
 	
@@ -84,8 +85,12 @@ public class UI {
 		
 	}
 	
-	public void addTurtleToRoot(){
-		turtle.getRoot();
+//	public void addTurtleToRoot(){
+//		turtle.getRoot();
+//	}
+	
+	public GeneralSettings getGeneralSettings(){
+		return generalSettings;
 	}
 	
 	

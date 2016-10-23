@@ -7,8 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import view.data.DataIn;
-import view.data.DataOut;
+
+import javafx.stage.Stage;
+
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -38,15 +39,17 @@ public class CommandLine extends UIBuilder{
 	
 	private DataIn DataIn;
 	private DataOut DataOut;
+	private UI ui;
 	
-	public CommandLine(int sceneHeight,DataIn DataIn,DataOut DataOut){
+	public CommandLine(int sceneHeight,DataIn DataIn,DataOut DataOut, UI ui){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
-		this.DataIn=DataIn;
-		this.DataOut=DataOut;
+		this.DataIn = DataIn;
+		this.DataOut = DataOut;
+		this.ui = ui;
 	}
 	
 	
@@ -103,6 +106,7 @@ public class CommandLine extends UIBuilder{
 			}
 			displayDataOut();
 			textArea.setText("");
+			//ui.addTurtleToRoot();
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
@@ -110,7 +114,7 @@ public class CommandLine extends UIBuilder{
 	
 	private void updateDataIn() throws Exception {
 		DataIn.setCommand(textArea.getText());
-		DataIn.setLanguage(UI.generalSettings.getLanguage());
+		DataIn.setLanguage(ui.getGeneralSettings().getLanguage());
 		//testing
 //		System.out.println(DataIn.getCommand());
 //		System.out.println(DataIn.getLanguage());
