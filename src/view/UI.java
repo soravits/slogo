@@ -59,7 +59,7 @@ public class UI {
 		
 		DataIn=new DataIn();
 		DataOut=new DataOut();
-		//Controller=new Controller(DataIn);
+		Controller=new Controller(DataIn);
 		helpWindowUI = new HelpWindowUI();
 		
 		turtleSettings = new TurtleSettings(this, stage);

@@ -14,4 +14,8 @@ public abstract class ControlCommand extends Command {
         super(model);
         this.root = root;
     }
+    
+    public Node getRoot(){
+    	return root;
+    }
 }
