@@ -1,15 +1,12 @@
 package view;
-
+import model.Model;
 import view.data.DataIn;
-import view.data.DataOut;
 import controller.Controller;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import view.data.DataIn;
-import view.data.DataOut;
+
 
 /**
  * 
@@ -23,20 +20,20 @@ public class UI {
 	
 	private HelpWindowUI helpWindowUI;
 	private Turtle turtle;
-	private TurtleSettings turtleSettings;
 	
 	private CommandLine commandLine;
-	
+	private Console console;
+	private Workspace workspace;
 	private Group root = new Group();
 	private int xSize, ySize;
 	private Stage stage;
+	private Model Model;
 	
-	public static GeneralSettings generalSettings;
+	public GeneralSettings generalSettings;
 	public static DataIn DataIn;
-	public static DataOut DataOut;
 	public static Controller Controller;
-	public static Console console;
-	public static Workspace workspace;
+	
+	
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -50,6 +47,8 @@ public class UI {
 	}
 
 	
+	
+	
 	/**
 	 * Creates a root and initiates the scene. Main calls this method to start the program.
 	 */
@@ -58,24 +57,27 @@ public class UI {
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
-		DataIn=new DataIn();
-		DataOut=new DataOut();
+		Model = new Model();
+		DataIn=new DataIn(Model);
 		Controller=new Controller(DataIn);
+		
 		helpWindowUI = new HelpWindowUI();
 		
-		turtleSettings = new TurtleSettings(this, stage);
+		//turtleSettings = new TurtleSettings(this, stage);
 		
-		root.getChildren().add(turtleSettings.getRoot());		
+		//root.getChildren().add(turtleSettings.getRoot());		
 		
-		turtle = new Turtle(turtleSettings);	
+		turtle = new Turtle(stage);	
+		root.getChildren().add(turtle.getTurtleSettings().getRoot());
 		
 		generalSettings = new GeneralSettings();
 		
-		commandLine = new CommandLine(ySize,DataIn,DataOut);
+
+		commandLine = new CommandLine(ySize, DataIn, this);
 		
-		workspace = new Workspace(xSize,DataOut);
+		workspace = new Workspace(xSize);
 	
-		console = new Console(ySize, xSize,DataOut);
+		console = new Console(ySize, xSize);
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
@@ -84,8 +86,16 @@ public class UI {
 		
 	}
 	
-	public void addTurtleToRoot(){
-		turtle.getRoot();
+//	public void addTurtleToRoot(){
+//		turtle.getRoot();
+//	}
+	
+	public GeneralSettings getGeneralSettings(){
+		return generalSettings;
+	}
+	
+	public Controller getController() {
+		return Controller;
 	}
 	
 	

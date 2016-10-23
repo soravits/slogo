@@ -1,11 +1,9 @@
 package view;
 import java.util.Queue;
 import view.data.DataIn;
-import view.data.DataOut;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
-import view.data.DataIn;
-import view.data.DataOut;
+
 
 /**
  * The purpose of this class is to create the root that visualizes the console.
@@ -21,17 +19,15 @@ public class Console extends UIBuilder{
 	private int consoleWidth;
 	private int consoleX;
 	private int consoleY;
-	private DataOut DataOut;
 	private TextArea console;
 	
 	
-	public Console(int sceneHeight, int sceneWidth, DataOut DataOut){
+	public Console(int sceneHeight, int sceneWidth){
 		super();
 		this.consoleHeight = sceneHeight - WORKSPACE_HEIGHT - 120;
 		this.consoleWidth = sceneWidth - COMMAND_LINE_WIDTH - 30;
 		this.consoleX = COMMAND_LINE_WIDTH + 20;
 		this.consoleY = WORKSPACE_HEIGHT + 110;
-		this.DataOut = DataOut;
 	}
 	
 	
@@ -58,13 +54,6 @@ public class Console extends UIBuilder{
 		root.getChildren().add(console);
 	}
 	
-	//testing
-	public void displayResults() {
-		Queue<String> results= DataOut.getConsoleResults();
-		while (!results.isEmpty()) {
-			console.appendText(results.poll()+"\n");
-		}
-	}
 	
 }
 
