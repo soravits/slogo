@@ -1,6 +1,7 @@
 package model.commands.control;
 
 import controller.Node;
+
 import controller.Parser;
 import model.Model;
 import model.commands.ControlCommand;
