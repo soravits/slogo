@@ -1,9 +1,7 @@
 package view;
-
+import model.Model;
 import view.data.DataIn;
-import view.data.DataOut;
 import controller.Controller;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -24,17 +22,18 @@ public class UI {
 	private Turtle turtle;
 	
 	private CommandLine commandLine;
-	
+	private Console console;
+	private Workspace workspace;
 	private Group root = new Group();
 	private int xSize, ySize;
 	private Stage stage;
+	private Model Model;
 	
 	public GeneralSettings generalSettings;
 	public static DataIn DataIn;
-	public static DataOut DataOut;
 	public static Controller Controller;
-	public static Console console;
-	public static Workspace workspace;
+	
+	
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -58,9 +57,12 @@ public class UI {
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
-		DataIn = new DataIn();
-		DataOut = new DataOut();
-		Controller = new Controller(DataIn);
+
+		Model = new Model();
+		DataIn= new DataIn(Model);
+		Controller=new Controller(DataIn);
+		
+
 		helpWindowUI = new HelpWindowUI();
 		
 		//turtleSettings = new TurtleSettings(this, stage);
@@ -72,11 +74,12 @@ public class UI {
 		
 		generalSettings = new GeneralSettings();
 		
-		commandLine = new CommandLine(ySize, DataIn, DataOut, this);
+
+		commandLine = new CommandLine(ySize, DataIn, this);
 		
-		workspace = new Workspace(xSize,DataOut);
+		workspace = new Workspace(xSize);
 	
-		console = new Console(ySize, xSize,DataOut);
+		console = new Console(ySize, xSize);
 		
 		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
@@ -91,6 +94,10 @@ public class UI {
 	
 	public GeneralSettings getGeneralSettings(){
 		return generalSettings;
+	}
+	
+	public Controller getController() {
+		return Controller;
 	}
 	
 	

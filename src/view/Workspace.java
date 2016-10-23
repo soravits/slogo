@@ -1,6 +1,5 @@
 package view;
 import view.data.DataIn;
-import view.data.DataOut;
 import java.util.HashMap;
 import java.util.Queue;
 
@@ -24,16 +23,14 @@ public class Workspace extends UIBuilder{
 	private int workspaceHeight;
 	private TextArea workspace;
 	private static int WORKSPACE_Y = 55;
-	private DataOut DataOut;
 	
 	
-	public Workspace(int sceneWidth, DataOut DataOut){
+	public Workspace(int sceneWidth){
 		super();
 		
 		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
 		this.workspaceWidth = sceneWidth - TURTLE_CANVAS_WIDTH - 170;
 		this.workspaceHeight = WORKSPACE_HEIGHT;
-		this.DataOut=DataOut;
 	}
 	
 	
@@ -54,19 +51,9 @@ public class Workspace extends UIBuilder{
 		workspace = new TextArea();
 		workspace.setLayoutX(workspaceX);
 		workspace.setLayoutY(WORKSPACE_Y);
-		
 		workspace.setPrefWidth(workspaceWidth);
 		workspace.setPrefHeight(workspaceHeight);
-		
 		root.getChildren().add(workspace);
 	}
-	
-	//testing
-		public void displayResults() {
-			HashMap<String,Double> results= DataOut.getVariables();
-			for (String key:results.keySet()) {
-				workspace.appendText(key+": "+results.get(key)+"\n");
-			}
-		}
 	
 }
