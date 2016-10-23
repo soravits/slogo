@@ -2,6 +2,7 @@ package view;
 import controller.Controller;
 import javafx.scene.Group;
 import view.data.DataIn;
+import model.Model;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
@@ -37,6 +38,7 @@ public class CommandLine extends UIBuilder{
 	private static int COMMAND_LINE_X = 10;
 	
 	private DataIn DataIn;
+	private Model updatedModel;
 	
 	public CommandLine(int sceneHeight,DataIn DataIn){
 		super();
@@ -87,7 +89,7 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-			displayCommandHistory();
+				//todo
 		});	
 		
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
@@ -95,11 +97,13 @@ public class CommandLine extends UIBuilder{
 		submit.setOnAction((event) -> {
 			try {
 				updateDataIn();
+				textArea.setText("");
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			textArea.setText("");
+			
 			//ui.addTurtleToRoot();
 		});	
 		
@@ -109,20 +113,11 @@ public class CommandLine extends UIBuilder{
 	private void updateDataIn() throws Exception {
 		DataIn.setCommand(textArea.getText());
 		DataIn.setLanguage(UI.generalSettings.getLanguage());
-		//testing
-//		System.out.println(DataIn.getCommand());
-//		System.out.println(DataIn.getLanguage());
+		System.out.println(DataIn.getCommand());
+		System.out.println(UI.generalSettings.getLanguage());
 		DataIn.parseCommand(UI.Controller);
+		updatedModel=DataIn.getViewModel();
 	}
 	
-	private void displayCommandHistory() {
-		//
-	}
-	
-	private boolean commandIsEmpty() {
-		return textArea.getText().trim().equals("");
-	}
-	
-
 	
 }
