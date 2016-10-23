@@ -1,15 +1,12 @@
 package view;
 import view.data.DataIn;
-import view.data.DataOut;
 import java.util.Queue;
 import view.data.DataIn;
-import view.data.DataOut;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import view.data.DataOut;
 
 public class CommandHistoryWindow {
 	private int height;
@@ -18,12 +15,10 @@ public class CommandHistoryWindow {
 	Group group;
 	Scene scene;
 	TextArea popupScene;
-	DataOut DataOut;
 
-	CommandHistoryWindow(int height, int width, DataOut DataOut) {
+	CommandHistoryWindow(int height, int width) {
 		this.stage=new Stage();
 		this.popupScene = new TextArea();
-		this.DataOut=DataOut;
 		this.height=height;
 		this.width=width;
 		this.group=new Group();
@@ -42,16 +37,6 @@ public class CommandHistoryWindow {
 		
 		group.getChildren().add(popupScene);
 		
-	}
-	
-
-	public void displayHistory() {
-		Queue<String> history= DataOut.getCommandHistory();
-		while (!history.isEmpty()) {
-			popupScene.appendText(history.poll()+"\n");
-		}
-        stage.setScene(scene);
-        stage.show();
 	}
 
 }

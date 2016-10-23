@@ -2,7 +2,6 @@ package view;
 import controller.Controller;
 import javafx.scene.Group;
 import view.data.DataIn;
-import view.data.DataOut;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
@@ -38,16 +37,14 @@ public class CommandLine extends UIBuilder{
 	private static int COMMAND_LINE_X = 10;
 	
 	private DataIn DataIn;
-	private DataOut DataOut;
 	
-	public CommandLine(int sceneHeight,DataIn DataIn,DataOut DataOut){
+	public CommandLine(int sceneHeight,DataIn DataIn){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
 		this.DataIn=DataIn;
-		this.DataOut=DataOut;
 	}
 	
 	
@@ -102,7 +99,6 @@ public class CommandLine extends UIBuilder{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			displayDataOut();
 			textArea.setText("");
 			//ui.addTurtleToRoot();
 		});	
@@ -114,21 +110,13 @@ public class CommandLine extends UIBuilder{
 		DataIn.setCommand(textArea.getText());
 		DataIn.setLanguage(UI.generalSettings.getLanguage());
 		//testing
-		System.out.println(DataIn.getCommand());
-		System.out.println(DataIn.getLanguage());
-		//DataIn.parseCommand(UI.Controller);
-	}
-	
-	private void displayDataOut() {
-		if (!commandIsEmpty()) {
-			UI.console.displayResults();
-			UI.workspace.displayResults();
-		}
+//		System.out.println(DataIn.getCommand());
+//		System.out.println(DataIn.getLanguage());
+		DataIn.parseCommand(UI.Controller);
 	}
 	
 	private void displayCommandHistory() {
-		CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,DataOut);
-		CommandHistoryWindow.displayHistory();
+		//
 	}
 	
 	private boolean commandIsEmpty() {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Node {
     String value;
-    ArrayList<Node> children;
+    ArrayList<Node> children = new ArrayList<Node>();
 
     public Node(String value){
         this.value = value;

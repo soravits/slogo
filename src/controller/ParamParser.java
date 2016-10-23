@@ -28,6 +28,7 @@ public class ParamParser {
     }
 
     public int getNumParams(String key){
+    	System.out.println(key);
         return paramsCounts.get(key);
     }
 }

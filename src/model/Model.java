@@ -12,6 +12,10 @@ public class Model{
         commandHistory = new CommandHistory();
     }
 
+    public TurtleMap getTurtleMap (){
+        return turtleMap;
+    }
+    
     public TurtleState getTurtle () {
         return turtleMap.getTurtle();
     }
