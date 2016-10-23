@@ -1,5 +1,8 @@
 package view;
 
+import java.util.HashMap;
+import java.util.Queue;
+
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 
@@ -18,15 +21,18 @@ public class Workspace extends UIBuilder{
 	private int workspaceX;
 	private int workspaceWidth;
 	private int workspaceHeight;
-	
+	private TextArea workspace;
 	private static int WORKSPACE_Y = 55;
+	private DataOut DataOut;
 	
 	
-	public Workspace(int sceneWidth){
+	public Workspace(int sceneWidth, DataOut DataOut){
 		super();
+		
 		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
 		this.workspaceWidth = sceneWidth - TURTLE_CANVAS_WIDTH - 170;
-		this.workspaceHeight = WORKSPACE_HEIGHT; 
+		this.workspaceHeight = WORKSPACE_HEIGHT;
+		this.DataOut=DataOut;
 	}
 	
 	
@@ -44,7 +50,7 @@ public class Workspace extends UIBuilder{
 	
 	
 	private void makeWorkspace(){
-		TextArea workspace = new TextArea();
+		workspace = new TextArea();
 		workspace.setLayoutX(workspaceX);
 		workspace.setLayoutY(WORKSPACE_Y);
 		
@@ -53,5 +59,13 @@ public class Workspace extends UIBuilder{
 		
 		root.getChildren().add(workspace);
 	}
+	
+	//testing
+		public void displayResults() {
+			HashMap<String,Double> results= DataOut.getVariables();
+			for (String key:results.keySet()) {
+				workspace.appendText(key+": "+results.get(key)+"\n");
+			}
+		}
 	
 }

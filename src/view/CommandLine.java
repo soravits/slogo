@@ -1,8 +1,11 @@
 package view;
 
 import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -30,13 +33,15 @@ public class CommandLine extends UIBuilder{
 	
 	private static int COMMAND_LINE_X = 10;
 	
+	private DataIn DataIn;
 	
-	public CommandLine(int sceneHeight){
+	public CommandLine(int sceneHeight,DataIn DataIn){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
+		this.DataIn=DataIn;
 	}
 	
 	
@@ -56,6 +61,7 @@ public class CommandLine extends UIBuilder{
 	/*
 	 * returns list of objects which are each a line of input in the command line
 	 */
+
 	public String getCommand(){
 		return textArea.getText();
 	}
@@ -78,20 +84,42 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-			//TODO: add action
+			displayCommandHistory();
 		});	
 		
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
-			//TODO: add action
+			updateDataIn();
+			displayDataOut();
+			textArea.setText("");
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
-			
-			
-							
-		
+	}
+	
+	private void updateDataIn() {
+		//set command line
+		DataIn.setCommand(textArea.getText());
+		System.out.println(DataIn.getCommand());
+		//update variables from workspace
+		//update turtle position
+	}
+	
+	private void displayDataOut() {
+		if (!commandIsEmpty()) {
+			UI.console.displayResults();
+			UI.workspace.displayResults();
+		}
+	}
+	
+	private void displayCommandHistory() {
+		CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,UI.DataOut);
+		CommandHistoryWindow.displayHistory();
+	}
+	
+	private boolean commandIsEmpty() {
+		return textArea.getText().trim().equals("");
 	}
 	
 
