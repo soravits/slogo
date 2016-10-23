@@ -1,8 +1,9 @@
 package controller;
 
+import model.Model;
 import model.State;
-import view.UI;
 import view.data.DataIn;
+import view.UI;
 
 /**
  * The purpose of this class is to receive the data from the view and send it to the controller.Parser to be handled. It will
@@ -17,10 +18,10 @@ public class Controller {
 
     private State state;
     private Parser parser;
-    private DataIn DataIn;
+    private DataIn view;
 
-    public Controller(DataIn dataIn){
-        this.DataIn = dataIn;
+    public Controller(DataIn view){
+        this.view = view;
         state = new State();
         parser = new Parser(state);
     }
@@ -30,7 +31,7 @@ public class Controller {
     }
 
     public void updateView(){
-        //
+    	
     }
 
     /**
