@@ -112,9 +112,9 @@ public class CommandLine extends UIBuilder{
 		DataIn.setCommand(textArea.getText());
 		DataIn.setLanguage(UI.generalSettings.getLanguage());
 		//testing
-		System.out.println(DataIn.getCommand());
-		System.out.println(DataIn.getLanguage());
-		//DataIn.parseCommand(UI.Controller);
+//		System.out.println(DataIn.getCommand());
+//		System.out.println(DataIn.getLanguage());
+		DataIn.parseCommand(UI.Controller);
 	}
 	
 	private void displayDataOut() {
