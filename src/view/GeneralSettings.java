@@ -44,8 +44,8 @@ public class GeneralSettings extends UIBuilder{
 	/*
 	 * returns the selected language
 	 */
-	public Object getLanguage(){
-		return null;
+	public String getLanguage(){
+		return languageComboBox.getValue();
 	}
 	
 	
