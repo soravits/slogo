@@ -1,7 +1,7 @@
 package model.commands.turtle;
 
-import model.LineState;
 import model.Model;
+import model.Position;
 import model.TurtleState;
 import model.commands.OneInputCommand;
 
@@ -14,11 +14,12 @@ public class Forward extends OneInputCommand{
     @Override
     public double execute () {
         TurtleState turtle = this.getModel().getTurtle();
-        LineState lines = this.getModel().getLineState();
+        Position prevPosition = turtle.getPosition();
         double moveX = Math.sin(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
         double moveY = Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
         turtle.addTurtleX(moveX);
         turtle.addTurtleY(moveY);
+        drawLines(prevPosition, turtle.getPosition());
         return this.getParam1();
     }
 

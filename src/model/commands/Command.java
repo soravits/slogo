@@ -1,6 +1,7 @@
 package model.commands;
 
 import model.Model;
+import model.Position;
 
 public abstract class Command {
     
@@ -23,6 +24,12 @@ public abstract class Command {
             normalizedAngle += 360;
         }
         return normalizedAngle;
+    }
+    
+    public void drawLines(Position pos1, Position pos2){
+        if (slogoModel.getLineState().isPenDown()){
+            slogoModel.getLineState().createLine(pos1, pos2);
+        }   
     }
 
 }
