@@ -4,24 +4,21 @@ import model.Model;
 
 public abstract class Command implements CommandInterface{
     
-    protected double[] parameters;
-    protected Model slogoModel;
+    private double[] parameters;
+    private Model slogoModel;
     
-    Command(double[] params, Model model){
+    public Command(double[] params, Model model){
         parameters = params;
         slogoModel = model;
     }
-    
-    public double normalizeAngle(double angle){
-        double normalizedAngle = angle % 360;
-        if (normalizedAngle < 0){
-            normalizedAngle += 360;
-        }
-        return normalizedAngle;
-    }
 
     @Override
-    public abstract double execute ();
+    public double execute (){
+        return execute(parameters, slogoModel);
+    };
+
+    @Override
+    public abstract double execute (double[] params, Model model);
     
     
 

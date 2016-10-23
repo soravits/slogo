@@ -1,15 +1,16 @@
-package model.commands;
+package model.commands.turtle;
 
 import model.Model;
+import model.commands.Command;
 
-public class SetTowards extends Command{
+public class SetTowards extends CommandTurtle{
 
     SetTowards (double[] params, Model model) {
         super(params, model);
     }
 
     @Override
-    public double execute () {
+    public double execute (double[] parameters, Model slogoModel) {
         double xDiff = parameters[0] - slogoModel.getTurtle().getTurtleX();
         double yDiff = parameters[1] - slogoModel.getTurtle().getTurtleY();
         double angle = normalizeAngle(Math.toDegrees(Math.acos(yDiff/(xDiff*xDiff + yDiff*yDiff))));
@@ -24,7 +25,7 @@ public class SetTowards extends Command{
         }
         double currentAngle = slogoModel.getTurtle().getTurtleAngle();
         slogoModel.getTurtle().setTurtleAngle(angle);
-        return Math.abs(angle - currentAngle);       
+        return Math.abs(angle - currentAngle);      
     }
 
     

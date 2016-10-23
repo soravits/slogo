@@ -1,6 +1,7 @@
-package model.commands;
+package model.commands.math;
 
 import model.Model;
+import model.commands.Command;
 
 public class Sum extends Command{
     
@@ -8,7 +9,7 @@ public class Sum extends Command{
         super(parameters, model);
     }
     
-    public double execute(){
+    public double execute(double[] parameters, Model slogoModel){
         return parameters[0] + parameters[1];
     }
 }
