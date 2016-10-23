@@ -65,5 +65,4 @@ public class TurtleState {
     public boolean getShowTurtle () {
         return turtleShow;
     }
-
 }

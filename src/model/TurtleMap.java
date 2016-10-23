@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class TurtleMap {
@@ -10,6 +11,12 @@ public class TurtleMap {
     public TurtleMap(){
         currentID = 1;
         turtleMap = new HashMap<Object, TurtlePair>();
+        TurtlePair firstPair = new TurtlePair();
+        turtleMap.put(currentID, firstPair);
+    }
+    
+    public Collection<TurtlePair> getTurtles(){
+        return turtleMap.values();
     }
     
     public TurtleState getTurtle(){

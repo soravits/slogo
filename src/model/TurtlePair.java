@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Iterator;
+
 public class TurtlePair {
     
     private LineState lines;
@@ -14,18 +16,7 @@ public class TurtlePair {
         return lines;
     }
 
-    public void setLines (LineState lineState) {
-        lines = lineState;
-    }
-
     public TurtleState getTurtle () {
         return turtle;
     }
-
-    public void setTurtle (TurtleState turtleState) {
-        turtle = turtleState;
-    }
-    
-    
-
 }

@@ -8,7 +8,7 @@ import model.commands.OneInputCommand;
 
 public class Forward extends OneInputCommand{
 
-    Forward (double param1, Model model) {
+    public Forward (double param1, Model model) {
         super(param1, model);
     }
 
@@ -21,6 +21,7 @@ public class Forward extends OneInputCommand{
         double moveY = Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
         turtle.updateTurtlePosition(moveX, moveY);
         lines.createLine(prevPosition, turtle.getPosition());
+
         return this.getParam1();
     }
 

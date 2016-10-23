@@ -1,41 +1,35 @@
 package model;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
 
-public class WorkspaceState implements WorkspaceStateInterface {
+public class WorkspaceState {
     
-    private Collection<Variable> listOfVariables;
+    private HashMap<String, Double> mapOfVariables;
     
     public WorkspaceState(){
-        listOfVariables = new HashSet<Variable>();
+        mapOfVariables = new HashMap<String, Double>();
     }
 
-    @Override
-    public void addVariable (Object name, Object value) {
-        Variable var = new Variable(name, value);
-        if (listOfVariables.contains(var)){
-            removeVariable(var);
+    public void addVariable (Object name, Double value) {
+        if (mapOfVariables.containsKey(name)){
+            mapOfVariables.replace(name.toString(), value);
         }
-        listOfVariables.add(var);
     }
 
-    @Override
     public void removeVariable (Object var) {
-        listOfVariables.remove(var);
+        mapOfVariables.remove(var);
     }
     
-
-    @Override
-    public Collection<Variable> getListOfVariables () {
-        return listOfVariables;
+    public double getVariableValue(String name){
+        return mapOfVariables.get(name);
     }
 
-    @Override
+    public HashMap<String, Double> getListOfVariables () {
+        return mapOfVariables;
+    }
+
     public void clearWorkspace () {
-        listOfVariables = new HashSet<Variable>();
+        mapOfVariables = new HashMap<String, Double>();
     }
-
-    
     
 }
