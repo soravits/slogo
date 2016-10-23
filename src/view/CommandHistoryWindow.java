@@ -2,6 +2,8 @@ package view;
 import view.data.DataIn;
 import view.data.DataOut;
 import java.util.Queue;
+import view.data.DataIn;
+import view.data.DataOut;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,7 +19,7 @@ public class CommandHistoryWindow {
 	TextArea popupScene;
 	DataOut DataOut;
 
-	CommandHistoryWindow(int height, int width,DataOut DataOut) {
+	CommandHistoryWindow(int height, int width, DataOut DataOut) {
 		this.stage=new Stage();
 		this.popupScene = new TextArea();
 		this.DataOut=DataOut;

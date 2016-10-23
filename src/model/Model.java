@@ -17,6 +17,7 @@ public class Model{
     public TurtleState getTurtle () {
         return turtle;
     }
+
     public LineState getLineState () {
         return lines;
     }

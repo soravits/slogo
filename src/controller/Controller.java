@@ -1,8 +1,8 @@
 package controller;
 
 import model.Model;
-import model.State;
 import view.data.DataIn;
+import view.data.DataOut;
 import view.UI;
 
 /**
@@ -16,22 +16,18 @@ import view.UI;
  */
 public class Controller {
 
-    private State state;
+    private Model model;
     private Parser parser;
     private DataIn view;
 
     public Controller(DataIn view){
         this.view = view;
-        state = new State();
-        parser = new Parser(state);
+        model = new Model();
+        parser = new Parser(model);
     }
 
-    public void updateState(State state){
-        this.state = state;
-    }
-
-    public void updateView(){
-    	
+    public void updateModel(Model model){
+        this.model = model;
     }
 
     /**
@@ -41,6 +37,10 @@ public class Controller {
      */
     public void processCommand(String input){
         parser.parseString(input);
+    }
+
+    public void updateView(Model model){
+        view.update();
     }
 
 }

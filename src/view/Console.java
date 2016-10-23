@@ -4,6 +4,8 @@ import view.data.DataIn;
 import view.data.DataOut;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
+import view.data.DataIn;
+import view.data.DataOut;
 
 /**
  * The purpose of this class is to create the root that visualizes the console.
@@ -23,13 +25,13 @@ public class Console extends UIBuilder{
 	private TextArea console;
 	
 	
-	public Console(int sceneHeight, int sceneWidth,DataOut DataOut){
+	public Console(int sceneHeight, int sceneWidth, DataOut DataOut){
 		super();
 		this.consoleHeight = sceneHeight - WORKSPACE_HEIGHT - 120;
 		this.consoleWidth = sceneWidth - COMMAND_LINE_WIDTH - 30;
 		this.consoleX = COMMAND_LINE_WIDTH + 20;
 		this.consoleY = WORKSPACE_HEIGHT + 110;
-		this.DataOut=DataOut;
+		this.DataOut = DataOut;
 	}
 	
 	
