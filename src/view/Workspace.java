@@ -1,11 +1,11 @@
 package view;
-
+import view.data.DataIn;
+import view.data.DataOut;
 import java.util.HashMap;
 import java.util.Queue;
 
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
-import view.data.DataOut;
 
 
 /**

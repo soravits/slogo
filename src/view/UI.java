@@ -1,5 +1,9 @@
 package view;
 
+import view.data.DataIn;
+import view.data.DataOut;
+import controller.Controller;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -29,6 +33,7 @@ public class UI {
 	
 	public static DataIn DataIn;
 	public static DataOut DataOut;
+	public static Controller Controller;
 	public static Console console;
 	public static Workspace workspace;
 	
@@ -54,8 +59,7 @@ public class UI {
 		
 		DataIn=new DataIn();
 		DataOut=new DataOut();
-		
-		
+		Controller=new Controller(DataIn);
 		helpWindowUI = new HelpWindowUI();
 		
 		turtleSettings = new TurtleSettings(this, stage);
@@ -66,7 +70,7 @@ public class UI {
 		
 		generalSettings = new GeneralSettings();
 		
-		commandLine = new CommandLine(ySize,DataIn);
+		commandLine = new CommandLine(ySize,DataIn,DataOut);
 		
 		workspace = new Workspace(xSize,DataOut);
 	

@@ -17,7 +17,6 @@ public class MakeVariable extends OneInputCommand{
         double value = getParam1();
         this.getModel().getWorkspace().addVariable(name, value);
         return value;
-        
     }
 
     

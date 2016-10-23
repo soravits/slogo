@@ -1,6 +1,5 @@
 package view.data;
 
-
 /**
  * the purpose of this class is to sort data from the back end 
  * so that visualization classes can call just the data they need

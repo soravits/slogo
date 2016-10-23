@@ -1,8 +1,14 @@
 package model;
 
-public class TurtleState implements TurtleStateInterface{
+/**
+* This class hold the basic information about the turtle model; used to update the state of the turtle after
+* receiving a command, as well as get the individual characteristics of a turtle
+* @author Brian
+*
+*/
+public class TurtleState {
 
-    private PositionInterface turtlePosition;
+    private Position turtlePosition;
     private double turtleAngle;
     private boolean turtleShow;
 
@@ -17,59 +23,45 @@ public class TurtleState implements TurtleStateInterface{
         turtleAngle = angle;
         turtleShow = isShowing;
     }
-
-
-    @Override
-    public void setTurtleX (double x) {
-        turtlePosition.setX(x);
+    
+    public Position getPosition(){
+        return turtlePosition;
     }
-
-    @Override
-    public void addTurtleX (double x) {
+    
+    public void updateTurtlePosition (double x, double y){
         turtlePosition.addX(x);
-    }
-
-    @Override
-    public void setTurtleY (double y) {
-        turtlePosition.setY(y);
-    }
-
-    @Override
-    public void addTurtleY (double y) {
         turtlePosition.addY(y);
     }
 
-    @Override
+    public void setTurtlePosition (double x, double y){
+        turtlePosition.setX(x);
+        turtlePosition.setY(y);
+    }    
+
     public void setTurtleAngle (double degrees) {
         turtleAngle = degrees;
     }
 
-    @Override
     public void addTurtleAngle (double degrees) {
         turtleAngle += degrees;
     }
 
-    @Override
     public void setShowTurtle (boolean setShow) {
         turtleShow = setShow;
     }
 
-    @Override
     public double getTurtleX () {
         return turtlePosition.getX();
     }
 
-    @Override
     public double getTurtleY () {
         return turtlePosition.getY();
     }
 
-    @Override
     public double getTurtleAngle () {
         return turtleAngle;
     }
 
-    @Override
     public boolean getShowTurtle () {
         return turtleShow;
     }
