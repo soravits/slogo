@@ -7,8 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import view.data.DataIn;
-import view.data.DataOut;
+
+import javafx.stage.Stage;
+
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -103,6 +104,7 @@ public class CommandLine extends UIBuilder{
 			}
 			displayDataOut();
 			textArea.setText("");
+			//ui.addTurtleToRoot();
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
