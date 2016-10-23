@@ -23,13 +23,14 @@ public class UI {
 	private HelpWindowUI helpWindowUI;
 	private Turtle turtle;
 	private TurtleSettings turtleSettings;
-	private GeneralSettings generalSettings;
+	
 	private CommandLine commandLine;
 	
 	private Group root = new Group();
 	private int xSize, ySize;
 	private Stage stage;
 	
+	public static GeneralSettings generalSettings;
 	public static DataIn DataIn;
 	public static DataOut DataOut;
 	public static Controller Controller;

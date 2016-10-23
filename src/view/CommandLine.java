@@ -96,7 +96,12 @@ public class CommandLine extends UIBuilder{
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
-			updateDataIn();
+			try {
+				updateDataIn();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			displayDataOut();
 			textArea.setText("");
 			//ui.addTurtleToRoot();
@@ -105,10 +110,12 @@ public class CommandLine extends UIBuilder{
 		root.getChildren().addAll(reset, history, submit);
 	}
 	
-	private void updateDataIn() {
-		//set command line
+	private void updateDataIn() throws Exception {
 		DataIn.setCommand(textArea.getText());
+		DataIn.setLanguage(UI.generalSettings.getLanguage());
+		//testing
 		System.out.println(DataIn.getCommand());
+		System.out.println(DataIn.getLanguage());
 		//DataIn.parseCommand(UI.Controller);
 	}
 	
