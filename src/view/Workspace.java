@@ -51,10 +51,8 @@ public class Workspace extends UIBuilder{
 		workspace = new TextArea();
 		workspace.setLayoutX(workspaceX);
 		workspace.setLayoutY(WORKSPACE_Y);
-		
 		workspace.setPrefWidth(workspaceWidth);
 		workspace.setPrefHeight(workspaceHeight);
-		
 		root.getChildren().add(workspace);
 	}
 	

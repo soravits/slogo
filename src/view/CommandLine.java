@@ -39,6 +39,7 @@ public class CommandLine extends UIBuilder{
 	
 	private DataIn DataIn;
 	private Model updatedModel;
+	private ModelExtractor ModelExtractor;
 	
 	public CommandLine(int sceneHeight,DataIn DataIn){
 		super();
@@ -97,7 +98,7 @@ public class CommandLine extends UIBuilder{
 		submit.setOnAction((event) -> {
 			try {
 				updateDataIn();
-				textArea.setText("");
+				Display();
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -113,10 +114,16 @@ public class CommandLine extends UIBuilder{
 	private void updateDataIn() throws Exception {
 		DataIn.setCommand(textArea.getText());
 		DataIn.setLanguage(UI.generalSettings.getLanguage());
-		System.out.println(DataIn.getCommand());
-		System.out.println(UI.generalSettings.getLanguage());
 		DataIn.parseCommand(UI.Controller);
+		
+	}
+	
+	private void Display() {
 		updatedModel=DataIn.getViewModel();
+		ModelExtractor = new ModelExtractor(updatedModel);
+		ModelExtractor.init();
+		ModelExtractor.displayConsole();
+		ModelExtractor.displayWorkspace();
 	}
 	
 	
