@@ -13,12 +13,15 @@ import model.Model;
 public class DataIn {
 	private String command;
 	private String language;
+	private Model viewModel;
 	
-	public DataIn() {
+	public DataIn(Model model) {
+		this.viewModel=model;
 	}
 	
 	public void setCommand(String command) {
 		this.command=command;
+		
 	}
 	
 	public void setLanguage(String language) {
@@ -28,24 +31,16 @@ public class DataIn {
 	public String getCommand() {
 		return command;
 	}
-	
-	public String getLanguage() {
-		return language;
-	}
 
 	public void parseCommand(Controller controller) throws Exception {
 		controller.processCommand(command);
 	}
 	
-	public void setTurtlePos() {
-		//TODO
+	public void updateViewModel(Model Model) {
+		this.viewModel=Model;
 	}
 	
-	public void setVariables(HashMap<String,Double> variableMap) {
-		//TODO
-	}
-	
-	public void updateModel(Model model) {
-		//update all fields using data from UI
+	public Model getViewModel() {
+		return viewModel;
 	}
 }

@@ -2,7 +2,7 @@ package view;
 import controller.Controller;
 import javafx.scene.Group;
 import view.data.DataIn;
-import view.data.DataOut;
+import model.Model;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
@@ -38,17 +38,17 @@ public class CommandLine extends UIBuilder{
 	private static int COMMAND_LINE_X = 10;
 	
 	private DataIn DataIn;
-	private DataOut DataOut;
+	private Model updatedModel;
+	//private ModelExtractor ModelExtractor;
 	private UI ui;
 	
-	public CommandLine(int sceneHeight,DataIn DataIn,DataOut DataOut, UI ui){
+	public CommandLine(int sceneHeight,DataIn DataIn, UI ui){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
-		this.DataIn = DataIn;
-		this.DataOut = DataOut;
+		this.DataIn=DataIn;
 		this.ui = ui;
 	}
 	
@@ -92,7 +92,7 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-			displayCommandHistory();
+				//todo
 		});	
 		
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
@@ -100,11 +100,12 @@ public class CommandLine extends UIBuilder{
 		submit.setOnAction((event) -> {
 			try {
 				updateDataIn();
+				//Display();
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			displayDataOut();
 			textArea.setText("");
 			//ui.addTurtleToRoot();
 		});	
@@ -115,28 +116,14 @@ public class CommandLine extends UIBuilder{
 	private void updateDataIn() throws Exception {
 		DataIn.setCommand(textArea.getText());
 		DataIn.setLanguage(ui.getGeneralSettings().getLanguage());
-		//testing
-//		System.out.println(DataIn.getCommand());
-//		System.out.println(DataIn.getLanguage());
-		DataIn.parseCommand(UI.Controller);
+		DataIn.parseCommand(ui.Controller);
+		
 	}
 	
-	private void displayDataOut() {
-		if (!commandIsEmpty()) {
-			UI.console.displayResults();
-			UI.workspace.displayResults();
-		}
+	private void Display() {
+		updatedModel=DataIn.getViewModel();
+		
 	}
 	
-	private void displayCommandHistory() {
-		CommandHistoryWindow CommandHistoryWindow=new CommandHistoryWindow(100,100,DataOut);
-		CommandHistoryWindow.displayHistory();
-	}
-	
-	private boolean commandIsEmpty() {
-		return textArea.getText().trim().equals("");
-	}
-	
-
 	
 }

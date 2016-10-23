@@ -2,7 +2,6 @@ package controller;
 
 import model.Model;
 import view.data.DataIn;
-import view.data.DataOut;
 import view.UI;
 
 /**
