@@ -1,5 +1,6 @@
 package view;
-
+import view.data.DataIn;
+import view.data.DataOut;
 import java.util.Queue;
 
 import javafx.scene.Group;

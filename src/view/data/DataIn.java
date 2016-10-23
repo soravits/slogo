@@ -1,7 +1,7 @@
-package view;
+package view.data;
 
 import java.util.HashMap;
-
+import controller.Controller;
 
 /**
  *View External API is mainly responsible of sending data to the back end. 
@@ -16,6 +16,9 @@ public class DataIn {
 	}
 	public void setCommand(String command) {
 		this.command=command;
+	}
+	public void parseCommand(Controller controller) {
+		controller.processCommand(command);
 	}
 	
 	public void setLanguage(String language) {

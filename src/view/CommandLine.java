@@ -1,11 +1,8 @@
 package view;
-
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
+import view.data.DataIn;
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
@@ -102,8 +99,7 @@ public class CommandLine extends UIBuilder{
 		//set command line
 		DataIn.setCommand(textArea.getText());
 		System.out.println(DataIn.getCommand());
-		//update variables from workspace
-		//update turtle position
+		//DataIn.parseCommand(UI.Controller);
 	}
 	
 	private void displayDataOut() {

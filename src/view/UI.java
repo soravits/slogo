@@ -1,5 +1,7 @@
 package view;
-
+import view.data.DataIn;
+import view.data.DataOut;
+import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -29,6 +31,7 @@ public class UI {
 	public static DataOut DataOut;
 	public static Console console;
 	public static Workspace workspace;
+	public static Controller Controller;
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -52,7 +55,7 @@ public class UI {
 		
 		DataIn=new DataIn();
 		DataOut=new DataOut();
-		
+		Controller=new Controller(DataIn);
 		
 		helpWindowUI = new HelpWindowUI();
 		
