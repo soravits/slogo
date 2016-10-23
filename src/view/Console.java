@@ -1,4 +1,6 @@
 package view;
+import java.util.Queue;
+
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 
@@ -16,14 +18,17 @@ public class Console extends UIBuilder{
 	private int consoleWidth;
 	private int consoleX;
 	private int consoleY;
+	private DataOut DataOut;
+	private TextArea console;
 	
 	
-	public Console(int sceneHeight, int sceneWidth){
+	public Console(int sceneHeight, int sceneWidth,DataOut DataOut){
 		super();
 		this.consoleHeight = sceneHeight - WORKSPACE_HEIGHT - 120;
 		this.consoleWidth = sceneWidth - COMMAND_LINE_WIDTH - 30;
 		this.consoleX = COMMAND_LINE_WIDTH + 20;
 		this.consoleY = WORKSPACE_HEIGHT + 110;
+		this.DataOut=DataOut;
 	}
 	
 	
@@ -41,14 +46,21 @@ public class Console extends UIBuilder{
 	
 	
 	private void makeConsole(){
-		TextArea console = new TextArea();
+		console = new TextArea();
 		console.setEditable(false);
 		console.setPrefWidth(consoleWidth);
 		console.setPrefHeight(consoleHeight);
 		console.setLayoutX(consoleX);
 		console.setLayoutY(consoleY);		
 		root.getChildren().add(console);
-		
+	}
+	
+	//testing
+	public void displayResults() {
+		Queue<String> results= DataOut.getConsoleResults();
+		while (!results.isEmpty()) {
+			console.appendText(results.poll()+"\n");
+		}
 	}
 	
 }

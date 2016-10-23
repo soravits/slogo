@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Collection;
+
 /**
  * This interface outlines the public methods needed to get, add and remove new variables and expressions
  * from the workspace.
@@ -19,12 +21,12 @@ public interface WorkspaceStateInterface {
     public void removeVariable(Object name);
     
     /*
-     * Overwrite the value of a variable
+     * Clear all variables from the workspace
      */
-    public void overWriteVariable(Variable variable, Object value);
+    public void clearWorkspace();
     
     /*
      * Return all of the workspace objects in the workspaceState
      */
-    public List<Variable> getListOfVariables();
+    public Collection<Variable> getListOfVariables();
 }
