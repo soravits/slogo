@@ -32,10 +32,10 @@ public class Turtle extends UIBuilder{
 	private static int TURTLE_Y = 55;
 	private int canvasWidth;
 	private int canvasHeight;
-	private int originX;
-	private int originY;
-	private int currX;
-	private int currY;
+	private double originX;
+	private double originY;
+	private double currX;
+	private double currY;
 	
 	
 	
@@ -52,6 +52,7 @@ public class Turtle extends UIBuilder{
 		this.originY = canvasHeight/2;
 		this.currX = originX;
 		this.currY = originY;
+		bindInstanceVariables();
 		makeCanvas();
 		makeTurtle();
 		getButtons();
@@ -68,6 +69,11 @@ public class Turtle extends UIBuilder{
 		
 		return root;
 	}
+	
+	private void bindInstanceVariables(){
+		//TODO: bind currX and currY to turtle coordinates from model
+	}
+	
 	
 	private void makeCanvas(){		
 		Canvas turtleCanvas = new Canvas(canvasWidth, canvasHeight);
