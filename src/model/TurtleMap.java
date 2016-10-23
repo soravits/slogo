@@ -11,6 +11,8 @@ public class TurtleMap {
     public TurtleMap(){
         currentID = 1;
         turtleMap = new HashMap<Object, TurtlePair>();
+        TurtlePair firstPair = new TurtlePair();
+        turtleMap.put(currentID, firstPair);
     }
     
     public Collection<TurtlePair> getTurtles(){

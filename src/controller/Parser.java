@@ -3,13 +3,13 @@ package controller;
 import controller.CommandParser;
 import controller.ParamParser;
 import model.Model;
+import model.commands.Constant;
+import model.commands.variables.Variable;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.*;
-
-import com.sun.org.apache.xpath.internal.operations.Variable;
 
 /**
  * The purpose of this class is to take the string from the controller and
@@ -32,6 +32,7 @@ public class Parser {
 	private String language = DEFAULT_LANGUAGE;
 	private CommandParser commandParser;
 	private ParamParser paramParser;
+	private CommandParser syntaxParser;
 	private ArrayList<String> controlStructures;
 	private Model model;
 
@@ -39,9 +40,10 @@ public class Parser {
 		this.model = model;
 		commandParser = new CommandParser();
 		paramParser = new ParamParser();
+		syntaxParser = new CommandParser();
 		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
 		paramParser.addMappings(RESOURCE_PACKAGE + File.separator + PARAMS);
-		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
+		syntaxParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
 		controlStructures = getControlStructures(RESOURCE_PACKAGE + File.separator + CONTROL_STRUCTURES);
 	}
 
@@ -74,30 +76,35 @@ public class Parser {
 
 	public double executeTree(Node root) throws Exception{
 		String value = root.getValue();
-		if(!controlStructures.contains(value)) {
-			double[] params = new double[root.getChildren().size()];
-			for (int i = 0; i < root.getChildren().size(); i++) {
-				Node currNode = root.getChildren().get(i);
-				params[i] = executeTree(currNode);
-			}
-			Class command = Class.forName(value);
-			Constructor<?> constructor = command.getDeclaredConstructor();
-			constructor.newInstance(params, model);
-			Method execute = command.getMethod("execute");
-			return (double) execute.invoke(this);
-		}else if(commandParser.getSymbol(value).equals(VARIABLE)){
-			Variable var = new Variable(value.substring(1), model);
-			return var.execute();
-		}else if(commandParser.getSymbol(value).equals(CONSTANT)){
-			Constant constant = new Constant(value, model);
-			return constant.execute();
-		}
-		else{
-			Class command = Class.forName(value);
+		if(controlStructures.contains(value)) {
+			Class<?> command = Class.forName("model.commands.turtle" + value);
 			Constructor<?> constructor = command.getDeclaredConstructor();
 			constructor.newInstance(command, this, model);
 			Method execute = command.getMethod("execute");
 			return (double) execute.invoke(this);
+		}else if(syntaxParser.getSymbol(value).equals(VARIABLE)){
+			Variable var = new Variable(value.substring(1), model);
+			return var.execute();
+		}else if(syntaxParser.getSymbol(value).equals(CONSTANT)){
+			Constant constant = new Constant(Double.parseDouble(value), model);
+			return constant.execute();
+		}
+		else{
+			double[] doubles = new double[root.getChildren().size()];
+			for (int i = 0; i < root.getChildren().size(); i++) {
+				Node currNode = root.getChildren().get(i);
+				doubles[i] = executeTree(currNode);
+			}
+			Class<?>[] classes = new Class[root.getChildren().size()+1];
+			for (int i = 0; i < root.getChildren().size(); i++) {
+				classes[i] = double.class;
+			}
+			classes[root.getChildren().size()] = Model.class;
+			Class<?> command = Class.forName("model.commands.turtle." + value);
+			Constructor<?> constructor = command.getDeclaredConstructor(classes);
+			Object t = constructor.newInstance(doubles[0], model);
+			Method execute = command.getMethod("execute");
+			return (double) execute.invoke(t);
 		}
 	}
 
