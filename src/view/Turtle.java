@@ -110,6 +110,10 @@ public class Turtle extends UIBuilder{
 		turtleView.drawImage(turtleImage, currX - TURTLE_SIZE/2, currY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
 	}
 	
+	public void clearTurtlePath(){
+		turtleView.beginPath();
+	}
+	
 //	private void setTurtlePath(){
 //		for (Type line : turtleLines){
 //			currX = ;

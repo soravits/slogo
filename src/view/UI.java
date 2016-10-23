@@ -58,9 +58,9 @@ public class UI {
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
-		DataIn=new DataIn();
-		DataOut=new DataOut();
-		Controller=new Controller(DataIn);
+		DataIn = new DataIn();
+		DataOut = new DataOut();
+		Controller = new Controller(DataIn);
 		helpWindowUI = new HelpWindowUI();
 		
 		//turtleSettings = new TurtleSettings(this, stage);
