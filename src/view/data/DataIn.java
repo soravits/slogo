@@ -33,8 +33,8 @@ public class DataIn {
 		return language;
 	}
 
-	public void parseCommand(Controller Controller) throws Exception {
-		Controller.processCommand(command);
+	public void parseCommand(Controller controller) throws Exception {
+		controller.processCommand(command);
 	}
 	
 	public void setTurtlePos() {
