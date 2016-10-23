@@ -1,15 +1,19 @@
 package view;
-import java.io.File;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -33,9 +37,12 @@ public class TurtleSettings extends UIBuilder{
 	
 	private Group root = new Group();
 	private UI ui;
+	private DisplayError displayError;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;
 	private Stage stage;
+	private Image turtle;
+	
 	
 	private static int COLOR_RECT_WIDTH = 75;
 	private static int COLOR_RECT_HEIGHT = 20;
@@ -91,12 +98,11 @@ public class TurtleSettings extends UIBuilder{
 	
 	
 	/*
-	 * returns an ImageView of an image that was selected by the user
+	 * returns an image that was selected by the user
 	 */
-	public ImageView getTurtleImage(){		
-		ImageView turtle = new ImageView();
+
+	public Image getTurtleImage(){
 		return turtle;
-		
 	}
 	
 	private void getBackgroundColorComboBox(){
@@ -166,9 +172,11 @@ public class TurtleSettings extends UIBuilder{
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
-			//Make turtle call getTurtleImage which will get image from chooseImage
-			//Change Listener?
-			//have default image? Like a shape
+			ui.addTurtleToRoot();
+			
+			
+			
+			
 		});	
 		
 		root.getChildren().addAll(reset, image);
@@ -177,11 +185,17 @@ public class TurtleSettings extends UIBuilder{
 	private void chooseImage(){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Image File");
-		ExtensionFilter filter = new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif");
+		ExtensionFilter filter = new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"); 	//http://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html
 		fileChooser.getExtensionFilters().add(filter);
 		File selectedFile = fileChooser.showOpenDialog(stage);
 		
-		
+		try {
+			BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
+			turtle = SwingFXUtils.toFXImage(bufferedImage, null);
+		} catch (IOException e) {
+			displayError.displayErrorDialogueBox("File selected is not a valid image file");
+		}	
+				
 	}
 	
 }

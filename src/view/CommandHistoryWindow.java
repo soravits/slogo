@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import view.data.DataOut;
 
 public class CommandHistoryWindow {
 	private int height;

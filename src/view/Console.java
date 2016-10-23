@@ -3,6 +3,7 @@ import java.util.Queue;
 
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
+import view.data.DataOut;
 
 /**
  * The purpose of this class is to create the root that visualizes the console.
