@@ -14,7 +14,8 @@ public class Repeat extends ControlCommand{
 	double count;
 	Parser parser;
 
-	public Repeat(Node root, Parser parser, Model model) throws Exception{
+	public Repeat(Node root, Parser
+	        parser, Model model) throws Exception{
 		super(root,model);
 		this.parser = parser;
 		count = parser.executeTree(root.getChildren().get(0));
