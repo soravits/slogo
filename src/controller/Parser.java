@@ -2,7 +2,7 @@ package controller;
 
 import controller.CommandParser;
 import controller.ParamParser;
-import model.State;
+import model.Model;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -29,10 +29,10 @@ public class Parser {
     //private CommandParser typeParser;
     private ParamParser paramParser;
     private ArrayList controlStructures;
-    private State state;
+    private Model model;
 
-    public Parser(State state){
-        this.state = state;
+    public Parser(Model model){
+        this.model = model;
         commandParser = new CommandParser();
         //typeParser = new CommandParser();
         paramParser = new ParamParser();
@@ -64,6 +64,7 @@ public class Parser {
     }
 
     public double executeTree(Node root) throws Exception{
+        if(!controlStructures.contains(root.getValue())) {
             double[] params = new double[root.getChildren().size()];
             for (int i = 0; i < root.getChildren().size(); i++) {
                 Node currNode = root.getChildren().get(i);
@@ -71,14 +72,16 @@ public class Parser {
             }
             Class command = Class.forName(root.getValue());
             Constructor<?> constructor = command.getDeclaredConstructor();
-            if(controlStructures.contains(root.getValue())){
-                constructor.newInstance(root, state);
-            }
-            else {
-                constructor.newInstance(params, state);
-            }
+            constructor.newInstance(params, model);
             Method execute = command.getMethod("execute");
             return (double) execute.invoke(this);
+        }else{
+            Class command = Class.forName(root.getValue());
+            Constructor<?> constructor = command.getDeclaredConstructor();
+            constructor.newInstance(command, model);
+            Method execute = command.getMethod("execute");
+            return (double) execute.invoke(this);
+        }
     }
 
     public void printTree(Node root){

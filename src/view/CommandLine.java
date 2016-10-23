@@ -1,6 +1,8 @@
 package view;
 
 import javafx.scene.Group;
+import view.data.DataIn;
+import view.data.DataOut;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;

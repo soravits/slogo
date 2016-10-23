@@ -1,6 +1,8 @@
 package controller;
 
-import model.State;
+import model.Model;
+import view.data.DataIn;
+import view.data.DataOut;
 import view.UI;
 
 /**
@@ -14,22 +16,18 @@ import view.UI;
  */
 public class Controller {
 
-    private State state;
+    private Model model;
     private Parser parser;
-    private UI ui;
+    private DataIn view;
 
-    public Controller(UI ui){
-        this.ui = ui;
-        state = new State();
-        parser = new Parser(state);
+    public Controller(DataIn view){
+        this.view = view;
+        model = new Model();
+        parser = new Parser(model);
     }
 
-    public void updateState(State state){
-        this.state = state;
-    }
-
-    public void updateView(){
-        ui.updateState(state);
+    public void updateModel(Model model){
+        this.model = model;
     }
 
     /**
@@ -39,6 +37,10 @@ public class Controller {
      */
     public void processCommand(String input){
         parser.parseString(input);
+    }
+
+    public void updateView(Model model){
+        view.update();
     }
 
 }

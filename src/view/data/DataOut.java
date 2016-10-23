@@ -1,4 +1,4 @@
-package view;
+package view.data;
 
 /**
  *View External API is mainly responsible of receiving data from the backend to be displayed on UI. 
@@ -15,7 +15,7 @@ public class DataOut {
 	private Queue<String> consoleResults;
 	private HashMap<String,Double> variableMap;
 	
-	DataOut() {
+	public DataOut() {
 		this.commandHistory=new LinkedList<String>();
 		this.consoleResults=new LinkedList<String>();
 		this.variableMap=new HashMap<String,Double>();

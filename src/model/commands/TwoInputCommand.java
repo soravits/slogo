@@ -11,9 +11,6 @@ public abstract class TwoInputCommand extends OneInputCommand {
         param2 = parameter2;
     }
 
-    @Override
-    public abstract double execute ();
-    
     public double getParam2(){
         return param2;
     }

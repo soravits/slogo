@@ -5,6 +5,8 @@ import java.util.Queue;
 
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
+import view.data.DataIn;
+import view.data.DataOut;
 
 
 /**
