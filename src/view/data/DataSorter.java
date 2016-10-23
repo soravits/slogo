@@ -1,4 +1,4 @@
-
+package view.data;
 
 /**
  * the purpose of this class is to sort data from the back end 

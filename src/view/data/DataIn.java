@@ -1,4 +1,4 @@
-package view;
+package view.data;
 
 import java.util.HashMap;
 

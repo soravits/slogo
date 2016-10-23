@@ -11,14 +11,7 @@ public abstract class OneInputCommand extends Command{
         param1 = parameter;
     }
 
-    @Override
-    public abstract double execute ();
-    
     public double getParam1(){
         return param1;
     }
-    
-    
-
-
 }
