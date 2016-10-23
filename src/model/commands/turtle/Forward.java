@@ -2,22 +2,22 @@ package model.commands.turtle;
 
 import model.Model;
 import model.TurtleState;
-import model.commands.Command;
+import model.commands.OneInputCommand;
 
-public class Forward extends Command{
+public class Forward extends OneInputCommand{
 
-    Forward (double[] params, Model model) {
-        super(params, model);
+    Forward (double param1, Model model) {
+        super(param1, model);
     }
 
     @Override
-    public double execute (double[] parameters, Model slogoModel) {
-        TurtleState turtle = slogoModel.getTurtle();
-        double moveX = Math.sin(Math.toRadians(turtle.getTurtleAngle()))*parameters[0];
-        double moveY = Math.cos(Math.toRadians(turtle.getTurtleAngle()))*parameters[1];
+    public double execute () {
+        TurtleState turtle = getModel().getTurtle();
+        double moveX = Math.sin(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
+        double moveY = Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
         turtle.addTurtleX(moveX);
         turtle.addTurtleY(moveY);
-        return parameters[0];
+        return this.getParam1();
     }
 
 }
