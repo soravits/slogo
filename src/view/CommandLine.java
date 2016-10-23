@@ -99,6 +99,7 @@ public class CommandLine extends UIBuilder{
 			updateDataIn();
 			displayDataOut();
 			textArea.setText("");
+			//ui.addTurtleToRoot();
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
