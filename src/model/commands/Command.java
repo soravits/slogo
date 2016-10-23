@@ -24,5 +24,4 @@ public abstract class Command {
         }
         return normalizedAngle;
     }
-
 }

@@ -27,6 +27,4 @@ public class SetTowards extends TwoInputCommand{
         this.getModel().getTurtle().setTurtleAngle(angle);
         return Math.abs(angle - currentAngle);      
     }
-
-    
 }
