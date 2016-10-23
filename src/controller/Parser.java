@@ -86,7 +86,8 @@ public class Parser {
 			Variable var = new Variable(value.substring(1), model);
 			return var.execute();
 		}else if(syntaxParser.getSymbol(value).equals(CONSTANT)){
-			Constant constant = new Constant(Double.parseDouble(value), model);
+		        double[] constantDouble = {Double.parseDouble(value)};
+			Constant constant = new Constant(constantDouble, model);
 			return constant.execute();
 		}
 		else{
@@ -95,14 +96,14 @@ public class Parser {
 				Node currNode = root.getChildren().get(i);
 				doubles[i] = executeTree(currNode);
 			}
-			Class<?>[] classes = new Class[root.getChildren().size()+1];
-			for (int i = 0; i < root.getChildren().size(); i++) {
-				classes[i] = double.class;
-			}
-			classes[root.getChildren().size()] = Model.class;
+//			Class<?>[] classes = new Class[root.getChildren().size()+1];
+//			for (int i = 0; i < root.getChildren().size(); i++) {
+//				classes[i] = double.class;
+//			}
+//			classes[root.getChildren().size()] = Model.class;
 			Class<?> command = Class.forName("model.commands.turtle." + value);
-			Constructor<?> constructor = command.getDeclaredConstructor(classes);
-			Object t = constructor.newInstance(doubles[0], model);
+			Constructor<?> constructor = command.getDeclaredConstructor(double[].class, Model.class);
+			Object t = constructor.newInstance(doubles, model);
 			Method execute = command.getMethod("execute");
 			return (double) execute.invoke(t);
 		}

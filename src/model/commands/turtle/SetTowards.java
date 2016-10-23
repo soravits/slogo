@@ -5,8 +5,8 @@ import model.commands.TwoInputCommand;
 
 public class SetTowards extends TwoInputCommand{
 
-    SetTowards (double param1, double param2, Model model) {
-        super(param1, param2, model);
+    SetTowards (double[] parameters, Model model) {
+        super(parameters, model);
     }
 
     @Override
