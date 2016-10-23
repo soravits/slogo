@@ -14,43 +14,36 @@ public class DataIn {
 	private String command;
 	private String language;
 	
-	public String getCommand() {
-		return command;
+	public DataIn() {
 	}
+	
 	public void setCommand(String command) {
 		this.command=command;
 	}
-
-	public void parseCommand(Controller Controller) {
-		Controller.processCommand(command);
-	}
 	
 	public void setLanguage(String language) {
-		//getting language from settings
+		this.language=language;
+	}
+	
+	public String getCommand() {
+		return command;
 	}
 	
 	public String getLanguage() {
 		return language;
+	}
+
+	public void parseCommand(Controller Controller) throws Exception {
+		Controller.processCommand(command);
 	}
 	
 	public void setTurtlePos() {
 		//TODO
 	}
 	
-	public Object getTurtlePos() {
-		//TODO
-		return null;
-	}
-	
 	public void setVariables(HashMap<String,Double> variableMap) {
 		//TODO
 	}
-	
-	public HashMap<String,Double> getVariables() {
-		//TODO
-		return null;
-	}
-	
 	
 	public void updateModel(Model model) {
 		//update all fields using data from UI
