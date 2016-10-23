@@ -39,15 +39,17 @@ public class CommandLine extends UIBuilder{
 	
 	private DataIn DataIn;
 	private Model updatedModel;
-	private ModelExtractor ModelExtractor;
+	//private ModelExtractor ModelExtractor;
+	private UI ui;
 	
-	public CommandLine(int sceneHeight,DataIn DataIn){
+	public CommandLine(int sceneHeight,DataIn DataIn, UI ui){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
 		this.DataIn=DataIn;
+		this.ui = ui;
 	}
 	
 	
@@ -98,13 +100,13 @@ public class CommandLine extends UIBuilder{
 		submit.setOnAction((event) -> {
 			try {
 				updateDataIn();
-				Display();
+				//Display();
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			textArea.setText("");
 			//ui.addTurtleToRoot();
 		});	
 		
@@ -113,17 +115,14 @@ public class CommandLine extends UIBuilder{
 	
 	private void updateDataIn() throws Exception {
 		DataIn.setCommand(textArea.getText());
-		DataIn.setLanguage(UI.generalSettings.getLanguage());
-		DataIn.parseCommand(UI.Controller);
+		DataIn.setLanguage(ui.getGeneralSettings().getLanguage());
+		DataIn.parseCommand(ui.Controller);
 		
 	}
 	
 	private void Display() {
 		updatedModel=DataIn.getViewModel();
-		ModelExtractor = new ModelExtractor(updatedModel);
-		ModelExtractor.init();
-		ModelExtractor.displayConsole();
-		ModelExtractor.displayWorkspace();
+		
 	}
 	
 	

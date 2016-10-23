@@ -20,7 +20,6 @@ public class UI {
 	
 	private HelpWindowUI helpWindowUI;
 	private Turtle turtle;
-	private TurtleSettings turtleSettings;
 	
 	private CommandLine commandLine;
 	private Console console;
@@ -30,7 +29,7 @@ public class UI {
 	private Stage stage;
 	private Model Model;
 	
-	public static GeneralSettings generalSettings;
+	public GeneralSettings generalSettings;
 	public static DataIn DataIn;
 	public static Controller Controller;
 	
@@ -48,6 +47,8 @@ public class UI {
 	}
 
 	
+	
+	
 	/**
 	 * Creates a root and initiates the scene. Main calls this method to start the program.
 	 */
@@ -62,15 +63,17 @@ public class UI {
 		
 		helpWindowUI = new HelpWindowUI();
 		
-		turtleSettings = new TurtleSettings(this, stage);
+		//turtleSettings = new TurtleSettings(this, stage);
 		
-		root.getChildren().add(turtleSettings.getRoot());		
+		//root.getChildren().add(turtleSettings.getRoot());		
 		
-		turtle = new Turtle(turtleSettings);	
+		turtle = new Turtle(stage);	
+		root.getChildren().add(turtle.getTurtleSettings().getRoot());
 		
 		generalSettings = new GeneralSettings();
 		
-		commandLine = new CommandLine(ySize,DataIn);
+
+		commandLine = new CommandLine(ySize, DataIn, this);
 		
 		workspace = new Workspace(xSize);
 	
@@ -83,8 +86,16 @@ public class UI {
 		
 	}
 	
-	public void addTurtleToRoot(){
-		turtle.getRoot();
+//	public void addTurtleToRoot(){
+//		turtle.getRoot();
+//	}
+	
+	public GeneralSettings getGeneralSettings(){
+		return generalSettings;
+	}
+	
+	public Controller getController() {
+		return Controller;
 	}
 	
 	

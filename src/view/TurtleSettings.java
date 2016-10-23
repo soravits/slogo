@@ -36,12 +36,12 @@ import javafx.util.Callback;
 public class TurtleSettings extends UIBuilder{
 	
 	private Group root = new Group();
-	private UI ui;
 	private DisplayError displayError;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;
 	private Stage stage;
-	private Image turtle;
+	private Image turtleImage;
+	private Turtle turtle;
 	
 	
 	private static int COLOR_RECT_WIDTH = 75;
@@ -52,11 +52,11 @@ public class TurtleSettings extends UIBuilder{
 	
 	private int controlX;
 	
-	public TurtleSettings(UI ui, Stage stage){
+	public TurtleSettings(Stage stage, Turtle turtle){
 		super();
-		this.ui = ui;
 		this.controlX = TURTLE_CANVAS_WIDTH + 20;
 		this.stage = stage;
+		this.turtle = turtle;
 	}
 		
 	
@@ -102,7 +102,7 @@ public class TurtleSettings extends UIBuilder{
 	 */
 
 	public Image getTurtleImage(){
-		return turtle;
+		return turtleImage;
 	}
 	
 	private void getBackgroundColorComboBox(){
@@ -122,7 +122,8 @@ public class TurtleSettings extends UIBuilder{
 		
 		comboBox.valueProperty().addListener(new ChangeListener<Color>() {
 			@Override public void changed(ObservableValue color, Color c1, Color c2) {
-				ui.addTurtleToRoot();
+				turtle.getRoot();
+				//ui.addTurtleToRoot();
 			}
 		});		
 		root.getChildren().add(setControlLayout(comboBox, controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
@@ -172,10 +173,8 @@ public class TurtleSettings extends UIBuilder{
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
-			ui.addTurtleToRoot();
-			
-			
-			
+			//ui.addTurtleToRoot();
+			turtle.getRoot();
 			
 		});	
 		
@@ -191,7 +190,7 @@ public class TurtleSettings extends UIBuilder{
 		
 		try {
 			BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
-			turtle = SwingFXUtils.toFXImage(bufferedImage, null);
+			turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
 		} catch (IOException e) {
 			displayError.displayErrorDialogueBox("File selected is not a valid image file");
 		}	

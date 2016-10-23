@@ -1,12 +1,11 @@
 package view;
 import view.data.DataIn;
 import java.util.Queue;
-import view.data.DataIn;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+
 
 public class CommandHistoryWindow {
 	private int height;
