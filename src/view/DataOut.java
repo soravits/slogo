@@ -6,9 +6,10 @@ package view;
  */
 
 import java.util.HashMap;
-
 import java.util.LinkedList;
 import java.util.Queue;
+
+import model.Model;
 
 public class DataOut {
 	private Queue<String> commandHistory;
@@ -59,7 +60,7 @@ public class DataOut {
 		return variableMap;
 	}
 	
-	public void update() {
+	public void updateModel(Model model) {
 		//update all fieds using data from controller
 	}
 
