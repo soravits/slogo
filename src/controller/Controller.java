@@ -34,13 +34,14 @@ public class Controller {
      * This class takes the different data objects/variables packaged into the data object, modifies the controller.Parser and
      * Interpreter as necessary, and sends the data to the controller.Parser.
      * @param input The command inputted by the user
+     * @throws Exception 
      */
-    public void processCommand(String input){
+    public void processCommand(String input) throws Exception{
         parser.parseString(input);
     }
 
     public void updateView(Model model){
-        view.update();
+        
     }
 
 }

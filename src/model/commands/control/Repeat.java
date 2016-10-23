@@ -1,6 +1,7 @@
 package model.commands.control;
 
 import controller.Node;
+import controller.Parser;
 import model.Model;
 import model.commands.ControlCommand;
 
@@ -9,14 +10,24 @@ import model.commands.ControlCommand;
  */
 public class Repeat extends ControlCommand{
 
-	
-	
-    public Repeat(Node root, Model model){
-        super(root,model);
-    }
+	double count;
+	Parser parser;
 
-//    @Override
-//    public double execute() {
-//        
-//    }
+	public Repeat(Node root, Parser parser, Model model) throws Exception{
+		super(root,model);
+		this.parser = parser;
+		count = parser.executeTree(root.getChildren().get(0));
+	}
+
+	@Override
+	public double execute() throws Exception {
+		for(int i = 0; i < count; i++){
+			for(int j = 1; j < getRoot().getChildren().size(); j++){
+				if(j != getRoot().getChildren().size()-1){
+					parser.executeTree(getRoot().getChildren().get(j));
+				}
+			}
+		}
+		return parser.executeTree(getRoot().getChildren().get(getRoot().getChildren().size()-1));
+	}
 }

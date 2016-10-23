@@ -28,13 +28,12 @@ public class Parser {
     private CommandParser commandParser;
     //private CommandParser typeParser;
     private ParamParser paramParser;
-    private ArrayList controlStructures;
+    private ArrayList<String> controlStructures;
     private Model model;
 
     public Parser(Model model){
         this.model = model;
         commandParser = new CommandParser();
-        //typeParser = new CommandParser();
         paramParser = new ParamParser();
         commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
         paramParser.addMappings(RESOURCE_PACKAGE + File.separator + PARAMS);
@@ -46,7 +45,7 @@ public class Parser {
         this.language = language;
     }
 
-    public void parseString(String s){
+    public void parseString(String s) throws Exception{
         ArrayList<String> tokens = new ArrayList<String>();
         Scanner inputScanner = new Scanner(s);
         while(inputScanner.hasNextLine()){
@@ -59,8 +58,13 @@ public class Parser {
                     tokens.add(lineScanner.next());
                 }
             }
+            lineScanner.close();
         }
+        inputScanner.close();
         ArrayList<Node> trees = formExpressionTrees(tokens);
+        for(Node n:trees){
+        	executeTree(n);
+        }
     }
 
     public double executeTree(Node root) throws Exception{
@@ -78,7 +82,7 @@ public class Parser {
         }else{
             Class command = Class.forName(root.getValue());
             Constructor<?> constructor = command.getDeclaredConstructor();
-            constructor.newInstance(command, model);
+            constructor.newInstance(command, this, model);
             Method execute = command.getMethod("execute");
             return (double) execute.invoke(this);
         }
@@ -100,7 +104,6 @@ public class Parser {
 
     private ArrayList<Node> formExpressionTrees(ArrayList<String> predicates){
         ArrayList<Node> trees = new ArrayList<Node>();
-        Node root = new Node(predicates.get(0));
         Queue<Node> queue = new LinkedList<Node>();
         for(int i = 0; i < predicates.size(); i++){
             Node node = new Node(predicates.get(i));
@@ -135,7 +138,7 @@ public class Parser {
         return root;
     }
 
-    public ArrayList<String> getControlStructures(String syntax) {
+    private ArrayList<String> getControlStructures(String syntax) {
         ArrayList<String> controlStructures = new ArrayList<String>();
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
