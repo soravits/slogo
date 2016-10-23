@@ -1,11 +1,13 @@
 package view;
-
+import view.data.DataIn;
+import view.data.DataOut;
 import java.util.HashMap;
 import java.util.Queue;
 
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
-
+import view.data.DataIn;
+import view.data.DataOut;
 
 /**
  * The purpose of this class is to create the root that visualizes the workspace.

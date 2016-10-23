@@ -1,6 +1,8 @@
 package controller;
 
-import model.State;
+import model.Model;
+import view.data.DataIn;
+import view.data.DataOut;
 import view.UI;
 
 /**
@@ -14,31 +16,32 @@ import view.UI;
  */
 public class Controller {
 
-    private State state;
+    private Model model;
     private Parser parser;
-    private UI ui;
+    private DataIn view;
 
-    public Controller(UI ui){
-        this.ui = ui;
-        state = new State();
-        parser = new Parser(state);
+    public Controller(DataIn view){
+        this.view = view;
+        model = new Model();
+        parser = new Parser(model);
     }
 
-    public void updateState(State state){
-        this.state = state;
-    }
-
-    public void updateView(){
-        ui.updateState(state);
+    public void updateModel(Model model){
+        this.model = model;
     }
 
     /**
      * This class takes the different data objects/variables packaged into the data object, modifies the controller.Parser and
      * Interpreter as necessary, and sends the data to the controller.Parser.
      * @param input The command inputted by the user
+     * @throws Exception 
      */
-    public void processCommand(String input){
+    public void processCommand(String input) throws Exception{
         parser.parseString(input);
+    }
+
+    public void updateView(Model model){
+        
     }
 
 }

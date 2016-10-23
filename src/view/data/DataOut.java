@@ -1,4 +1,4 @@
-package view;
+package view.data;
 
 /**
  *View External API is mainly responsible of receiving data from the backend to be displayed on UI. 
@@ -6,16 +6,17 @@ package view;
  */
 
 import java.util.HashMap;
-
 import java.util.LinkedList;
 import java.util.Queue;
+
+import model.Model;
 
 public class DataOut {
 	private Queue<String> commandHistory;
 	private Queue<String> consoleResults;
 	private HashMap<String,Double> variableMap;
 	
-	DataOut() {
+	public DataOut() {
 		this.commandHistory=new LinkedList<String>();
 		this.consoleResults=new LinkedList<String>();
 		this.variableMap=new HashMap<String,Double>();
@@ -59,7 +60,7 @@ public class DataOut {
 		return variableMap;
 	}
 	
-	public void update() {
+	public void updateModel(Model model) {
 		//update all fieds using data from controller
 	}
 

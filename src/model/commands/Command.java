@@ -10,7 +10,7 @@ public abstract class Command {
         slogoModel = model;
     }
 
-    public abstract double execute ();
+    public abstract double execute () throws Exception;
     
     public Model getModel(){
         return slogoModel;
