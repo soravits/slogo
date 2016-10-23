@@ -168,6 +168,7 @@ public class TurtleSettings extends UIBuilder{
 			chooseImage();
 			//Make turtle call getTurtleImage which will get image from chooseImage
 			//Change Listener?
+			//have default image? Like a shape
 		});	
 		
 		root.getChildren().addAll(reset, image);
