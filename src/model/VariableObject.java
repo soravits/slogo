@@ -1,11 +1,11 @@
 package model;
 
-public class Variable {
+public class VariableObject {
     
     private String variableName;
     private Object variableValue;
     
-    public Variable(Object name, Object value){
+    public VariableObject(Object name, Object value){
         variableName = name.toString();
         variableValue = value;
     }

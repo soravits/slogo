@@ -3,37 +3,33 @@ package model;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class WorkspaceState implements WorkspaceStateInterface {
+public class WorkspaceState {
     
-    private Collection<Variable> listOfVariables;
+    private Collection<VariableObject> listOfVariables;
     
     public WorkspaceState(){
-        listOfVariables = new HashSet<Variable>();
+        listOfVariables = new HashSet<VariableObject>();
     }
 
-    @Override
     public void addVariable (Object name, Object value) {
-        Variable var = new Variable(name, value);
+        VariableObject var = new VariableObject(name, value);
         if (listOfVariables.contains(var)){
             removeVariable(var);
         }
         listOfVariables.add(var);
     }
 
-    @Override
     public void removeVariable (Object var) {
         listOfVariables.remove(var);
     }
     
 
-    @Override
-    public Collection<Variable> getListOfVariables () {
+    public Collection<VariableObject> getListOfVariables () {
         return listOfVariables;
     }
 
-    @Override
     public void clearWorkspace () {
-        listOfVariables = new HashSet<Variable>();
+        listOfVariables = new HashSet<VariableObject>();
     }
 
     

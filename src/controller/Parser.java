@@ -74,13 +74,13 @@ public class Parser {
                 Node currNode = root.getChildren().get(i);
                 params[i] = executeTree(currNode);
             }
-            Class command = Class.forName(root.getValue());
+            Class<?> command = Class.forName(root.getValue());
             Constructor<?> constructor = command.getDeclaredConstructor();
             constructor.newInstance(params, model);
             Method execute = command.getMethod("execute");
             return (double) execute.invoke(this);
         }else{
-            Class command = Class.forName(root.getValue());
+            Class<?> command = Class.forName(root.getValue());
             Constructor<?> constructor = command.getDeclaredConstructor();
             constructor.newInstance(command, this, model);
             Method execute = command.getMethod("execute");
