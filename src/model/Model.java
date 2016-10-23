@@ -5,11 +5,13 @@ public class Model{
     private TurtleState turtle;
     private LineState lines;
     private WorkspaceState workspace;
+    private CommandHistory commandHistory;
 
-    public Model(TurtleState turtleState, LineState lineState, WorkspaceState workspaceState){
-        turtle = turtleState;
-        lines = lineState;
-        workspace = workspaceState;
+    public Model(){
+        turtle = new TurtleState();
+        lines = new LineState();
+        workspace = new WorkspaceState();
+        commandHistory = new CommandHistory();
     }
 
     public TurtleState getTurtle () {
@@ -18,8 +20,13 @@ public class Model{
     public LineState getLineState () {
         return lines;
     }
+    
     public WorkspaceState getWorkspace () {
         return workspace;
+    }
+    
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
     }
 
     public void setTurtle (TurtleState turtleState) {
@@ -32,6 +39,10 @@ public class Model{
 
     public void setWorkspace (WorkspaceState workspaceState) {
         workspace = workspaceState;
+    }
+    
+    public void setCommandHistory (CommandHistory commands){
+        commandHistory = commands;
     }
     
 

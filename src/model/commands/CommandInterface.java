@@ -18,9 +18,10 @@ public abstract interface CommandInterface {
     
     /**
      * Execute the correct command specified by the relection instantiation
-     * @param params
-     * @param model
+     * @param parameters
+     * @param slogoModel
      * @return the double needed for the next node in the expression tree
      */
     public double execute(double[] parameters, Model slogoModel);
+    
 }

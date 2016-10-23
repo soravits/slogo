@@ -2,24 +2,27 @@ package model.commands;
 
 import model.Model;
 
-public abstract class Command implements CommandInterface{
+public abstract class Command {
     
-    private double[] parameters;
     private Model slogoModel;
     
-    public Command(double[] params, Model model){
-        parameters = params;
+    public Command(Model model){
         slogoModel = model;
     }
 
-    @Override
-    public double execute (){
-        return execute(parameters, slogoModel);
-    };
-
-    @Override
-    public abstract double execute (double[] params, Model model);
+    public abstract double execute ();
     
+    public Model getModel(){
+        return slogoModel;
+    } 
     
+    // NEED TO MOVE THIS SOMEWHERE BETTER!!!!
+    public double normalizeAngle(double angle){
+        double normalizedAngle = angle % 360;
+        if (normalizedAngle < 0){
+            normalizedAngle += 360;
+        }
+        return normalizedAngle;
+    }
 
 }

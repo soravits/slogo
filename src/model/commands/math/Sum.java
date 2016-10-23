@@ -1,15 +1,16 @@
 package model.commands.math;
 
 import model.Model;
-import model.commands.Command;
+import model.commands.TwoInputCommand;
 
-public class Sum extends Command{
-    
-    public Sum(double[] parameters, Model model){
-        super(parameters, model);
+public class Sum extends TwoInputCommand{
+        
+    public Sum (double parameter1, double parameter2, Model model) {
+        super(parameter1, parameter2, model);
     }
-    
-    public double execute(double[] parameters, Model slogoModel){
-        return parameters[0] + parameters[1];
+
+    @Override
+    public double execute () {
+        return getParam1() + getParam2();
     }
 }
