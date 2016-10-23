@@ -7,10 +7,10 @@ package model.commands;
  * @author Brian
  *
  */
-public interface CommandInterface {
+public abstract interface CommandInterface {
 
     /*
      * Perform the given operation needed depending on the command specified by the Interpreter
      */
-    public double execute();
+    public abstract double execute();
 }

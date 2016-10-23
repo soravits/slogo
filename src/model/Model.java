@@ -1,37 +1,37 @@
 package model;
 
-import javafx.beans.property.SimpleObjectProperty;
-
 public class Model{
 
-    private SimpleObjectProperty<TurtleState> turtle;
-    private SimpleObjectProperty<LineState> lines;
-    private SimpleObjectProperty<WorkspaceState> workspace;
+    private TurtleState turtle;
+    private LineState lines;
+    private WorkspaceState workspace;
 
     public Model(TurtleState turtleState, LineState lineState, WorkspaceState workspaceState){
-        turtle = new SimpleObjectProperty<TurtleState>(turtleState);
-        lines = new SimpleObjectProperty<LineState>(lineState);
-        workspace = new SimpleObjectProperty<WorkspaceState>(workspaceState);
+        turtle = turtleState;
+        lines = lineState;
+        workspace = workspaceState;
     }
 
-    public TurtleState getModifiableTurtle () {
-        return turtle.getValue();
-    }
-    public LineState getModifiableLineState () {
-        return lines.getValue();
-    }
-    public WorkspaceState getModifiableWorkspace () {
-        return workspace.getValue();
-    }
-    
     public TurtleState getTurtle () {
-        return turtle.get();
+        return turtle;
     }
     public LineState getLineState () {
-        return lines.get();
+        return lines;
     }
     public WorkspaceState getWorkspace () {
-        return workspace.get();
+        return workspace;
+    }
+
+    public void setTurtle (TurtleState turtleState) {
+        turtle = turtleState;
+    }
+
+    public void setLines (LineState lineState) {
+        lines = lineState;
+    }
+
+    public void setWorkspace (WorkspaceState workspaceState) {
+        workspace = workspaceState;
     }
     
 
