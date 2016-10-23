@@ -1,37 +1,35 @@
 package model;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class WorkspaceState {
     
-    private Collection<VariableObject> listOfVariables;
+    private HashMap<String, Double> mapOfVariables;
     
     public WorkspaceState(){
-        listOfVariables = new HashSet<VariableObject>();
+        mapOfVariables = new HashMap<String, Double>();
     }
 
-    public void addVariable (Object name, Object value) {
-        VariableObject var = new VariableObject(name, value);
-        if (listOfVariables.contains(var)){
-            removeVariable(var);
+    public void addVariable (Object name, Double value) {
+        if (mapOfVariables.containsKey(name)){
+            mapOfVariables.replace(name.toString(), value);
         }
-        listOfVariables.add(var);
     }
 
     public void removeVariable (Object var) {
-        listOfVariables.remove(var);
+        mapOfVariables.remove(var);
     }
     
+    public double getVariableValue(String name){
+        return mapOfVariables.get(name);
+    }
 
-    public Collection<VariableObject> getListOfVariables () {
-        return listOfVariables;
+    public HashMap<String, Double> getListOfVariables () {
+        return mapOfVariables;
     }
 
     public void clearWorkspace () {
-        listOfVariables = new HashSet<VariableObject>();
+        mapOfVariables = new HashMap<String, Double>();
     }
-
-    
     
 }
