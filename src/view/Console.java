@@ -54,6 +54,10 @@ public class Console extends UIBuilder{
 		root.getChildren().add(console);
 	}
 	
+	public void updateConsole() {
+		
+	}
+	
 	
 }
 

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Collection;
+
 public class Model{
 
     private TurtleMap turtleMap;
@@ -35,7 +37,7 @@ public class Model{
         return workspace;
     }
     
-    public CommandHistory getCommandHistory() {
-        return commandHistory;
+    public Collection<String> getCommandHistory() {
+        return commandHistory.getCommandHistory();
     }
 }

@@ -21,12 +21,6 @@ public class CommandHistory {
     
     public Collection<String> getCommandHistory(){
         return commandHistory;
-    }
-    
-    
-
-   
-   
-    
+    } 
 
 }
