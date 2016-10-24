@@ -19,16 +19,17 @@ public class IfElse extends ControlCommand{
 	@Override
 	public double execute() throws Exception {
 		Node commandRoot = null;
+		double ret = 0;
 		if(bool != 0){
 			commandRoot = getRoot().getChildren().get(1);
 		}else{
 			commandRoot = getRoot().getChildren().get(2);
 		}
-		for(int j = 0; j < commandRoot.getChildren().size()-1; j++){
-			getParser().executeTree(commandRoot.getChildren().get(j));
+		for(int j = 0; j < commandRoot.getChildren().size(); j++){
+			ret = getParser().executeTree(commandRoot.getChildren().get(j));
 		}
 		if(commandRoot.getChildren().size() > 0){
-			return getParser().executeTree(commandRoot.getChildren().get(commandRoot.getChildren().size()-1));
+			return ret;
 		}
 		return 0;
 	}
