@@ -16,19 +16,19 @@ import javafx.scene.control.ComboBox;
  */
 
 public class GeneralSettings extends UIBuilder{
-	
+
 	private Group root = new Group();
 	private ComboBox<String> languageComboBox;
-	
+
 	private static int LANGUAGE_COMBOBOX_X = 140;
 	private static int LANGUAGE_COMBOBOX_Y = 10;
-	
-	
+
+
 	public GeneralSettings(){
 		super();
-		
+
 	}
-	
+
 
 	/*
 	 * returns the root with all visualizations of 
@@ -38,28 +38,27 @@ public class GeneralSettings extends UIBuilder{
 		makeLanguageComboBox();
 		return root;
 	}
-	
-	
-	
+
+
+
 	/*
 	 * returns the selected language
 	 */
 	public String getLanguage(){
 		return languageComboBox.getValue();
 	}
-	
-	
+
+
 	private void makeLanguageComboBox(){
-		
 		ObservableList<String> languageOptions = FXCollections.observableArrayList(
 				uiResources.getString("English"), uiResources.getString("Chinese"),
 				uiResources.getString("French"), uiResources.getString("German"),
 				uiResources.getString("Italian"), uiResources.getString("Portuguese"),
 				uiResources.getString("Russian"), uiResources.getString("Spanish"));		
-			
+
 		languageComboBox = new ComboBox<String>(languageOptions);
 		languageComboBox.setValue(uiResources.getString("English"));
 		root.getChildren().add(setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y, "generalcontrol"));
 	}
-	
+
 }

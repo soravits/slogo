@@ -44,5 +44,9 @@ public class Controller {
     private void updateView(){
         view.updateViewModel(model);
     }
+    
+    public void setLanguage(String language){
+    	parser.setLanguage(language);
+    }
 
 }
