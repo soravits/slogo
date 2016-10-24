@@ -3,9 +3,9 @@ package model.commands.turtle;
 import model.Model;
 import model.commands.Command;
 
-public class PenUP extends Command {
+public class PenUp extends Command {
 
-    PenUP (Model model) {
+    PenUp (double[] parameters, Model model) {
         super(model);
     }
 

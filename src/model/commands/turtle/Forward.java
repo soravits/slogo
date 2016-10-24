@@ -15,7 +15,7 @@ public class Forward extends OneInputCommand{
     @Override
     public double execute () {
         TurtleState turtle = this.getModel().getTurtle();
-        Position prevPosition = turtle.getPosition();
+        Position prevPosition = turtle.getPosition().clone();
         LineState lines = this.getModel().getLineState();
         double moveX = Math.sin(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
         double moveY = Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
