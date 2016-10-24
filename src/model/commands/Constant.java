@@ -4,7 +4,7 @@ import model.Model;
 
 public class Constant extends OneInputCommand {
 
-    public Constant (double parameter, Model model) {
+    public Constant (double[] parameter, Model model) {
         super(parameter, model);
     }
 

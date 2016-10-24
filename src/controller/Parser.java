@@ -35,12 +35,14 @@ public class Parser {
 	private CommandParser syntaxParser;
 	private ArrayList<String> controlStructures;
 	private Model model;
+	private CommandController commandController;
 
 	public Parser(Model model){
 		this.model = model;
 		commandParser = new CommandParser();
 		paramParser = new ParamParser();
 		syntaxParser = new CommandParser();
+		commandController = new CommandController();
 		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
 		paramParser.addMappings(RESOURCE_PACKAGE + File.separator + PARAMS);
 		syntaxParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
@@ -59,7 +61,8 @@ public class Parser {
 			Scanner lineScanner = new Scanner(line);
 			if(line.charAt(0) == '#'){
 				continue;
-			}else{
+			}
+			else{
 				while(lineScanner.hasNext()){
 					tokens.add(lineScanner.next());
 				}
@@ -82,11 +85,14 @@ public class Parser {
 			constructor.newInstance(command, this, model);
 			Method execute = command.getMethod("execute");
 			return (double) execute.invoke(this);
-		}else if(syntaxParser.getSymbol(value).equals(VARIABLE)){
+		}
+		else if(syntaxParser.getSymbol(value).equals(VARIABLE)){
 			Variable var = new Variable(value.substring(1), model);
 			return var.execute();
-		}else if(syntaxParser.getSymbol(value).equals(CONSTANT)){
-			Constant constant = new Constant(Double.parseDouble(value), model);
+		}
+		else if(syntaxParser.getSymbol(value).equals(CONSTANT)){
+		        double[] constantDouble = {Double.parseDouble(value)};
+			Constant constant = new Constant(constantDouble, model);
 			return constant.execute();
 		}
 		else{
@@ -95,16 +101,21 @@ public class Parser {
 				Node currNode = root.getChildren().get(i);
 				doubles[i] = executeTree(currNode);
 			}
-			Class<?>[] classes = new Class[root.getChildren().size()+1];
-			for (int i = 0; i < root.getChildren().size(); i++) {
-				classes[i] = double.class;
-			}
-			classes[root.getChildren().size()] = Model.class;
+//			Class<?>[] classes = new Class[root.getChildren().size()+1];
+//			for (int i = 0; i < root.getChildren().size(); i++) {
+//				classes[i] = double.class;
+//			}
+//			classes[root.getChildren().size()] = Model.class;
 			Class<?> command = Class.forName("model.commands.turtle." + value);
-			Constructor<?> constructor = command.getDeclaredConstructor(classes);
-			Object t = constructor.newInstance(doubles[0], model);
-			Method execute = command.getMethod("execute");
-			return (double) execute.invoke(t);
+			Constructor<?> constructor = command.getDeclaredConstructor(double[].class, Model.class);
+			Object t = constructor.newInstance(doubles, model);
+			commandController.setCommand(t);
+			System.out.println(t);
+			double x = commandController.execute();
+			System.out.println(model.getTurtle().getTurtleAngle());
+			return x;
+//			Method execute = command.getMethod("execute");
+//			return (double) execute.invoke(t);
 		}
 	}
 

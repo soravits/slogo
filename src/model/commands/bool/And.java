@@ -5,8 +5,8 @@ import model.commands.TwoInputCommand;
 
 public class And extends TwoInputCommand{
 
-    public And (double param1, double param2, Model model) {
-        super(param1, param2, model);
+    public And (double[] parameters, Model model) {
+        super(parameters, model);
     }
 
     @Override
