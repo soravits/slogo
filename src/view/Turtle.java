@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import model.LineModel;
 import model.LineState;
 import model.Model;
+import model.Position;
 import model.TurtleMap;
 import model.TurtlePair;
 import model.TurtleState;
@@ -97,10 +98,19 @@ public class Turtle extends UIBuilder{
 	
 	public void updateTurtle(TurtleMap turtleMap){
 		TurtleState turtleState = turtleMap.getTurtle();
-		LineState lines = turtleMap.getLineState();
-		Position pos = turtleState.getPosition();
+		
+				
+		angle = turtleState.getTurtleAngle();
+		
 		Boolean isTurtleShowing = turtleState.getShowTurtle();
-		double angle = turtleState.getTurtleAngle();
+		if (isTurtleShowing){
+			LineState lines = turtleMap.getLineState();
+			setTurtlePath(lines);
+		}
+		
+		Position pos = turtleState.getPosition();
+		currX = pos.getX();
+		currY = pos.getY();
 		
 	}
 	
@@ -140,22 +150,22 @@ public class Turtle extends UIBuilder{
 	
 	private void rotateTurtle(){
 		ImageView imageView = new ImageView(turtleImage);
-		imageView.setRotate();
+		imageView.setRotate(angle);
+		
 		
 		
 	}
 	
 	
-	
-//	private void setTurtlePath(){
-//		for (Type line : turtleLines){
-//			currX = ;
-//			currY = ;
-//			
-//			
-//			
-//		}
-//	}
+	private void setTurtlePath(LineState lines){
+		for (Line line : lines){
+			currX = ;
+			currY = ;
+			
+			
+			
+		}
+	}
 	
 	
 }
