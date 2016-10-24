@@ -1,4 +1,4 @@
-package model.commands;
+package model.commandabstract;
 
 import controller.Node;
 import model.Model;
