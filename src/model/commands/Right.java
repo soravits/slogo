@@ -1,19 +1,18 @@
 package model.commands;
 
 import model.Model;
-import model.TurtleState;
+import model.commandabstract.OneInputCommand;
 
-public class Right extends Forward{
+public class Right extends OneInputCommand{
 
     public Right (double[] parameters, Model model) {
         super(parameters, model);
     }
-    
-    public double[] calculateCoordinates(TurtleState turtle){
-        double[] coords = new double[2];
-        coords[0] = Math.sin(Math.toRadians(turtle.getTurtleAngle() + 90.0))*this.getParam1();
-        coords[1] = Math.cos(Math.toRadians(turtle.getTurtleAngle() + 90.0))*this.getParam1();
-        return coords;
-    }
 
+    @Override
+    public double execute () {
+        getModel().getTurtle().addTurtleAngle(-normalizeAngle(getParam1()));
+        return getParam1();
+    }
+    
 }
