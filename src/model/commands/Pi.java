@@ -3,15 +3,15 @@ package model.commands;
 import model.Model;
 import model.commandabstract.Command;
 
-public class XCoordinate extends Command {
+public class Pi extends Command{
 
-    public XCoordinate (double[] parameters, Model model) {
+    public Pi (double[] parameters, Model model) {
         super(model);
     }
 
     @Override
     public double execute () {
-        return getModel().getTurtle().getTurtleX();
+        return Math.PI;
     }
 
 }

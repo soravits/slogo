@@ -28,6 +28,7 @@ public class Parser {
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String VARIABLE = "Variable";
 	public static final String CONSTANT = "Constant";
+	public static final String COMMAND_PACKAGE = "model.commands.";
 
 	private String language = DEFAULT_LANGUAGE;
 	private CommandParser commandParser;
@@ -104,7 +105,7 @@ public class Parser {
 				Node currNode = root.getChildren().get(i);
 				doubles[i] = executeTree(currNode);
 			}
-			Class<?> command = Class.forName("model.commands." + value);
+			Class<?> command = Class.forName(COMMAND_PACKAGE + value);
 			Constructor<?> constructor = command.getDeclaredConstructor(double[].class, Model.class);
 			Object t = constructor.newInstance(doubles, model);
 			commandController.setCommand(t);
