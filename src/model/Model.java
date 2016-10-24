@@ -1,5 +1,4 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -40,16 +39,20 @@ public class Model{
         return workspace;
     }
     
-    public CommandHistory getCommandHistory() {
-        return commandHistory;
+    public Collection<String> getCommandHistory() {
+        return commandHistory.getCommandHistory();
+    }
+    
+    public void addCommand(String command){
+        commandHistory.addCommand(command);
     }
     
     public Collection<String> getConsoleReturn(){
         return consoleReturn;
     }
     
-    public void updateConsoleReturn(String value){
-        consoleReturn.add(value);
+    public void updateConsoleReturn(Double value){
+        consoleReturn.add(value.toString());
     }
     
     public void clearConsoleReturn(){

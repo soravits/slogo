@@ -113,6 +113,7 @@ public class Parser {
 			System.out.println(t);
 			double x = commandController.execute();
 			System.out.println(model.getTurtle().getTurtleY());
+			model.updateConsoleReturn(x);
 			return x;
 //			Method execute = command.getMethod("execute");
 //			return (double) execute.invoke(t);

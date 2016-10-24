@@ -33,6 +33,8 @@ public class CommandLine extends UIBuilder{
 	
 	private static int FIRST_BUTTON_X = 190;
 	private static int BUTTON_SPACING = 170;
+	private static int COMMAND_HISTORY_WINDOW_X = 190;
+	private static int COMMAND_HISTORY_WINDOW_Y = 190;
 	private int buttonsY; 
 	
 	private static int COMMAND_LINE_X = 10;
@@ -92,7 +94,9 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-				//todo
+				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
+				commandHistoryWindow.updateCommandHistory(ui.getModel().getCommandHistory());
+				commandHistoryWindow.show();
 		});	
 		
 		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
@@ -100,25 +104,13 @@ public class CommandLine extends UIBuilder{
 		submit.setOnAction((event) -> {
 			try {
 				ui.updateDataIn();
-				//Display();
-				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			textArea.setText("");
-			//ui.addTurtleToRoot();
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
-	}
-	
-	
-	
-	
-	private void Display() {
-		updatedModel = DataIn.getViewModel();
-		
 	}
 	
 	
