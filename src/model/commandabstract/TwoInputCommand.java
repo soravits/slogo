@@ -1,4 +1,4 @@
-package model.commands;
+package model.commandabstract;
 
 import model.Model;
 
@@ -6,9 +6,9 @@ public abstract class TwoInputCommand extends OneInputCommand {
 
     private double param2;
     
-    public TwoInputCommand (double parameter1, double parameter2, Model model) {
-        super(parameter1, model);
-        param2 = parameter2;
+    public TwoInputCommand (double[] parameters, Model model) {
+        super(parameters, model);
+        param2 = parameters[1];
     }
 
     public double getParam2(){

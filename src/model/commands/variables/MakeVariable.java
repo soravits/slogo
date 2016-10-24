@@ -1,13 +1,13 @@
 package model.commands.variables;
 
 import model.Model;
-import model.commands.OneInputCommand;
+import model.commandabstract.OneInputCommand;
 
 public class MakeVariable extends OneInputCommand{
 
     private String name;
     
-    public MakeVariable (String varName, double param1, Model model) {
+    public MakeVariable (String varName, double[] param1, Model model) {
         super(param1, model);
         name = varName;
     }

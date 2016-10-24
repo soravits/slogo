@@ -1,12 +1,12 @@
-package model.commands.turtle;
+package model.commands;
 
 import model.Model;
-import model.commands.OneInputCommand;
+import model.commandabstract.OneInputCommand;
 
 public class SetHeading extends OneInputCommand{
 
-    SetHeading (double param1, Model model) {
-        super(param1, model);
+    public SetHeading (double[] parameters, Model model) {
+        super(parameters, model);
     }
 
     @Override

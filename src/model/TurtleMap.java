@@ -28,6 +28,10 @@ public class TurtleMap {
         return turtleMap.get(currentID).getTurtle();        
     }
     
+    public Collection<LineModel> getLines(){
+        return turtleMap.get(currentID).getLines().getLines();
+    }
+    
     public LineState getLineState(){
         return turtleMap.get(currentID).getLines();
     }

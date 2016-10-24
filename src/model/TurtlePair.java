@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Iterator;
-
 public class TurtlePair {
     
     private LineState lines;

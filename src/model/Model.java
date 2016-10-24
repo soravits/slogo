@@ -1,5 +1,5 @@
 package model;
-
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Model{
@@ -7,11 +7,13 @@ public class Model{
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
     private CommandHistory commandHistory;
+    private Collection<String> consoleReturn;
 
     public Model(){
         turtleMap = new TurtleMap();
         workspace = new WorkspaceState();
         commandHistory = new CommandHistory();
+        consoleReturn = new ArrayList<String>();
     }
 
     public TurtleMap getTurtleMap (){
@@ -39,5 +41,17 @@ public class Model{
     
     public Collection<String> getCommandHistory() {
         return commandHistory.getCommandHistory();
+    }
+    
+    public Collection<String> getConsoleReturn(){
+        return consoleReturn;
+    }
+    
+    public void updateConsoleReturn(String value){
+        consoleReturn.add(value);
+    }
+    
+    public void clearConsoleReturn(){
+        consoleReturn.clear();
     }
 }

@@ -115,7 +115,8 @@ public class UI {
 		turtle.updateTurtle(model.getTurtleMap());
 		//console.updateConsole(model.);
 		workspace.updateWorkspace(model.getWorkspace());
-		
+		System.out.println(model.getCommandHistory());
+		turtle.getRoot();
 		
 	}
 	

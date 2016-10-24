@@ -1,12 +1,12 @@
-package model.commands.math;
+package model.commands;
 
 import model.Model;
-import model.commands.TwoInputCommand;
+import model.commandabstract.TwoInputCommand;
 
 public class Quotient extends TwoInputCommand {
 
-    public Quotient (double parameter1, double parameter2, Model model) {
-        super(parameter1, parameter2, model);
+    public Quotient (double[] parameters, Model model) {
+        super(parameters, model);
     }
 
     // NEED TO ADD DIVIDEBYZERO EXCEPTION;
