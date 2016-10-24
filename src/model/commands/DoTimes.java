@@ -17,7 +17,7 @@ public class DoTimes extends ControlCommand{
 		super(root,parser,model);
 		Node commandRoot = getRoot().getChildren().get(0);
 		variable = commandRoot.getChildren().get(0).getValue().substring(1);
-		limit = Double.parseDouble(commandRoot.getChildren().get(1).getValue());
+		limit = getParser().executeTree(commandRoot.getChildren().get(1));
 	}
 
 	@Override
