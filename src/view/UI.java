@@ -27,11 +27,11 @@ public class UI {
 	private Group root = new Group();
 	private int xSize, ySize;
 	private Stage stage;
-	private Model Model;
+	private Model model;
 	
 	public GeneralSettings generalSettings;
-	public static DataIn DataIn;
-	public static Controller Controller;
+	public DataIn dataIn;
+	public Controller controller;
 	
 	
 	
@@ -58,9 +58,9 @@ public class UI {
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
 
-		Model = new Model();
-		DataIn= new DataIn(Model);
-		Controller=new Controller(DataIn);
+		model = new Model();
+		dataIn = new DataIn(model);
+		controller = new Controller(dataIn);
 		
 
 		helpWindowUI = new HelpWindowUI();
@@ -69,13 +69,16 @@ public class UI {
 		
 		//root.getChildren().add(turtleSettings.getRoot());		
 		
-		turtle = new Turtle(stage);	
+		//turtle = new Turtle(stage. model);	
+		
+		turtle = new Turtle(stage);
+		
 		root.getChildren().add(turtle.getTurtleSettings().getRoot());
 		
 		generalSettings = new GeneralSettings();
 		
 
-		commandLine = new CommandLine(ySize, DataIn, this);
+		commandLine = new CommandLine(ySize, this);
 		
 		workspace = new Workspace(xSize);
 	
@@ -88,17 +91,25 @@ public class UI {
 		
 	}
 	
-//	public void addTurtleToRoot(){
-//		turtle.getRoot();
-//	}
-	
 	public GeneralSettings getGeneralSettings(){
 		return generalSettings;
 	}
 	
 	public Controller getController() {
-		return Controller;
+		return controller;
 	}
 	
+	
+	public void updateDataIn() throws Exception {	
+		
+		dataIn.setCommand(commandLine.getCommand());
+		dataIn.setLanguage(generalSettings.getLanguage());
+		dataIn.parseCommand(controller);
+		
+		model = dataIn.getViewModel();
+		
+		turtle.updateTurtle(model.getTurtleMap());
+		
+	}
 	
 }
