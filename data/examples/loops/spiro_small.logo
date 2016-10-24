@@ -1,7 +1,6 @@
 home
 
-repeat 30 
-[
+
   repeat 20 
   [
     fd 10
@@ -12,4 +11,3 @@ repeat 30
     fd 20
     rt 100
   ]
-]

@@ -5,7 +5,7 @@ import model.commandabstract.Command;
 
 public class IsShowing extends Command {
 
-    public IsShowing (Model model) {
+    public IsShowing (double[] parameters, Model model) {
         super(model);
     }
 
