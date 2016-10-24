@@ -123,7 +123,6 @@ public class TurtleSettings extends UIBuilder{
 		comboBox.valueProperty().addListener(new ChangeListener<Color>() {
 			@Override public void changed(ObservableValue color, Color c1, Color c2) {
 				turtle.getRoot();
-				//ui.addTurtleToRoot();
 			}
 		});		
 		root.getChildren().add(setControlLayout(comboBox, controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		

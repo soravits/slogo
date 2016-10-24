@@ -6,18 +6,95 @@
 	</head>
 	
 	<body>
-		<h1>SLogo Commands</h1>
-		<h3>Turtle Commands</h3>
-			<h4>Forward <i>pixels</i></h4> 
-			<p>Move the turtle forward by <i>pixels</i> 
+		<h1>SLogo</h1>
+		
+		<p>Slogo is not case sensitive. The center of the turtle display
+		is considered to be (0,0). Values that are returned will appear in
+		the console.</p>
+		
+		<h2>Turtle Commands</h2>
+			<p><strong>FORWARD <i>pixels</i>, FD <i>pixels</i></strong><br> 
+			Moves the turtle forward by <i>pixels</i>
 			amount in its current direction</p>
-		<h3>Turtle Queries</31>
+			
+			<p><strong>BACK <i>pixels</i>, BK <i>pixels</i></strong><br> 
+			Moves the turtle backward by <i>pixels</i>
+			amount in its current direction</p>
+			
+			<p><strong>LEFT <i>degrees</i>, LT <i>degrees</i></strong><br> 
+			Turns the turtle counterclockwise by <i>degrees</i> angle</p>
+			
+			<p><strong>RIGHT <i>degrees</i>, RT <i>degrees</i></strong><br> 
+			Turns the turtle clockwise by <i>degrees</i> angle</p>
+			
+			<p><strong>SETHEADING <i>degrees</i>, SETH <i>degrees</i></strong><br> 
+			Turns turtle to an absolute heading</p>
+			
+			<p><strong>TOWARDS <i>xy</i></strong><br> 
+			Turns turtle to face the point (<i>x</i>, <i>y</i>)</p>
+			
+			<p><strong>SETXY <i>xy</i>, GOTO <i>xy</i></strong><br> 
+			Moves turtle to an absolute screen position</p>
+			
+			<p><strong>PENDOWN, PD</strong><br> 
+			Puts pen down such that when the turtle moves, it leaves a trail</p>
+			
+			<p><strong>PENUP, PU</strong><br> 
+			Puts pen up such that when the turtle moves, it does not leave a trail</p>
+			
+			<p><strong>SHOWTURTLE, ST</strong><br> 
+			Makes turtle visible</p>
+			
+			<p><strong>HIDETURTLE, HT</strong><br> 
+			Makes turtle invisible</p>
+			
+			<p><strong>HOME</strong><br> 
+			Moves turtle to the center of the screen (0, 0)</p>
+			
+			<p><strong>CLEARSCREEN, CS</strong><br> 
+			Erases turtle's trails and sends it to the home position</p>
+			
+		<h2>Turtle Queries</h2>
+			<p><strong>XCOR</strong><br> 
+			Returns the turtle's X coordinate</p>
+			
+			<p><strong>YCOR</strong><br> 
+			Returns the turtle's Y coordinate</p>
+			
+			<p><strong>HEADING</strong><br> 
+			Returns the turtle's heading in degrees</p>
+			
+			<p><strong>PENDOWN?, PENDOWNP</strong><br> 
+			Returns 1 if turtle's pen is down, 0 if it is up</p>
+			
+			<p><strong>SHOWING?, SHOWINGP</strong><br> 
+			Returns 1 if turtle is showing, 0 if it is hiding</p>
+			
+		<h2>Math Operations</h2>
+			<p><strong>SUM <i>expr1 expr2</i>, + <i>expr1 expr2</i></strong><br> 
+			Returns sum of the values of <i>expr1</i> and <i>expr2</i></p>
+			
+			<p><strong>DIFFERENCE <i>expr1 expr2</i>, - <i>expr1 expr2</i></strong><br> 
+			Returns difference of the values of <i>expr1</i> and <i>expr2</i></p>
+			
+			<p><strong>PRODUCT <i>expr1 expr2</i>, * <i>expr1 expr2</i></strong><br> 
+			Returns product of the values of <i>expr1</i> and <i>expr2</i></p>
+			
+			<p><strong>QUOTIENT <i>expr1 expr2</i>, +  <i>expr1 expr2</i></strong><br> 
+			Returns quotient of the values of <i>expr1</i> and <i>expr2</i></p>
+			
+			<p><strong>REMAINDER <i>expr1 expr2</i>, % <i>expr1 expr2</i></strong><br> 
+			Returns remainder on dividing the values of <i>expr1</i> and <i>expr2</i></p>
+			
+			<p><strong>MINUS <i>expr</i>, ~ <i>expr</i></strong><br> 
+			Returns negative of the values of <i>expr</i></p>
+		
+		
+		
+		<h2>Boolean Operations</h2>
 			<p></p>
-		<h3>Math Operations</h3>
-			<p></p>
-		<h3>Boolean Operations</h3>
-			<p></p>
-		<h3>Variables, Control Structures, and User-Defined Commands</h3>
+		
+		<h2>Variables, Control Structures, and User-Defined Commands</h2>
 		
 		
 	

@@ -75,7 +75,7 @@ public class UI {
 		
 		root.getChildren().add(turtle.getTurtleSettings().getRoot());
 		
-		generalSettings = new GeneralSettings();
+		generalSettings = new GeneralSettings(controller);
 		
 
 		commandLine = new CommandLine(ySize, this);
