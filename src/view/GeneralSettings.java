@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
-import javafx.scene.paint.Color;
 
 /**
  * 
@@ -67,7 +66,7 @@ public class GeneralSettings extends UIBuilder{
 		
 		languageComboBox.valueProperty().addListener(new ChangeListener<String>() {
 			@Override public void changed(ObservableValue color, String s1, String s2) {
-				
+				controller.setLanguage(languageComboBox.getValue());
 			}
 		});	
 		
