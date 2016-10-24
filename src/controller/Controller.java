@@ -2,7 +2,6 @@ package controller;
 
 import model.Model;
 import view.data.DataIn;
-import view.UI;
 
 /**
  * The purpose of this class is to receive the data from the view and send it to the controller.Parser to be handled. It will

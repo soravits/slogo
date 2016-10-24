@@ -112,6 +112,4 @@ public class CommandLine extends UIBuilder{
 		
 		root.getChildren().addAll(reset, history, submit);
 	}
-	
-	
 }

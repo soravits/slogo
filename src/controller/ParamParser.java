@@ -12,7 +12,6 @@ public class ParamParser {
     // "types" and the regular expression patterns that recognize those types
     // note, it is a list because order matters (some patterns may be more generic)
     private Map<String, Integer> paramsCounts;
-
     public ParamParser() {
         paramsCounts = new HashMap<String, Integer>();
     }
@@ -28,7 +27,6 @@ public class ParamParser {
     }
 
     public int getNumParams(String key){
-    	System.out.println(key);
         return paramsCounts.get(key);
     }
 }
