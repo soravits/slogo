@@ -5,7 +5,7 @@ import model.commandabstract.Command;
 
 public class PenUp extends Command {
 
-    PenUp (double[] parameters, Model model) {
+    public PenUp (double[] parameters, Model model) {
         super(model);
     }
 

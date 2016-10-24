@@ -46,8 +46,11 @@ public class Turtle extends UIBuilder{
 	private int canvasHeight;
 	private double originX;
 	private double originY;
-	private double currX;
-	private double currY;
+	private double lineX;
+	private double lineY;
+	private double turtleX;
+	private double turtleY;
+	
 	private double angle;
 	
 	
@@ -88,9 +91,11 @@ public class Turtle extends UIBuilder{
 	
 	public void resetTurtle(){
 		turtleView.beginPath();
-		currX = originX;
-		currY = originY;
-		turtleView.moveTo(originX, originY);
+		lineX = originX;
+		lineY = originY;
+		turtleX = originX;
+		turtleY = originY;
+		turtleView.moveTo(turtleX, turtleY);
 		
 	}
 	
@@ -99,8 +104,14 @@ public class Turtle extends UIBuilder{
 		TurtleState turtleState = turtleMap.getTurtle();			
 		angle = turtleState.getTurtleAngle();
 		Boolean isTurtleShowing = turtleState.getShowTurtle();
-		
 		resetTurtle();
+		
+		turtleX = originX + turtleState.getTurtleX();
+		turtleY = originY - turtleState.getTurtleY();
+		
+		System.out.println(turtleX);
+		System.out.println(turtleY);
+		
 			
 		if (isTurtleShowing){
 			LineState lines = turtleMap.getLineState();
@@ -148,10 +159,10 @@ public class Turtle extends UIBuilder{
 	private void rotateTurtle(){
 
 		turtleView.save();
-		Rotate rotate = new Rotate(angle, currX, currY);
+		Rotate rotate = new Rotate(angle, turtleX, turtleY);
 		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
 				rotate.getMyy(), rotate.getTx(), rotate.getTy());
-		turtleView.drawImage(turtleImage, currX - TURTLE_SIZE/2, currY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
+		turtleView.drawImage(turtleImage, turtleX - TURTLE_SIZE/2, turtleY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
 		turtleView.restore();
 			
 	}
@@ -161,17 +172,17 @@ public class Turtle extends UIBuilder{
 		Collection<LineModel> linePoints = lines.getLines();
 		for (LineModel line : linePoints){
 			
-			if (currX != originX + line.getPosition1().getX() ||
-					currY != originY - line.getPosition1().getY()){
+			if (lineX != originX + line.getPosition1().getX() ||
+					lineY != originY - line.getPosition1().getY()){
 				
-				currX = originX + line.getPosition1().getX();
-				currY = originY - line.getPosition1().getY();
-				turtleView.moveTo(currX, currY);
+				lineX = originX + line.getPosition1().getX();
+				lineY = originY - line.getPosition1().getY();
+				turtleView.moveTo(lineX, lineY);
 			}
 			
-			currX = originX + line.getPosition2().getX();
-			currY = originY - line.getPosition2().getY();
-			turtleView.lineTo(currX, currY);
+			lineX = originX + line.getPosition2().getX();
+			lineY = originY - line.getPosition2().getY();
+			turtleView.lineTo(lineX, lineY);
 					
 		}
 	}
