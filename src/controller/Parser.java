@@ -147,10 +147,18 @@ public class Parser {
 		String predicate = root.getValue();
 		String commandName = commandParser.getSymbol(predicate);
 		if(predicate.equals(LIST_START)){
+			double openBracketCount = 1;
+			double closedBracketCount = 0;
 			Node node = new Node(CONTROL_STRUCTURES);
 			Queue<Node> tempQueue = new LinkedList<Node>();
-			while(!queue.peek().getValue().equals(LIST_END)){
-				tempQueue.add(queue.poll());
+			while(!queue.peek().getValue().equals(LIST_END) || openBracketCount != closedBracketCount+1){
+				Node nextNode = queue.poll();
+				if(nextNode.getValue().equals(LIST_START)){
+					openBracketCount++;
+				}else if(nextNode.getValue().equals(LIST_END)){
+					closedBracketCount++;
+				}
+				tempQueue.add(nextNode);
 			}
 			queue.poll();
 			while(!tempQueue.isEmpty()){
