@@ -1,6 +1,10 @@
 package view;
 import view.data.DataIn;
+
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Queue;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
@@ -23,8 +27,8 @@ public class CommandHistoryWindow {
 		this.group=new Group();
 		this.scene=new Scene(group);
 		init();
-		
 	}
+	
 	public void init() {
         popupScene = new TextArea();
         stage.setTitle("History");
@@ -33,9 +37,18 @@ public class CommandHistoryWindow {
 		popupScene.setPrefHeight(height);
 		popupScene.setLayoutX(width);
 		popupScene.setLayoutY(height);
-		
 		group.getChildren().add(popupScene);
-		
+	}
+	
+	public void updateCommandHistory(Collection<String> commandHistory) {
+		for (String command:commandHistory) {
+			popupScene.appendText(command+"\n");
+		}
+	}
+	
+	public void show() {
+		stage.setScene(scene);
+        stage.show();
 	}
 
 }

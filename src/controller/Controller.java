@@ -35,6 +35,7 @@ public class Controller {
      * @throws Exception 
      */
     public void processCommand(String input) throws Exception{
+    	model.clearConsoleReturn();
     	model.addCommand(input);
         parser.parseString(input);
         updateView();
