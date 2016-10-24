@@ -57,7 +57,6 @@ public class Console extends UIBuilder{
 	}
 	
 	public void updateConsole(Collection<String> consoleResults) {
-		console.appendText("hi");
 		for (String command:consoleResults) {
 			console.appendText(command+"\n");
 		}
