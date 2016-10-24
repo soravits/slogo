@@ -109,6 +109,7 @@ public class UI {
 		model = dataIn.getViewModel();
 		
 		turtle.updateTurtle(model.getTurtleMap());
+		turtle.getRoot();
 		
 	}
 	
