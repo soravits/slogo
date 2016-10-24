@@ -51,8 +51,8 @@ public class Model{
         return consoleReturn;
     }
     
-    public void updateConsoleReturn(String value){
-        consoleReturn.add(value);
+    public void updateConsoleReturn(Double value){
+        consoleReturn.add(value.toString());
     }
     
     public void clearConsoleReturn(){
