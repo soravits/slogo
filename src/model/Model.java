@@ -1,15 +1,20 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Model{
 
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
     private CommandHistory commandHistory;
+    private Collection<String> consoleReturn;
 
     public Model(){
         turtleMap = new TurtleMap();
         workspace = new WorkspaceState();
         commandHistory = new CommandHistory();
+        consoleReturn = new ArrayList<String>();
     }
 
     public TurtleMap getTurtleMap (){
@@ -35,11 +40,23 @@ public class Model{
         return workspace;
     }
     
-    public CommandHistory getCommandHistory() {
-        return commandHistory;
+    public Collection<String> getCommandHistory() {
+        return commandHistory.getCommandHistory();
     }
     
     public void addCommand(String command){
-    	commandHistory.addCommand(command);
+        commandHistory.addCommand(command);
+    }
+    
+    public Collection<String> getConsoleReturn(){
+        return consoleReturn;
+    }
+    
+    public void updateConsoleReturn(Double value){
+        consoleReturn.add(value.toString());
+    }
+    
+    public void clearConsoleReturn(){
+        consoleReturn.clear();
     }
 }

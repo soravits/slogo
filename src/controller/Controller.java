@@ -2,7 +2,6 @@ package controller;
 
 import model.Model;
 import view.data.DataIn;
-import view.UI;
 
 /**
  * The purpose of this class is to receive the data from the view and send it to the controller.Parser to be handled. It will
@@ -38,7 +37,11 @@ public class Controller {
     public void processCommand(String input) throws Exception{
     	model.addCommand(input);
         parser.parseString(input);
+        updateView();
     }
 
+    private void updateView(){
+        view.updateViewModel(model);
+    }
 
 }

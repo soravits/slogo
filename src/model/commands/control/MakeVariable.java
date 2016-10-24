@@ -3,8 +3,7 @@ package model.commands.control;
 import controller.Node;
 import controller.Parser;
 import model.Model;
-import model.commands.ControlCommand;
-import model.commands.OneInputCommand;
+import model.commandabstract.ControlCommand;
 
 public class MakeVariable extends ControlCommand{
 

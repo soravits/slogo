@@ -80,7 +80,7 @@ public class Parser {
 	public double executeTree(Node root) throws Exception{
 		String value = root.getValue();
 		if(controlStructures.contains(value)) {
-			Class<?> command = Class.forName("model.commands.turtle" + value);
+			Class<?> command = Class.forName("model.commands." + value);
 			Constructor<?> constructor = command.getDeclaredConstructor();
 			constructor.newInstance(command, this, model);
 			Method execute = command.getMethod("execute");
@@ -106,13 +106,14 @@ public class Parser {
 //				classes[i] = double.class;
 //			}
 //			classes[root.getChildren().size()] = Model.class;
-			Class<?> command = Class.forName("model.commands.turtle." + value);
+			Class<?> command = Class.forName("model.commands." + value);
 			Constructor<?> constructor = command.getDeclaredConstructor(double[].class, Model.class);
 			Object t = constructor.newInstance(doubles, model);
 			commandController.setCommand(t);
 			System.out.println(t);
 			double x = commandController.execute();
-			System.out.println(model.getTurtle().getTurtleAngle());
+			System.out.println(model.getTurtle().getTurtleY());
+			model.updateConsoleReturn(x);
 			return x;
 //			Method execute = command.getMethod("execute");
 //			return (double) execute.invoke(t);
