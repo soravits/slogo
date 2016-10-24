@@ -34,8 +34,8 @@ public class LineState {
     /**
      * return Iterator for each line
      */
-    public Iterator<LineModel> getLines () {
-        return lines.iterator();
+    public Collection<LineModel> getLines () {
+        return lines;
     }
 
     /**

@@ -1,7 +1,7 @@
 
 package model;
 
-public class Position {
+public class Position implements Cloneable{
     
     private double xPosition;
     private double yPosition;
@@ -10,6 +10,7 @@ public class Position {
     public Position(){
         resetPosition();
     }
+    
     /**
      * Construct a Position object of (x, y)
      * @param x
@@ -73,6 +74,17 @@ public class Position {
     public void resetPosition(){
         xPosition = 0;
         yPosition = 0;
+    }
+    
+    @Override
+    public String toString(){
+        return xPosition + " " + yPosition;
+    }
+    
+    @Override
+    public Position clone(){
+        final Position clonedPosition = new Position(xPosition, yPosition);
+        return clonedPosition;        
     }
 
 }

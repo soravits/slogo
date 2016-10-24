@@ -5,8 +5,8 @@ import model.commands.TwoInputCommand;
 
 public class LessThan extends TwoInputCommand{
 
-    public LessThan (double param1, double param2, Model model) {
-        super(param1, param2, model);        
+    public LessThan (double[] parameters, Model model) {
+        super(parameters, model);        
     }
 
     @Override

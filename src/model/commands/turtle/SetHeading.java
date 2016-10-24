@@ -5,8 +5,8 @@ import model.commands.OneInputCommand;
 
 public class SetHeading extends OneInputCommand{
 
-    SetHeading (double param1, Model model) {
-        super(param1, model);
+    public SetHeading (double[] parameters, Model model) {
+        super(parameters, model);
     }
 
     @Override

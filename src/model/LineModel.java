@@ -25,7 +25,11 @@ public class LineModel {
         }
         LineModel other = (LineModel) obj;
         return ((this == obj) |  
-                (other.getPosition1().equals(position1) & other.getPosition2().equals(position2))); 
-        
+                (other.getPosition1().equals(position1) & other.getPosition2().equals(position2)));    
+    }
+    
+    @Override
+    public String toString(){
+        return position1.toString() +  " " + position2.toString();
     }
 }
