@@ -1,4 +1,4 @@
-package model.commands.control;
+package model.commands;
 import controller.Node;
 import controller.Parser;
 import model.Model;

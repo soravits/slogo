@@ -1,4 +1,4 @@
-package model.commands.control;
+package model.commands;
 import controller.Node;
 import controller.Parser;
 import model.Model;
@@ -17,7 +17,6 @@ public class DoTimes extends ControlCommand{
 		super(root,parser,model);
 		Node commandRoot = getRoot().getChildren().get(0);
 		variable = commandRoot.getChildren().get(0).getValue().substring(1);
-		limit = Double.parseDouble(commandRoot.getChildren().get(1).getValue());
 	}
 
 	@Override
@@ -25,7 +24,7 @@ public class DoTimes extends ControlCommand{
 		double ret = 0;
 		Node commandRoot = getRoot().getChildren().get(1);
         WorkspaceState workspace = this.getModel().getWorkspace();
-        workspace.addVariable(variable.toString(), 1.0);
+        limit = workspace.getVariableValue(variable);
         for(double i = 1; i < limit; i++){
         	for(double j = 0; j<commandRoot.getChildren().size(); j++){
         	ret = getParser().executeTree(commandRoot.getChildren().get((int) j));
