@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,7 +17,7 @@ public class LineState {
     private boolean penDown;
     
     public LineState(){
-        lines = new HashSet<LineModel>();
+        lines = new ArrayList<LineModel>();
         penDown = true;
     }
 
