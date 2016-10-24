@@ -2,7 +2,7 @@ package model.commands.control;
 import controller.Node;
 import controller.Parser;
 import model.Model;
-import model.commands.ControlCommand;
+import model.commandabstract.ControlCommand;
 
 /**
  * Created by Soravit on 10/23/2016.
@@ -20,13 +20,17 @@ public class IfElse extends ControlCommand{
 
 	@Override
 	public double execute() throws Exception {
-		if(bool == 1){
-			for(int j = 1; j < getRoot().getChildren().size(); j++){
-				if(j != getRoot().getChildren().size()-1){
-					parser.executeTree(getRoot().getChildren().get(j));
-				}
-			}
-			return parser.executeTree(getRoot().getChildren().get(getRoot().getChildren().size()-1));
+		Node commandRoot = null;
+		if(bool != 0){
+			commandRoot = getRoot().getChildren().get(1);
+		}else{
+			commandRoot = getRoot().getChildren().get(2);
+		}
+		for(int j = 0; j < commandRoot.getChildren().size()-1; j++){
+			parser.executeTree(commandRoot.getChildren().get(j));
+		}
+		if(commandRoot.getChildren().size() > 0){
+			return parser.executeTree(commandRoot.getChildren().get(commandRoot.getChildren().size()-1));
 		}
 		return 0;
 	}

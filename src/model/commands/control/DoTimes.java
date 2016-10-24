@@ -3,7 +3,7 @@ package model.commands.control;
 import controller.Node;
 import controller.Parser;
 import model.Model;
-import model.commands.ControlCommand;
+import model.commandabstract.ControlCommand;
 
 /**
  * Created by Soravit on 10/23/2016.

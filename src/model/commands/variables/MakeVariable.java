@@ -1,7 +1,7 @@
 package model.commands.variables;
 
 import model.Model;
-import model.commands.OneInputCommand;
+import model.commandabstract.OneInputCommand;
 
 public class MakeVariable extends OneInputCommand{
 
