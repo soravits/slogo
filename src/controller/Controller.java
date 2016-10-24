@@ -37,10 +37,11 @@ public class Controller {
      */
     public void processCommand(String input) throws Exception{
         parser.parseString(input);
+        updateView();
     }
 
-    public void updateView(Model model){
-        
+    private void updateView(){
+        view.updateViewModel(model);
     }
 
 }
