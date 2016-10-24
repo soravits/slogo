@@ -5,9 +5,16 @@ import java.util.HashMap;
 import java.util.Queue;
 
 import model.WorkspaceState;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 /**
  * The purpose of this class is to create the root that visualizes the workspace.
@@ -15,7 +22,6 @@ import javafx.scene.control.TextArea;
  * 
  * @author Diane Hadley
  */
-
 
 public class Workspace extends UIBuilder{
 	
@@ -25,14 +31,21 @@ public class Workspace extends UIBuilder{
 	private int workspaceHeight;
 	private TextArea workspace;
 	private static int WORKSPACE_Y = 55;
+	private VBox VBox;
+	private Group group;
+	private UI ui;
+	private CommandLine commandLine;
 	
 	
-	public Workspace(int sceneWidth){
+	public Workspace(int sceneWidth,UI ui,CommandLine commandLine){
 		super();
-		
+		this.ui=ui;
 		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
 		this.workspaceWidth = sceneWidth - TURTLE_CANVAS_WIDTH - 170;
 		this.workspaceHeight = WORKSPACE_HEIGHT;
+		this.VBox=new VBox(20);
+		this.group=new Group();
+		this.commandLine=commandLine;
 	}
 	
 	
@@ -50,19 +63,45 @@ public class Workspace extends UIBuilder{
 	
 	
 	private void makeWorkspace(){
-		workspace = new TextArea();
-		workspace.setLayoutX(workspaceX);
-		workspace.setLayoutY(WORKSPACE_Y);
-		workspace.setPrefWidth(workspaceWidth);
-		workspace.setPrefHeight(workspaceHeight);
-		root.getChildren().add(workspace);
+		VBox.setPadding(new Insets(20));
+		VBox.setLayoutX(workspaceX);
+		VBox.setLayoutY(WORKSPACE_Y);
+		root.getChildren().add(VBox);
 	}
 	
 	public void updateWorkspace(WorkspaceState workspaceState) {
+		clearWorkspace();
 		HashMap<String, Double> variableMap = workspaceState.getListOfVariables();
 		for (String varName:variableMap.keySet()) {
-			workspace.appendText(varName+"= "+variableMap.get(varName));
+			Text varNameText=new Text(varName+" = ");
+			Double value=variableMap.get(varName);
+			HBox HBox = new HBox(10);
+			TextField space = new TextField();
+			space.setPrefWidth(50);
+			space.setText(""+value);
+			HBox.getChildren().addAll(varNameText,space,getSubmitButton(varName,space));
+			VBox.getChildren().add(HBox);
 		}
 	}
 	
+	public void clearWorkspace() {
+		VBox.getChildren().clear();
+	}
+	
+	public Button getSubmitButton(String varName, TextField space) {
+		Button button = new Button("Update");
+		button.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {  
+		    	commandLine.setCommand("set :"+varName+" "+space.getText());
+		    	try {
+					ui.updateDataIn();
+					commandLine.setCommand("");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    }
+		});
+		return button;
+	}
 }

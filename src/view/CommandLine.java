@@ -33,8 +33,8 @@ public class CommandLine extends UIBuilder{
 	
 	private static int FIRST_BUTTON_X = 190;
 	private static int BUTTON_SPACING = 170;
-	private static int COMMAND_HISTORY_WINDOW_X = 190;
-	private static int COMMAND_HISTORY_WINDOW_Y = 190;
+	private static int COMMAND_HISTORY_WINDOW_X = 300;
+	private static int COMMAND_HISTORY_WINDOW_Y = 300;
 	private int buttonsY; 
 	
 	private static int COMMAND_LINE_X = 10;
@@ -94,7 +94,7 @@ public class CommandLine extends UIBuilder{
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
+				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(ui,this,COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
 				commandHistoryWindow.updateCommandHistory(ui.getModel().getCommandHistory());
 				commandHistoryWindow.show();
 		});	
@@ -111,5 +111,9 @@ public class CommandLine extends UIBuilder{
 		});	
 		
 		root.getChildren().addAll(reset, history, submit);
+	}
+	
+	public void setCommand(String command) {
+		textArea.setText(command);
 	}
 }
