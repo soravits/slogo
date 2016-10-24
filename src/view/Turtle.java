@@ -1,4 +1,6 @@
 package view;
+import java.util.Collection;
+
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -158,7 +160,8 @@ public class Turtle extends UIBuilder{
 	
 	
 	private void setTurtlePath(LineState lines){
-		for (Line line : lines){
+		Collection<LineModel> linePoints = lines.getLines();
+		for (LineModel line : linePoints){
 			currX = ;
 			currY = ;
 			
