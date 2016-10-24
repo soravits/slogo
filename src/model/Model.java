@@ -43,6 +43,10 @@ public class Model{
         return commandHistory.getCommandHistory();
     }
     
+    public void addCommand(String command){
+        commandHistory.addCommand(command);
+    }
+    
     public Collection<String> getConsoleReturn(){
         return consoleReturn;
     }
