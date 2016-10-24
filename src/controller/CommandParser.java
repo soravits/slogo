@@ -48,4 +48,8 @@ public class CommandParser {
         // THIS IS THE KEY LINE
         return regex.matcher(text).matches();
     }
+    
+    public void removeAllPatterns(){
+    	mySymbols.clear();
+    }
 }
