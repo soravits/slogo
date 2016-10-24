@@ -14,7 +14,7 @@ public class WorkspaceState {
         if (mapOfVariables.containsKey(name)){
             mapOfVariables.replace(name.toString(), value);
         }else{
-        	mapOfVariables.put(name.toString(), value);
+            mapOfVariables.put(name.toString(), value);
         }
     }
 
