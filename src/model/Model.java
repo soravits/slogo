@@ -38,4 +38,8 @@ public class Model{
     public CommandHistory getCommandHistory() {
         return commandHistory;
     }
+    
+    public void addCommand(String command){
+    	commandHistory.addCommand(command);
+    }
 }

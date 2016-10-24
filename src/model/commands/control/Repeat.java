@@ -12,25 +12,21 @@ import model.commands.ControlCommand;
 public class Repeat extends ControlCommand{
 
 	double count;
-	Parser parser;
 
-	public Repeat(Node root, Parser
-	        parser, Model model) throws Exception{
-		super(root,model);
-		this.parser = parser;
+	public Repeat(Node root, Parser parser, Model model) throws Exception{
+		super(root,parser,model);
 		count = parser.executeTree(root.getChildren().get(0));
 	}
 
 	@Override
 	public double execute() throws Exception {
 		Node commandsRoot = getRoot().getChildren().get(1);
+		double ret = 0;
 		for(int i = 0; i < count; i++){
-			for(int j = 1; j < commandsRoot.getChildren().size(); j++){
-				if(j != commandsRoot.getChildren().size()-1){
-					parser.executeTree(commandsRoot.getChildren().get(j));
-				}
+			for(int j = 0; j < commandsRoot.getChildren().size(); j++){
+				ret = getParser().executeTree(commandsRoot.getChildren().get(j));
 			}
 		}
-		return parser.executeTree(getRoot().getChildren().get(getRoot().getChildren().size()-1));
+		return ret;
 	}
 }

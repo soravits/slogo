@@ -1,8 +1,8 @@
 package model.commands.control;
-
 import controller.Node;
 import controller.Parser;
 import model.Model;
+import model.WorkspaceState;
 import model.commands.ControlCommand;
 
 /**
@@ -10,24 +10,28 @@ import model.commands.ControlCommand;
  */
 public class DoTimes extends ControlCommand{
 
-	double limit;
-	Parser parser;
+	private String variable;
+	private double limit;
 
 	public DoTimes(Node root, Parser parser, Model model) throws Exception{
-		super(root,model);
-		this.parser = parser;
-		count = parser.executeTree(root.getChildren().get(0));
+		super(root,parser,model);
+		Node commandRoot = getRoot().getChildren().get(0);
+		variable = commandRoot.getChildren().get(0).getValue().substring(1);
+		limit = Double.parseDouble(commandRoot.getChildren().get(1).getValue());
 	}
 
 	@Override
 	public double execute() throws Exception {
-		for(int i = 0; i < count; i++){
-			for(int j = 1; j < getRoot().getChildren().size(); j++){
-				if(j != getRoot().getChildren().size()-1){
-					parser.executeTree(getRoot().getChildren().get(j));
-				}
-			}
-		}
-		return parser.executeTree(getRoot().getChildren().get(getRoot().getChildren().size()-1));
+		double ret = 0;
+		Node commandRoot = getRoot().getChildren().get(1);
+        WorkspaceState workspace = this.getModel().getWorkspace();
+        workspace.addVariable(variable.toString(), 1.0);
+        for(double i = 1; i < limit; i++){
+        	for(double j = 0; j<commandRoot.getChildren().size(); j++){
+        	ret = getParser().executeTree(commandRoot.getChildren().get((int) j));
+        	workspace.addVariable(variable, i);
+        	}
+        }
+        return ret;
 	}
 }

@@ -10,11 +10,9 @@ import model.commands.ControlCommand;
 public class IfElse extends ControlCommand{
 
 	double bool;
-	Parser parser;
 
 	public IfElse(Node root, Parser parser, Model model) throws Exception{
-		super(root,model);
-		this.parser = parser;
+		super(root,parser,model);
 		bool = parser.executeTree(root.getChildren().get(0));
 	}
 
@@ -27,10 +25,10 @@ public class IfElse extends ControlCommand{
 			commandRoot = getRoot().getChildren().get(2);
 		}
 		for(int j = 0; j < commandRoot.getChildren().size()-1; j++){
-			parser.executeTree(commandRoot.getChildren().get(j));
+			getParser().executeTree(commandRoot.getChildren().get(j));
 		}
 		if(commandRoot.getChildren().size() > 0){
-			return parser.executeTree(commandRoot.getChildren().get(commandRoot.getChildren().size()-1));
+			return getParser().executeTree(commandRoot.getChildren().get(commandRoot.getChildren().size()-1));
 		}
 		return 0;
 	}
