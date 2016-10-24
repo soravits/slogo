@@ -13,6 +13,8 @@ public class WorkspaceState {
     public void addVariable (Object name, Double value) {
         if (mapOfVariables.containsKey(name)){
             mapOfVariables.replace(name.toString(), value);
+        }else{
+        	mapOfVariables.put(name.toString(), value);
         }
     }
 
@@ -23,6 +25,7 @@ public class WorkspaceState {
     public double getVariableValue(String name){
         return mapOfVariables.get(name);
     }
+   
 
     public HashMap<String, Double> getListOfVariables () {
         return mapOfVariables;

@@ -80,7 +80,7 @@ public class UI {
 
 		commandLine = new CommandLine(ySize, this);
 		
-		workspace = new Workspace(xSize);
+		workspace = new Workspace(xSize,this,commandLine);
 	
 		console = new Console(ySize, xSize);
 		
@@ -103,6 +103,10 @@ public class UI {
 		return model;
 	}
 	
+	public DataIn getDataIn() {
+		return dataIn;
+	}
+	
 	
 	public void updateDataIn() throws Exception {	
 		dataIn.setCommand(commandLine.getCommand());
@@ -112,7 +116,9 @@ public class UI {
 		turtle.updateTurtle(model.getTurtleMap());
 		console.updateConsole(model.getConsoleReturn());
 		workspace.updateWorkspace(model.getWorkspace());
-		System.out.println(model.getCommandHistory());
+		//testing
+		System.out.println("Variables: "+model.getWorkspace().getListOfVariables());
+		System.out.println("command history: "+model.getCommandHistory());
 		turtle.getRoot();	
 	}
 	

@@ -132,7 +132,9 @@ public class TurtleSettings extends UIBuilder{
 	
 	private void addColorsToComboBox(ComboBox<Color> comboBox){
 		comboBox.getItems().addAll(Color.WHITE, Color.BLACK, Color.RED, 
-				Color.BLUE, Color.ORANGE, Color.GREEN,
+				Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, 
+				Color.DEEPSKYBLUE,
+				Color.PURPLE, Color.PINK, Color.CORAL,
 				Color.ALICEBLUE, Color.ANTIQUEWHITE, 
 				Color.AQUA, Color.AQUAMARINE, Color.AZURE);
 	}
@@ -163,12 +165,12 @@ public class TurtleSettings extends UIBuilder{
 	
 	
 	private void getButtons(){
-		Button reset = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, 
-				uiResources.getString("ResetTurtle"), "turtlecontrol");
-		reset.setOnAction((event) -> {
-			turtle.clearTurtlePath();
-			turtle.getRoot();
-		});	
+//		Button reset = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, 
+//				uiResources.getString("ResetTurtle"), "turtlecontrol");
+//		reset.setOnAction((event) -> {
+//			turtle.resetTurtle();
+//			turtle.getRoot();
+//		});	
 		
 		Button image = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
 				uiResources.getString("Image"), "turtlecontrol");
@@ -178,7 +180,7 @@ public class TurtleSettings extends UIBuilder{
 			
 		});	
 		
-		root.getChildren().addAll(reset, image);
+		root.getChildren().addAll(image);
 	}
 	
 	private void chooseImage(){
