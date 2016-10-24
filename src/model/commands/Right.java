@@ -11,7 +11,7 @@ public class Right extends OneInputCommand{
 
     @Override
     public double execute () {
-        getModel().getTurtle().addTurtleAngle(-normalizeAngle(getParam1()));
+        getModel().getTurtle().addTurtleAngle(normalizeAngle(getParam1()));
         return getParam1();
     }
     
