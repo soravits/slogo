@@ -20,13 +20,12 @@ public class If extends ControlCommand{
 
 	@Override
 	public double execute() throws Exception {
-		if(bool == 1){
-			for(int j = 1; j < getRoot().getChildren().size(); j++){
-				if(j != getRoot().getChildren().size()-1){
-					parser.executeTree(getRoot().getChildren().get(j));
-				}
+		if(bool != 0 && getRoot().getChildren().get(1).getChildren().size() > 0){
+			Node commandRoot = getRoot().getChildren().get(1);
+			for(int j = 0; j < commandRoot.getChildren().size()-1; j++){
+					parser.executeTree(commandRoot.getChildren().get(j));
 			}
-			return parser.executeTree(getRoot().getChildren().get(getRoot().getChildren().size()-1));
+			return parser.executeTree(commandRoot.getChildren().get(getRoot().getChildren().size() - 1));
 		}
 		return 0;
 	}

@@ -13,9 +13,14 @@ public class Variable extends Command{
     }
 
     @Override
-    public double execute () {
+    public double execute() {
         WorkspaceState workspace = this.getModel().getWorkspace();
-        return workspace.getListOfVariables().get(variableName);
+        if(workspace.getListOfVariables().get(variableName) != null){
+        	workspace.addVariable(variableName, 0.0);
+        	return 0;
+        }else{
+        	return workspace.getListOfVariables().get(variableName);
+        }
     }
 
 }
