@@ -19,9 +19,9 @@ public class For extends ControlCommand{
 		super(root,parser,model);
 		Node commandRoot = getRoot().getChildren().get(0);
 		variable = commandRoot.getChildren().get(0).getValue().substring(1);
-		start = Double.parseDouble(commandRoot.getChildren().get(1).getValue());
-		end = Double.parseDouble(commandRoot.getChildren().get(2).getValue());
-		increment = Double.parseDouble(commandRoot.getChildren().get(3).getValue());
+		start = getParser().executeTree(commandRoot.getChildren().get(1));
+		end = getParser().executeTree(commandRoot.getChildren().get(2));
+		increment = getParser().executeTree(commandRoot.getChildren().get(3));
 	}
 
 	@Override
