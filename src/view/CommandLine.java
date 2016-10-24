@@ -37,18 +37,18 @@ public class CommandLine extends UIBuilder{
 	
 	private static int COMMAND_LINE_X = 10;
 	
-	private DataIn DataIn;
-	private Model updatedModel;
+	//private DataIn dataIn;
+	//private Model updatedModel;
 	//private ModelExtractor ModelExtractor;
 	private UI ui;
 	
-	public CommandLine(int sceneHeight,DataIn DataIn, UI ui){
+	public CommandLine(int sceneHeight, UI ui){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
-		this.DataIn=DataIn;
+		//this.dataIn = new DataIn(model);
 		this.ui = ui;
 	}
 	
@@ -99,7 +99,7 @@ public class CommandLine extends UIBuilder{
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			try {
-				updateDataIn();
+				ui.updateDataIn();
 				//Display();
 				
 			} catch (Exception e) {
@@ -113,15 +113,11 @@ public class CommandLine extends UIBuilder{
 		root.getChildren().addAll(reset, history, submit);
 	}
 	
-	private void updateDataIn() throws Exception {
-		DataIn.setCommand(textArea.getText());
-		DataIn.setLanguage(ui.getGeneralSettings().getLanguage());
-		DataIn.parseCommand(ui.Controller);
-		
-	}
+	
+	
 	
 	private void Display() {
-		updatedModel=DataIn.getViewModel();
+		updatedModel = DataIn.getViewModel();
 		
 	}
 	

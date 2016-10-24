@@ -166,14 +166,14 @@ public class TurtleSettings extends UIBuilder{
 		Button reset = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, 
 				uiResources.getString("ResetTurtle"), "turtlecontrol");
 		reset.setOnAction((event) -> {
-			//TODO: add action
+			turtle.clearTurtlePath();
+			turtle.getRoot();
 		});	
 		
 		Button image = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
-			//ui.addTurtleToRoot();
 			turtle.getRoot();
 			
 		});	

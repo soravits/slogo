@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.text.Text;
+import view.data.DataIn;
 
 public class UIBuilder{
 	
@@ -13,11 +14,15 @@ public class UIBuilder{
 	protected static int COMMAND_LINE_WIDTH = 670;
 	
 	protected ResourceBundle uiResources;
+//	protected Model model;
+	protected DataIn dataIn;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	
 	public UIBuilder(){
 		this.uiResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+		//this.model = new Model();
+		//this.dataIn = new DataIn(model);
 	}
 	
 	

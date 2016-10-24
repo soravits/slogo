@@ -1,14 +1,26 @@
 package view;
+import java.util.Collection;
+
 import javafx.geometry.Insets;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import model.LineModel;
+import model.LineState;
+import model.Model;
+import model.Position;
+import model.TurtleMap;
+import model.TurtlePair;
+import model.TurtleState;
 
 
 /**
@@ -25,6 +37,7 @@ public class Turtle extends UIBuilder{
 	private TurtleSettings turtleSettings;
 	private GraphicsContext turtleView;
 	private Image turtleImage;
+	private Model model;
 	
 	private static int TURTLE_X = 10;
 	private static int TURTLE_Y = 55;
@@ -35,6 +48,7 @@ public class Turtle extends UIBuilder{
 	private double originY;
 	private double currX;
 	private double currY;
+	private double angle;
 	
 	
 	
@@ -45,14 +59,17 @@ public class Turtle extends UIBuilder{
 	public Turtle(Stage stage){
 		super();
 		this.turtleSettings = new TurtleSettings(stage, this);
-		//root.getChildren().add(turtleSettings.getRoot());
+		//this.model = model;
 		this.canvasWidth = TURTLE_CANVAS_WIDTH;
 		this.canvasHeight = TURTLE_CANVAS_HEIGHT;	
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;
 		this.currX = originX;
 		this.currY = originY;
-		bindInstanceVariables();
+		this.angle = 0;
+		
+		
+		//bindInstanceVariables();
 		makeCanvas();
 	}
 	
@@ -73,10 +90,30 @@ public class Turtle extends UIBuilder{
 		return turtleSettings;
 	}
 	
-	private void bindInstanceVariables(){
-		//TODO: bind currX and currY to turtle coordinates from model
+	
+	public void clearTurtlePath(){
+		turtleView.beginPath();
 	}
 	
+//	private void bindInstanceVariables(){
+//		//TODO: bind angle to model angle
+//		
+//	}
+	
+	public void updateTurtle(TurtleMap turtleMap){
+		TurtleState turtleState = turtleMap.getTurtle();			
+		angle = turtleState.getTurtleAngle();
+		Boolean isTurtleShowing = turtleState.getShowTurtle();
+		
+		turtleView.moveTo(originX, originY);
+		
+		if (isTurtleShowing){
+			LineState lines = turtleMap.getLineState();
+			setTurtlePath(lines);
+		}
+	
+		
+	}
 	
 	private void makeCanvas(){		
 		
@@ -106,19 +143,44 @@ public class Turtle extends UIBuilder{
 		turtleView.setStroke(turtleSettings.getPenColor());
 		
 		turtleView.stroke();
-		//turtleView.
+		
+		rotateTurtle();
+			
 		turtleView.drawImage(turtleImage, currX - TURTLE_SIZE/2, currY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
 	}
 	
-//	private void setTurtlePath(){
-//		for (Type line : turtleLines){
-//			currX = ;
-//			currY = ;
-//			
-//			
-//			
-//		}
-//	}
+	private void rotateTurtle(){
+		ImageView imageView = new ImageView(turtleImage);	//http://stackoverflow.com/questions/33613664/javafx-drawimage-rotated
+		imageView.setRotate(angle);
+		SnapshotParameters params = new SnapshotParameters();
+		params.setFill(Color.TRANSPARENT);
+		turtleImage = imageView.snapshot(params, null);
+		
+		//turtleImage = imageView.getImage();
+		
+			
+	}
+	
+	
+	private void setTurtlePath(LineState lines){
+		Collection<LineModel> linePoints = lines.getLines();
+		
+		for (LineModel line : linePoints){
+
+			
+			if (currX != line.getPosition1().getX() + originX ||
+					currY != originY - line.getPosition1().getY()){
+				currX = line.getPosition1().getX() + originX;
+				currY = originY - line.getPosition1().getY();
+				turtleView.moveTo(currX, currY);
+			}
+			
+			currX = line.getPosition2().getX() + originX;
+			currY = originY - line.getPosition2().getY();
+			turtleView.lineTo(currX, currY);
+					
+		}
+	}
 	
 	
 }
