@@ -1,10 +1,10 @@
-package model.commands.turtle;
+package model.commands;
 
 import model.LineState;
 import model.Model;
 import model.Position;
 import model.TurtleState;
-import model.commands.OneInputCommand;
+import model.commandabstract.OneInputCommand;
 
 public class Forward extends OneInputCommand{
 

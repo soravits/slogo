@@ -1,7 +1,7 @@
-package model.commands.bool;
+package model.commands;
 
 import model.Model;
-import model.commands.TwoInputCommand;
+import model.commandabstract.TwoInputCommand;
 
 public class And extends TwoInputCommand{
 

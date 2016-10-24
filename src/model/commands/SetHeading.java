@@ -1,7 +1,7 @@
-package model.commands.turtle;
+package model.commands;
 
 import model.Model;
-import model.commands.OneInputCommand;
+import model.commandabstract.OneInputCommand;
 
 public class SetHeading extends OneInputCommand{
 

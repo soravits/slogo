@@ -1,7 +1,7 @@
-package model.commands.turtle;
+package model.commands;
 
 import model.Model;
-import model.commands.Command;
+import model.commandabstract.Command;
 
 public class PenUp extends Command {
 

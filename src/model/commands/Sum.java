@@ -1,7 +1,7 @@
-package model.commands.math;
+package model.commands;
 
 import model.Model;
-import model.commands.TwoInputCommand;
+import model.commandabstract.TwoInputCommand;
 
 public class Sum extends TwoInputCommand{
         

@@ -1,6 +1,7 @@
 package model.commands;
 
 import model.Model;
+import model.commandabstract.OneInputCommand;
 
 public class Constant extends OneInputCommand {
 
