@@ -52,6 +52,7 @@ public class Parser {
 
 	public void setLanguage(String language){
 		this.language = language;
+		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
 	}
 
 	public void parseString(String s) throws Exception{
@@ -61,7 +62,7 @@ public class Parser {
 		while(inputScanner.hasNextLine()){
 			String line = inputScanner.nextLine();
 			Scanner lineScanner = new Scanner(line);
-			if(line.charAt(0) == '#'){
+			if(!line.isEmpty() && line.charAt(0) == '#'){
 				continue;
 			}
 			else{
@@ -162,7 +163,6 @@ public class Parser {
 			int numParams = paramParser.getNumParams(commandName);
 			for(int i = 0; i < numParams; i++){
 				Node child = visitNode(queue, queue.poll());
-				System.out.println(child.getValue());
 				root.addChild(child);
 			}
 			root.setValue(commandName);
