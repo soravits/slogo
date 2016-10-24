@@ -132,7 +132,9 @@ public class TurtleSettings extends UIBuilder{
 	
 	private void addColorsToComboBox(ComboBox<Color> comboBox){
 		comboBox.getItems().addAll(Color.WHITE, Color.BLACK, Color.RED, 
-				Color.BLUE, Color.ORANGE, Color.GREEN,
+				Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, 
+				Color.DEEPSKYBLUE,
+				Color.PURPLE, Color.PINK, Color.CORAL,
 				Color.ALICEBLUE, Color.ANTIQUEWHITE, 
 				Color.AQUA, Color.AQUAMARINE, Color.AZURE);
 	}
