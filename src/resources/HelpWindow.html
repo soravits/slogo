@@ -13,6 +13,7 @@
 		the console.</p>
 		
 		<h2>Turtle Commands</h2>
+			
 			<p><strong>FORWARD <i>pixels</i>, FD <i>pixels</i></strong><br> 
 			Moves the turtle forward by <i>pixels</i>
 			amount in its current direction</p>
@@ -55,6 +56,7 @@
 			Erases turtle's trails and sends it to the home position</p>
 			
 		<h2>Turtle Queries</h2>
+			
 			<p><strong>XCOR</strong><br> 
 			Returns the turtle's X coordinate</p>
 			
@@ -71,6 +73,7 @@
 			Returns 1 if turtle is showing, 0 if it is hiding</p>
 			
 		<h2>Math Operations</h2>
+			
 			<p><strong>SUM <i>expr1 expr2</i>, + <i>expr1 expr2</i></strong><br> 
 			Returns sum of the values of <i>expr1</i> and <i>expr2</i></p>
 			
@@ -88,15 +91,94 @@
 			
 			<p><strong>MINUS <i>expr</i>, ~ <i>expr</i></strong><br> 
 			Returns negative of the values of <i>expr</i></p>
-		
-		
+			
+			<p><strong>RANDOM <i>max</i></strong><br> 
+			Returns random non-negative number strictly less than <i>max</i></p>
+			
+			<p><strong>SIN <i>degrees</i></strong><br> 
+			Returns sine of <i>degrees</i></p>
+			
+			<p><strong>COS <i>degrees</i></strong><br> 
+			Returns cosine of <i>degrees</i></p>
+			
+			<p><strong>TAN <i>degrees</i></strong><br> 
+			Returns tangent of <i>degrees</i></p>
+			
+			<p><strong>ATAN <i>degrees</i></strong><br> 
+			Returns arctangent of <i>degrees</i></p>
+			
+			<p><strong>LOG <i>expr</i></strong><br> 
+			Returns natural log of <i>expr</i></p>
+			
+			<p><strong>POW <i>base exponent</i></strong><br> 
+			Returns <i>base</i> raised to the power of the <i>exponent</i></p>
+			
+			<p><strong>PI </strong><br> 
+			Reports the number Pi</i></p>	
 		
 		<h2>Boolean Operations</h2>
-			<p></p>
+			
+			<p><strong>LESS? <i>expr1 expr2</i>, LESSP <i>expr1 expr2</i></strong><br> 
+			Returns 1 if the value of <i>expr1</i> is strictly less than the value of 
+			<i>expr2</i>, otherwise 0</p>
+			
+			<p><strong>GREATER? <i>expr1 expr2</i>, GREATERP <i>expr1 expr2</i></strong><br> 
+			Returns 1 if the value of <i>expr1</i> is strictly greater than the value of 
+			<i>expr2</i>, otherwise 0</p>
+			
+			<p><strong>EQUAL? <i>expr1 expr2</i>, EQUALP <i>expr1 expr2</i></strong><br> 
+			Returns 1 if the value of <i>expr1</i> and the value of <i>expr2</i> are equal, 
+			otherwise 0</p>
+			
+			<p><strong>NOTEQUAL? <i>expr1 expr2</i>, NOTEQUALP <i>expr1 expr2</i></strong><br> 
+			Returns 1 if the value of <i>expr1</i> and the value of <i>expr2</i> are not equal, 
+			otherwise 0</p>
+		
+			<p><strong>AND <i>test1 test2</i></strong><br> 
+			Returns 1 if <i>test1</i> and <i>test2</i> are non-zero, otherwise 0</p>
+			
+			<p><strong>OR <i>test1 test2</i></strong><br> 
+			Returns 1 if <i>test1</i> or <i>test2</i> are non-zero, otherwise 0</p>
+			
+			<p><strong>NOT <i>test</i></strong><br> 
+			returns 1 if <i>test</i> is 0 and 0 if <i>test</i> is non-zero</p>
 		
 		<h2>Variables, Control Structures, and User-Defined Commands</h2>
 		
+			<p><strong>MAKE <i>variable expr</i>, SET <i>variable expr</i></strong><br> 
+			Assigns the value of <i>expr</i> to <i>variable</i>, creating the variable 
+			if necessary</p>
+			
+			<p><strong>REPEAT <i>expr</i> [<i>command(s)</i>]</strong><br> 
+			Runs <i>command(s)</i> given in the list the value of <i>expr</i> number of times<br>
+			The value of the current iteration, starting at 1, is automatically assigned to the 
+			variable <i>:repcount</i> so that it can be accessed by the <i>command(s)</i></p>
 		
+			<p><strong>DOTIMES [<i>variable limit</i>] [<i>command(s)</i>]</strong><br> 
+			Runs <i>command(s)</i> for each value specified in the range, i.e., from (1 - <i>limit</i>) 
+			inclusive <br>
+			<i>Variable</i> is assigned to each succeeding value so that it can be accessed by the 
+			<i>command(s)</i></p>
+			
+			<p><strong>FOR [<i>variable start end increment</i>] [<i>command(s)</i>]</strong><br> 
+			Runs <i>command(s)</i> for each value specified in the range, i.e., from (<i>start</i> 
+			- <i>end</i>), going by <i>increment</i><br>
+			<i>Variable</i> is assigned to each succeeding value so that it can be accessed by the 
+			<i>command(s)</i></p>
+			
+			<p><strong>IF <i>expr</i> [<i>command(s)</i>]</strong><br> 
+			If <i>expr</i> is not 0, runs the runs the command(s) given in the list</p>
+			
+			<p><strong>IFELSE <i>expr</i> [<i>trueCommand(s)</i>] [<i>falseCommand(s)</i>]</strong><br> 
+			If <i>expr</i> is not 0, runs the <i>trueCommand(s)</i> given in the first list, otherwise 
+			runs the <i>falseCommand(s)</i> given in the second list</p>
+			
+			<p><strong>TO <i>commandName</i> [<i>variable(s)</i>] [<i>command(s)</i>]</strong><br> 
+			Assigns <i>command(s)</i> given in the second list to <i>commandName</i> using 
+			<i>parameters</i> given in first list as variables<br>
+			When <i>commandName</i> is used later in a program, any given values are assigned to 
+			variables that can be accessed when the command list is run and the value of the final 
+			command executed is returned (or 0 if no commands are executed)</p>
 	
 	</body>
 

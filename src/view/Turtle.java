@@ -49,9 +49,9 @@ public class Turtle extends UIBuilder{
 	private double lineX;
 	private double lineY;
 	private double turtleX;
-	private double turtleY;
-	
+	private double turtleY;	
 	private double angle;
+	private boolean isTurtleShowing = true;
 	
 	
 	
@@ -77,10 +77,8 @@ public class Turtle extends UIBuilder{
 	 * 
 	 */	
 	public Pane getRoot(){
-		
 		setCanvas();
-		setTurtle();
-		
+		setTurtle();	
 		return root;
 	}
 	
@@ -103,27 +101,20 @@ public class Turtle extends UIBuilder{
 	public void updateTurtle(TurtleMap turtleMap){
 		TurtleState turtleState = turtleMap.getTurtle();			
 		angle = turtleState.getTurtleAngle();
-		Boolean isTurtleShowing = turtleState.getShowTurtle();
+		isTurtleShowing = turtleState.getShowTurtle();
 		resetTurtle();
 		
 		turtleX = originX + turtleState.getTurtleX();
 		turtleY = originY - turtleState.getTurtleY();
-		
-		System.out.println(turtleX);
-		System.out.println(turtleY);
-		
 			
 		if (isTurtleShowing){
 			LineState lines = turtleMap.getLineState();
-			setTurtlePath(lines);
+			setTurtlePath(lines);	
 		}
-	
-		
 	}
 	
 	
-	private void makeCanvas(){		
-		
+	private void makeCanvas(){				
 		Canvas turtleCanvas = new Canvas(canvasWidth, canvasHeight);
 		root.setLayoutX(TURTLE_X);
 		root.setLayoutY(TURTLE_Y);
@@ -141,23 +132,25 @@ public class Turtle extends UIBuilder{
 	}
 	
 	private void setTurtle(){
-		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
+		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);		
+		turtleView.setStroke(turtleSettings.getPenColor());	
+		turtleView.stroke();	
+		if (isTurtleShowing){
+			viewTurtle();
+		}
+	}
+	
+	private void viewTurtle(){
 		if (turtleSettings.getTurtleImage() != null) {
 			turtleImage = turtleSettings.getTurtleImage();
 		}
 		else {
 			turtleImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/turtle.png"));
 		}
-		turtleView.setStroke(turtleSettings.getPenColor());
-		
-		turtleView.stroke();
-		
 		rotateTurtle();
-		
 	}
 	
 	private void rotateTurtle(){
-
 		turtleView.save();
 		Rotate rotate = new Rotate(angle, turtleX, turtleY);
 		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
@@ -165,8 +158,7 @@ public class Turtle extends UIBuilder{
 		turtleView.drawImage(turtleImage, turtleX - TURTLE_SIZE/2, turtleY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
 		turtleView.restore();
 			
-	}
-	
+	}	
 	
 	private void setTurtlePath(LineState lines){
 		Collection<LineModel> linePoints = lines.getLines();
@@ -182,8 +174,7 @@ public class Turtle extends UIBuilder{
 			
 			lineX = originX + line.getPosition2().getX();
 			lineY = originY - line.getPosition2().getY();
-			turtleView.lineTo(lineX, lineY);
-					
+			turtleView.lineTo(lineX, lineY);				
 		}
 	}
 	
