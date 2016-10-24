@@ -1,8 +1,10 @@
 package view;
 import view.data.DataIn;
+
 import java.util.HashMap;
 import java.util.Queue;
 
+import model.WorkspaceState;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 
@@ -54,6 +56,13 @@ public class Workspace extends UIBuilder{
 		workspace.setPrefWidth(workspaceWidth);
 		workspace.setPrefHeight(workspaceHeight);
 		root.getChildren().add(workspace);
+	}
+	
+	public void updateWorkspace(WorkspaceState workspaceState) {
+		HashMap<String, Double> variableMap = workspaceState.getListOfVariables();
+		for (String varName:variableMap.keySet()) {
+			workspace.appendText(varName+"= "+variableMap.get(varName));
+		}
 	}
 	
 }
