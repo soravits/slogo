@@ -24,8 +24,6 @@ public class HelpWindowUI extends UIBuilder{
 	private final int helpButtonX = 10;
 	private final int helpButtonY = 10;
 	
-	
-	
 	/**
 	 * initiates HelpWindow and assigns resource bundle for instance
 	 */
@@ -67,9 +65,7 @@ public class HelpWindowUI extends UIBuilder{
 		stage.setResizable(true);
 		Scene scene = new Scene(helpWindow);		
 		stage.setScene(scene);
-		stage.show();
-		
-		
+		stage.show();	
 	}
 	
 }

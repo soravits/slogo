@@ -1,22 +1,27 @@
 package view;
 import view.data.DataIn;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Queue;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
-public class CommandHistoryWindow {
+public class CommandHistoryWindow extends UIBuilder{
 	private int height;
 	private int width;
 	Stage stage;
@@ -26,8 +31,10 @@ public class CommandHistoryWindow {
 	VBox VBox;
 	private UI ui;
 	private CommandLine commandLine;
+	final ScrollBar sc = new ScrollBar();
 
 	CommandHistoryWindow(UI ui,CommandLine commandLine,int height, int width) {
+		super();
 		this.stage=new Stage();
 		this.commandList = new TextArea();
 		this.height=height;
@@ -42,10 +49,28 @@ public class CommandHistoryWindow {
 	
 	public void init() {
         VBox.setPadding(new Insets(20));
+        stage.setResizable(false);
         stage.setTitle("History");
         stage.setWidth(width);
         stage.setHeight(height);
-        group.getChildren().add(VBox);
+        group.getChildren().addAll(sc,VBox);
+        
+        VBox.setLayoutX(5);
+        VBox.setSpacing(10);
+ 
+        sc.setLayoutX(scene.getWidth()-sc.getWidth());
+        sc.setMin(0);
+        sc.setOrientation(Orientation.VERTICAL);
+        sc.setPrefHeight(height);
+        sc.setMax(height);
+        
+        sc.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                Number old_val, Number new_val) {
+                    VBox.setLayoutY(-new_val.doubleValue());
+                }
+        });
+        
 	}
 	
 	public void updateCommandHistory(Collection<String> commandHistory) {
@@ -74,15 +99,6 @@ public class CommandHistoryWindow {
 		});
 		return button;
 	}
-	/*
-	public Button getUndoButton() {
-		Button button=new Button("Undo");
-		button.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {  
-		    }
-		});
-		return button;
-	}*/
 	
 	public void show() {
 		stage.setScene(scene);
