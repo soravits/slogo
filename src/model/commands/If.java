@@ -18,12 +18,13 @@ public class If extends ControlCommand{
 
 	@Override
 	public double execute() throws Exception {
+		double ret = 0;
 		if(bool != 0 && getRoot().getChildren().get(1).getChildren().size() > 0){
 			Node commandRoot = getRoot().getChildren().get(1);
-			for(int j = 0; j < commandRoot.getChildren().size()-1; j++){
-					getParser().executeTree(commandRoot.getChildren().get(j));
+			for(int j = 0; j < commandRoot.getChildren().size(); j++){
+					ret = getParser().executeTree(commandRoot.getChildren().get(j));
 			}
-			return getParser().executeTree(commandRoot.getChildren().get(getRoot().getChildren().size() - 1));
+			return ret;
 		}
 		return 0;
 	}
