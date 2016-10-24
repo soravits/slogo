@@ -59,18 +59,13 @@ public class Turtle extends UIBuilder{
 	public Turtle(Stage stage){
 		super();
 		this.turtleSettings = new TurtleSettings(stage, this);
-		//this.model = model;
 		this.canvasWidth = TURTLE_CANVAS_WIDTH;
 		this.canvasHeight = TURTLE_CANVAS_HEIGHT;	
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;
-		this.currX = originX;
-		this.currY = originY;
 		this.angle = 0;
-		
-		
-		//bindInstanceVariables();
 		makeCanvas();
+		resetTurtle();
 	}
 	
 	
@@ -91,25 +86,22 @@ public class Turtle extends UIBuilder{
 	}
 	
 	
-	public void clearTurtlePath(){
-		turtleView.beginPath();
-	}
-	
-//	private void bindInstanceVariables(){
-//		//TODO: bind angle to model angle
-//		
-//	}
-	
-	public void updateTurtle(TurtleMap turtleMap){
-		TurtleState turtleState = turtleMap.getTurtle();			
-		angle = turtleState.getTurtleAngle();
-		Boolean isTurtleShowing = turtleState.getShowTurtle();
+	public void resetTurtle(){
 		turtleView.beginPath();
 		currX = originX;
 		currY = originY;
 		turtleView.moveTo(originX, originY);
 		
+	}
+	
+	
+	public void updateTurtle(TurtleMap turtleMap){
+		TurtleState turtleState = turtleMap.getTurtle();			
+		angle = turtleState.getTurtleAngle();
+		Boolean isTurtleShowing = turtleState.getShowTurtle();
 		
+		resetTurtle();
+			
 		if (isTurtleShowing){
 			LineState lines = turtleMap.getLineState();
 			setTurtlePath(lines);
@@ -117,6 +109,7 @@ public class Turtle extends UIBuilder{
 	
 		
 	}
+	
 	
 	private void makeCanvas(){		
 		
@@ -149,7 +142,6 @@ public class Turtle extends UIBuilder{
 		turtleView.stroke();
 		
 		rotateTurtle();
-			
 		
 	}
 	
