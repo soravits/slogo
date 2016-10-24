@@ -19,7 +19,7 @@ public class Forward extends OneInputCommand{
         LineState lines = this.getModel().getLineState();
         double[] coords = calculateCoordinates(turtle);
         turtle.updateTurtlePosition(coords[0], coords[1]);
-        lines.createLine(prevPosition, turtle.getPosition());
+        lines.createLine(prevPosition, turtle.getPosition().clone());
         return this.getParam1();
     }
     
