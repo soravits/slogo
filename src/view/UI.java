@@ -113,7 +113,7 @@ public class UI {
 		model = dataIn.getViewModel();
 		
 		turtle.updateTurtle(model.getTurtleMap());
-		//console.updateConsole(model.);
+		console.updateConsole(model.getConsoleReturn());
 		workspace.updateWorkspace(model.getWorkspace());
 		System.out.println(model.getCommandHistory());
 		turtle.getRoot();

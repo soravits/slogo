@@ -41,7 +41,6 @@ public class CommandHistoryWindow {
 	}
 	
 	public void updateCommandHistory(Collection<String> commandHistory) {
-		popupScene.appendText("hello");
 		for (String command:commandHistory) {
 			popupScene.appendText(command+"\n");
 		}

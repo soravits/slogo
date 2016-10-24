@@ -1,5 +1,7 @@
 package view;
+import java.util.Collection;
 import java.util.Queue;
+
 import view.data.DataIn;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
@@ -54,8 +56,11 @@ public class Console extends UIBuilder{
 		root.getChildren().add(console);
 	}
 	
-	public void updateConsole() {
-		
+	public void updateConsole(Collection<String> consoleResults) {
+		console.appendText("hi");
+		for (String command:consoleResults) {
+			console.appendText(command+"\n");
+		}
 	}
 	
 	
