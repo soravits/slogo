@@ -1,4 +1,4 @@
-package model.commands.control;
+package model.commands;
 
 public class MakeUserInstruction {
 

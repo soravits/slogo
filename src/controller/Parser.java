@@ -4,7 +4,7 @@ import controller.CommandParser;
 import controller.ParamParser;
 import model.Model;
 import model.commands.Constant;
-import model.commands.variables.Variable;
+import model.commands.Variable;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -22,8 +22,8 @@ public class Parser {
 	public static final String RESOURCE_PACKAGE = "resources/languages";
 	public static final String PARAMS = "Params";
 	public static final String SYNTAX = "Syntax";
-	public static final String LIST_START = "ListStart";
-	public static final String LIST_END = "ListEnd";
+	public static final String LIST_START = "[";
+	public static final String LIST_END = "]";
 	public static final String CONTROL_STRUCTURES = "Control";
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String VARIABLE = "Variable";
@@ -54,6 +54,7 @@ public class Parser {
 	}
 
 	public void parseString(String s) throws Exception{
+		s = s.toLowerCase();
 		ArrayList<String> tokens = new ArrayList<String>();
 		Scanner inputScanner = new Scanner(s);
 		while(inputScanner.hasNextLine()){
@@ -81,17 +82,19 @@ public class Parser {
 		String value = root.getValue();
 		if(controlStructures.contains(value)) {
 			Class<?> command = Class.forName("model.commands." + value);
-			Constructor<?> constructor = command.getDeclaredConstructor();
-			constructor.newInstance(command, this, model);
-			Method execute = command.getMethod("execute");
-			return (double) execute.invoke(this);
+			Constructor<?> constructor = command.getDeclaredConstructor(Node.class, Parser.class, Model.class);
+			Object t = constructor.newInstance(root, this, model);
+			commandController.setCommand(t);
+			double x = commandController.execute();
+			model.updateConsoleReturn(x);
+			return x;
 		}
 		else if(syntaxParser.getSymbol(value).equals(VARIABLE)){
 			Variable var = new Variable(value.substring(1), model);
 			return var.execute();
 		}
 		else if(syntaxParser.getSymbol(value).equals(CONSTANT)){
-		        double[] constantDouble = {Double.parseDouble(value)};
+			double[] constantDouble = {Double.parseDouble(value)};
 			Constant constant = new Constant(constantDouble, model);
 			return constant.execute();
 		}
@@ -101,22 +104,13 @@ public class Parser {
 				Node currNode = root.getChildren().get(i);
 				doubles[i] = executeTree(currNode);
 			}
-//			Class<?>[] classes = new Class[root.getChildren().size()+1];
-//			for (int i = 0; i < root.getChildren().size(); i++) {
-//				classes[i] = double.class;
-//			}
-//			classes[root.getChildren().size()] = Model.class;
 			Class<?> command = Class.forName("model.commands." + value);
 			Constructor<?> constructor = command.getDeclaredConstructor(double[].class, Model.class);
 			Object t = constructor.newInstance(doubles, model);
 			commandController.setCommand(t);
-			System.out.println(t);
 			double x = commandController.execute();
-			System.out.println(model.getTurtle().getTurtleY());
 			model.updateConsoleReturn(x);
 			return x;
-//			Method execute = command.getMethod("execute");
-//			return (double) execute.invoke(t);
 		}
 	}
 
@@ -150,23 +144,24 @@ public class Parser {
 	private Node visitNode(Queue<Node> queue, Node root){
 		String predicate = root.getValue();
 		String commandName = commandParser.getSymbol(predicate);
-		if(commandName.equals(CommandParser.ERROR)){
-			return root;
-		}else if(commandName.equals(LIST_START)){
+		if(predicate.equals(LIST_START)){
 			Node node = new Node(CONTROL_STRUCTURES);
 			Queue<Node> tempQueue = new LinkedList<Node>();
-			while(!commandParser.getSymbol(queue.peek().getValue()).equals(LIST_END)){
+			while(!queue.peek().getValue().equals(LIST_END)){
 				tempQueue.add(queue.poll());
 			}
 			queue.poll();
 			while(!tempQueue.isEmpty()){
-			node.addChild(visitNode(tempQueue, tempQueue.poll()));
+				node.addChild(visitNode(tempQueue, tempQueue.poll()));
 			}
 			return node;
-		}else{
+		}else if(commandName.equals(CommandParser.ERROR)){
+			return root;
+		} else{
 			int numParams = paramParser.getNumParams(commandName);
 			for(int i = 0; i < numParams; i++){
 				Node child = visitNode(queue, queue.poll());
+				System.out.println(child.getValue());
 				root.addChild(child);
 			}
 			root.setValue(commandName);
