@@ -40,8 +40,12 @@ public class Model{
         return workspace;
     }
     
-    public CommandHistory getCommandHistory() {
-        return commandHistory;
+    public Collection<String> getCommandHistory() {
+        return commandHistory.getCommandHistory();
+    }
+    
+    public void addCommand(String command){
+        commandHistory.addCommand(command);
     }
     
     public Collection<String> getConsoleReturn(){
