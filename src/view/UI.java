@@ -117,8 +117,8 @@ public class UI {
 		console.updateConsole(model.getConsoleReturn());
 		workspace.updateWorkspace(model.getWorkspace());
 		//testing
-		System.out.println("Variables: "+model.getWorkspace().getListOfVariables());
-		System.out.println("command history: "+model.getCommandHistory());
+//		System.out.println("Variables: "+model.getWorkspace().getListOfVariables());
+//		System.out.println("command history: "+model.getCommandHistory());
 		turtle.getRoot();	
 	}
 	

@@ -15,7 +15,7 @@ public class CommandHistory {
         commandHistory.add(command);
     }
     
-    public void clearHistory(String command){
+    public void clear(){
         commandHistory.clear();
     }
     
