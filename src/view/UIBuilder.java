@@ -14,15 +14,12 @@ public class UIBuilder{
 	protected static int COMMAND_LINE_WIDTH = 670;
 	
 	protected ResourceBundle uiResources;
-//	protected Model model;
 	protected DataIn dataIn;
 	
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	
 	public UIBuilder(){
 		this.uiResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
-		//this.model = new Model();
-		//this.dataIn = new DataIn(model);
 	}
 	
 	

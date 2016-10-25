@@ -41,7 +41,7 @@ public class TurtleSettings extends UIBuilder{
 	private ComboBox<Color> penComboBox;
 	private Stage stage;
 	private Image turtleImage;
-	private Turtle turtle;
+	private TurtleCanvas turtle;
 	
 	
 	private static int COLOR_RECT_WIDTH = 75;
@@ -52,7 +52,7 @@ public class TurtleSettings extends UIBuilder{
 	
 	private int controlX;
 	
-	public TurtleSettings(Stage stage, Turtle turtle){
+	public TurtleSettings(Stage stage, TurtleCanvas turtle){
 		super();
 		this.controlX = TURTLE_CANVAS_WIDTH + 20;
 		this.stage = stage;

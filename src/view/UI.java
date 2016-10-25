@@ -12,14 +12,14 @@ import javafx.stage.Stage;
  * 
  * The purpose of this class is to display the interface that the user interacts with.
  * 
- * @author Diane Hadley
+ * @author Diane Hadley, Pim
  */
 
 
 public class UI {
 	
 	private HelpWindowUI helpWindowUI;
-	private Turtle turtle;
+	private TurtleCanvas turtleCanvas;
 	
 	private CommandLine commandLine;
 	private Console console;
@@ -65,15 +65,9 @@ public class UI {
 
 		helpWindowUI = new HelpWindowUI();
 		
-		//turtleSettings = new TurtleSettings(this, stage);
+		turtleCanvas = new TurtleCanvas(stage);
 		
-		//root.getChildren().add(turtleSettings.getRoot());		
-		
-		//turtle = new Turtle(stage. model);	
-		
-		turtle = new Turtle(stage);
-		
-		root.getChildren().add(turtle.getTurtleSettings().getRoot());
+		root.getChildren().add(turtleCanvas.getTurtleSettings().getRoot());
 		
 		generalSettings = new GeneralSettings(controller);
 		
@@ -84,7 +78,7 @@ public class UI {
 	
 		console = new Console(ySize, xSize);
 		
-		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
+		root.getChildren().addAll(turtleCanvas.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot());
 		return scene;
@@ -113,13 +107,10 @@ public class UI {
 		dataIn.setLanguage(generalSettings.getLanguage());
 		dataIn.parseCommand(controller);
 		model = dataIn.getViewModel();
-		turtle.updateTurtle(model.getTurtleMap());
+		turtleCanvas.updateTurtle(model.getTurtleMap());
 		console.updateConsole(model.getConsoleReturn());
 		workspace.updateWorkspace(model.getWorkspace());
-		//testing
-		System.out.println("Variables: "+model.getWorkspace().getListOfVariables());
-		System.out.println("command history: "+model.getCommandHistory());
-		turtle.getRoot();	
+		turtleCanvas.getRoot();	
 	}
 	
 }
