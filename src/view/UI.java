@@ -110,6 +110,7 @@ public class UI {
 		turtleCanvas.updateTurtle(model.getTurtleMap());
 		console.updateConsole(model.getConsoleReturn());
 		workspace.updateWorkspace(model.getWorkspace());
+
 		turtleCanvas.getRoot();	
 	}
 	

@@ -31,8 +31,8 @@ public class WorkspaceState {
         return mapOfVariables;
     }
 
-    public void clearWorkspace () {
-        mapOfVariables = new HashMap<String, Double>();
+    public void clear() {
+        mapOfVariables.clear();
     }
     
 }

@@ -84,7 +84,7 @@ public class CommandLine extends UIBuilder{
 	private void getButtons(){
 		Button reset = makeButton(FIRST_BUTTON_X, buttonsY, uiResources.getString("ResetAll"), "generalcontrol");
 		reset.setOnAction((event) -> {
-			//TODO: add action
+	
 		});	
 		
 		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 

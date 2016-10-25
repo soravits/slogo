@@ -47,4 +47,8 @@ public class TurtleMap {
     public void setCurrentID (Object ID) {
         currentID = ID;
     }
+    
+    public void clear(){
+    	turtleMap.clear();
+    }
 }
