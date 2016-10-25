@@ -21,9 +21,6 @@ public class Repeat extends ControlCommand{
 	@Override
 	public double execute() throws Exception {
 		Node commandsRoot = getRoot().getChildren().get(1);
-		for(int i = 0; i<commandsRoot.getChildren().size();i++){
-			System.out.println(commandsRoot.getChildren().get(i));
-		}
 		double ret = 0;
 		for(int i = 0; i < count; i++){
 			for(int j = 0; j < commandsRoot.getChildren().size(); j++){
