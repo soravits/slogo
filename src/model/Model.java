@@ -58,4 +58,11 @@ public class Model{
     public void clearConsoleReturn(){
         consoleReturn.clear();
     }
+    
+    public void clear(){
+    	turtleMap.clear();
+    	commandHistory.clear();
+    	clearConsoleReturn();
+    	workspace.clear();
+    }
 }

@@ -80,7 +80,7 @@ public class CommandHistoryWindow extends UIBuilder{
 			HBox.getChildren().add(getRedoButton(command));
 			VBox.getChildren().add(HBox);
 		}
-		System.out.println("size: "+commandHistory.size());
+//		System.out.println("size: "+commandHistory.size());
 	}
 	
 	public Button getRedoButton(String command) {

@@ -78,8 +78,8 @@ public class Parser {
 		inputScanner.close();
 		ArrayList<Node> trees = formExpressionTrees(tokens);
 		for(Node n:trees){
-			printTree(n);
-			System.out.println();
+//			printTree(n);
+//			System.out.println();
 		}
 	}
 
@@ -217,7 +217,6 @@ public class Parser {
 			for(int i = 0; i < n.getChildren().size(); i++){
 				String variableName = params.getChildren().get(i).getValue().substring(1);
 				double value = executeTree(n.getChildren().get(i));
-				System.out.println(variableName);
 				model.getWorkspace().addVariable(variableName, value);
 			}
 			Node commandRoot = instruction.getChildren().get(2);
