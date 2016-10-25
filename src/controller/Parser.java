@@ -26,6 +26,7 @@ public class Parser {
 	public static final String LIST_END = "]";
 	public static final String CONTROL_STRUCTURES = "Control";
 	public static final String DEFAULT_LANGUAGE = "English";
+	public static final String COMMAND = "Command";
 	public static final String VARIABLE = "Variable";
 	public static final String CONSTANT = "Constant";
 	public static final String COMMAND_PACKAGE = "model.commands.";
@@ -37,6 +38,7 @@ public class Parser {
 	private ArrayList<String> controlStructures;
 	private Model model;
 	private CommandController commandController;
+	private Map<String, Node> userInstructions;
 
 	public Parser(Model model){
 		this.model = model;
@@ -44,6 +46,7 @@ public class Parser {
 		paramParser = new ParamParser();
 		syntaxParser = new CommandParser();
 		commandController = new CommandController();
+		userInstructions = new HashMap<String, Node>();
 		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
 		paramParser.addMappings(RESOURCE_PACKAGE + File.separator + PARAMS);
 		syntaxParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
@@ -76,7 +79,7 @@ public class Parser {
 		ArrayList<Node> trees = formExpressionTrees(tokens);
 		for(Node n:trees){
 			printTree(n);
-			executeTree(n);
+			System.out.println();
 		}
 	}
 
@@ -100,7 +103,9 @@ public class Parser {
 			Constant constant = new Constant(constantDouble, model);
 			return constant.execute();
 		}
-		else{
+		else if(userInstructions.containsKey(value)){
+			return runInstruction(root);
+		}else{
 			double[] doubles = new double[root.getChildren().size()];
 			for (int i = 0; i < root.getChildren().size(); i++) {
 				Node currNode = root.getChildren().get(i);
@@ -130,7 +135,7 @@ public class Parser {
 		}
 	}
 
-	private ArrayList<Node> formExpressionTrees(ArrayList<String> predicates){
+	private ArrayList<Node> formExpressionTrees(ArrayList<String> predicates) throws Exception{
 		ArrayList<Node> trees = new ArrayList<Node>();
 		Queue<Node> queue = new LinkedList<Node>();
 		for(int i = 0; i < predicates.size(); i++){
@@ -138,7 +143,9 @@ public class Parser {
 			queue.add(node);
 		}
 		while(!queue.isEmpty()){
-			trees.add(visitNode(queue, queue.poll()));
+			Node tree = queue.poll();
+			trees.add(visitNode(queue, tree));
+			executeTree(tree);
 		}
 		return trees;
 	}
@@ -165,6 +172,12 @@ public class Parser {
 				node.addChild(visitNode(tempQueue, tempQueue.poll()));
 			}
 			return node;
+		}else if(userInstructions.containsKey(predicate)){
+			int numParams = userInstructions.get(predicate).getChildren().get(1).getChildren().size();
+			for(int i = 0; i < numParams; i++){
+				Node child = visitNode(queue, queue.poll());
+				root.addChild(child);
+			}
 		}else if(commandName.equals(CommandParser.ERROR)){
 			return root;
 		} else{
@@ -186,5 +199,34 @@ public class Parser {
 			controlStructures.add(iter.nextElement());
 		}
 		return controlStructures;
+	}
+
+	public void addInstruction(String commandName, Node root){
+		userInstructions.put(commandName, root);
+	}
+
+	public boolean isValidCommandName(String s){
+		return syntaxParser.getSymbol(s).equals(COMMAND);
+	}
+	
+	private double runInstruction(Node n) throws Exception{
+		Node instruction = userInstructions.get(n.getValue());
+		Node params = instruction.getChildren().get(1);
+		double ret = 0;
+		if(n.getChildren().size() == params.getChildren().size()){
+			for(int i = 0; i < n.getChildren().size(); i++){
+				String variableName = params.getChildren().get(i).getValue().substring(1);
+				double value = executeTree(n.getChildren().get(i));
+				System.out.println(variableName);
+				model.getWorkspace().addVariable(variableName, value);
+			}
+			Node commandRoot = instruction.getChildren().get(2);
+			for(int i = 0; i < commandRoot.getChildren().size(); i++){
+				ret = executeTree(commandRoot.getChildren().get(i));
+			}
+		}else{
+			throw new NullPointerException();
+		}
+		return ret;
 	}
 }
