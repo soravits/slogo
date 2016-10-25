@@ -38,10 +38,6 @@ public class CommandLine extends UIBuilder{
 	private int buttonsY; 
 	
 	private static int COMMAND_LINE_X = 10;
-	
-	//private DataIn dataIn;
-	//private Model updatedModel;
-	//private ModelExtractor ModelExtractor;
 	private UI ui;
 	
 	public CommandLine(int sceneHeight, UI ui){
