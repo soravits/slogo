@@ -1,8 +1,5 @@
-package view;
+package view.ui;
 import java.util.Collection;
-import java.util.Queue;
-
-import view.data.DataIn;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 
@@ -14,7 +11,7 @@ import javafx.scene.control.TextArea;
  * @author Diane Hadley
  */
 
-public class Console extends UIBuilder{
+public class Console implements UIAttributes{
 	
 	private Group root = new Group();
 	private int consoleHeight;
@@ -38,11 +35,16 @@ public class Console extends UIBuilder{
 	 * returns root with all visualization of console
 	 * 
 	 */	
-	public Group getRoot(){
-		
+	public Group getRoot(){		
 		makeConsole();
-		root.getChildren().add(getText(consoleX, consoleY - 10, uiResources.getString("Console")));
+		root.getChildren().add(uiBuilder.getText(consoleX, consoleY - 10, uiResources.getString("Console")));
 		return root;
+	}
+	
+	public void updateConsole(Collection<String> consoleResults) {
+		for (String command:consoleResults) {
+			console.appendText(command+"\n");
+		}
 	}
 	
 	
@@ -54,12 +56,6 @@ public class Console extends UIBuilder{
 		console.setLayoutX(consoleX);
 		console.setLayoutY(consoleY);		
 		root.getChildren().add(console);
-	}
-	
-	public void updateConsole(Collection<String> consoleResults) {
-		for (String command:consoleResults) {
-			console.appendText(command+"\n");
-		}
 	}
 	
 	

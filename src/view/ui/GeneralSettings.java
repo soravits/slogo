@@ -1,4 +1,4 @@
-package view;
+package view.ui;
 
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
@@ -18,7 +18,7 @@ import javafx.scene.control.ComboBox;
  *
  */
 
-public class GeneralSettings extends UIBuilder{
+public class GeneralSettings implements UIAttributes{
 
 	private Group root = new Group();
 	private ComboBox<String> languageComboBox;
@@ -70,7 +70,7 @@ public class GeneralSettings extends UIBuilder{
 			}
 		});	
 		
-		root.getChildren().add(setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y, "generalcontrol"));
+		root.getChildren().add(uiBuilder.setControlLayout(languageComboBox, LANGUAGE_COMBOBOX_X, LANGUAGE_COMBOBOX_Y, "generalcontrol"));
 	}
 
 }

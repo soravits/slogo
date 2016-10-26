@@ -1,10 +1,6 @@
-package view;
-import view.data.DataIn;
+package view.ui;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Queue;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -21,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CommandHistoryWindow extends UIBuilder{
+public class CommandHistoryWindow{
 	private int height;
 	private int width;
 	Stage stage;

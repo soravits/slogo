@@ -1,4 +1,4 @@
-package view;
+package view.ui.turtle;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,6 +21,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import view.DisplayError;
+import view.ui.UIAttributes;
+import view.ui.UIBuilder;
 
 /**
  * 
@@ -33,7 +36,7 @@ import javafx.util.Callback;
  */
 
 
-public class TurtleSettings extends UIBuilder{
+public class TurtleSettings implements UIAttributes{
 	
 	private Group root = new Group();
 	private DisplayError displayError;
@@ -41,7 +44,7 @@ public class TurtleSettings extends UIBuilder{
 	private ComboBox<Color> penComboBox;
 	private Stage stage;
 	private Image turtleImage;
-	private TurtleCanvas turtle;
+	private TurtleScreen turtle;
 	
 	
 	private static int COLOR_RECT_WIDTH = 75;
@@ -52,7 +55,7 @@ public class TurtleSettings extends UIBuilder{
 	
 	private int controlX;
 	
-	public TurtleSettings(Stage stage, TurtleCanvas turtle){
+	public TurtleSettings(Stage stage, TurtleScreen turtle){
 		super();
 		this.controlX = TURTLE_CANVAS_WIDTH + 20;
 		this.stage = stage;
@@ -68,11 +71,11 @@ public class TurtleSettings extends UIBuilder{
 		getBackgroundColorComboBox();
 		getPenColorComboBox();
 		root.getChildren().addAll(
-			getText(controlX, FIRST_CONTROL_Y - 10, uiResources.getString("TurtleBackgroundColor")),
-			getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, uiResources.getString("TurtlePenColor"))	
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y - 10, uiResources.getString("TurtleBackgroundColor")),
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, uiResources.getString("TurtlePenColor"))	
 		);
 		
-		getButtons();
+		getButton();
 		return root;
 	}
 	
@@ -125,7 +128,7 @@ public class TurtleSettings extends UIBuilder{
 				turtle.getRoot();
 			}
 		});		
-		root.getChildren().add(setControlLayout(comboBox, controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
+		root.getChildren().add(uiBuilder.setControlLayout(comboBox, controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
 	}
 	
 	
@@ -163,15 +166,9 @@ public class TurtleSettings extends UIBuilder{
 	}
 	
 	
-	private void getButtons(){
-//		Button reset = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, 
-//				uiResources.getString("ResetTurtle"), "turtlecontrol");
-//		reset.setOnAction((event) -> {
-//			turtle.resetTurtle();
-//			turtle.getRoot();
-//		});	
+	private void getButton(){
 		
-		Button image = makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
+		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();

@@ -1,4 +1,4 @@
-package view;
+package view.ui.turtle;
 import java.util.Collection;
 
 import javafx.geometry.Insets;
@@ -15,7 +15,9 @@ import javafx.stage.Stage;
 import model.LineModel;
 import model.LineState;
 import model.TurtleMap;
+import model.TurtlePair;
 import model.TurtleState;
+import view.ui.UIAttributes;
 
 
 /**
@@ -26,43 +28,36 @@ import model.TurtleState;
  */
 
 
-public class TurtleCanvas extends UIBuilder{
+public class TurtleScreen implements UIAttributes{
 	
 	private Pane root = new Pane();
 	private TurtleSettings turtleSettings;
 	private GraphicsContext turtleView;
-	private Image turtleImage;
+	private TurtleVisualMap turtleVisualMap = new TurtleVisualMap();
 	
 	private static int TURTLE_X = 10;
 	private static int TURTLE_Y = 55;
-	private static int TURTLE_SIZE = 30;
 	private int canvasWidth;
 	private int canvasHeight;
 	private double originX;
 	private double originY;
-	private double lineX;
-	private double lineY;
-	private double turtleX;
-	private double turtleY;	
-	private double angle;
-	private boolean isTurtleShowing = true;
 	
+	private static int TURTLE_SIZE = 20;
 	
-	
+
 	/*
-	 * initiates Turtle and sets instance of TurtleSettings
+	 * initiates TurtleCanvas and sets instance of TurtleSettings
 	 */
 	
-	public TurtleCanvas(Stage stage){
+	public TurtleScreen(Stage stage){
 		super();
 		this.turtleSettings = new TurtleSettings(stage, this);
 		this.canvasWidth = TURTLE_CANVAS_WIDTH;
-		this.canvasHeight = TURTLE_CANVAS_HEIGHT;	
+		this.canvasHeight = TURTLE_CANVAS_HEIGHT;		
 		this.originX = canvasWidth/2;
-		this.originY = canvasHeight/2;
-		this.angle = 0;
+		this.originY = canvasHeight/2;		
 		makeCanvas();
-		resetTurtle();
+		//resetTurtle();
 	}
 	
 	
@@ -81,30 +76,44 @@ public class TurtleCanvas extends UIBuilder{
 	}
 	
 	
-	public void resetTurtle(){
-		turtleView.beginPath();
-		lineX = originX;
-		lineY = originY;
-		turtleX = originX;
-		turtleY = originY;
-		turtleView.moveTo(turtleX, turtleY);
+//	public void resetTurtles(Collection<TurtlePair> turtles){
+//				
+//	}
 		
-	}
-	
-	
-	public void updateTurtle(TurtleMap turtleMap){
-		TurtleState turtleState = turtleMap.getTurtle();			
-		angle = turtleState.getTurtleAngle();
-		isTurtleShowing = turtleState.getShowTurtle();
-		resetTurtle();
+	public void updateTurtles(TurtleMap turtleMap){
+		
+		turtleView.beginPath();
+		turtleView.moveTo(originX, originY);
+		
+		Collection<TurtlePair> turtlePairs = turtleMap.getTurtles();
+		
+	//	turtleMap.
+		
+		for (TurtlePair turtlePair : turtlePairs){
+			TurtleState turtleState = turtlePair.getTurtle();
+			
+			
+			if (turtleState.getShowTurtle()){
+				LineState lines = turtlePair.getLines();
+				viewTurtlePath(lines);
+				
+				viewTurtle();
+			}
+			
+			
+		}
+		
+		
+				
+		
+		turtleState.getTurtleAngle();
+		
+		
 		
 		turtleX = originX + turtleState.getTurtleX();
+		
 		turtleY = originY - turtleState.getTurtleY();
 			
-		if (isTurtleShowing){
-			LineState lines = turtleMap.getLineState();
-			setTurtlePath(lines);	
-		}
 	}
 	
 	
@@ -112,8 +121,7 @@ public class TurtleCanvas extends UIBuilder{
 		Canvas turtleCanvas = new Canvas(canvasWidth, canvasHeight);
 		root.setLayoutX(TURTLE_X);
 		root.setLayoutY(TURTLE_Y);
-		turtleView = turtleCanvas.getGraphicsContext2D();	
-		
+		turtleView = turtleCanvas.getGraphicsContext2D();			
 		root.getChildren().add(turtleCanvas);		
 	}
 	
@@ -134,43 +142,46 @@ public class TurtleCanvas extends UIBuilder{
 		}
 	}
 	
-	private void viewTurtle(){
-		if (turtleSettings.getTurtleImage() != null) {
-			turtleImage = turtleSettings.getTurtleImage();
+	
+	
+	private void viewTurtlePath(LineState lines){
+		Collection<LineModel> linePoints = lines.getLines();
+		
+		for (LineModel line : linePoints){
+			
+			turtleView.strokeLine(
+					originX + line.getPosition1().getX(), 
+					originY - line.getPosition1().getY(),
+					originX + line.getPosition2().getX(),
+					originY - line.getPosition2().getY()
+			);				
 		}
-		else {
-			turtleImage = new Image(getClass().getClassLoader().getResourceAsStream("resources/turtle.png"));
+	}
+	
+	
+	private void viewTurtle(Image image){
+
+		
+		if (image == null) {
+			image = new Image(getClass().getClassLoader().getResourceAsStream("resources/turtle.png"));
 		}
+		
 		rotateTurtle();
 	}
 	
 	private void rotateTurtle(){
 		turtleView.save();
-		Rotate rotate = new Rotate(angle, turtleX, turtleY);
+		Rotate rotate = new Rotate(angle, posX, posY);
 		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
 				rotate.getMyy(), rotate.getTx(), rotate.getTy());
-		turtleView.drawImage(turtleImage, turtleX - TURTLE_SIZE/2, turtleY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
+		turtleView.drawImage(turtleImage, posX - TURTLE_SIZE/2, posY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
 		turtleView.restore();
 			
 	}	
 	
-	private void setTurtlePath(LineState lines){
-		Collection<LineModel> linePoints = lines.getLines();
-		for (LineModel line : linePoints){
-			
-			if (lineX != originX + line.getPosition1().getX() ||
-					lineY != originY - line.getPosition1().getY()){
-				
-				lineX = originX + line.getPosition1().getX();
-				lineY = originY - line.getPosition1().getY();
-				turtleView.moveTo(lineX, lineY);
-			}
-			
-			lineX = originX + line.getPosition2().getX();
-			lineY = originY - line.getPosition2().getY();
-			turtleView.lineTo(lineX, lineY);				
-		}
-	}
 	
+	private void updateImageMap(){
+		
+	}
 	
 }
