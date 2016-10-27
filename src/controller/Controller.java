@@ -15,13 +15,13 @@ import view.data.DataIn;
 public class Controller {
 
     private Model model;
-    private Parser parser;
+    private Interpreter parser;
     private DataIn view;
 
     public Controller(DataIn view){
         this.view = view;
         model = new Model();
-        parser = new Parser(model);
+        parser = new Interpreter(model);
     }
 
     public void updateModel(Model model){

@@ -1,17 +1,17 @@
 package model.commands;
 
 import controller.Node;
-import controller.Parser;
+import controller.Interpreter;
 import model.Model;
-import model.commandabstract.ControlCommand;
+import model.abstractcommands.ControlCommand;
 
 public class MakeVariable extends ControlCommand{
 
     private String name;
     
-    public MakeVariable (Node root, Parser parser, Model model) {
+    public MakeVariable (Node root, Interpreter parser, Model model) {
         super(root, parser, model);
-        name = getRoot().getChildren().get(0).getValue().substring(1);
+        name = getRoot().getChildren().get(0).getValue();
     }
 
     @Override

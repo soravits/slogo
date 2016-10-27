@@ -1,7 +1,8 @@
 package controller;
 
 import java.util.Stack;
-import model.commandabstract.Command;
+
+import model.abstractcommands.Command;
 
 public class CommandController {
 

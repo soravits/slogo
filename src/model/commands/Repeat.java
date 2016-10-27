@@ -2,9 +2,9 @@ package model.commands;
 
 import controller.Node;
 
-import controller.Parser;
+import controller.Interpreter;
 import model.Model;
-import model.commandabstract.ControlCommand;
+import model.abstractcommands.ControlCommand;
 
 /**
  * Created by Soravit on 10/23/2016.
@@ -13,7 +13,7 @@ public class Repeat extends ControlCommand{
 
 	double count;
 
-	public Repeat(Node root, Parser parser, Model model) throws Exception{
+	public Repeat(Node root, Interpreter parser, Model model) throws Exception{
 		super(root,parser,model);
 		count = parser.executeTree(root.getChildren().get(0));
 	}

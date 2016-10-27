@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author Soravit
  */
-public class Parser {
+public class Interpreter {
 
 	public static final String RESOURCE_PACKAGE = "resources/languages";
 	public static final String PARAMS = "Params";
@@ -35,12 +35,12 @@ public class Parser {
 	private CommandParser commandParser;
 	private ParamParser paramParser;
 	private CommandParser syntaxParser;
-	private ArrayList<String> controlStructures;
+	private List<String> controlStructures;
 	private Model model;
 	private CommandController commandController;
 	private Map<String, Node> userInstructions;
 
-	public Parser(Model model){
+	public Interpreter(Model model){
 		this.model = model;
 		commandParser = new CommandParser();
 		paramParser = new ParamParser();
@@ -78,16 +78,16 @@ public class Parser {
 		inputScanner.close();
 		ArrayList<Node> trees = formExpressionTrees(tokens);
 		for(Node n:trees){
-//			printTree(n);
-//			System.out.println();
+			printTree(n);
+			System.out.println();
 		}
 	}
 
 	public double executeTree(Node root) throws Exception{
 		String value = root.getValue();
 		if(controlStructures.contains(value)) {
-			Class<?> command = Class.forName("model.commands." + value);
-			Constructor<?> constructor = command.getDeclaredConstructor(Node.class, Parser.class, Model.class);
+			Class<?> command = Class.forName(COMMAND_PACKAGE + value);
+			Constructor<?> constructor = command.getDeclaredConstructor(Node.class, Interpreter.class, Model.class);
 			Object t = constructor.newInstance(root, this, model);
 			commandController.setCommand(t);
 			double x = commandController.execute();
@@ -119,6 +119,14 @@ public class Parser {
 			model.updateConsoleReturn(x);
 			return x;
 		}
+	}
+
+	public void addInstruction(String commandName, Node root){
+		userInstructions.put(commandName, root);
+	}
+
+	public boolean isValidCommandName(String s){
+		return syntaxParser.getSymbol(s).equals(COMMAND);
 	}
 
 	public void printTree(Node root){
@@ -201,14 +209,6 @@ public class Parser {
 		return controlStructures;
 	}
 
-	public void addInstruction(String commandName, Node root){
-		userInstructions.put(commandName, root);
-	}
-
-	public boolean isValidCommandName(String s){
-		return syntaxParser.getSymbol(s).equals(COMMAND);
-	}
-	
 	private double runInstruction(Node n) throws Exception{
 		Node instruction = userInstructions.get(n.getValue());
 		Node params = instruction.getChildren().get(1);

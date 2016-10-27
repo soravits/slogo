@@ -4,7 +4,7 @@ import model.LineState;
 import model.Model;
 import model.Position;
 import model.TurtleState;
-import model.commandabstract.OneInputCommand;
+import model.abstractcommands.OneInputCommand;
 
 public class Forward extends OneInputCommand{
 

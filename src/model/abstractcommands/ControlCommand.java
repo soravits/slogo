@@ -1,7 +1,7 @@
-package model.commandabstract;
+package model.abstractcommands;
 
 import controller.Node;
-import controller.Parser;
+import controller.Interpreter;
 import model.Model;
 
 /**
@@ -10,9 +10,9 @@ import model.Model;
 public abstract class ControlCommand extends Command {
 
     private Node root;
-    private Parser parser;
+    private Interpreter parser;
 
-    public ControlCommand(Node root, Parser parser, Model model){
+    public ControlCommand(Node root, Interpreter parser, Model model){
         super(model);
         this.root = root;
         this.parser = parser;
@@ -22,7 +22,7 @@ public abstract class ControlCommand extends Command {
     	return root;
     }
     
-    public Parser getParser(){
+    public Interpreter getParser(){
     	return parser;
     }
 }

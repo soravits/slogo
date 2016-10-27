@@ -1,7 +1,7 @@
 package model.commands;
 
 import model.Model;
-import model.commandabstract.OneInputCommand;
+import model.abstractcommands.OneInputCommand;
 
 public class Right extends OneInputCommand{
 
