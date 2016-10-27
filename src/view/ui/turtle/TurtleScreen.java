@@ -4,7 +4,6 @@ import java.util.Collection;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 import model.LineModel;
 import model.LineState;
 import model.TurtleMap;
-import model.TurtlePair;
 import model.TurtleState;
 import view.ui.UIAttributes;
 
@@ -57,6 +55,7 @@ public class TurtleScreen implements UIAttributes{
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;		
 		makeCanvas();
+		viewTurtle(0, originX, originY, 1);
 		
 	}
 	
@@ -66,7 +65,7 @@ public class TurtleScreen implements UIAttributes{
 	 * 
 	 */	
 	public Pane getRoot(){
-		setCanvas();	
+		setCanvas();
 		return root;
 	}
 	
@@ -78,8 +77,6 @@ public class TurtleScreen implements UIAttributes{
 	public void updateTurtles(TurtleMap turtleMap){
 		resetTurtle();
 		
-		Collection<TurtlePair> turtlePairs = turtleMap.getTurtles();
-		
 		Collection<Object> ids = turtleMap.getIDs();
 		
 		updateViewMap(ids);
@@ -90,7 +87,10 @@ public class TurtleScreen implements UIAttributes{
 			if (turtleState.getShowTurtle()){
 				LineState lines = turtleMap.getLineState(id);
 				viewTurtlePath(lines);				
-				viewTurtle(turtleState, id);
+				double posX = originX + turtleState.getTurtleX();
+				double posY = originY - turtleState.getTurtleY();
+				double angle = turtleState.getTurtleAngle();				
+				viewTurtle(angle, posX, posY, id);
 			}		
 		}	
 	}
@@ -146,14 +146,9 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	
-	private void viewTurtle(TurtleState turtleState, Object id){
-		
-		double posX = originX + turtleState.getTurtleX();
-		double posY = originY - turtleState.getTurtleY();
-		
-		
+	private void viewTurtle(double angle, double posX, double posY, Object id){
 		turtleView.save();
-		Rotate rotate = new Rotate(turtleState.getTurtleAngle(), posX, posY);
+		Rotate rotate = new Rotate(angle, posX, posY);
 		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
 				rotate.getMyy(), rotate.getTx(), rotate.getTy());
 		turtleView.drawImage(turtleViewMap.getImage(id), posX - TURTLE_SIZE/2, 
