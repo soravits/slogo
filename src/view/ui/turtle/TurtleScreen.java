@@ -33,7 +33,7 @@ public class TurtleScreen implements UIAttributes{
 	private Pane root = new Pane();
 	private TurtleSettings turtleSettings;
 	private GraphicsContext turtleView;
-	private TurtleVisualMap turtleVisualMap = new TurtleVisualMap();
+	private TurtleViewMap turtleViewMap = new TurtleViewMap();
 	
 	private static int TURTLE_X = 10;
 	private static int TURTLE_Y = 55;
@@ -57,7 +57,7 @@ public class TurtleScreen implements UIAttributes{
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;		
 		makeCanvas();
-		//resetTurtle();
+		
 	}
 	
 	
@@ -66,8 +66,7 @@ public class TurtleScreen implements UIAttributes{
 	 * 
 	 */	
 	public Pane getRoot(){
-		setCanvas();
-		setTurtle();	
+		setCanvas();	
 		return root;
 	}
 	
@@ -75,45 +74,43 @@ public class TurtleScreen implements UIAttributes{
 		return turtleSettings;
 	}
 	
-	
-//	public void resetTurtles(Collection<TurtlePair> turtles){
-//				
-//	}
 		
 	public void updateTurtles(TurtleMap turtleMap){
-		
-		turtleView.beginPath();
-		turtleView.moveTo(originX, originY);
+		resetTurtle();
 		
 		Collection<TurtlePair> turtlePairs = turtleMap.getTurtles();
 		
-	//	turtleMap.
+		Collection<Object> ids = turtleMap.getIDs();
 		
-		for (TurtlePair turtlePair : turtlePairs){
-			TurtleState turtleState = turtlePair.getTurtle();
-			
-			
+		updateViewMap(ids);
+		
+		for (Object id : ids){
+			TurtleState turtleState = turtleMap.getTurtle(id);
+					
 			if (turtleState.getShowTurtle()){
-				LineState lines = turtlePair.getLines();
-				viewTurtlePath(lines);
-				
-				viewTurtle();
+				LineState lines = turtleMap.getLineState(id);
+				viewTurtlePath(lines);				
+				viewTurtle(turtleState, id);
+			}		
+		}	
+	}
+
+
+	private void updateViewMap(Collection<Object> ids) {
+		if (ids.size() != turtleViewMap.getIDs().size()){
+			for (Object id : ids){
+				if (!turtleViewMap.getIDs().contains(id)){
+					turtleViewMap.setAttributes(id);				
+				}
 			}
-			
-			
 		}
-		
-		
-				
-		
-		turtleState.getTurtleAngle();
-		
-		
-		
-		turtleX = originX + turtleState.getTurtleX();
-		
-		turtleY = originY - turtleState.getTurtleY();
-			
+	}
+
+
+	private void resetTurtle() {
+		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
+		turtleView.beginPath();
+		turtleView.moveTo(originX, originY);
 	}
 	
 	
@@ -133,17 +130,7 @@ public class TurtleScreen implements UIAttributes{
 		root.setBackground(background);
 	}
 	
-	private void setTurtle(){
-		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);		
-		turtleView.setStroke(turtleSettings.getPenColor());	
-		turtleView.stroke();	
-		if (isTurtleShowing){
-			viewTurtle();
-		}
-	}
-	
-	
-	
+
 	private void viewTurtlePath(LineState lines){
 		Collection<LineModel> linePoints = lines.getLines();
 		
@@ -159,29 +146,20 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	
-	private void viewTurtle(Image image){
-
+	private void viewTurtle(TurtleState turtleState, Object id){
 		
-		if (image == null) {
-			image = new Image(getClass().getClassLoader().getResourceAsStream("resources/turtle.png"));
-		}
+		double posX = originX + turtleState.getTurtleX();
+		double posY = originY - turtleState.getTurtleY();
 		
-		rotateTurtle();
-	}
-	
-	private void rotateTurtle(){
+		
 		turtleView.save();
-		Rotate rotate = new Rotate(angle, posX, posY);
+		Rotate rotate = new Rotate(turtleState.getTurtleAngle(), posX, posY);
 		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
 				rotate.getMyy(), rotate.getTx(), rotate.getTy());
-		turtleView.drawImage(turtleImage, posX - TURTLE_SIZE/2, posY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
-		turtleView.restore();
-			
+		turtleView.drawImage(turtleViewMap.getImage(id), posX - TURTLE_SIZE/2, 
+				posY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
+		turtleView.restore();		
 	}	
 	
-	
-	private void updateImageMap(){
-		
-	}
 	
 }
