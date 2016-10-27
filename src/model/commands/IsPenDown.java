@@ -1,7 +1,7 @@
 package model.commands;
 
 import model.Model;
-import model.commandabstract.Command;
+import model.abstractcommands.Command;
 
 public class IsPenDown extends Command{
 

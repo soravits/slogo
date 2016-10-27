@@ -1,6 +1,6 @@
 package model.commands;
 import model.Model;
-import model.commandabstract.TwoInputCommand;
+import model.abstractcommands.TwoInputCommand;
 
 public class Power extends TwoInputCommand{
 

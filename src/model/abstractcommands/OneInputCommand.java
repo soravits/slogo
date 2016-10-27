@@ -1,4 +1,4 @@
-package model.commandabstract;
+package model.abstractcommands;
 
 import model.Model;
 

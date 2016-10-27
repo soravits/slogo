@@ -1,8 +1,8 @@
 package model.commands;
 import controller.Node;
-import controller.Parser;
+import controller.Interpreter;
 import model.Model;
-import model.commandabstract.ControlCommand;
+import model.abstractcommands.ControlCommand;
 
 /**
  * Created by Soravit on 10/23/2016.
@@ -11,7 +11,7 @@ public class If extends ControlCommand{
 
 	double bool;
 
-	public If(Node root, Parser parser, Model model) throws Exception{
+	public If(Node root, Interpreter parser, Model model) throws Exception{
 		super(root,parser,model);
 		bool = getParser().executeTree(root.getChildren().get(0));
 	}
