@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class HelpWindowUI implements UIAttributes{
 	
 	private Group root = new Group();
+	private UIBuilder uiBuilder = new UIBuilder();
 	
 	private static final String HTML_FILE_NAME = "resources/HelpWindow.html";
 	

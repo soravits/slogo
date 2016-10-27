@@ -39,6 +39,7 @@ import view.ui.UIBuilder;
 public class TurtleSettings implements UIAttributes{
 	
 	private Group root = new Group();
+	private UIBuilder uiBuilder = new UIBuilder();
 	private DisplayError displayError;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;

@@ -20,25 +20,27 @@ public class CommandLine implements UIAttributes{
 	private Group root = new Group();
 	private TextArea textArea = new TextArea();
 	private DisplayError displayError = new DisplayError();
+	private UIBuilder uiBuilder = new UIBuilder();
 
 
 	private int commandLineHeight;
 	private int commandLineWidth;
 	private int commandLineY;
 	
-	private static int FIRST_BUTTON_X = 190;
-	private static int BUTTON_SPACING = 170;
-	private static int COMMAND_HISTORY_WINDOW_X = 300;
-	private static int COMMAND_HISTORY_WINDOW_Y = 300;
+	private static final int FIRST_BUTTON_X = 190;
+	private static final int BUTTON_SPACING = 170;
+	private static final int COMMAND_HISTORY_WINDOW_X = 300;
+	private static final int COMMAND_HISTORY_WINDOW_Y = 300;
+	private static final int COMMAND_LINE_X = 10;
 	private int buttonsY; 
 	
 	
-	private static int COMMAND_LINE_X = 10;
+	
 	private UI ui;
 	
 	public CommandLine(int sceneHeight, UI ui){
 		super();
-		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 120;
+		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 145;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;

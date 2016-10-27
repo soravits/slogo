@@ -6,6 +6,8 @@ import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -22,18 +24,18 @@ public class UI implements UIAttributes{
 	
 	private HelpWindowUI helpWindowUI;
 	private TurtleScreen turtleScreen;
-	
+	private GeneralSettings generalSettings;
 	private CommandLine commandLine;
 	private Console console;
 	private Workspace workspace;
 	private Group root = new Group();
+	private UIBuilder uiBuilder = new UIBuilder();
 	private int xSize, ySize;
 	private Stage stage;
-	private Model model;
 	
-	public GeneralSettings generalSettings;
-	public DataIn dataIn;
-	public Controller controller;
+	private Model model;
+	private DataIn dataIn;
+	private Controller controller;
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -53,8 +55,13 @@ public class UI implements UIAttributes{
 	 * Creates a root and initiates the scene. Main calls this method to start the program.
 	 */
 	public Scene init(){
-				
-		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
+		
+		TabPane tabPane = new TabPane();
+		Tab tab = new Tab();
+		tab.setClosable(false);
+		tab.setContent(root);
+		tabPane.getTabs().add(tab);
+		Scene scene = new Scene(tabPane, xSize, ySize, Color.LIGHTGREY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		model = new Model();
 		dataIn = new DataIn(model);
@@ -80,7 +87,7 @@ public class UI implements UIAttributes{
 	}
 	
 	private void makeResetButton(){
-		Button reset = uiBuilder.makeButton(190, 465, uiResources.getString("ResetAll"), "generalcontrol");
+		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
 		reset.setOnAction((event) -> {
 			resetAll();		
 		});	
@@ -126,5 +133,7 @@ public class UI implements UIAttributes{
 
 		turtleScreen.getRoot();	
 	}
+	
+	
 	
 }

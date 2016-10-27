@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CommandHistoryWindow{
+public class CommandHistoryWindow implements UIAttributes{
 	private int height;
 	private int width;
 	Stage stage;
@@ -76,7 +76,6 @@ public class CommandHistoryWindow{
 			HBox.getChildren().add(getRedoButton(command));
 			VBox.getChildren().add(HBox);
 		}
-//		System.out.println("size: "+commandHistory.size());
 	}
 	
 	public Button getRedoButton(String command) {

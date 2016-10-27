@@ -1,27 +1,37 @@
 .root{
-  -fx-base: #ffffff;
+  
   -fx-background-radius: 3;
   -fx-font-size: 13;  
 }
 
+.tab-pane {
+  -fx-base: d3d3d3;
+  -fx-padding: 0 10 10 10;
+ }
+ 
+ 
+
 .helpcontrol{
   -fx-pref-width: 120;
   -fx-pref-height: 35;
+  -fx-base: #ffffff;
 }
 
 .helpcontrol:hover{
   -fx-base: #f0efef;
+  -fx-base: #ffffff;
 }
 
 .turtlecontrol{
   -fx-pref-height: 30;
   -fx-pref-width: 130;
+  -fx-base: #ffffff;
   
 }
 
 
 .generalcontrol{
-  
+  -fx-base: #ffffff;
   -fx-pref-width: 150;
   -fx-pref-height: 35;
 

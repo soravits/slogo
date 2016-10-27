@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 public class Workspace implements UIAttributes{
 	
 	private Group root = new Group();
+	private UIBuilder uiBuilder = new UIBuilder();
 	private int workspaceX;
 	private int workspaceWidth;
 	private int workspaceHeight;
