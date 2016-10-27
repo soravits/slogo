@@ -1,6 +1,7 @@
 package view;
 
 import model.Model;
+import view.ui.UI;
 
 public class Display {
 	private Model Model;

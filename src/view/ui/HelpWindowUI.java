@@ -1,4 +1,4 @@
-package view;
+package view.ui;
 import java.net.URL;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * @author Diane Hadley
  */
 
-public class HelpWindowUI extends UIBuilder{
+public class HelpWindowUI implements UIAttributes{
 	
 	private Group root = new Group();
 	
@@ -43,7 +43,7 @@ public class HelpWindowUI extends UIBuilder{
 	
 	private void getButton(){
 		
-		helpButton = makeButton(helpButtonX, helpButtonY, uiResources.getString("HelpButton"), "helpcontrol");
+		helpButton = uiBuilder.makeButton(helpButtonX, helpButtonY, uiResources.getString("HelpButton"), "helpcontrol");
 		addActionToButton();
 		root.getChildren().add(helpButton);
 		

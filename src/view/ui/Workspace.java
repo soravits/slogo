@@ -1,9 +1,7 @@
-package view;
-import view.data.DataIn;
+package view.ui;
+
 
 import java.util.HashMap;
-import java.util.Queue;
-
 import model.WorkspaceState;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +21,7 @@ import javafx.scene.text.Text;
  * @author Diane Hadley
  */
 
-public class Workspace extends UIBuilder{
+public class Workspace implements UIAttributes{
 	
 	private Group root = new Group();
 	private int workspaceX;
@@ -46,6 +44,7 @@ public class Workspace extends UIBuilder{
 		this.VBox=new VBox(20);
 		this.group=new Group();
 		this.commandLine=commandLine;
+		makeWorkspace();
 	}
 	
 	
@@ -54,10 +53,8 @@ public class Workspace extends UIBuilder{
 	 * 
 	 */	
 	public Group getRoot(){
-		makeWorkspace();
-		root.getChildren().add(
-				getText(workspaceX, WORKSPACE_Y - 10, uiResources.getString("Workspace"))
-		);
+		
+		
 		return root;
 	}
 	
@@ -67,6 +64,9 @@ public class Workspace extends UIBuilder{
 		VBox.setLayoutX(workspaceX);
 		VBox.setLayoutY(WORKSPACE_Y);
 		root.getChildren().add(VBox);
+		root.getChildren().add(
+				uiBuilder.getText(workspaceX, WORKSPACE_Y - 10, uiResources.getString("Workspace"))
+		);
 	}
 	
 	public void updateWorkspace(WorkspaceState workspaceState) {
