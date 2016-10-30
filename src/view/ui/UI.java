@@ -30,7 +30,7 @@ public class UI implements UIAttributes{
 	private int xSize, ySize;
 	private Stage stage;
 	private Model model;
-	
+	private LoadCommand loadCommand;
 	public GeneralSettings generalSettings;
 	public DataIn dataIn;
 	public Controller controller;
@@ -73,9 +73,10 @@ public class UI implements UIAttributes{
 		commandLine = new CommandLine(ySize, this);		
 		workspace = new Workspace(xSize,this,commandLine);
 		console = new Console(ySize, xSize);
+		loadCommand = new LoadCommand(this);
 		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot());
+				console.getRoot(),loadCommand.getRoot());
 		makeResetButton();
 	}
 	
