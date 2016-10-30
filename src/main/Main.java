@@ -12,8 +12,8 @@ import view.ui.UI;
 
 public class Main extends Application {
 	private UI ui;
-	public static int XSIZE = 1000;
-	public static int YSIZE = 700;
+	public static int XSIZE = 1100;
+	public static int YSIZE = 725;
 	public static String TITLE = "SLogo";
 	public static String COMBO_BOX_WORKAROUND = "glass.accessible.force";
 	public static String FALSE = "glass.accessible.force";
