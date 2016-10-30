@@ -53,6 +53,8 @@ public class TurtleMap {
     }
     
     public void clear(){
-    	turtleMap = new HashMap<Object, TurtlePair>();
+        turtleMap = new HashMap<Object, TurtlePair>();
+        TurtlePair firstPair = new TurtlePair();
+        turtleMap.put(currentID, firstPair);
     }
 }
