@@ -2,7 +2,7 @@ package model.commands;
 
 import model.Model;
 import model.TurtleState;
-import model.commandabstract.TwoInputCommand;
+import model.abstractcommands.TwoInputCommand;
 
 public class SetPosition extends TwoInputCommand{
 

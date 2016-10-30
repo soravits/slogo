@@ -2,7 +2,7 @@ package model.commands;
 
 import model.Model;
 import model.WorkspaceState;
-import model.commandabstract.Command;
+import model.abstractcommands.Command;
 
 public class Variable extends Command{
 

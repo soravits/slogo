@@ -1,7 +1,10 @@
 package controller;
 
 import java.util.Stack;
-import model.commandabstract.Command;
+
+import error.InvalidCommandException;
+import error.InvalidSyntaxException;
+import model.abstractcommands.Command;
 
 public class CommandController {
 
@@ -12,9 +15,9 @@ public class CommandController {
         commands = new Stack<Command>();
     }
     
-    public void setCommand(Object command){
-        currentCommand = (Command) command;
-        commands.add((Command) command);
+    public void setCommand(Command command){
+        currentCommand = command;
+        commands.add(command);
     }
     
     public double execute() throws Exception{

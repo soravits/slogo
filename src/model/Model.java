@@ -23,6 +23,7 @@ public class Model{
     public TurtleState getTurtle () {
         return turtleMap.getTurtle();
     }
+
     public TurtleState getTurtle (Object ID){
         return turtleMap.getTurtle(ID);
     }

@@ -1,8 +1,9 @@
 package model.commands;
+import controller.CommandManager;
 import controller.Node;
-import controller.Parser;
+import controller.Interpreter;
 import model.Model;
-import model.commandabstract.ControlCommand;
+import model.abstractcommands.ControlCommand;
 
 /**
  * Created by Soravit on 10/23/2016.
@@ -11,9 +12,9 @@ public class IfElse extends ControlCommand{
 
 	double bool;
 
-	public IfElse(Node root, Parser parser, Model model) throws Exception{
-		super(root,parser,model);
-		bool = parser.executeTree(root.getChildren().get(0));
+	public IfElse(Node root, CommandManager commandManager, Model model) throws Exception{
+		super(root, commandManager, model);
+		bool = executeTree(root.getChildren().get(0));
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class IfElse extends ControlCommand{
 			commandRoot = getRoot().getChildren().get(2);
 		}
 		for(int j = 0; j < commandRoot.getChildren().size(); j++){
-			ret = getParser().executeTree(commandRoot.getChildren().get(j));
+			ret = executeTree(commandRoot.getChildren().get(j));
 		}
 		if(commandRoot.getChildren().size() > 0){
 			return ret;

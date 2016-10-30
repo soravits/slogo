@@ -1,5 +1,6 @@
-package model.commandabstract;
+package model.abstractcommands;
 
+import error.InvalidCommandException;
 import model.Model;
 
 public abstract class Command {
@@ -10,7 +11,7 @@ public abstract class Command {
         slogoModel = model;
     }
 
-    public abstract double execute () throws Exception;
+    public abstract double execute() throws Exception;
     
     public Model getModel(){
         return slogoModel;

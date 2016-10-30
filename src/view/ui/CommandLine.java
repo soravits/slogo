@@ -93,7 +93,7 @@ public class CommandLine implements UIAttributes{
 			try {
 				window.updateDataIn();
 			} catch (Exception e) {
-				displayError.displayErrorDialogueBox(uiResources.getString("InvalidCommandError"));
+				displayError.displayErrorDialogueBox(e.getMessage());
 			}
 			textArea.setText("");
 		});	
