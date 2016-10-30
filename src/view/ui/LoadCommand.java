@@ -53,6 +53,7 @@ public class LoadCommand implements UIAttributes{
         		try {
 					controller.runFile(selectedFile.getAbsolutePath());
 					window.updateUI();
+					window.updateDataIn();
 				} catch (InvalidSyntaxException | InvalidCommandException
 						| IOException | InvalidParametersException e) {
 					// TODO Auto-generated catch block

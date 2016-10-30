@@ -46,6 +46,8 @@ public class Window implements UIAttributes{
 	}
 	
 	
+		
+	
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
 		turtleScreen = new TurtleScreen(stage);	
@@ -58,6 +60,7 @@ public class Window implements UIAttributes{
 		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot(),loadCommand.getRoot());
+
 //		makeResetButton();
 	}
 	

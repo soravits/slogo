@@ -20,6 +20,7 @@ public class UI implements UIAttributes{
 	private UIBuilder uiBuilder = new UIBuilder();
 	private int xSize, ySize;
 	private Stage stage;
+	public GeneralSettings generalSettings;
 	private TabPane tabPane = new TabPane();
 	private Group tabArea = new Group();
 	
@@ -76,7 +77,6 @@ public class UI implements UIAttributes{
 		Tab tab = new Tab();
 		tab.setClosable(isClosable);
 		tab.setContent(root);
-		//tab.setStyle("sup");
 		tabPane.getTabs().add(tab);	
 	}
 	
