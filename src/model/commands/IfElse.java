@@ -1,4 +1,5 @@
 package model.commands;
+import controller.CommandManager;
 import controller.Node;
 import controller.Interpreter;
 import model.Model;
@@ -11,9 +12,9 @@ public class IfElse extends ControlCommand{
 
 	double bool;
 
-	public IfElse(Node root, Interpreter parser, Model model) throws Exception{
-		super(root,parser,model);
-		bool = parser.executeTree(root.getChildren().get(0));
+	public IfElse(Node root, CommandManager commandManager, Model model) throws Exception{
+		super(root, commandManager, model);
+		bool = executeTree(root.getChildren().get(0));
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class IfElse extends ControlCommand{
 			commandRoot = getRoot().getChildren().get(2);
 		}
 		for(int j = 0; j < commandRoot.getChildren().size(); j++){
-			ret = getParser().executeTree(commandRoot.getChildren().get(j));
+			ret = executeTree(commandRoot.getChildren().get(j));
 		}
 		if(commandRoot.getChildren().size() > 0){
 			return ret;

@@ -1,4 +1,5 @@
 package model.commands;
+import controller.CommandManager;
 import controller.Node;
 import controller.Interpreter;
 import model.Model;
@@ -15,13 +16,13 @@ public class For extends ControlCommand{
 	private double end;
 	private double increment;
 
-	public For(Node root, Interpreter parser, Model model) throws Exception{
-		super(root,parser,model);
+	public For(Node root, CommandManager commandManager, Model model) throws Exception{
+		super(root,commandManager,model);
 		Node commandRoot = getRoot().getChildren().get(0);
 		variable = commandRoot.getChildren().get(0).getValue();
-		start = getParser().executeTree(commandRoot.getChildren().get(1));
-		end = getParser().executeTree(commandRoot.getChildren().get(2));
-		increment = getParser().executeTree(commandRoot.getChildren().get(3));
+		start = executeTree(commandRoot.getChildren().get(1));
+		end = executeTree(commandRoot.getChildren().get(2));
+		increment = executeTree(commandRoot.getChildren().get(3));
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class For extends ControlCommand{
         workspace.addVariable(variable, start);
         for(double i = start; i < end; i += increment){
         	for(double j = 0; j < commandRoot.getChildren().size(); j++){
-        	ret = getParser().executeTree(commandRoot.getChildren().get((int)j));
+        	ret = executeTree(commandRoot.getChildren().get((int)j));
         	workspace.addVariable(variable, i);
         	}
         }

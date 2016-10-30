@@ -1,5 +1,6 @@
 package controller;
 
+import error.InvalidCommandException;
 import model.Model;
 
 /**
@@ -7,5 +8,5 @@ import model.Model;
  */
 public interface Executor {
 
-    public double execute(Node root, CommandManager executor, CommandController commandController, Model model) throws Exception;
+    public double execute(Node root, CommandManager executor, Model model) throws InvalidCommandException;
 }

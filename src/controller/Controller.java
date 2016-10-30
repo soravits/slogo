@@ -1,11 +1,16 @@
 package controller;
 
+import error.InvalidCommandException;
+import error.InvalidParametersException;
+import error.InvalidSyntaxException;
 import model.Model;
 import view.data.DataIn;
 
+import java.io.IOException;
+
 /**
  * The purpose of this class is to receive the data from the view and send it to the controller.Parser to be handled. It will
- * also take the tree that is returned by the parser and send it to the interpreter. Essentially, the controller.Controller
+ * also take the tree that is returned by the interpreter and send it to the interpreter. Essentially, the controller.Controller
  * acts as a gateway to the back-end and facilitates the controller.Parser and Interpreter classes. Currently, it only
  * has an update function, but as the project progresses, it will likely assume more responsibility.
  *
@@ -15,38 +20,29 @@ import view.data.DataIn;
 public class Controller {
 
     private Model model;
-    private Interpreter parser;
+    private Interpreter interpreter;
     private DataIn view;
 
     public Controller(DataIn view){
         this.view = view;
         model = new Model();
-        parser = new Interpreter(model);
+        interpreter = new Interpreter(model);
     }
-
-    public void updateModel(Model model){
-        this.model = model;
-    }
-
     /**
      * This class takes the different data objects/variables packaged into the data object, modifies the controller.Parser and
      * Interpreter as necessary, and sends the data to the controller.Parser.
      * @param input The command inputted by the user
      * @throws Exception 
      */
-    public void processCommand(String input) throws Exception{
+    public void processCommand(String input) throws InvalidCommandException, InvalidSyntaxException, InvalidParametersException {
     	model.clearConsoleReturn();
     	model.addCommand(input);
-        parser.parseString(input);
+        interpreter.parseString(input);
         updateView();
     }
 
-    private void updateView(){
-        view.updateViewModel(model);
-    }
-    
     public void setLanguage(String language){
-    	parser.setLanguage(language);
+    	interpreter.setLanguage(language);
     }
     
     public void reset(){
@@ -54,4 +50,11 @@ public class Controller {
     	view.updateViewModel(model);
     }
 
+    public void runFile(String fileName) throws InvalidSyntaxException, InvalidCommandException, IOException, InvalidParametersException {
+        processCommand(interpreter.readFileToString(fileName));
+    }
+
+    private void updateView(){
+        view.updateViewModel(model);
+    }
 }
