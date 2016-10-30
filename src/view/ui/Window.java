@@ -18,6 +18,7 @@ public class Window implements UIAttributes{
 	private Console console;
 	private Workspace workspace;
 	private Stage stage;
+	private LoadCommand loadCommand;
 	
 	private Model model;
 	private DataIn dataIn;
@@ -45,6 +46,8 @@ public class Window implements UIAttributes{
 	}
 	
 	
+		
+	
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
 		turtleScreen = new TurtleScreen(stage);	
@@ -53,9 +56,10 @@ public class Window implements UIAttributes{
 		commandLine = new CommandLine(ySize, this);		
 		workspace = new Workspace(xSize,this,commandLine);
 		console = new Console(ySize, xSize);
+		loadCommand = new LoadCommand(this);
 		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot());
+				console.getRoot(), loadCommand.getRoot());
 //		makeResetButton();
 	}
 	
