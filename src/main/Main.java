@@ -15,13 +15,15 @@ public class Main extends Application {
 	public static int XSIZE = 1000;
 	public static int YSIZE = 700;
 	public static String TITLE = "SLogo";
-	
-	
+	public static String COMBO_BOX_WORKAROUND = "glass.accessible.force";
+	public static String FALSE = "glass.accessible.force";
+
 	/** 
 	 * sets up visualization window
 	 */
 	public void start(Stage stage) {
-		ui = new UI(XSIZE, YSIZE, stage);	
+		System.setProperty(COMBO_BOX_WORKAROUND, FALSE);
+		ui = new UI(XSIZE, YSIZE, stage);
 		stage.setTitle(TITLE);
 		stage.setScene(ui.init());
 		stage.setResizable(false);
