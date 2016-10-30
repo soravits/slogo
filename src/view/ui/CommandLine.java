@@ -22,29 +22,26 @@ public class CommandLine implements UIAttributes{
 	private DisplayError displayError = new DisplayError();
 	private UIBuilder uiBuilder = new UIBuilder();
 
-
 	private int commandLineHeight;
 	private int commandLineWidth;
 	private int commandLineY;
+	private int buttonsY; 
 	
 	private static final int FIRST_BUTTON_X = 190;
 	private static final int BUTTON_SPACING = 170;
 	private static final int COMMAND_HISTORY_WINDOW_X = 300;
 	private static final int COMMAND_HISTORY_WINDOW_Y = 300;
 	private static final int COMMAND_LINE_X = 10;
-	private int buttonsY; 
 	
+	private Window window;
 	
-	
-	private UI ui;
-	
-	public CommandLine(int sceneHeight, UI ui){
+	public CommandLine(int sceneHeight, Window window){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 145;
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
-		this.ui = ui;
+		this.window = window;
 		makeCommandLine();
 		getButtons();
 		root.getChildren().add(uiBuilder.getText(COMMAND_LINE_X, commandLineY - 10, 
@@ -85,8 +82,8 @@ public class CommandLine implements UIAttributes{
 		Button history = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(ui,this,COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
-				commandHistoryWindow.updateCommandHistory(ui.getModel().getCommandHistory());
+				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(window,this,COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
+				commandHistoryWindow.updateCommandHistory(window.getModel().getCommandHistory());
 				commandHistoryWindow.show();
 		});	
 		
@@ -94,7 +91,7 @@ public class CommandLine implements UIAttributes{
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			try {
-				ui.updateDataIn();
+				window.updateDataIn();
 			} catch (Exception e) {
 				displayError.displayErrorDialogueBox(uiResources.getString("InvalidCommandError"));
 			}

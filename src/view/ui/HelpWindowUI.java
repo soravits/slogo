@@ -22,8 +22,8 @@ public class HelpWindowUI implements UIAttributes{
 	private static final String HTML_FILE_NAME = "resources/HelpWindow.html";
 	
 	private Button helpButton;
-	private final int helpButtonX = 10;
-	private final int helpButtonY = 10;
+	private static final int HELP_BUTTON_X = 10;
+	private static final int HELP_BUTTON_Y = 10;
 	
 	/**
 	 * initiates HelpWindow and assigns resource bundle for instance
@@ -44,7 +44,7 @@ public class HelpWindowUI implements UIAttributes{
 	
 	private void getButton(){
 		
-		helpButton = uiBuilder.makeButton(helpButtonX, helpButtonY, uiResources.getString("HelpButton"), "helpcontrol");
+		helpButton = uiBuilder.makeButton(HELP_BUTTON_X, HELP_BUTTON_Y, uiResources.getString("HelpButton"), "helpcontrol");
 		addActionToButton();
 		root.getChildren().add(helpButton);
 		

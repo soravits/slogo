@@ -25,11 +25,11 @@ public class CommandHistoryWindow implements UIAttributes{
 	Scene scene;
 	TextArea commandList;
 	VBox VBox;
-	private UI ui;
+	private Window window;
 	private CommandLine commandLine;
 	final ScrollBar sc = new ScrollBar();
 
-	CommandHistoryWindow(UI ui,CommandLine commandLine,int height, int width) {
+	CommandHistoryWindow(Window window,CommandLine commandLine,int height, int width) {
 		super();
 		this.stage=new Stage();
 		this.commandList = new TextArea();
@@ -38,7 +38,7 @@ public class CommandHistoryWindow implements UIAttributes{
 		this.group=new Group();
 		this.scene=new Scene(group,width,height);
 		this.VBox=new VBox(20);
-		this.ui=ui;
+		this.window = window;
 		this.commandLine=commandLine;
 		init();
 	}
@@ -84,7 +84,7 @@ public class CommandHistoryWindow implements UIAttributes{
 		    @Override public void handle(ActionEvent e) {  
 		    	commandLine.setCommand(command);
 		    	try {
-					ui.updateDataIn();
+					window.updateDataIn();
 					commandLine.setCommand("");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

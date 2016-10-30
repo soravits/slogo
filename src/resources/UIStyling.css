@@ -1,14 +1,19 @@
 .root{
-  
   -fx-background-radius: 3;
   -fx-font-size: 13;  
 }
 
+.pane{
+  -fx-base: #d3d3d3;
+}
+
 .tab-pane {
-  -fx-base: d3d3d3;
   -fx-padding: 0 10 10 10;
  }
  
+ .tab-header-area{
+  -fx-pref-height: 35;
+ }
  
 
 .helpcontrol{
@@ -29,6 +34,15 @@
   
 }
 
+.tabcontrol{
+  -fx-base: #ffffff;
+  -fx-pref-width: 100;
+  -fx-pref-height: 35;
+}
+
+.tab{
+  -fx-pref-width: 40;
+}
 
 .generalcontrol{
   -fx-base: #ffffff;

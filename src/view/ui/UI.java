@@ -1,13 +1,12 @@
 package view.ui;
-import model.Model;
-import view.data.DataIn;
-import view.ui.turtle.TurtleScreen;
-import controller.Controller;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -16,26 +15,20 @@ import javafx.stage.Stage;
  * 
  * The purpose of this class is to display the interface that the user interacts with.
  * 
- * @author Diane Hadley, Pim
+ * @author Diane Hadley
  */
 
 
 public class UI implements UIAttributes{
 	
-	private HelpWindowUI helpWindowUI;
-	private TurtleScreen turtleScreen;
-	private GeneralSettings generalSettings;
-	private CommandLine commandLine;
-	private Console console;
-	private Workspace workspace;
-	private Group root = new Group();
+	
 	private UIBuilder uiBuilder = new UIBuilder();
 	private int xSize, ySize;
 	private Stage stage;
+	private TabPane tabPane = new TabPane();
+	private Group tabArea = new Group();
 	
-	private Model model;
-	private DataIn dataIn;
-	private Controller controller;
+	
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -56,83 +49,71 @@ public class UI implements UIAttributes{
 	 */
 	public Scene init(){
 		
-		TabPane tabPane = new TabPane();
-		Tab tab = new Tab();
-		tab.setClosable(false);
-		tab.setContent(root);
-		tabPane.getTabs().add(tab);
-		Scene scene = new Scene(tabPane, xSize, ySize, Color.LIGHTGREY);
+		BorderPane root = new BorderPane();
+				
+		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGREY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
-		model = new Model();
-		dataIn = new DataIn(model);
-		controller = new Controller(dataIn);
 		
-		buildRoot();
+		AnchorPane anchor = new AnchorPane();
+		anchor.getStyleClass().add("pane");
+		root.getStyleClass().add("pane");
+		
+		AnchorPane.setTopAnchor(tabArea, 0.0);
+        AnchorPane.setRightAnchor(tabArea, 10.0);
+        AnchorPane.setTopAnchor(tabPane, 0.0);
+        AnchorPane.setRightAnchor(tabPane, 0.0);
+        AnchorPane.setLeftAnchor(tabPane, 0.0);
+        AnchorPane.setBottomAnchor(tabPane, 0.0);	
+        
+		anchor.getChildren().addAll(tabPane, tabArea);
+		
+		root.setCenter(anchor);
+		
+		makeWindow(false);
+		makeNewTabButton();
+
 		return scene;
 		
 	}
 
-	private void buildRoot() {
-		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage);	
-		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());		
-		generalSettings = new GeneralSettings(controller);
-		commandLine = new CommandLine(ySize, this);		
-		workspace = new Workspace(xSize,this,commandLine);
-		console = new Console(ySize, xSize);
-		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
-				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot());
-		makeResetButton();
+	
+	private void makeWindow(Boolean isClosable){
+		Window window = new Window(stage, xSize, ySize);
+		Group root = window.getRoot();
+			
+		Tab tab = new Tab();
+		tab.setClosable(isClosable);
+		tab.setContent(root);
+		//tab.setStyle("sup");
+		tabPane.getTabs().add(tab);	
 	}
 	
-	private void makeResetButton(){
-		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
-		reset.setOnAction((event) -> {
-			resetAll();		
-		});	
-		root.getChildren().add(reset);
-	}
-
 	
-	private void resetAll() {
-		controller.reset();
-		model = dataIn.getViewModel();
-		turtleScreen.updateTurtles(model.getTurtleMap());
-		console.updateConsole(model.getConsoleReturn());
-		workspace.updateWorkspace(model.getWorkspace());
-		workspace.getRoot();
-		console.getRoot();
-	}
-	
-	public GeneralSettings getGeneralSettings(){
-		return generalSettings;
-	}
-	
-	public Controller getController() {
-		return controller;
-	}
-	
-	public Model getModel() {
-		return model;
-	}
-	
-	public DataIn getDataIn() {
-		return dataIn;
-	}
-	
+	private void makeNewTabButton(){
+		Button newTab = uiBuilder.makeButton(xSize - 10, 10, uiResources.getString("NewTab"),
+				"tabcontrol");
 		
-	public void updateDataIn() throws Exception {	
-		dataIn.setCommand(commandLine.getCommand());
-		dataIn.setLanguage(generalSettings.getLanguage());
-		dataIn.parseCommand(controller);
-		model = dataIn.getViewModel();
-		turtleScreen.updateTurtles(model.getTurtleMap());
-		console.updateConsole(model.getConsoleReturn());
-		workspace.updateWorkspace(model.getWorkspace());
-
-		turtleScreen.getRoot();	
+		newTab.setOnAction((event) -> {
+			makeWindow(true);
+		});	
+		
+		tabArea.getChildren().add(newTab);
 	}
+	
+	
+//	private void resetAll() {
+//		controller.reset();
+//		model = dataIn.getViewModel();
+//		turtleScreen.updateTurtles(model.getTurtleMap());
+//		console.updateConsole(model.getConsoleReturn());
+//		workspace.updateWorkspace(model.getWorkspace());
+//		workspace.getRoot();
+//		console.getRoot();
+//	}
+	
+	
+	
+
 	
 	
 	

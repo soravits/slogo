@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
  * The purpose of this class is to create the root that visualizes the workspace.
  * This root can then be passed to UI to be displayed in the scene
  * 
- * @author Diane Hadley
+ * @author Diane Hadley, Pim
  */
 
 public class Workspace implements UIAttributes{
@@ -32,13 +32,13 @@ public class Workspace implements UIAttributes{
 	private static int WORKSPACE_Y = 55;
 	private VBox VBox;
 	private Group group;
-	private UI ui;
+	private Window window;
 	private CommandLine commandLine;
 	
 	
-	public Workspace(int sceneWidth,UI ui,CommandLine commandLine){
+	public Workspace(int sceneWidth, Window window, CommandLine commandLine){
 		super();
-		this.ui=ui;
+		this.window = window;
 		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
 		this.workspaceWidth = sceneWidth - TURTLE_CANVAS_WIDTH - 170;
 		this.workspaceHeight = WORKSPACE_HEIGHT;
@@ -95,7 +95,7 @@ public class Workspace implements UIAttributes{
 		    @Override public void handle(ActionEvent e) {  
 		    	commandLine.setCommand("set :"+varName+" "+space.getText());
 		    	try {
-					ui.updateDataIn();
+					window.updateDataIn();
 					commandLine.setCommand("");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

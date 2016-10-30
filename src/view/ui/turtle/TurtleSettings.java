@@ -48,10 +48,10 @@ public class TurtleSettings implements UIAttributes{
 	private TurtleScreen turtle;
 	
 	
-	private static int COLOR_RECT_WIDTH = 75;
-	private static int COLOR_RECT_HEIGHT = 20;
-	private static int FIRST_CONTROL_Y = 100;
-	private static int CONTROL_Y_SPACING = 60;
+	private static final int COLOR_RECT_WIDTH = 75;
+	private static final int COLOR_RECT_HEIGHT = 20;
+	private static final int FIRST_CONTROL_Y = 100;
+	private static final int CONTROL_Y_SPACING = 60;
 	
 	
 	private int controlX;
@@ -182,7 +182,7 @@ public class TurtleSettings implements UIAttributes{
 	
 	private void chooseImage(){
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Image File");
+		fileChooser.setTitle(uiResources.getString("NewImageTitle"));
 		ExtensionFilter filter = new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"); 	//http://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html
 		fileChooser.getExtensionFilters().add(filter);
 		File selectedFile = fileChooser.showOpenDialog(stage);
