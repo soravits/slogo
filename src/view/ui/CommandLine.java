@@ -1,14 +1,9 @@
-package view;
-import controller.Controller;
+package view.ui;
+
 import javafx.scene.Group;
-import view.data.DataIn;
-import model.Model;
-import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-
-import javafx.stage.Stage;
+import view.DisplayError;
 
 
 /**
@@ -20,12 +15,12 @@ import javafx.stage.Stage;
  *
  */
 
-
-
-public class CommandLine extends UIBuilder{
+public class CommandLine implements UIAttributes{
 	
 	private Group root = new Group();
 	private TextArea textArea = new TextArea();
+	private DisplayError displayError = new DisplayError();
+
 
 	private int commandLineHeight;
 	private int commandLineWidth;
@@ -37,11 +32,8 @@ public class CommandLine extends UIBuilder{
 	private static int COMMAND_HISTORY_WINDOW_Y = 300;
 	private int buttonsY; 
 	
-	private static int COMMAND_LINE_X = 10;
 	
-	//private DataIn dataIn;
-	//private Model updatedModel;
-	//private ModelExtractor ModelExtractor;
+	private static int COMMAND_LINE_X = 10;
 	private UI ui;
 	
 	public CommandLine(int sceneHeight, UI ui){
@@ -50,8 +42,11 @@ public class CommandLine extends UIBuilder{
 		this.commandLineY = TURTLE_CANVAS_HEIGHT + 110; 
 		this.commandLineWidth = COMMAND_LINE_WIDTH;
 		this.buttonsY = TURTLE_CANVAS_HEIGHT + 65;
-		//this.dataIn = new DataIn(model);
 		this.ui = ui;
+		makeCommandLine();
+		getButtons();
+		root.getChildren().add(uiBuilder.getText(COMMAND_LINE_X, commandLineY - 10, 
+				uiResources.getString("CommandLine")));
 	}
 	
 	
@@ -60,10 +55,7 @@ public class CommandLine extends UIBuilder{
 	 * 
 	 */	
 	public Group getRoot(){
-		makeCommandLine();
-		getButtons();
-		root.getChildren().add(getText(COMMAND_LINE_X, commandLineY - 10, 
-				uiResources.getString("CommandLine")));
+		
 		return root;
 	}
 	
@@ -86,12 +78,9 @@ public class CommandLine extends UIBuilder{
 	}
 	
 	private void getButtons(){
-		Button reset = makeButton(FIRST_BUTTON_X, buttonsY, uiResources.getString("ResetAll"), "generalcontrol");
-		reset.setOnAction((event) -> {
-	
-		});	
 		
-		Button history = makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
+		
+		Button history = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
 				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(ui,this,COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
@@ -99,18 +88,18 @@ public class CommandLine extends UIBuilder{
 				commandHistoryWindow.show();
 		});	
 		
-		Button submit = makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
+		Button submit = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			try {
 				ui.updateDataIn();
 			} catch (Exception e) {
-				e.printStackTrace();
+				displayError.displayErrorDialogueBox(uiResources.getString("InvalidCommandError"));
 			}
 			textArea.setText("");
 		});	
 		
-		root.getChildren().addAll(reset, history, submit);
+		root.getChildren().addAll(history, submit);
 	}
 	
 	public void setCommand(String command) {

@@ -15,6 +15,10 @@ public class TurtleMap {
         turtleMap.put(currentID, firstPair);
     }
     
+    public Collection<Object> getIDs(){
+    	return turtleMap.keySet();
+    }
+    
     public Collection<TurtlePair> getTurtles(){
         return turtleMap.values();
     }

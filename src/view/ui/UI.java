@@ -1,9 +1,11 @@
-package view;
+package view.ui;
 import model.Model;
 import view.data.DataIn;
+import view.ui.turtle.TurtleScreen;
 import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -12,14 +14,14 @@ import javafx.stage.Stage;
  * 
  * The purpose of this class is to display the interface that the user interacts with.
  * 
- * @author Diane Hadley
+ * @author Diane Hadley, Pim
  */
 
 
-public class UI {
+public class UI implements UIAttributes{
 	
 	private HelpWindowUI helpWindowUI;
-	private Turtle turtle;
+	private TurtleScreen turtleScreen;
 	
 	private CommandLine commandLine;
 	private Console console;
@@ -32,8 +34,6 @@ public class UI {
 	public GeneralSettings generalSettings;
 	public DataIn dataIn;
 	public Controller controller;
-	
-	
 	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
@@ -56,39 +56,46 @@ public class UI {
 				
 		Scene scene = new Scene(root, xSize, ySize, Color.LIGHTGRAY);
 		scene.getStylesheets().add(CSS_FILE_NAME);
-		
-
 		model = new Model();
 		dataIn = new DataIn(model);
 		controller = new Controller(dataIn);
 		
-
-		helpWindowUI = new HelpWindowUI();
-		
-		//turtleSettings = new TurtleSettings(this, stage);
-		
-		//root.getChildren().add(turtleSettings.getRoot());		
-		
-		//turtle = new Turtle(stage. model);	
-		
-		turtle = new Turtle(stage);
-		
-		root.getChildren().add(turtle.getTurtleSettings().getRoot());
-		
-		generalSettings = new GeneralSettings(controller);
-		
-
-		commandLine = new CommandLine(ySize, this);
-		
-		workspace = new Workspace(xSize,this,commandLine);
-	
-		console = new Console(ySize, xSize);
-		
-		root.getChildren().addAll(turtle.getRoot(), helpWindowUI.getRoot(),
-				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot());
+		buildRoot();
 		return scene;
 		
+	}
+
+	private void buildRoot() {
+		helpWindowUI = new HelpWindowUI();
+		turtleScreen = new TurtleScreen(stage);	
+		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());		
+		generalSettings = new GeneralSettings(controller);
+		commandLine = new CommandLine(ySize, this);		
+		workspace = new Workspace(xSize,this,commandLine);
+		console = new Console(ySize, xSize);
+		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
+				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
+				console.getRoot());
+		makeResetButton();
+	}
+	
+	private void makeResetButton(){
+		Button reset = uiBuilder.makeButton(190, 465, uiResources.getString("ResetAll"), "generalcontrol");
+		reset.setOnAction((event) -> {
+			resetAll();		
+		});	
+		root.getChildren().add(reset);
+	}
+
+	
+	private void resetAll() {
+		controller.reset();
+		model = dataIn.getViewModel();
+		turtleScreen.updateTurtles(model.getTurtleMap());
+		console.updateConsole(model.getConsoleReturn());
+		workspace.updateWorkspace(model.getWorkspace());
+		workspace.getRoot();
+		console.getRoot();
 	}
 	
 	public GeneralSettings getGeneralSettings(){
@@ -107,19 +114,17 @@ public class UI {
 		return dataIn;
 	}
 	
-	
+		
 	public void updateDataIn() throws Exception {	
 		dataIn.setCommand(commandLine.getCommand());
 		dataIn.setLanguage(generalSettings.getLanguage());
 		dataIn.parseCommand(controller);
 		model = dataIn.getViewModel();
-		turtle.updateTurtle(model.getTurtleMap());
+		turtleScreen.updateTurtles(model.getTurtleMap());
 		console.updateConsole(model.getConsoleReturn());
 		workspace.updateWorkspace(model.getWorkspace());
-		//testing
-//		System.out.println("Variables: "+model.getWorkspace().getListOfVariables());
-//		System.out.println("command history: "+model.getCommandHistory());
-		turtle.getRoot();	
+
+		turtleScreen.getRoot();	
 	}
 	
 }
