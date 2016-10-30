@@ -25,11 +25,9 @@ public class UI implements UIAttributes{
 	private UIBuilder uiBuilder = new UIBuilder();
 	private int xSize, ySize;
 	private Stage stage;
-	private Model model;
-	private LoadCommand loadCommand;
+	
 	public GeneralSettings generalSettings;
-	public DataIn dataIn;
-	public Controller controller;
+	
 	private TabPane tabPane = new TabPane();
 	private Group tabArea = new Group();
 	
@@ -81,20 +79,7 @@ public class UI implements UIAttributes{
 		
 	}
 
-	private void buildRoot() {
-		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage);	
-		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());		
-		generalSettings = new GeneralSettings(controller);
-		commandLine = new CommandLine(ySize, this);		
-		workspace = new Workspace(xSize,this,commandLine);
-		console = new Console(ySize, xSize);
-		loadCommand = new LoadCommand(this);
-		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
-				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot(),loadCommand.getRoot());
-		makeResetButton();
-	}
+	
 
 	
 	private void makeWindow(Boolean isClosable){
