@@ -1,8 +1,6 @@
 package view.ui;
-
 import java.io.File;
 import java.io.IOException;
-
 import controller.Controller;
 import error.InvalidCommandException;
 import error.InvalidParametersException;
@@ -16,19 +14,19 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class LoadCommand implements UIAttributes{
-	private static int BUTTON_X = 300;
+	private static int BUTTON_X = 320;
 	private static int BUTTON_Y = 10;
 	private Group root;
 	private Button loadButton;
 	private Stage stage;
-	private UI ui;
+	private Window window;
 	private Controller controller;
 	
-	LoadCommand(UI ui) {
+	LoadCommand(Window window) {
 		this.root = new Group();
 		this.stage = new Stage();
-		this.ui=ui;
-		this.controller = ui.getController();
+		this.window = window;
+		this.controller = window.getController();
 		makeButton();
 	}
 	
@@ -54,7 +52,7 @@ public class LoadCommand implements UIAttributes{
         		
         		try {
 					controller.runFile(selectedFile.getAbsolutePath());
-					ui.updateDataIn();
+					window.updateUI();
 				} catch (InvalidSyntaxException | InvalidCommandException
 						| IOException | InvalidParametersException e) {
 					// TODO Auto-generated catch block

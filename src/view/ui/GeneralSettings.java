@@ -21,11 +21,12 @@ import javafx.scene.control.ComboBox;
 public class GeneralSettings implements UIAttributes{
 
 	private Group root = new Group();
+	private UIBuilder uiBuilder = new UIBuilder();
 	private ComboBox<String> languageComboBox;
 	private Controller controller;
 	
-	private static int LANGUAGE_COMBOBOX_X = 140;
-	private static int LANGUAGE_COMBOBOX_Y = 10;
+	private static final int LANGUAGE_COMBOBOX_X = 150;
+	private static final int LANGUAGE_COMBOBOX_Y = 10;
 	
 	
 	public GeneralSettings(Controller controller){
