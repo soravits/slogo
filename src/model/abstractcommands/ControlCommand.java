@@ -1,7 +1,10 @@
 package model.abstractcommands;
 
+import controller.CommandController;
+import controller.CommandManager;
 import controller.Node;
 import controller.Interpreter;
+import error.InvalidCommandException;
 import model.Model;
 
 /**
@@ -10,19 +13,23 @@ import model.Model;
 public abstract class ControlCommand extends Command {
 
     private Node root;
-    private Interpreter parser;
+    private CommandManager commandManager;
 
-    public ControlCommand(Node root, Interpreter parser, Model model){
+    public ControlCommand(Node root, CommandManager commandManager, Model model){
         super(model);
         this.root = root;
-        this.parser = parser;
+        this.commandManager = commandManager;
     }
     
     public Node getRoot(){
     	return root;
     }
     
-    public Interpreter getParser(){
-    	return parser;
+    public double executeTree(Node root) throws Exception {
+        return commandManager.executeTree(root);
+    }
+
+    public void addInstruction(String name, Node root){
+        commandManager.addInstruction(name, root);
     }
 }

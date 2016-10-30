@@ -1,4 +1,5 @@
 package model.commands;
+import controller.CommandManager;
 import controller.Node;
 import controller.Interpreter;
 import model.Model;
@@ -13,11 +14,11 @@ public class DoTimes extends ControlCommand{
 	private String variable;
 	private double limit;
 
-	public DoTimes(Node root, Interpreter parser, Model model) throws Exception{
-		super(root,parser,model);
+	public DoTimes(Node root, CommandManager commandManager, Model model) throws Exception{
+		super(root,commandManager,model);
 		Node commandRoot = getRoot().getChildren().get(0);
 		variable = commandRoot.getChildren().get(0).getValue();
-		limit = getParser().executeTree(commandRoot.getChildren().get(1));
+		limit = executeTree(commandRoot.getChildren().get(1));
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class DoTimes extends ControlCommand{
         WorkspaceState workspace = this.getModel().getWorkspace();
         for(double i = 1; i < limit; i++){
         	for(double j = 0; j<commandRoot.getChildren().size(); j++){
-        	ret = getParser().executeTree(commandRoot.getChildren().get((int) j));
+        	ret = executeTree(commandRoot.getChildren().get((int) j));
         	workspace.addVariable(variable, i);
         	}
         }
