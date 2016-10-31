@@ -4,6 +4,7 @@ import java.util.Collection;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -13,6 +14,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import model.LineModel;
 import model.LineState;
+import model.Model;
 import model.TurtleMap;
 import model.TurtleState;
 import view.ui.UIAttributes;
@@ -48,7 +50,7 @@ public class TurtleScreen implements UIAttributes{
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
 	 */
 	
-	public TurtleScreen(Stage stage){
+	public TurtleScreen(Stage stage, Model model){
 		super();
 		this.turtleSettings = new TurtleSettings(stage, this);
 		this.canvasWidth = TURTLE_CANVAS_WIDTH;
@@ -57,7 +59,9 @@ public class TurtleScreen implements UIAttributes{
 		this.originY = canvasHeight/2;		
 		makeCanvas();
 		this.currID = 1;
-		viewTurtle(0, originX, originY, currID);
+		updateTurtles(model.getTurtleMap());
+		
+		//viewTurtle(0, originX, originY, currID);
 		
 	}
 	
@@ -85,7 +89,8 @@ public class TurtleScreen implements UIAttributes{
 		
 		for (Object id : ids){
 			TurtleState turtleState = turtleMap.getTurtle(id);
-					
+			
+			
 			if (turtleState.getShowTurtle()){
 				LineState lines = turtleMap.getLineState(id);
 				viewTurtlePath(lines);				
@@ -94,18 +99,25 @@ public class TurtleScreen implements UIAttributes{
 				double angle = turtleState.getTurtleAngle();				
 				viewTurtle(angle, posX, posY, id);
 			}		
+			else {
+				root.getChildren().remove(turtleViewMap.getImage(id));
+			}
 		}	
 	}
 
 
 	private void updateViewMap(Collection<Object> ids) {
-		if (ids.size() != turtleViewMap.getIDs().size()){
-			for (Object id : ids){
-				if (!turtleViewMap.getIDs().contains(id)){
-					turtleViewMap.setAttributes(id);				
-				}
+		
+		for (Object id : ids){
+			if (!turtleViewMap.getIDs().contains(id)){
+				turtleViewMap.setAttributes(id);				
+			}
+			if (!root.getChildren().contains(turtleViewMap.getImage(id))){
+				root.getChildren().add(turtleViewMap.getImage(id));
 			}
 		}
+		
+		
 	}
 
 
@@ -149,13 +161,21 @@ public class TurtleScreen implements UIAttributes{
 	
 	
 	private void viewTurtle(double angle, double posX, double posY, Object id){
-		turtleView.save();
-		Rotate rotate = new Rotate(angle, posX, posY);
-		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
-				rotate.getMyy(), rotate.getTx(), rotate.getTy());
-		turtleView.drawImage(turtleViewMap.getImage(id), posX - TURTLE_SIZE/2, 
-				posY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
-		turtleView.restore();		
+		ImageView iv = turtleViewMap.getImage(id);
+		iv.setRotate(angle);
+		iv.setFitWidth(TURTLE_SIZE);
+		iv.setFitHeight(TURTLE_SIZE);
+		iv.setX(posX - TURTLE_SIZE/2);
+		iv.setY(posY - TURTLE_SIZE/2);
+		
+		
+//		turtleView.save();
+//		Rotate rotate = new Rotate(angle, posX, posY);
+//		turtleView.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), 
+//				rotate.getMyy(), rotate.getTx(), rotate.getTy());
+//		turtleView.drawImage(turtleViewMap.getImage(id), posX - TURTLE_SIZE/2, 
+//				posY - TURTLE_SIZE/2, TURTLE_SIZE, TURTLE_SIZE);
+//		turtleView.restore();		
 	}	
 	
 	

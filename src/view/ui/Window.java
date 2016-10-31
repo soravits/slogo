@@ -50,7 +50,7 @@ public class Window implements UIAttributes{
 	
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage);	
+		turtleScreen = new TurtleScreen(stage, model);	
 		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());		
 		generalSettings = new GeneralSettings(controller);
 		commandLine = new CommandLine(ySize, this);		
