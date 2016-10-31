@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Difference extends TwoInputCommand{
+public class Difference extends MathBoolCommand{
 
     public Difference (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,6 +11,10 @@ public class Difference extends TwoInputCommand{
 
     @Override
     public double execute () throws Exception {
-        return getParam1() - getParam2();
+        double x = this.getParams()[0];
+        for (double i : this.getParams()){
+            x -= i;
+        }
+        return x;
     }
 }

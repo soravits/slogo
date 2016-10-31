@@ -3,7 +3,7 @@ package model.abstractcommands;
 import error.InvalidCommandException;
 import model.Model;
 
-public abstract class Command {
+public abstract class Command implements CommandInterface{
     
     private Model slogoModel;
     
@@ -17,12 +17,4 @@ public abstract class Command {
         return slogoModel;
     } 
     
-    // NEED TO MOVE THIS SOMEWHERE BETTER!!!!
-    public double normalizeAngle(double angle){
-        double normalizedAngle = angle % 360;
-        if (normalizedAngle < 0){
-            normalizedAngle += 360;
-        }
-        return normalizedAngle;
-    }
 }

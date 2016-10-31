@@ -1,16 +1,16 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.Command;
+import model.abstractcommands.TurtleCommand;
 
-public class HideTurtle extends Command{
+public class HideTurtle extends TurtleCommand{
 
     public HideTurtle (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override
-    public double execute () throws Exception {
+    public double execute () {
         getModel().getTurtle().setShowTurtle(false);
         return 1;
     }
