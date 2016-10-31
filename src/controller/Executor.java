@@ -8,5 +8,9 @@ import model.Model;
  */
 public interface Executor {
 
+    public static final String COMMAND_PACKAGE = "model.commands.";
+    public static final String CONTROL_COMMAND_PACKAGE = "model.controlcommands.";
+    public static final String TURTLE_COMMAND_PACKAGE = "model.turtlecommands";
+    
     public double execute(Node root, CommandManager executor, Model model) throws InvalidCommandException;
 }
