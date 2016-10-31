@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Cosine extends OneInputCommand{
+public class Cosine extends MathBoolCommand{
 
     public Cosine (double[] parameter, Model model) {
         super(parameter, model);
@@ -11,7 +11,7 @@ public class Cosine extends OneInputCommand{
 
     @Override
     public double execute () throws Exception {
-        return Math.cos(Math.toRadians(getParam1()));
+        return Math.cos(Math.toRadians(this.getParams()[0]));
     }
 
 }

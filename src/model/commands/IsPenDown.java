@@ -2,11 +2,12 @@ package model.commands;
 
 import model.Model;
 import model.abstractcommands.Command;
+import model.abstractcommands.TurtleCommand;
 
-public class IsPenDown extends Command{
+public class IsPenDown extends TurtleCommand{
 
     public IsPenDown (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override

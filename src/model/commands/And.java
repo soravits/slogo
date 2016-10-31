@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class And extends TwoInputCommand{
+public class And extends MathBoolCommand{
 
     public And (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,7 +11,12 @@ public class And extends TwoInputCommand{
 
     @Override
     public double execute () {
-        return ((getParam1() != 0) & (getParam2() != 0)) ? 1 : 0;
+        for (double x : this.getParams()){
+            if (x == 0.0){
+                return 0;
+            }
+        }
+        return 1;
     }
 
 }

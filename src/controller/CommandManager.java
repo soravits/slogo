@@ -3,7 +3,7 @@ package controller;
 import error.InvalidCommandException;
 import model.Model;
 import model.abstractcommands.Command;
-
+import model.abstractcommands.CommandInterface;
 import java.io.File;
 import java.util.*;
 
@@ -48,7 +48,7 @@ public class CommandManager {
         return userInstructions;
     }
 
-    public double executeCommand(Command command) throws Exception {
+    public double executeCommand(CommandInterface command) throws Exception {
         commandController.setCommand(command);
         return commandController.execute();
     }

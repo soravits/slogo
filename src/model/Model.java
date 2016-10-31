@@ -1,8 +1,11 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collection;
+import model.interfaces.EmptyInterface;
+import model.interfaces.TurtleCommandInterface;
+import model.interfaces.WorkspaceCommandInterface;
 
-public class Model{
+public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface{
 
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
@@ -20,6 +23,11 @@ public class Model{
         return turtleMap;
     }
     
+    public double getNumberOfTurtles (){
+        return turtleMap.getIDs().size();
+    }
+    
+    @Override
     public TurtleState getTurtle () {
         return turtleMap.getTurtle();
     }
@@ -28,6 +36,19 @@ public class Model{
         return turtleMap.getTurtle(ID);
     }
     
+    public Object getID () {
+        return turtleMap.getCurrentID();
+    }
+    
+    public void setTurtle (Object ID){
+        turtleMap.setCurrentID(ID);
+    }
+    
+    public void createTurtle (Object ID){
+        turtleMap.addTurtle(ID);
+    }
+    
+    @Override
     public LineState getLineState () {
         return turtleMap.getLineState();
     }
