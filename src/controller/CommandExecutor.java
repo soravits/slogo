@@ -17,7 +17,11 @@ public class CommandExecutor implements Executor{
         if(commandManager.getControlStructures().contains(root.getValue())) {
             ControlExecutor controlExecutor = new ControlExecutor();
             return controlExecutor.execute(root, commandManager, model);
-        }else if(commandManager.getUserInstructions().containsKey(root.getValue())){
+        }
+        else if (commandManager.getTurtleCommands().contains(root.getValue())){
+            // Add TurtleCommand Executor Right Here
+        }
+        else if(commandManager.getUserInstructions().containsKey(root.getValue())){
             UserInstructionExecutor userInstructionExecutor = new UserInstructionExecutor();
             return userInstructionExecutor.execute(root,commandManager,model);
         }
