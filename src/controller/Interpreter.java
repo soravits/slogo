@@ -23,6 +23,7 @@ public class Interpreter {
 	public static final String LIST_END = "]";
 	public static final String DEFAULT_LANGUAGE = "English";
     public static final String CONTROL_STRUCTURES = "Control";
+    public static final String TURTLE_COMMANDS = "TurtleCommands";
 
     private String language = DEFAULT_LANGUAGE;
 	private CommandParser commandParser;
