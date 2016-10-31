@@ -9,8 +9,8 @@ import java.lang.reflect.Constructor;
 
 public class CommandExecutor implements Executor{
 
-    public static final String COMMAND_PACKAGE = "model.commands.";
-    public static final String CONTROL_COMMAND_PACKAGE = "model.controlcommands.";
+//    public static final String COMMAND_PACKAGE = "model.commands.";
+//    public static final String CONTROL_COMMAND_PACKAGE = "model.controlcommands.";
 
     @Override
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException{
