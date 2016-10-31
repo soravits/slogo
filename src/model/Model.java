@@ -1,18 +1,21 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collection;
+import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
 import model.interfaces.WorkspaceCommandInterface;
 
-public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface{
+public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface{
 
+    private DisplayState display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
     private CommandHistory commandHistory;
     private Collection<String> consoleReturn;
 
     public Model(){
+        display = new DisplayState();
         turtleMap = new TurtleMap();
         workspace = new WorkspaceState();
         commandHistory = new CommandHistory();
@@ -73,6 +76,11 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
         return consoleReturn;
     }
     
+    @Override
+    public DisplayState getDisplay () {
+        return display;
+    }
+
     public void updateConsoleReturn(Double value){
         consoleReturn.add(value.toString());
     }
@@ -87,4 +95,6 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     	clearConsoleReturn();
     	workspace.clear();
     }
+    
+    
 }
