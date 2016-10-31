@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.TurtleCommand;
 
-public class SetHeading extends OneInputCommand{
+public class SetHeading extends TurtleCommand{
 
     public SetHeading (double[] parameters, Model model) {
         super(parameters, model);
@@ -12,8 +12,8 @@ public class SetHeading extends OneInputCommand{
     @Override
     public double execute () {
         double currentAngle = this.getModel().getTurtle().getTurtleAngle();
-        this.getModel().getTurtle().setTurtleAngle(normalizeAngle(this.getParam1()));
-        return this.getParam1() - currentAngle;
+        this.getModel().getTurtle().setTurtleAngle(normalizeAngle(this.getParams()[0]));
+        return this.getParams()[0] - currentAngle;
     }
 
     

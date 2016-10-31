@@ -1,18 +1,21 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Quotient extends TwoInputCommand {
+public class Quotient extends MathBoolCommand {
 
     public Quotient (double[] parameters, Model model) {
         super(parameters, model);
     }
 
-    // NEED TO ADD DIVIDEBYZERO EXCEPTION;
     @Override
     public double execute () {
-        return getParam1()/getParam2();
+        double div = this.getParams()[0];
+        for (int i = 1; i < this.getParams().length; i++){
+            div /= this.getParams()[i];
+        }
+        return div;
     }
 
 }

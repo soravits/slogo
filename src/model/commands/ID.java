@@ -3,15 +3,15 @@ package model.commands;
 import model.Model;
 import model.abstractcommands.TurtleCommand;
 
-public class Heading extends TurtleCommand{
+public class ID extends TurtleCommand{
 
-    public Heading (double[] parameters, Model model) {
+    public ID (double[] parameters, Model model) {
         super(parameters, model);
     }
 
     @Override
     public double execute () throws Exception {
-        return getModel().getTurtle().getTurtleAngle();
+        return Double.parseDouble(getModel().getID().toString());
     }
 
 }

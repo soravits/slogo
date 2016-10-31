@@ -2,12 +2,12 @@ package model.commands;
 
 import model.Model;
 import model.Position;
-import model.abstractcommands.Command;
+import model.abstractcommands.TurtleCommand;
 
-public class Home extends Command{
+public class Home extends TurtleCommand{
 
     public Home (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package model.commands;
+package model.controlcommands;
 
 import controller.CommandManager;
 import controller.Node;
@@ -12,6 +12,7 @@ public class MakeVariable extends ControlCommand{
     
     public MakeVariable (Node root, CommandManager commandManager, Model model) {
         super(root, commandManager, model);
+        System.out.println("Hello");
         name = getRoot().getChildren().get(0).getValue();
     }
 

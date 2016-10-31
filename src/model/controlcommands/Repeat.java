@@ -1,4 +1,4 @@
-package model.commands;
+package model.controlcommands;
 
 import controller.CommandManager;
 import controller.Node;
