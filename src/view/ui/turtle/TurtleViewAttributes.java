@@ -1,6 +1,12 @@
 package view.ui.turtle;
 
+
+
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -13,6 +19,16 @@ public class TurtleViewAttributes{
 	public TurtleViewAttributes(){
 		this.penColor = Color.BLACK;
 		this.image = new Image(getClass().getClassLoader().getResourceAsStream("resources/turtle.png"));
+		ImageView iv = new ImageView(image);
+		
+		iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		        System.out.print(mouseEvent.getX());
+		        System.out.print(mouseEvent.getY());
+
+		    }
+		});
 	}
 	
 	public Paint getPenColor(){

@@ -39,6 +39,7 @@ public class TurtleScreen implements UIAttributes{
 	private int canvasHeight;
 	private double originX;
 	private double originY;
+	private int currID;
 	
 	private static int TURTLE_SIZE = 20;
 	
@@ -55,7 +56,8 @@ public class TurtleScreen implements UIAttributes{
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;		
 		makeCanvas();
-		viewTurtle(0, originX, originY, 1);
+		this.currID = 1;
+		viewTurtle(0, originX, originY, currID);
 		
 	}
 	

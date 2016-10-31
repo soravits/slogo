@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 public class Console implements UIAttributes{
 	
 	private Group root = new Group();
+	private UIBuilder uiBuilder = new UIBuilder();
 	private int consoleHeight;
 	private int consoleWidth;
 	private int consoleX;
@@ -23,7 +24,7 @@ public class Console implements UIAttributes{
 	
 	public Console(int sceneHeight, int sceneWidth){
 		super();
-		this.consoleHeight = sceneHeight - WORKSPACE_HEIGHT - 120;
+		this.consoleHeight = sceneHeight - WORKSPACE_HEIGHT - 145;
 		this.consoleWidth = sceneWidth - COMMAND_LINE_WIDTH - 30;
 		this.consoleX = COMMAND_LINE_WIDTH + 20;
 		this.consoleY = WORKSPACE_HEIGHT + 110;
