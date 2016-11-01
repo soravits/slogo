@@ -2,9 +2,9 @@ package controller;
 
 import error.InvalidCommandException;
 import model.Model;
-import model.commands.Variable;
+import model.commands.general.Variable;
 
-public class VariableExecutor implements Executor{
+public class VariableExecutor extends Executor{
 
     @Override
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException {

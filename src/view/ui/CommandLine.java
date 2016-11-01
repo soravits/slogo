@@ -77,7 +77,7 @@ public class CommandLine implements UIAttributes{
 	}
 	
 	private void getButtons(){
-		
+
 		Button history = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {

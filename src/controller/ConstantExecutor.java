@@ -2,9 +2,9 @@ package controller;
 
 import error.InvalidCommandException;
 import model.Model;
-import model.commands.Constant;
+import model.commands.general.Constant;
 
-public class ConstantExecutor implements Executor{
+public class ConstantExecutor extends Executor{
 
     @Override
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException {

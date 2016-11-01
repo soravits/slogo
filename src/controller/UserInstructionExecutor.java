@@ -6,7 +6,7 @@ import model.Model;
 /**
  * Created by Soravit on 10/29/2016.
  */
-public class UserInstructionExecutor implements Executor{
+public class UserInstructionExecutor extends Executor{
     @Override
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException {
         try {
