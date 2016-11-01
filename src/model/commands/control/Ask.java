@@ -34,6 +34,7 @@ public class Ask extends ControlCommand{
         }
         getModel().setTell(true);
         getModel().subtractNestedAsk();
+        getModel().setTell(true);
         return ret;
     }
 }

@@ -23,7 +23,6 @@ public abstract class Executor {
             double[] doubles = new double[root.getChildren().size()];
             for (int i = 0; i < root.getChildren().size(); i++) {
                 Node currNode = root.getChildren().get(i);
-                currNode.setFoundTurtleCommand(root.getIsFoundTurtleCommand());
                 doubles[i] = commandManager.executeTree(currNode);
             }
             Class<?> command = Class.forName(commandPackage + root.getValue());

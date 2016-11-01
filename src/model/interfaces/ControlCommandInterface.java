@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import model.LineState;
+import model.TurtlePair;
 import model.WorkspaceState;
 
 import java.util.Collection;
@@ -28,5 +30,12 @@ public interface ControlCommandInterface {
     public void setTell(boolean tell);
 
     public void clearAskTurtles();
+
+    public Collection<Double> getIDs();
+
+    public void setTurtle(double ID);
+
+
+
 
 }
