@@ -27,8 +27,6 @@ public class CommandManager {
     private Map<String, Node> userInstructions;
     private List<String> controlStructures;
     private List<String> turtleCommands;
-    
-    private TurtleController turtleController;
 
     public CommandManager(CommandParser syntax, CommandController commandController, Model model){
         this.syntax = syntax;
@@ -41,7 +39,6 @@ public class CommandManager {
         constantExecutor = new ConstantExecutor();
         controlStructures = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
         turtleCommands = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
-        turtleController = new TurtleController();
         mapExecutions();
     }
 
@@ -90,7 +87,4 @@ public class CommandManager {
         return controlStructures;
     }
     
-    public TurtleController getTurtleController(){
-        return turtleController;
-    }
 }

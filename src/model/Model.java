@@ -1,16 +1,16 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collection;
-import controller.TurtleController;
 import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
+import model.interfaces.TurtleControllerInterface;
 import model.interfaces.WorkspaceCommandInterface;
 import view.data.ViewModelInterface;
 
-public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface{
+public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleControllerInterface{
 
-    private TurtleController turtleController;
+    private TurtleControllerInterface turtleController;
     private DisplayState display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
@@ -77,6 +77,7 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     
     public void createTurtle (Object ID){
         turtleMap.addTurtle(ID);
+        turtleController.addTurtle(ID);
     }
     
     @Override
@@ -129,6 +130,38 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     public void updateID (Object ID){
         turtleMap.setCurrentID(ID);
     }
+
+    @Override
+    public void addTurtle (Object ID) {
+        turtleController.addTurtle(ID);
+    }
+
+    @Override
+    public void removeTellTurtle (Object ID) {
+        turtleController.removeTellTurtle(ID);
+    }
+
+    @Override
+    public void clearTellTurtles () {
+        turtleController.clearTellTurtles();
+    }
+
+
+    @Override
+    public Collection<Object> getTurtlesToModify () {
+        return turtleController.getTurtlesToModify();
+    }
+
+    @Override
+    public void addNestedAsk () {
+        turtleController.addNestedAsk();
+    }
+
+    @Override
+    public void subtractNestedAsk () {
+        turtleController.subtractNestedAsk();
+    }
+    
     
     
 }
