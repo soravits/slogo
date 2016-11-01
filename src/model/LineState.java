@@ -33,9 +33,10 @@ public class LineState {
         }
     }
 
-    public LineModel getLastLineDrawn(){
-        return lines.get(lines.size() - 1);
+    public double[][] getLastLineDrawn(){
+        return lines.get(lines.size() - 1).getLine();
     }
+    
     /**
      * return Iterator for each line
      */

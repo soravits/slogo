@@ -77,8 +77,12 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         return turtleMap.getLineState();
     }
     
-    public LineState getLineState (Double ID){
+    public LineState getLineState (double ID){
         return turtleMap.getLineState(ID);
+    }
+    
+    public double[][] getLines (double ID){
+        return turtleMap.getLines();
     }
     
     public WorkspaceState getWorkspace () {
@@ -122,6 +126,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     }
     
     public void updateID (double ID){
+
         turtleMap.setCurrentID(ID);
     }
 
@@ -157,17 +162,17 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         turtleController.subtractNestedAsk();
     }
 
-    public boolean isTell() {
-        return turtleController.isTell();
-    }
-
-    public void setTell(boolean tell) {
-        turtleController.setTell(tell);
-    }
-
-    @Override
-    public void clearAskTurtles() {
-        turtleController.clearAskTurtles();
-    }
+//    public boolean isTell() {
+//        return turtleController.isTell();
+//    }
+//
+//    public void setTell(boolean tell) {
+//        turtleController.setTell(tell);
+//    }
+//
+//    @Override
+//    public void clearAskTurtles() {
+//        turtleController.clearAskTurtles();
+//    }
 
 }

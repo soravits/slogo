@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import model.LineState;
+import model.TurtlePair;
 import model.WorkspaceState;
 
 import java.util.Collection;
@@ -22,11 +24,5 @@ public interface ControlCommandInterface {
     void addNestedAsk ();
 
     void subtractNestedAsk ();
-
-    public boolean isTell();
-
-    public void setTell(boolean tell);
-
-    public void clearAskTurtles();
 
 }
