@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Minus extends OneInputCommand {
+public class Minus extends MathBoolCommand {
 
     public Minus (double[] parameter, Model model) {
         super(parameter, model);
@@ -11,7 +11,7 @@ public class Minus extends OneInputCommand {
 
     @Override
     public double execute () throws Exception {
-        return -getParam1();
+        return -this.getParams()[0];
     }
 
 }

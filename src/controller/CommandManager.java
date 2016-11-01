@@ -1,11 +1,15 @@
 package controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 import error.InvalidCommandException;
 import model.Model;
-import model.abstractcommands.Command;
-
-import java.io.File;
-import java.util.*;
+import model.abstractcommands.CommandInterface;
 
 public class CommandManager {
 	
@@ -22,6 +26,7 @@ public class CommandManager {
     private ConstantExecutor constantExecutor;
     private Map<String, Node> userInstructions;
     private List<String> controlStructures;
+    private List<String> turtleCommands;
 
     public CommandManager(CommandParser syntax, CommandController commandController, Model model){
         this.syntax = syntax;
@@ -33,6 +38,7 @@ public class CommandManager {
         variableExecutor = new VariableExecutor();
         constantExecutor = new ConstantExecutor();
         controlStructures = processControlStructures(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
+        turtleCommands = processTurtleStructures(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
         mapExecutions();
     }
 
@@ -47,8 +53,12 @@ public class CommandManager {
     public Map<String, Node> getUserInstructions(){
         return userInstructions;
     }
+    
+    public List<String> getTurtleCommands(){
+        return turtleCommands;
+    }
 
-    public double executeCommand(Command command) throws Exception {
+    public double executeCommand(CommandInterface command) throws Exception {
         commandController.setCommand(command);
         return commandController.execute();
     }
@@ -76,4 +86,15 @@ public class CommandManager {
         }
         return controlStructures;
     }
+    
+    private List<String> processTurtleStructures(String syntax){
+        ArrayList<String> controlStructures = new ArrayList<String>();
+        ResourceBundle resources = ResourceBundle.getBundle(syntax);
+        Enumeration<String> iter = resources.getKeys();
+        while (iter.hasMoreElements()) {
+            controlStructures.add(iter.nextElement());
+        }
+        return controlStructures;
+    }
+    
 }

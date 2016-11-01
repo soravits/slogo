@@ -1,12 +1,12 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.Command;
+import model.abstractcommands.TurtleCommand;
 
-public class PenUp extends Command {
+public class PenUp extends TurtleCommand{
 
     public PenUp (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override

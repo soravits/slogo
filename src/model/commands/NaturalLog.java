@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class NaturalLog extends OneInputCommand{
+public class NaturalLog extends MathBoolCommand{
 
     public NaturalLog (double[] parameter, Model model) {
         super(parameter, model);
@@ -11,7 +11,7 @@ public class NaturalLog extends OneInputCommand{
 
     @Override
     public double execute () throws Exception {
-        return Math.log(getParam1());
+        return Math.log(this.getParams()[0]);
     }
 
 }

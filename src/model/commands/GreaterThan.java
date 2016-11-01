@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class GreaterThan extends TwoInputCommand{
+public class GreaterThan extends MathBoolCommand{
 
     public GreaterThan (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,7 +11,14 @@ public class GreaterThan extends TwoInputCommand{
 
     @Override
     public double execute () throws Exception {
-        return (getParam1() > getParam2()) ? 1 : 0;
+        double first = this.getParams()[0];
+        for (double y : this.getParams()){
+            if (first <= y){
+                return 0;
+            }
+            first = y;
+        }
+        return 1;
     }
 
 }

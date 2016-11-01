@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * The class implements the way in which LinesModels are saved/updated; used to update the state of the line after
@@ -13,7 +14,7 @@ import java.util.Iterator;
  */
 public class LineState {
 
-    private Collection<LineModel> lines;
+    private List<LineModel> lines;
     private boolean penDown;
     
     public LineState(){
@@ -32,6 +33,9 @@ public class LineState {
         }
     }
 
+    public LineModel getLastLineDrawn(){
+        return lines.get(lines.size() - 1);
+    }
     /**
      * return Iterator for each line
      */

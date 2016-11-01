@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class LessThan extends TwoInputCommand{
+public class LessThan extends MathBoolCommand{
 
     public LessThan (double[] parameters, Model model) {
         super(parameters, model);        
@@ -11,7 +11,14 @@ public class LessThan extends TwoInputCommand{
 
     @Override
     public double execute () {
-        return (getParam1() < getParam2()) ? 1 : 0;
+        double first = this.getParams()[0];
+        for (double y : this.getParams()){
+            if (first >= y){
+                return 0;
+            }
+            first = y;
+        }
+        return 1;
     }
 
 }

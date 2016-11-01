@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Constant extends OneInputCommand {
+public class Constant extends MathBoolCommand {
 
     public Constant (double[] parameter, Model model) {
         super(parameter, model);
@@ -11,7 +11,7 @@ public class Constant extends OneInputCommand {
 
     @Override
     public double execute () {
-        return getParam1();
+        return this.getParams()[0];
     }
 
 }

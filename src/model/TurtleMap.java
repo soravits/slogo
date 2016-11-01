@@ -15,6 +15,13 @@ public class TurtleMap {
         turtleMap.put(currentID, firstPair);
     }
     
+    public void addTurtle (Object ID){
+        if (!turtleMap.containsKey(ID)){
+            TurtlePair turtle = new TurtlePair();
+            turtleMap.put(ID, turtle);
+        }
+    }
+    
     public Collection<Object> getIDs(){
     	return turtleMap.keySet();
     }
@@ -32,9 +39,13 @@ public class TurtleMap {
         return turtleMap.get(currentID).getTurtle();        
     }
     
-    public Collection<LineModel> getLines(){
-        return turtleMap.get(currentID).getLines().getLines();
+    // TELL DIANE TO CALL THIS METHOD!!!!
+    public LineModel getLines() {
+        return turtleMap.get(currentID).getLines().getLastLineDrawn();
     }
+//    public Collection<LineModel> getLines(){
+//        return turtleMap.get(currentID).getLines().getLines();
+//    }
     
     public LineState getLineState(){
         return turtleMap.get(currentID).getLines();

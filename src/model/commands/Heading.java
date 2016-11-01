@@ -1,12 +1,12 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.Command;
+import model.abstractcommands.TurtleCommand;
 
-public class Heading extends Command{
+public class Heading extends TurtleCommand{
 
     public Heading (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override

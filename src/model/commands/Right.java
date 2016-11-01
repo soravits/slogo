@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.TurtleCommand;
 
-public class Right extends OneInputCommand{
+public class Right extends TurtleCommand{
 
     public Right (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,8 +11,8 @@ public class Right extends OneInputCommand{
 
     @Override
     public double execute () {
-        getModel().getTurtle().addTurtleAngle(normalizeAngle(getParam1()));
-        return getParam1();
+        getModel().getTurtle().addTurtleAngle(normalizeAngle(this.getParams()[0]));
+        return this.getParams()[0];
     }
     
 }

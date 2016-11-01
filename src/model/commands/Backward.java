@@ -11,8 +11,8 @@ public class Backward extends Forward{
     
     public double[] calculateCoordinates(TurtleState turtle){
         double[] coords = new double[2];
-        coords[0] = -Math.sin(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
-        coords[1] = -Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParam1();
+        coords[0] = -Math.sin(Math.toRadians(turtle.getTurtleAngle()))*this.getParams()[0];
+        coords[1] = -Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParams()[0];
         return coords;
     }
 

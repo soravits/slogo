@@ -1,5 +1,4 @@
 package view.ui;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,25 +8,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-
 /**
  * 
  * The purpose of this class is to display the interface that the user interacts with.
  * 
  * @author Diane Hadley
  */
-
-
 public class UI implements UIAttributes{
 	
 	
 	private UIBuilder uiBuilder = new UIBuilder();
 	private int xSize, ySize;
 	private Stage stage;
-	
 	public GeneralSettings generalSettings;
-	
 	private TabPane tabPane = new TabPane();
 	private Group tabArea = new Group();
 	
@@ -43,7 +36,6 @@ public class UI implements UIAttributes{
 		this.ySize = ySize;
 		this.stage = stage;
 	}
-
 	
 	
 	
@@ -74,13 +66,9 @@ public class UI implements UIAttributes{
 		
 		makeWindow(false);
 		makeNewTabButton();
-
 		return scene;
 		
 	}
-
-	
-
 	
 	private void makeWindow(Boolean isClosable){
 		Window window = new Window(stage, xSize, ySize);
@@ -117,7 +105,6 @@ public class UI implements UIAttributes{
 	
 	
 	
-
 	
 	
 	

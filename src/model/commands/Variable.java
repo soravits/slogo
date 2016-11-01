@@ -2,19 +2,22 @@ package model.commands;
 
 import model.Model;
 import model.WorkspaceState;
-import model.abstractcommands.Command;
+import model.abstractcommands.CommandInterface;
+import model.interfaces.WorkspaceCommandInterface;
 
-public class Variable extends Command{
+public class Variable implements CommandInterface{
 
     private String variableName;
+    private WorkspaceCommandInterface listOfVars;
+    
     public Variable (String varName, Model model) {
-        super(model);
+        listOfVars = model;
         variableName = varName;
     }
 
     @Override
     public double execute() {
-        WorkspaceState workspace = this.getModel().getWorkspace();
+        WorkspaceState workspace = listOfVars.getWorkspace();
         if(!workspace.getListOfVariables().containsKey(variableName)){
         workspace.addVariable(variableName, 0.0);
         }

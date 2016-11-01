@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Sum extends TwoInputCommand{
+public class Sum extends MathBoolCommand{
         
     public Sum (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,6 +11,10 @@ public class Sum extends TwoInputCommand{
 
     @Override
     public double execute () {
-        return getParam1() + getParam2();
+        double sum = 0;
+        for (double x : this.getParams()){
+            sum += x;
+        }
+        return sum;
     }
 }

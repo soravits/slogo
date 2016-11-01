@@ -6,19 +6,25 @@ import controller.Node;
 import controller.Interpreter;
 import error.InvalidCommandException;
 import model.Model;
+import model.interfaces.WorkspaceCommandInterface;
 
 /**
  * Created by Soravit on 10/23/2016.
  */
-public abstract class ControlCommand extends Command {
+public abstract class ControlCommand implements CommandInterface {
 
+    private WorkspaceCommandInterface workspace;
     private Node root;
     private CommandManager commandManager;
 
     public ControlCommand(Node root, CommandManager commandManager, Model model){
-        super(model);
+        workspace = model;
         this.root = root;
         this.commandManager = commandManager;
+    }
+    
+    public WorkspaceCommandInterface getModel(){
+        return workspace;
     }
     
     public Node getRoot(){
