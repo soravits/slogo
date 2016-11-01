@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import model.LineState;
+import model.TurtlePair;
 import model.WorkspaceState;
 
 import java.util.Collection;
