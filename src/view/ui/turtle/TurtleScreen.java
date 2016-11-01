@@ -43,6 +43,8 @@ public class TurtleScreen implements UIAttributes{
 	private static final int TURTLE_X = 10;
 	private static final int TURTLE_Y = 55;
 	private static final int TURTLE_SIZE = 20;
+	private static final int VIEW_TURTLE_STATE_HEIGHT = 120;
+	private static final int VIEW_TURTLE_STATE_WIDTH = 200;
 	
 	private int canvasWidth;
 	private int canvasHeight;
@@ -87,11 +89,11 @@ public class TurtleScreen implements UIAttributes{
 		return turtleSettings;
 	}
 	
+	
+	
 		
 	public void updateTurtles(){
 		resetTurtle();
-		
-		
 		
 		Collection<Double> ids = viewData.getIDs();
 		
@@ -137,11 +139,26 @@ public class TurtleScreen implements UIAttributes{
 		}
 
 		Group root = getTurtleStateRoot(id);
-		Stage stage = getTurtleStateStage(id, root);				
+		Stage stage = getTurtleStateStage(id, root);	
+		stage.setX(originX + viewData.getTurtleX(id) + VIEW_TURTLE_STATE_WIDTH/2);
+		stage.setY(originY - viewData.getTurtleY(id) + VIEW_TURTLE_STATE_HEIGHT + TURTLE_SIZE*2);
 		setShowTurtleStateSettings(iv, stage);
+		setClickToChangeActiveState(iv, id);
+				
+		
 	}
 
+	private void setClickToChangeActiveState(ImageView iv, double id){
+		iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	
+				viewData.changeActiveTurtle(id);
 
+			    }
+			});
+	}
+	
 	private void setShowTurtleStateSettings(ImageView iv, Stage stage) {
 		iv.setOnMouseEntered(new EventHandler<MouseEvent>() {
 		    @Override
@@ -160,13 +177,14 @@ public class TurtleScreen implements UIAttributes{
 
 			    }
 			});
+		
 	}
 
 
 	private Stage getTurtleStateStage(Double id, Group root) {
 		Stage stage = new Stage();
 		stage.setResizable(false);
-		Scene scene = new Scene(root, 200, 120);		
+		Scene scene = new Scene(root, VIEW_TURTLE_STATE_WIDTH, VIEW_TURTLE_STATE_HEIGHT);		
 		stage.setScene(scene);
 		stage.setTitle("Turtle " + id.toString());
 		return stage;

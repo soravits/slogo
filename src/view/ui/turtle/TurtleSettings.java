@@ -59,6 +59,7 @@ public class TurtleSettings implements UIAttributes{
 	private static final int TEXT_SPACING = 6;
 	
 	
+	
 	private int controlX;
 	
 	public TurtleSettings(Stage stage, TurtleScreen turtle){

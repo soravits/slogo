@@ -47,12 +47,12 @@ public class GeneralSettings implements UIAttributes{
 
 
 
-	/*
-	 * returns the selected language
-	 */
-	public String getLanguage(){
-		return languageComboBox.getValue();
-	}
+//	/*
+//	 * returns the selected language
+//	 */
+//	public String getLanguage(){
+//		return languageComboBox.getValue();
+//	}
 
 
 	private void makeLanguageComboBox(){
