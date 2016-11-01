@@ -59,6 +59,9 @@ public class ViewData {
         viewModelInterface.changeActiveTurtle(ID);
     }
 	
+	public double[][] getLines (double ID){
+        return viewModelInterface.getLines(ID);
+    }
 	
 	public Collection<String> getConsoleReturn() {
 		return viewModelInterface.getConsoleReturn();

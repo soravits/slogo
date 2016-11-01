@@ -82,7 +82,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     }
     
     public double[][] getLines (double ID){
-        return turtleMap.getLines();
+        return turtleMap.getLines(ID);
     }
     
     public WorkspaceState getWorkspace () {

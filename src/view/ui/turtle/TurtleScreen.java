@@ -93,7 +93,7 @@ public class TurtleScreen implements UIAttributes{
 	
 		
 	public void updateTurtles(){
-		resetTurtle();
+		//resetTurtle();
 		
 		Collection<Double> ids = viewData.getIDs();
 		
@@ -101,9 +101,12 @@ public class TurtleScreen implements UIAttributes{
 		
 		for (double id : ids){
 			
-			if (viewData.getShowTurtle(id)){
-				LineState lines = viewData.getTurtleMap().getLineState(id);
-				viewTurtlePath(lines);				
+			
+			
+			double [][] line = viewData.getLines(id);
+			viewTurtlePath(line);	
+			
+			if (viewData.getShowTurtle(id)){				
 				double posX = originX + viewData.getTurtleX(id);
 				double posY = originY - viewData.getTurtleY(id);
 				double angle = viewData.getTurtleAngle(id);				
@@ -229,18 +232,16 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 
-	private void viewTurtlePath(LineState lines){
-		Collection<LineModel> linePoints = lines.getLines();
+	private void viewTurtlePath(double[][] line){
 		
-		for (LineModel line : linePoints){
 			
-			turtleView.strokeLine(
-					originX + line.getPosition1().getX(), 
-					originY - line.getPosition1().getY(),
-					originX + line.getPosition2().getX(),
-					originY - line.getPosition2().getY()
-			);				
-		}
+		turtleView.strokeLine(
+				originX + line[0][0], 
+				originY - line[0][1],
+				originX + line[1][0],
+				originY - line[1][1]
+		);				
+		
 	}
 	
 	
