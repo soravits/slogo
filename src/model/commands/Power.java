@@ -1,10 +1,10 @@
 package model.commands;
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Power extends MathBoolCommand{
 
-    public Power (double[] parameters, Model model) {
+    public Power (double[] parameters, EmptyInterface model) {
         super(parameters, model);
     }
 

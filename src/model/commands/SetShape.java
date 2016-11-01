@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.DisplayCommand;
+import model.interfaces.DisplayCommandInterface;
 
 public class SetShape extends DisplayCommand{
 
-    public SetShape (double[] parameters, Model model) {
+    public SetShape (double[] parameters, DisplayCommandInterface model) {
         super(parameters, model);
     }
 

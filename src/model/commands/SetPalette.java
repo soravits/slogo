@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.DisplayCommand;
+import model.interfaces.DisplayCommandInterface;
 
 public class SetPalette extends DisplayCommand{
 
-    public SetPalette (double[] parameters, Model model) {
+    public SetPalette (double[] parameters, DisplayCommandInterface model) {
         super(parameters, model);
     }
 

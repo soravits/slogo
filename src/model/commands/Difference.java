@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Difference extends MathBoolCommand{
 
-    public Difference (double[] parameters, Model model) {
+    public Difference (double[] parameters, EmptyInterface model) {
         super(parameters, model);
     }
 

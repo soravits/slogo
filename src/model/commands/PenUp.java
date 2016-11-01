@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class PenUp extends TurtleCommand{
 
-    public PenUp (double[] parameters, Model model) {
+    public PenUp (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

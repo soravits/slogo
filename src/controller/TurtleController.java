@@ -6,13 +6,14 @@ import java.util.HashMap;
 
 public class TurtleController {
     
-    private boolean isTellOrAsk;
+    private boolean isTell;
     private int nestedAsk;
     private Collection<Object> currentTellTurtles;
     private HashMap<Integer, ArrayList<Object>> askTurtles;
     
     public TurtleController(){
-        isTellOrAsk = true;
+        isTell = true;
+        nestedAsk = 0;
         currentTellTurtles = new ArrayList<Object>(1);
         askTurtles = new HashMap<Integer, ArrayList<Object>>();
     }
@@ -30,7 +31,7 @@ public class TurtleController {
     }
     
     public Collection<Object> getTurtlesToModify(){
-        if (isTellOrAsk){
+        if (isTell){
             return currentTellTurtles;
         }
         return askTurtles.get(nestedAsk);

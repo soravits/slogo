@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Sine extends MathBoolCommand{
 
-    public Sine (double[] parameter, Model model) {
+    public Sine (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

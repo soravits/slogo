@@ -1,13 +1,12 @@
 package model.abstractcommands;
 
-import model.Model;
 import model.interfaces.DisplayCommandInterface;
 
 public abstract class DisplayCommand extends GeneralCommand{
 
     private DisplayCommandInterface display;
     
-    public DisplayCommand (double[] parameters, Model model) {
+    public DisplayCommand (double[] parameters, DisplayCommandInterface model) {
         super(parameters);
         display = model;
     }

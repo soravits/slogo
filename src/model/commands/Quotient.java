@@ -1,5 +1,6 @@
 package model.commands;
 
+import error.InvalidCommandException;
 import model.Model;
 import model.abstractcommands.MathBoolCommand;
 
@@ -10,12 +11,17 @@ public class Quotient extends MathBoolCommand {
     }
 
     @Override
-    public double execute () {
-        double div = this.getParams()[0];
-        for (int i = 1; i < this.getParams().length; i++){
-            div /= this.getParams()[i];
+    public double execute () throws InvalidCommandException {
+        if (this.getParams()[1] == 0){
+            throw new InvalidCommandException("Divide By Zero");
         }
-        return div;
+        else{
+            double div = this.getParams()[0];
+            for (int i = 1; i < this.getParams().length; i++){
+                div /= this.getParams()[i];
+            }
+            return div;
+        }
     }
 
 }

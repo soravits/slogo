@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Not extends MathBoolCommand {
 
-    public Not (double[] parameter, Model model) {
+    public Not (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

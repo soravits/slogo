@@ -1,13 +1,12 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.DisplayCommand;
+import model.interfaces.DisplayCommandInterface;
 
 public class GetPenColor extends DisplayCommand{
 
-    public GetPenColor (double[] parameters, Model model) {
+    public GetPenColor (double[] parameters, DisplayCommandInterface model) {
         super(parameters, model);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

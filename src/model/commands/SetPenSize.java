@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.DisplayCommand;
+import model.interfaces.DisplayCommandInterface;
 
 public class SetPenSize extends DisplayCommand{
 
-    public SetPenSize (double[] parameters, Model model) {
+    public SetPenSize (double[] parameters, DisplayCommandInterface model) {
         super(parameters, model);
     }
 

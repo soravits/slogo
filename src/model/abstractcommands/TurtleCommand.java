@@ -1,13 +1,12 @@
 package model.abstractcommands;
 
-import model.Model;
 import model.interfaces.TurtleCommandInterface;
 
 public abstract class TurtleCommand extends GeneralCommand implements CommandInterface {
 
     private TurtleCommandInterface turtleModel;
     
-    public TurtleCommand(double[] parameters, Model model){
+    public TurtleCommand(double[] parameters, TurtleCommandInterface model){
         super(parameters);
         turtleModel = model;
     }

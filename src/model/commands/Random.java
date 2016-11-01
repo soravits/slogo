@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Random extends MathBoolCommand{
 
-    public Random (double[] parameter, Model model) {
+    public Random (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

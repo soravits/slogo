@@ -14,4 +14,11 @@ public abstract class GeneralCommand implements CommandInterface{
     @Override
     public abstract double execute () throws Exception;
 
+    public double sumParams(){
+        double sum = 0;
+        for (double x : params){
+            sum += x;
+        }
+        return sum;
+    }
 }

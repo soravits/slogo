@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class HideTurtle extends TurtleCommand{
 
-    public HideTurtle (double[] parameters, Model model) {
+    public HideTurtle (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class LessThan extends MathBoolCommand{
 
-    public LessThan (double[] parameters, Model model) {
+    public LessThan (double[] parameters, EmptyInterface model) {
         super(parameters, model);        
     }
 

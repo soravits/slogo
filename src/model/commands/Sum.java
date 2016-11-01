@@ -1,20 +1,16 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Sum extends MathBoolCommand{
         
-    public Sum (double[] parameters, Model model) {
+    public Sum (double[] parameters, EmptyInterface model) {
         super(parameters, model);
     }
 
     @Override
     public double execute () {
-        double sum = 0;
-        for (double x : this.getParams()){
-            sum += x;
-        }
-        return sum;
+        return sumParams();
     }
 }

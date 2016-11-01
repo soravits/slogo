@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.DisplayCommand;
+import model.interfaces.DisplayCommandInterface;
 
 public class SetPenColor extends DisplayCommand{
 
-    public SetPenColor (double[] parameters, Model model) {
+    public SetPenColor (double[] parameters, DisplayCommandInterface model) {
         super(parameters, model);
     }
 

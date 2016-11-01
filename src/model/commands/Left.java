@@ -1,12 +1,12 @@
 package model.commands;
 
-import model.Model;
-import model.abstractcommands.OneInputCommand;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
+
 
 public class Left extends TurtleCommand{
 
-    public Left (double[] parameters, Model model) {
+    public Left (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

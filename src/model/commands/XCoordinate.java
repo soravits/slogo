@@ -1,11 +1,11 @@
 package model.commands;
 
-import model.Model;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class XCoordinate extends TurtleCommand {
 
-    public XCoordinate (double[] parameters, Model model) {
+    public XCoordinate (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

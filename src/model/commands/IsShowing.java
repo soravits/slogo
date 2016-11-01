@@ -1,12 +1,11 @@
 package model.commands;
 
-import model.Model;
-import model.abstractcommands.Command;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class IsShowing extends TurtleCommand {
 
-    public IsShowing (double[] parameters, Model model) {
+    public IsShowing (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

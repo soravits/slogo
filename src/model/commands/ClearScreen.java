@@ -1,10 +1,10 @@
 package model.commands;
 
-import model.Model;
+import model.interfaces.TurtleCommandInterface;
 
 public class ClearScreen extends Home{
 
-    public ClearScreen (double[] parameters, Model model) {
+    public ClearScreen (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
     

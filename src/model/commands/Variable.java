@@ -1,6 +1,5 @@
 package model.commands;
 
-import model.Model;
 import model.WorkspaceState;
 import model.abstractcommands.CommandInterface;
 import model.interfaces.WorkspaceCommandInterface;
@@ -10,7 +9,7 @@ public class Variable implements CommandInterface{
     private String variableName;
     private WorkspaceCommandInterface listOfVars;
     
-    public Variable (String varName, Model model) {
+    public Variable (String varName, WorkspaceCommandInterface model) {
         listOfVars = model;
         variableName = varName;
     }
