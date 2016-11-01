@@ -19,8 +19,8 @@ public class TurtleExecutor extends Executor{
         double ret = 0;
         if(!root.getIsFoundTurtleCommand()) {
             root.setFoundTurtleCommand(true);
-            for(Object o : model.getTurtlesToModify()){
-                model.setTurtle(o);
+            for(double d : model.getTurtlesToModify()){
+                model.setTurtle(d);
                 ret = super.execute(root, executor, model);
             }
         }

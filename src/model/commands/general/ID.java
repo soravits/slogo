@@ -11,7 +11,7 @@ public class ID extends TurtleCommand{
 
     @Override
     public double execute () throws Exception {
-        return Double.parseDouble(getModel().getID().toString());
+        return getModel().getID();
     }
 
 }

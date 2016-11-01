@@ -15,16 +15,16 @@ public interface ViewModelInterface{
     
     public Collection<String> getConsoleReturn();
     
-    public Collection<Object> getIDs();
+    public Collection<Double> getIDs();
     
-    public boolean getShowTurtle(Object id);
+    public boolean getShowTurtle(double id);
     
-    public double getTurtleAngle(Object id);
+    public double getTurtleAngle(double id);
     
-    public double getTurtleX(Object id);
+    public double getTurtleX(double id);
     
-    public double getTurtleY(Object id);
+    public double getTurtleY(double id);
     
-    public boolean isPenDown(Object id);
+    public boolean isPenDown(double id);
     
 }
