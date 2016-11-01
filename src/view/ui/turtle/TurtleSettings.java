@@ -55,7 +55,7 @@ public class TurtleSettings implements UIAttributes{
 	private static final int COLOR_RECT_WIDTH = 75;
 	private static final int COLOR_RECT_HEIGHT = 20;
 	private static final int FIRST_CONTROL_Y = 80;
-	private static final int CONTROL_Y_SPACING = 28;
+	private static final int CONTROL_Y_SPACING = 18;
 	private static final int TEXT_SPACING = 6;
 	
 	
@@ -80,12 +80,13 @@ public class TurtleSettings implements UIAttributes{
 		initPenThicknessTextField();
 		initActiveTurtleToggle();
 		initColorPaletteButton();
+		initImagePaletteButton();
 		root.getChildren().addAll(
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y - 10, uiResources.getString("TurtleBackgroundColor")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2 - TEXT_SPACING, uiResources.getString("TurtlePenColor")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*4 - TEXT_SPACING, uiResources.getString("TurtlePenType")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*6 - TEXT_SPACING, uiResources.getString("TurtlePenThickness")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*8 - TEXT_SPACING, uiResources.getString("ActiveTurtleToggle"))
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y - TEXT_SPACING, uiResources.getString("TurtleBackgroundColor")),
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3 - TEXT_SPACING, uiResources.getString("TurtlePenColor")),
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*6 - TEXT_SPACING, uiResources.getString("TurtlePenType")),
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*9 - TEXT_SPACING, uiResources.getString("TurtlePenThickness")),
+			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*12 - TEXT_SPACING, uiResources.getString("ActiveTurtleToggle"))
 		);
 		
 		initImageButton();
@@ -128,7 +129,7 @@ public class TurtleSettings implements UIAttributes{
 	
 	private void initPenColorComboBox(){
 		penComboBox = new ComboBox<Color>();
-		makeColorComboBox(penComboBox, Color.BLACK, 2);
+		makeColorComboBox(penComboBox, Color.BLACK, 3);
 	}
 	
 	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int yMultiplier){	
@@ -190,26 +191,26 @@ public class TurtleSettings implements UIAttributes{
 		penTypeComboBox.setValue(uiResources.getString("SolidLine"));
 		
 		root.getChildren().add(uiBuilder.setControlLayout(penTypeComboBox, controlX, 
-				FIRST_CONTROL_Y + CONTROL_Y_SPACING*4, "turtlecontrol"));
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*6, "turtlecontrol"));
 		
 	}
 	
 	private void initPenThicknessTextField(){
 		TextField penThickness = new TextField();
 		root.getChildren().add(uiBuilder.setControlLayout(penThickness, controlX, 
-				FIRST_CONTROL_Y + CONTROL_Y_SPACING*6, "turtlecontrol"));
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*9, "turtlecontrol"));
 	}
 	
 	private void initActiveTurtleToggle(){
 		CheckBox showActiveTurtle = new CheckBox();
 		root.getChildren().add(uiBuilder.setControlLayout(showActiveTurtle, controlX, 
-				FIRST_CONTROL_Y + CONTROL_Y_SPACING*8, "turtlecontrol"));
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*12, "turtlecontrol"));
 	}
 	
 	
 	private void initImageButton(){
 		
-		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*10, 
+		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*14, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
@@ -222,7 +223,7 @@ public class TurtleSettings implements UIAttributes{
 	
 	private void initColorPaletteButton(){
 
-		Button colorPalette = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*11, 
+		Button colorPalette = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*16, 
 				uiResources.getString("ColorPaletteButton"), "turtlecontrol");
 		colorPalette.setOnAction((event) -> {
 			
@@ -232,7 +233,13 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	private void initImagePaletteButton(){
+		Button imagePalette = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*18, 
+				uiResources.getString("ImagePaletteButton"), "turtlecontrol");
+		imagePalette.setOnAction((event) -> {
+			
+		});	
 		
+		root.getChildren().add(imagePalette);
 		
 	}
 	
