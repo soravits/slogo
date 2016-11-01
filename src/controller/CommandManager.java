@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import error.InvalidCommandException;
 import model.Model;
-import model.TurtleController;
 import model.abstractcommands.CommandInterface;
 
 public class CommandManager {
@@ -91,5 +90,7 @@ public class CommandManager {
         return controlStructures;
     }
     
-    
+    public TurtleController getTurtleController(){
+        return turtleController;
+    }
 }

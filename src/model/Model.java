@@ -1,6 +1,7 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collection;
+import controller.TurtleController;
 import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
@@ -122,6 +123,8 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     	clearConsoleReturn();
     	workspace.clear();
     }
+    
+    
     
     public void updateID (Object ID){
         turtleMap.setCurrentID(ID);
