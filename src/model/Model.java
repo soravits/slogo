@@ -117,7 +117,9 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     	workspace.clear();
     }
     
-    
+    public void changeActiveTurtle(double ID) {
+        turtleController.changeTurtleActive(ID);
+    }
     
     public void updateID (double ID){
 
