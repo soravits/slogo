@@ -29,8 +29,8 @@ public class CommandLine implements UIAttributes{
 	
 	private static final int FIRST_BUTTON_X = 190;
 	private static final int BUTTON_SPACING = 170;
+	private static final int COMMAND_HISTORY_WINDOW_Y = 600;
 	private static final int COMMAND_HISTORY_WINDOW_X = 300;
-	private static final int COMMAND_HISTORY_WINDOW_Y = 300;
 	private static final int COMMAND_LINE_X = 10;
 	
 	private Window window;
@@ -81,8 +81,8 @@ public class CommandLine implements UIAttributes{
 		Button history = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(window,this,COMMAND_HISTORY_WINDOW_X,COMMAND_HISTORY_WINDOW_Y);
-				commandHistoryWindow.updateCommandHistory(window.getModel().getCommandHistory());
+				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(window,this,COMMAND_HISTORY_WINDOW_Y,COMMAND_HISTORY_WINDOW_X);
+				commandHistoryWindow.updateCommandHistory(window.getViewData().getCommandHistory());
 				commandHistoryWindow.show();
 		});	
 		
@@ -90,7 +90,8 @@ public class CommandLine implements UIAttributes{
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			try {
-				window.updateDataIn();
+				window.updateViewData();
+				window.updateUI();
 			} catch (Exception e) {
 				displayError.displayErrorDialogueBox(e.getMessage());
 			}

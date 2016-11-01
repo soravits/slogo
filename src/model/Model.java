@@ -5,8 +5,13 @@ import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
 import model.interfaces.WorkspaceCommandInterface;
+import view.data.ViewModelInterface;
+import model.interfaces.DisplayCommandInterface;
+import model.interfaces.EmptyInterface;
+import model.interfaces.TurtleCommandInterface;
+import model.interfaces.WorkspaceCommandInterface;
 
-public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface{
+public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface{
 
     private DisplayState display;
     private TurtleMap turtleMap;
