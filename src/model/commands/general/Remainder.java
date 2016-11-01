@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Remainder extends MathBoolCommand {
 
-    public Remainder (double[] parameter, Model model) {
+    public Remainder (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

@@ -1,12 +1,12 @@
 package model.commands.turtle;
 
-import model.Model;
 import model.Position;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class Home extends TurtleCommand{
 
-    public Home (double[] parameters, Model model) {
+    public Home (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

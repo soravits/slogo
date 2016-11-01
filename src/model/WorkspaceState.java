@@ -18,10 +18,6 @@ public class WorkspaceState {
         }
     }
 
-    public void removeVariable (Object var) {
-        mapOfVariables.remove(var);
-    }
-    
     public double getVariableValue(String name){
         return mapOfVariables.get(name);
     }

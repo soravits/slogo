@@ -1,11 +1,11 @@
 package model.commands.turtle;
 
-import model.Model;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class SetTowards extends TurtleCommand{
 
-    public SetTowards (double[] parameters, Model model) {
+    public SetTowards (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

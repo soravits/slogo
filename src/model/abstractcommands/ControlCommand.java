@@ -1,10 +1,7 @@
 package model.abstractcommands;
 
-import controller.CommandController;
 import controller.CommandManager;
 import controller.Node;
-import controller.Interpreter;
-import error.InvalidCommandException;
 import model.Model;
 import model.interfaces.WorkspaceCommandInterface;
 

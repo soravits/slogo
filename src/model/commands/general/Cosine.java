@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Cosine extends MathBoolCommand{
 
-    public Cosine (double[] parameter, Model model) {
+    public Cosine (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

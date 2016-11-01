@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Equal extends MathBoolCommand {
 
-    public Equal (double[] parameters, Model model) {
+    public Equal (double[] parameters, EmptyInterface model) {
         super(parameters, model);
     }
 

@@ -4,15 +4,13 @@ import java.util.Collection;
 import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
+import model.interfaces.TurtleControllerInterface;
 import model.interfaces.WorkspaceCommandInterface;
 import view.data.ViewModelInterface;
-import model.interfaces.DisplayCommandInterface;
-import model.interfaces.EmptyInterface;
-import model.interfaces.TurtleCommandInterface;
-import model.interfaces.WorkspaceCommandInterface;
 
-public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface{
+public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleControllerInterface{
 
+    private TurtleControllerInterface turtleController;
     private DisplayState display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
@@ -25,6 +23,7 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
         workspace = new WorkspaceState();
         commandHistory = new CommandHistory();
         consoleReturn = new ArrayList<String>();
+        turtleController = new TurtleController();
     }
 
     public TurtleMap getTurtleMap (){
@@ -72,16 +71,13 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     	return turtleMap.getLineState(id).isPenDown();
     }
     
-    
-    
-    
-    
     public void setTurtle (Object ID){
         turtleMap.setCurrentID(ID);
     }
     
     public void createTurtle (Object ID){
         turtleMap.addTurtle(ID);
+        turtleController.addTurtle(ID);
     }
     
     @Override
@@ -128,6 +124,44 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     	clearConsoleReturn();
     	workspace.clear();
     }
+    
+    
+    
+    public void updateID (Object ID){
+        turtleMap.setCurrentID(ID);
+    }
+
+    @Override
+    public void addTurtle (Object ID) {
+        turtleController.addTurtle(ID);
+    }
+
+    @Override
+    public void removeTellTurtle (Object ID) {
+        turtleController.removeTellTurtle(ID);
+    }
+
+    @Override
+    public void clearTellTurtles () {
+        turtleController.clearTellTurtles();
+    }
+
+
+    @Override
+    public Collection<Object> getTurtlesToModify () {
+        return turtleController.getTurtlesToModify();
+    }
+
+    @Override
+    public void addNestedAsk () {
+        turtleController.addNestedAsk();
+    }
+
+    @Override
+    public void subtractNestedAsk () {
+        turtleController.subtractNestedAsk();
+    }
+    
     
     
 }

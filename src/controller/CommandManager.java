@@ -12,15 +12,15 @@ import model.Model;
 import model.abstractcommands.CommandInterface;
 
 public class CommandManager {
-	
-	public static final String COMMAND = "Command";
-	public static final String VARIABLE = "Variable";
-	public static final String CONSTANT = "Constant";
 
-	private CommandParser syntax;
+    public static final String COMMAND = "Command";
+    public static final String VARIABLE = "Variable";
+    public static final String CONSTANT = "Constant";
+
+    private CommandParser syntax;
     private CommandController commandController;
     private Model model;
-	private Map<String, Executor> executions;
+    private Map<String, Executor> executions;
     private CommandExecutor commandExecutor;
     private VariableExecutor variableExecutor;
     private ConstantExecutor constantExecutor;
@@ -32,7 +32,7 @@ public class CommandManager {
         this.syntax = syntax;
         this.commandController = commandController;
         this.model = model;
-		executions = new HashMap<String, Executor>();
+        executions = new HashMap<String, Executor>();
         userInstructions = new HashMap<String, Node>();
         commandExecutor = new CommandExecutor();
         variableExecutor = new VariableExecutor();
@@ -53,7 +53,7 @@ public class CommandManager {
     public Map<String, Node> getUserInstructions(){
         return userInstructions;
     }
-    
+
     public List<String> getTurtleCommands(){
         return turtleCommands;
     }
@@ -86,4 +86,5 @@ public class CommandManager {
         }
         return controlStructures;
     }
+    
 }

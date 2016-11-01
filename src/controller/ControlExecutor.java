@@ -1,10 +1,9 @@
 package controller;
 
+import java.lang.reflect.Constructor;
 import error.InvalidCommandException;
 import model.Model;
-import model.abstractcommands.Command;
 import model.abstractcommands.CommandInterface;
-import java.lang.reflect.Constructor;
 
 public class ControlExecutor extends Executor{
 

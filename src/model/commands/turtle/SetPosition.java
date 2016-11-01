@@ -1,12 +1,12 @@
 package model.commands.turtle;
 
-import model.Model;
 import model.TurtleState;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class SetPosition extends TurtleCommand{
 
-    public SetPosition (double[] parameters, Model model) {
+    public SetPosition (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

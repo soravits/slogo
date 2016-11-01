@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.DisplayCommand;
+import model.interfaces.DisplayCommandInterface;
 
 public class GetShape extends DisplayCommand{
 
-    public GetShape (double[] parameters, Model model) {
+    public GetShape (double[] parameters, DisplayCommandInterface model) {
         super(parameters, model);
     }
 

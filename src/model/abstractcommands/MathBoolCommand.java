@@ -1,13 +1,12 @@
 package model.abstractcommands;
 
-import model.Model;
 import model.interfaces.EmptyInterface;
 
 public abstract class MathBoolCommand extends GeneralCommand implements CommandInterface {
 
     private EmptyInterface emptyModel;
 
-    public MathBoolCommand(double[] parameters, Model model){
+    public MathBoolCommand(double[] parameters, EmptyInterface model){
         super(parameters);
         emptyModel = model;
     }

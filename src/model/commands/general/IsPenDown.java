@@ -1,12 +1,11 @@
 package model.commands.general;
 
-import model.Model;
-import model.abstractcommands.Command;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class IsPenDown extends TurtleCommand{
 
-    public IsPenDown (double[] parameters, Model model) {
+    public IsPenDown (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

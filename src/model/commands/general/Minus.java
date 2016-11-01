@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Minus extends MathBoolCommand {
 
-    public Minus (double[] parameter, Model model) {
+    public Minus (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 
