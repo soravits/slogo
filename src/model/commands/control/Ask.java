@@ -4,18 +4,31 @@ import controller.CommandManager;
 import controller.Node;
 import model.Model;
 import model.abstractcommands.ControlCommand;
+import model.interfaces.ControlCommandInterface;
+
+import java.util.ArrayList;
 
 /**
  * Created by Soravit on 10/31/2016.
  */
 public class Ask extends ControlCommand{
-    
-    public Ask(Node root, CommandManager commandManager, Model model) {
+
+    public Ask(Node root, CommandManager commandManager, ControlCommandInterface model) {
         super(root, commandManager, model);
     }
 
     @Override
     public double execute() throws Exception {
-        return 0;
+        Node turtleRoot = getRoot().getChildren().get(0);
+        Node commandRoot = getRoot().getChildren().get(1);
+        ArrayList<Double> ids = new ArrayList<Double>();
+        double ret = 0;
+        for(int i = 0 ; i < turtleRoot.getChildren().size(); i++){
+            ids.add(Double.parseDouble(turtleRoot.getChildren().get(i).getValue()));
+        }
+        for(int j = 0 ; j < commandRoot.getChildren().size(); j++){
+            ret = executeTree(commandRoot.getChildren().get(j));
+        }
+        return ret;
     }
 }

@@ -5,6 +5,7 @@ import controller.Interpreter;
 import model.Model;
 import model.WorkspaceState;
 import model.abstractcommands.ControlCommand;
+import model.interfaces.ControlCommandInterface;
 
 /**
  * Created by Soravit on 10/23/2016.
@@ -16,7 +17,7 @@ public class For extends ControlCommand{
 	private double end;
 	private double increment;
 
-	public For(Node root, CommandManager commandManager, Model model) throws Exception{
+	public For(Node root, CommandManager commandManager, ControlCommandInterface model) throws Exception{
 		super(root,commandManager,model);
 		Node commandRoot = getRoot().getChildren().get(0);
 		variable = commandRoot.getChildren().get(0).getValue();

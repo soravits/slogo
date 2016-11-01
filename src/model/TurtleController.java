@@ -15,7 +15,8 @@ public class TurtleController implements TurtleControllerInterface {
     public TurtleController(){
         isTell = true;
         nestedAsk = 0;
-        currentTellTurtles = new ArrayList<Object>(1);
+        currentTellTurtles = new ArrayList<Object>();
+        currentTellTurtles.add(1);
         askTurtles = new HashMap<Integer, ArrayList<Object>>();
     }
 

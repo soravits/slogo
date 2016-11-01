@@ -1,11 +1,15 @@
 package model.interfaces;
 
+import model.WorkspaceState;
+
 import java.util.Collection;
 
 /**
- * Created by Brian on 11/1/2016.
+ * Created by Soravit on 11/1/2016.
  */
-public interface TurtleControllerInterface {
+public interface ControlCommandInterface {
+
+    public WorkspaceState getWorkspace ();
 
     void removeTellTurtle (Object ID);
 
