@@ -6,6 +6,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -71,6 +73,7 @@ public class TurtleSettings implements UIAttributes{
 	public Group getRoot(){
 		getBackgroundColorComboBox();
 		getPenColorComboBox();
+		getPenTypeComboBox();
 		root.getChildren().addAll(
 			uiBuilder.getText(controlX, FIRST_CONTROL_Y - 10, uiResources.getString("TurtleBackgroundColor")),
 			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*1 -10, uiResources.getString("TurtlePenColor"))	
@@ -129,7 +132,8 @@ public class TurtleSettings implements UIAttributes{
 				turtle.getRoot();
 			}
 		});		
-		root.getChildren().add(uiBuilder.setControlLayout(comboBox, controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
+		root.getChildren().add(uiBuilder.setControlLayout(comboBox, controlX, 
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
 	}
 	
 	
@@ -167,9 +171,24 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	
+	private void getPenTypeComboBox(){
+		
+		ObservableList<String> penTypeOptions = FXCollections.observableArrayList(uiResources.getString("SolidLine"), 
+				uiResources.getString("DashedLine"),uiResources.getString("DottedLine")); 
+				
+
+		ComboBox<String> penTypeComboBox = new ComboBox<String>(penTypeOptions);
+		penTypeComboBox.setValue(uiResources.getString("SolidLine"));
+		
+		root.getChildren().add(uiBuilder.setControlLayout(penTypeComboBox, controlX, 
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, "turtlecontrol"));
+		
+	}
+	
+	
 	private void getButton(){
 		
-		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*2, 
+		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();

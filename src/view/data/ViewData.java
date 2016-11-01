@@ -26,9 +26,36 @@ public class ViewData {
 		this.viewModelInterface=Model;
 	}
 	
-	public TurtleMap getTurtleMap() {
+	public TurtleMap getTurtleMap(){
 		return viewModelInterface.getTurtleMap();
 	}
+
+	public Collection<Object> getIDs(){
+		return viewModelInterface.getIDs();
+	}
+	
+	public boolean getShowTurtle(Object id){
+		return viewModelInterface.getShowTurtle(id);
+	}
+	
+	public double getTurtleAngle(Object id){
+    	return viewModelInterface.getTurtleAngle(id);
+    }
+	
+	public double getTurtleX(Object id){
+    	return viewModelInterface.getTurtleX(id);
+    }
+	
+	public double getTurtleY(Object id){
+    	return viewModelInterface.getTurtleY(id);
+    }
+	
+	
+	public boolean isPenDown(Object id){
+    	return viewModelInterface.isPenDown(id);
+    }
+	
+	
 	
 	public Collection<String> getConsoleReturn() {
 		return viewModelInterface.getConsoleReturn();
