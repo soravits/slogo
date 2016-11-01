@@ -24,15 +24,12 @@ public class Ask extends ControlCommand{
         Node commandRoot = getRoot().getChildren().get(1);
         double ret = 0;
         getModel().addNestedAsk();
-        getModel().setTell(false);
-        getModel().clearAskTurtles();
         for(int i = 0 ; i < turtleRoot.getChildren().size(); i++){
             getModel().addTurtle(Double.parseDouble(turtleRoot.getChildren().get(i).getValue()));
         }
         for(int j = 0 ; j < commandRoot.getChildren().size(); j++) {
             ret = executeTree(commandRoot.getChildren().get(j));
         }
-        getModel().setTell(true);
         getModel().subtractNestedAsk();
         return ret;
     }
