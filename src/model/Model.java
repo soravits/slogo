@@ -48,6 +48,34 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
         return turtleMap.getCurrentID();
     }
     
+    public Collection<Object> getIDs(){
+    	return turtleMap.getIDs();
+    }
+    
+    public boolean getShowTurtle(Object id){
+    	return turtleMap.getTurtle(id).getShowTurtle();
+    }
+    
+    public double getTurtleAngle(Object id){
+    	return turtleMap.getTurtle(id).getTurtleAngle();
+    }
+    
+    public double getTurtleX(Object id){
+    	return turtleMap.getTurtle(id).getTurtleX();
+    }
+    
+    public double getTurtleY(Object id){
+    	return turtleMap.getTurtle(id).getTurtleY();
+    }
+    
+    public boolean isPenDown(Object id){
+    	return turtleMap.getLineState(id).isPenDown();
+    }
+    
+    
+    
+    
+    
     public void setTurtle (Object ID){
         turtleMap.setCurrentID(ID);
     }
