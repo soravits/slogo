@@ -1,5 +1,11 @@
 package view.ui;
 
+/**
+ * 
+ * @author Diane Hadley
+ */
+
+
 import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -19,8 +25,7 @@ public class Window implements UIAttributes{
 	private Workspace workspace;
 	private Stage stage;
 	private LoadCommand loadCommand;
-	
-	//private Model model;
+
 	private ViewData viewData;
 	private Controller controller;
 	
@@ -33,24 +38,20 @@ public class Window implements UIAttributes{
 		this.stage = stage;
 		this.xSize = xSize;
 		this.ySize = ySize;	
-		//model = new Model();
-		viewData = new ViewData();
-		controller = new Controller(viewData);
+		this.viewData = new ViewData();
+		this.controller = new Controller(viewData);
 		buildRoot();
 	}
 	
 	
-	public Group getRoot(){
-		
+	public Group getRoot(){		
 		return root;
 	}
 	
-	
-		
-	
+
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage);	
+		turtleScreen = new TurtleScreen(stage, viewData);	
 		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());		
 		generalSettings = new GeneralSettings(controller);
 		commandLine = new CommandLine(ySize, this);		
@@ -61,16 +62,16 @@ public class Window implements UIAttributes{
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot(),loadCommand.getRoot());
 
-//		makeResetButton();
+		makeResetButton();
 	}
 	
-//	private void makeResetButton(){
-//		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
-//		reset.setOnAction((event) -> {
-//			resetAll();		
-//		});	
-//		root.getChildren().add(reset);
-//	}
+	private void makeResetButton(){
+		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
+		reset.setOnAction((event) -> {
+			//resetAll();		
+		});	
+		root.getChildren().add(reset);
+	}
 
 	public GeneralSettings getGeneralSettings(){
 		return generalSettings;
@@ -79,10 +80,6 @@ public class Window implements UIAttributes{
 	public Controller getController() {
 		return controller;
 	}
-	
-	/*public Model getModel() {
-		return model;
-	}*/
 	
 	public ViewData getViewData() {
 		return viewData;
@@ -94,7 +91,7 @@ public class Window implements UIAttributes{
 	}
 	
 	public void updateUI() {
-		turtleScreen.updateTurtles(viewData.getTurtleMap());
+		turtleScreen.updateTurtles();
 		console.updateConsole(viewData.getConsoleReturn());
 		workspace.updateWorkspace(viewData.getWorkspace());
 		turtleScreen.getRoot();	

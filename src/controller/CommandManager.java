@@ -37,8 +37,8 @@ public class CommandManager {
         commandExecutor = new CommandExecutor();
         variableExecutor = new VariableExecutor();
         constantExecutor = new ConstantExecutor();
-        controlStructures = processControlStructures(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
-        turtleCommands = processTurtleStructures(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
+        controlStructures = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
+        turtleCommands = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
         mapExecutions();
     }
 
@@ -77,7 +77,7 @@ public class CommandManager {
         executions.put(CONSTANT, constantExecutor);
     }
 
-    private List<String> processControlStructures(String syntax) {
+    private List<String> processCommandType(String syntax) {
         ArrayList<String> controlStructures = new ArrayList<String>();
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
@@ -86,15 +86,4 @@ public class CommandManager {
         }
         return controlStructures;
     }
-    
-    private List<String> processTurtleStructures(String syntax){
-        ArrayList<String> controlStructures = new ArrayList<String>();
-        ResourceBundle resources = ResourceBundle.getBundle(syntax);
-        Enumeration<String> iter = resources.getKeys();
-        while (iter.hasMoreElements()) {
-            controlStructures.add(iter.nextElement());
-        }
-        return controlStructures;
-    }
-    
 }
