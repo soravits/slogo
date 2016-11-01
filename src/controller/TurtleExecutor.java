@@ -14,6 +14,9 @@ public class TurtleExecutor extends Executor{
     @Override
     public double execute(Node root, CommandManager executor, Model model) throws InvalidCommandException {
         setPackage(TURTLE_COMMAND_PACKAGE);
+        if(root.getIsFoundTurtleCommand() == false) {
+            root.setFoundTurtleCommand(true);
+        }
         return super.execute(root, executor, model);
     }
 }
