@@ -15,7 +15,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import model.LineModel;
 import model.LineState;
@@ -51,9 +50,6 @@ public class TurtleScreen implements UIAttributes{
 	private double originX;
 	private double originY;
 	private int currID;
-	
-	
-	
 
 	/*
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
@@ -80,6 +76,11 @@ public class TurtleScreen implements UIAttributes{
 	public Pane getRoot(){
 		setCanvas();
 		return root;
+	}
+	
+	
+	public int getCurrID(){
+		return currID;
 	}
 	
 	public TurtleSettings getTurtleSettings(){
@@ -116,40 +117,72 @@ public class TurtleScreen implements UIAttributes{
 	private void updateViewMap(TurtleMap turtleMap) {
 		Collection<Object> ids = turtleMap.getIDs();
 		for (Object id : ids){
+			
 			if (!turtleViewMap.getIDs().contains(id)){
 				turtleViewMap.setAttributes(id);				
 			}
-			if (!root.getChildren().contains(turtleViewMap.getImage(id))){
-				ImageView iv = turtleViewMap.getImage(id);
-				root.getChildren().add(iv);
-				iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				    @Override
-				    public void handle(MouseEvent mouseEvent) {
-				    	Group root = new Group();
-				    	
-				    	Text pos = uiBuilder.getText(10, 20, "Position: " + turtleMap.getTurtle().getPosition().toString()); 
-				    	Text heading = uiBuilder.getText(10, 40, "Heading: " + turtleMap.getTurtle().getTurtleAngle());
-				    	
-				    	//figure out penup/down
-				    	//THIS DOESN"T UPDATE
-				    	
-				    	root.getChildren().addAll(pos, heading);
-				    	
-				    	
-				    	
-				    	Stage stage = new Stage();
-						stage.setResizable(false);
-						Scene scene = new Scene(root, 400, 400);		
-						stage.setScene(scene);
-						stage.setTitle("Turtle " + id.toString());
-						stage.show(); 
-
-				    }
-				});
-			}
+			setImageViewSettings(turtleMap, id);
+			
 		}
 		
 		
+	}
+
+
+	private void setImageViewSettings(TurtleMap turtleMap, Object id) {
+		ImageView iv = turtleViewMap.getImage(id);
+		
+		if (!root.getChildren().contains(turtleViewMap.getImage(id))){				
+			root.getChildren().add(iv);
+		}
+
+		Group root = getTurtleStateRoot(turtleMap, id);
+		Stage stage = getTurtleStateStage(id, root);				
+		setShowTurtleStateSettings(iv, stage);
+	}
+
+
+	private void setShowTurtleStateSettings(ImageView iv, Stage stage) {
+		iv.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	
+				stage.show(); 
+
+			    }
+			});
+		
+		iv.setOnMouseExited(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	
+				stage.hide();
+
+			    }
+			});
+	}
+
+
+	private Stage getTurtleStateStage(Object id, Group root) {
+		Stage stage = new Stage();
+		stage.setResizable(false);
+		Scene scene = new Scene(root, 200, 100);		
+		stage.setScene(scene);
+		stage.setTitle("Turtle " + id.toString());
+		return stage;
+	}
+
+
+	private Group getTurtleStateRoot(TurtleMap turtleMap, Object id) {
+		Group root = new Group();
+		
+		Text pos = uiBuilder.getText(10, 20, "Position: " + turtleMap.getTurtle(id).getPosition().toString()); 
+		Text heading = uiBuilder.getText(10, 40, "Heading: " + turtleMap.getTurtle(id).getTurtleAngle());
+		Text penColor = uiBuilder.getText(10, 60, "Pen Color: " + turtleViewMap.getPenColor(id));
+		Text penStatus = uiBuilder.getText(10, 80, "Pen Down: " + turtleMap.getLineState(id).isPenDown());
+		
+		root.getChildren().addAll(pos, heading, penColor, penStatus);
+		return root;
 	}
 
 

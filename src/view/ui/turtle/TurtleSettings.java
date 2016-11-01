@@ -186,14 +186,14 @@ public class TurtleSettings implements UIAttributes{
 		ExtensionFilter filter = new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"); 	//http://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html
 		fileChooser.getExtensionFilters().add(filter);
 		File selectedFile = fileChooser.showOpenDialog(stage);
-		
-		try {
-			BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
-			turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
-		} catch (IOException e) {
-			displayError.displayErrorDialogueBox("File selected is not a valid image file");
+		if (selectedFile != null){
+			try {
+				BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
+				turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
+			} catch (IOException e) {
+				displayError.displayErrorDialogueBox("File selected is not a valid image file");
+			}	
 		}	
-				
 	}
 	
 }
