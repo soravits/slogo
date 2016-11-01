@@ -1,21 +1,18 @@
 package controller;
 
 import java.util.Stack;
-
-import error.InvalidCommandException;
-import error.InvalidSyntaxException;
-import model.abstractcommands.Command;
+import model.abstractcommands.CommandInterface;
 
 public class CommandController {
 
-    private Stack<Command> commands;
-    private Command currentCommand;
+    private Stack<CommandInterface> commands;
+    private CommandInterface currentCommand;
     
     public CommandController(){
-        commands = new Stack<Command>();
+        commands = new Stack<CommandInterface>();
     }
     
-    public void setCommand(Command command){
+    public void setCommand(CommandInterface command){
         currentCommand = command;
         commands.add(command);
     }

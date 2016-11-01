@@ -70,9 +70,8 @@ public class Workspace implements UIAttributes{
 		);
 	}
 	
-	public void updateWorkspace(WorkspaceState workspaceState) {
+	public void updateWorkspace(HashMap<String, Double> variableMap) {
 		clearWorkspace();
-		HashMap<String, Double> variableMap = workspaceState.getListOfVariables();
 		for (String varName:variableMap.keySet()) {
 			Text varNameText=new Text(varName+" = ");
 			Double value=variableMap.get(varName);
@@ -95,7 +94,7 @@ public class Workspace implements UIAttributes{
 		    @Override public void handle(ActionEvent e) {  
 		    	commandLine.setCommand("set :"+varName+" "+space.getText());
 		    	try {
-					window.updateDataIn();
+					window.updateViewData();
 					commandLine.setCommand("");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

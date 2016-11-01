@@ -4,7 +4,7 @@ import error.InvalidCommandException;
 import error.InvalidParametersException;
 import error.InvalidSyntaxException;
 import model.Model;
-import view.data.DataIn;
+import view.data.ViewData;
 
 import java.io.IOException;
 
@@ -21,9 +21,9 @@ public class Controller {
 
     private Model model;
     private Interpreter interpreter;
-    private DataIn view;
+    private ViewData view;
 
-    public Controller(DataIn view){
+    public Controller(ViewData view){
         this.view = view;
         model = new Model();
         interpreter = new Interpreter(model);

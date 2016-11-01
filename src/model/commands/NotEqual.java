@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class NotEqual extends TwoInputCommand {
+public class NotEqual extends MathBoolCommand {
 
     public NotEqual (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,7 +11,13 @@ public class NotEqual extends TwoInputCommand {
 
     @Override
     public double execute () throws Exception {
-        return (getParam1() != getParam2()) ? 1 : 0;
+        double first = this.getParams()[0];
+        for (double y : this.getParams()){
+            if (y == first){
+                return 0;
+            }
+        }
+        return 1;
     }
 
 }

@@ -78,12 +78,11 @@ public class CommandLine implements UIAttributes{
 	
 	private void getButtons(){
 		
-		
 		Button history = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
 				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(window,this,COMMAND_HISTORY_WINDOW_Y,COMMAND_HISTORY_WINDOW_X);
-				commandHistoryWindow.updateCommandHistory(window.getModel().getCommandHistory());
+				commandHistoryWindow.updateCommandHistory(window.getViewData().getCommandHistory());
 				commandHistoryWindow.show();
 		});	
 		
@@ -91,7 +90,7 @@ public class CommandLine implements UIAttributes{
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			try {
-				window.updateDataIn();
+				window.updateViewData();
 				window.updateUI();
 			} catch (Exception e) {
 				displayError.displayErrorDialogueBox(e.getMessage());

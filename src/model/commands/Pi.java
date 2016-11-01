@@ -1,12 +1,12 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.Command;
+import model.abstractcommands.MathBoolCommand;
 
-public class Pi extends Command{
+public class Pi extends MathBoolCommand{
 
     public Pi (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override

@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Model;
-import view.data.DataIn;
+import view.data.ViewData;
 import view.ui.turtle.TurtleScreen;
 
 public class Window implements UIAttributes{
@@ -20,8 +20,8 @@ public class Window implements UIAttributes{
 	private Stage stage;
 	private LoadCommand loadCommand;
 	
-	private Model model;
-	private DataIn dataIn;
+	//private Model model;
+	private ViewData viewData;
 	private Controller controller;
 	
 	private int xSize, ySize;
@@ -33,9 +33,9 @@ public class Window implements UIAttributes{
 		this.stage = stage;
 		this.xSize = xSize;
 		this.ySize = ySize;	
-		model = new Model();
-		dataIn = new DataIn(model);
-		controller = new Controller(dataIn);
+		//model = new Model();
+		viewData = new ViewData();
+		controller = new Controller(viewData);
 		buildRoot();
 	}
 	
@@ -80,26 +80,23 @@ public class Window implements UIAttributes{
 		return controller;
 	}
 	
-	public Model getModel() {
+	/*public Model getModel() {
 		return model;
-	}
+	}*/
 	
-	public DataIn getDataIn() {
-		return dataIn;
+	public ViewData getViewData() {
+		return viewData;
 	}
 	
 		
-	public void updateDataIn() throws Exception {	
-		dataIn.setCommand(commandLine.getCommand());
-		dataIn.setLanguage(generalSettings.getLanguage());
-		dataIn.parseCommand(controller);
+	public void updateViewData() throws Exception {	
+		viewData.sendCommand(commandLine.getCommand(),controller);
 	}
 	
 	public void updateUI() {
-		model = dataIn.getViewModel();
-		turtleScreen.updateTurtles(model.getTurtleMap());
-		console.updateConsole(model.getConsoleReturn());
-		workspace.updateWorkspace(model.getWorkspace());
+		turtleScreen.updateTurtles(viewData.getTurtleMap());
+		console.updateConsole(viewData.getConsoleReturn());
+		workspace.updateWorkspace(viewData.getWorkspace());
 		turtleScreen.getRoot();	
 	}
 	

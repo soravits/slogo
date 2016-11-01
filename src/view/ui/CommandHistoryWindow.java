@@ -84,7 +84,7 @@ public class CommandHistoryWindow implements UIAttributes{
 		    @Override public void handle(ActionEvent e) {  
 		    	commandLine.setCommand(command);
 		    	try {
-					window.updateDataIn();
+					window.updateViewData();
 					window.updateUI();
 					commandLine.setCommand("");
 				} catch (Exception e1) {

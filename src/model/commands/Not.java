@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Not extends OneInputCommand {
+public class Not extends MathBoolCommand {
 
     public Not (double[] parameter, Model model) {
         super(parameter, model);
@@ -11,7 +11,7 @@ public class Not extends OneInputCommand {
 
     @Override
     public double execute () {
-        return (getParam1() == 0) ? 1 : 0;
+        return (this.getParams()[0] == 0) ? 1 : 0;
     }
 
 }

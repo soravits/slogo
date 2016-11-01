@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.TwoInputCommand;
+import model.abstractcommands.TurtleCommand;
 
-public class SetTowards extends TwoInputCommand{
+public class SetTowards extends TurtleCommand{
 
     public SetTowards (double[] parameters, Model model) {
         super(parameters, model);
@@ -11,8 +11,8 @@ public class SetTowards extends TwoInputCommand{
 
     @Override
     public double execute () {
-        double xDiff = this.getParam1() - this.getModel().getTurtle().getTurtleX();
-        double yDiff = this.getParam2() - this.getModel().getTurtle().getTurtleY();
+        double xDiff = this.getParams()[0] - this.getModel().getTurtle().getTurtleX();
+        double yDiff = this.getParams()[1] - this.getModel().getTurtle().getTurtleY();
         double angle = normalizeAngle(Math.toDegrees(Math.acos(yDiff/Math.sqrt((xDiff*xDiff + yDiff*yDiff)))));
         if (xDiff < 0 & yDiff <= 0){
             angle = 360 - angle;

@@ -1,9 +1,9 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.OneInputCommand;
+import model.abstractcommands.MathBoolCommand;
 
-public class Tangent extends OneInputCommand{
+public class Tangent extends MathBoolCommand{
 
     public Tangent (double[] parameter, Model model) {
         super(parameter, model);
@@ -11,7 +11,7 @@ public class Tangent extends OneInputCommand{
 
     @Override
     public double execute () throws Exception {
-        return Math.tan(Math.toRadians(getParam1()));
+        return Math.tan(Math.toRadians(this.getParams()[0]));
     }
 
 }

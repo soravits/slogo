@@ -1,12 +1,12 @@
 package model.commands;
 
 import model.Model;
-import model.abstractcommands.Command;
+import model.abstractcommands.TurtleCommand;
 
-public class YCoordinate extends Command {
+public class YCoordinate extends TurtleCommand {
 
     public YCoordinate (double[] parameters, Model model) {
-        super(model);
+        super(parameters, model);
     }
 
     @Override
