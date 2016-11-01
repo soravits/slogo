@@ -2,27 +2,32 @@ package model;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public class TurtleMap {
 
-    private Object currentID;
-    private HashMap<Object, TurtlePair> turtleMap;
+    private double currentID;
+    private HashMap<Double, TurtlePair> turtleMap;
     
     public TurtleMap(){
-        currentID = 1;
-        turtleMap = new HashMap<Object, TurtlePair>();
+        currentID = 1.0;
+        turtleMap = new HashMap<Double, TurtlePair>();
         TurtlePair firstPair = new TurtlePair();
         turtleMap.put(currentID, firstPair);
     }
     
-    public void addTurtle (Object ID){
+    public void addTurtle (Double ID){
+        for(Double o : turtleMap.keySet()){
+            System.out.println(o);
+        }
         if (!turtleMap.containsKey(ID)){
+            System.out.println(ID);
             TurtlePair turtle = new TurtlePair();
             turtleMap.put(ID, turtle);
         }
     }
     
-    public Collection<Object> getIDs(){
+    public Collection<Double> getIDs(){
     	return turtleMap.keySet();
     }
     
@@ -33,10 +38,10 @@ public class TurtleMap {
     public TurtleState getTurtle(){
         return turtleMap.get(currentID).getTurtle();
     }
-    
-    public TurtleState getTurtle(Object ID){
+
+    public TurtleState getTurtle(double ID){
         currentID = ID;
-        return turtleMap.get(currentID).getTurtle();        
+        return turtleMap.get(currentID).getTurtle();
     }
     
     // TELL DIANE TO CALL THIS METHOD!!!!
@@ -51,21 +56,21 @@ public class TurtleMap {
         return turtleMap.get(currentID).getLines();
     }
     
-    public LineState getLineState(Object ID){
+    public LineState getLineState(double ID){
         return turtleMap.get(ID).getLines();
     }
 
-    public Object getCurrentID () {
+    public double getCurrentID () {
         return currentID;
     }
 
-    public void setCurrentID (Object ID) {
+    public void setCurrentID (double ID) {
         currentID = ID;
     }
     
     public void clear(){
-        turtleMap = new HashMap<Object, TurtlePair>();
+        turtleMap.clear();
         TurtlePair firstPair = new TurtlePair();
-        turtleMap.put(currentID, firstPair);
+        turtleMap.put(1.0, firstPair);
     }
 }

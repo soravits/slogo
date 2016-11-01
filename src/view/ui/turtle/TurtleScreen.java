@@ -93,11 +93,11 @@ public class TurtleScreen implements UIAttributes{
 		
 		
 		
-		Collection<Object> ids = viewData.getIDs();
+		Collection<Double> ids = viewData.getIDs();
 		
 		updateViewMap(ids);
 		
-		for (Object id : ids){
+		for (double id : ids){
 			
 			if (viewData.getShowTurtle(id)){
 				LineState lines = viewData.getTurtleMap().getLineState(id);
@@ -114,9 +114,9 @@ public class TurtleScreen implements UIAttributes{
 	}
 
 
-	private void updateViewMap(Collection<Object> ids) {
+	private void updateViewMap(Collection<Double> ids) {
 		
-		for (Object id : ids){
+		for (double id : ids){
 			
 			if (!turtleViewMap.getIDs().contains(id)){
 				turtleViewMap.setAttributes(id);				
@@ -129,7 +129,7 @@ public class TurtleScreen implements UIAttributes{
 	}
 
 
-	private void setImageViewSettings(Object id) {
+	private void setImageViewSettings(double id) {
 		ImageView iv = turtleViewMap.getImage(id);
 		
 		if (!root.getChildren().contains(turtleViewMap.getImage(id))){				
@@ -163,7 +163,7 @@ public class TurtleScreen implements UIAttributes{
 	}
 
 
-	private Stage getTurtleStateStage(Object id, Group root) {
+	private Stage getTurtleStateStage(Double id, Group root) {
 		Stage stage = new Stage();
 		stage.setResizable(false);
 		Scene scene = new Scene(root, 200, 120);		
@@ -173,7 +173,7 @@ public class TurtleScreen implements UIAttributes{
 	}
 
 
-	private Group getTurtleStateRoot(Object id) {
+	private Group getTurtleStateRoot(Double id) {
 		Group root = new Group();
 		
 		Text posX = uiBuilder.getText(10, 20, "Position X: " + viewData.getTurtleX(id));

@@ -7,13 +7,13 @@ import java.util.Collection;
  */
 public interface TurtleControllerInterface {
 
-    void removeTellTurtle (Object ID);
+    void removeTellTurtle (double ID);
 
     void clearTellTurtles ();
 
-    void addTurtle(Object ID);
+    void addTurtle(double ID);
 
-    Collection<Object> getTurtlesToModify ();
+    Collection<Double> getTurtlesToModify ();
 
     void addNestedAsk ();
 

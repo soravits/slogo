@@ -36,39 +36,39 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         return turtleMap.getTurtle();
     }
 
-    public TurtleState getTurtle (Object ID){
+    public TurtleState getTurtle (double ID){
         return turtleMap.getTurtle(ID);
     }
     
-    public Object getID () {
+    public double getID () {
         return turtleMap.getCurrentID();
     }
     
-    public Collection<Object> getIDs(){
+    public Collection<Double> getIDs(){
     	return turtleMap.getIDs();
     }
     
-    public boolean getShowTurtle(Object id){
+    public boolean getShowTurtle(double id){
     	return turtleMap.getTurtle(id).getShowTurtle();
     }
     
-    public double getTurtleAngle(Object id){
+    public double getTurtleAngle(double id){
     	return turtleMap.getTurtle(id).getTurtleAngle();
     }
     
-    public double getTurtleX(Object id){
+    public double getTurtleX(double id){
     	return turtleMap.getTurtle(id).getTurtleX();
     }
     
-    public double getTurtleY(Object id){
+    public double getTurtleY(double id){
     	return turtleMap.getTurtle(id).getTurtleY();
     }
     
-    public boolean isPenDown(Object id){
+    public boolean isPenDown(double id){
     	return turtleMap.getLineState(id).isPenDown();
     }
     
-    public void setTurtle (Object ID){
+    public void setTurtle (double ID){
         turtleMap.setCurrentID(ID);
     }
     
@@ -77,7 +77,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         return turtleMap.getLineState();
     }
     
-    public LineState getLineState (Object ID){
+    public LineState getLineState (Double ID){
         return turtleMap.getLineState(ID);
     }
     
@@ -119,19 +119,18 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     
     
     
-    public void updateID (Object ID){
+    public void updateID (double ID){
         turtleMap.setCurrentID(ID);
     }
 
     @Override
-    public void addTurtle (Object ID) {
+    public void addTurtle (double ID) {
         turtleMap.addTurtle(ID);
         turtleController.addTurtle(ID);
-        System.out.println(turtleMap.getIDs().size());
     }
 
     @Override
-    public void removeTellTurtle (Object ID) {
+    public void removeTellTurtle (double ID) {
         turtleController.removeTellTurtle(ID);
     }
 
@@ -142,7 +141,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
 
 
     @Override
-    public Collection<Object> getTurtlesToModify () {
+    public Collection<Double> getTurtlesToModify () {
         return turtleController.getTurtlesToModify();
     }
 
@@ -155,7 +154,18 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     public void subtractNestedAsk () {
         turtleController.subtractNestedAsk();
     }
-    
-    
-    
+
+    public boolean isTell() {
+        return turtleController.isTell();
+    }
+
+    public void setTell(boolean tell) {
+        turtleController.setTell(tell);
+    }
+
+    @Override
+    public void clearAskTurtles() {
+        turtleController.clearAskTurtles();
+    }
+
 }

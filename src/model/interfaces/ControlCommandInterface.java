@@ -11,15 +11,22 @@ public interface ControlCommandInterface {
 
     public WorkspaceState getWorkspace ();
 
-    void removeTellTurtle (Object ID);
+    void removeTellTurtle (double ID);
 
     void clearTellTurtles ();
 
-    void addTurtle(Object ID);
+    void addTurtle(double ID);
 
-    Collection<Object> getTurtlesToModify ();
+    Collection<Double> getTurtlesToModify ();
 
     void addNestedAsk ();
 
     void subtractNestedAsk ();
+
+    public boolean isTell();
+
+    public void setTell(boolean tell);
+
+    public void clearAskTurtles();
+
 }
