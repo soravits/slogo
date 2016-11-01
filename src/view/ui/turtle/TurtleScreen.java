@@ -89,6 +89,8 @@ public class TurtleScreen implements UIAttributes{
 		return turtleSettings;
 	}
 	
+	
+	
 		
 	public void updateTurtles(){
 		resetTurtle();
