@@ -1,9 +1,4 @@
-<<<<<<< HEAD:src/model/commands/Power.java
-package model.commands;
-=======
 package model.commands.general;
-import model.Model;
->>>>>>> master:src/model/commands/general/Power.java
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 

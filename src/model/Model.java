@@ -6,13 +6,10 @@ import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
 import model.interfaces.WorkspaceCommandInterface;
 import view.data.ViewModelInterface;
-import model.interfaces.DisplayCommandInterface;
-import model.interfaces.EmptyInterface;
-import model.interfaces.TurtleCommandInterface;
-import model.interfaces.WorkspaceCommandInterface;
 
 public class Model implements TurtleCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface{
 
+    private TurtleController turtleController;
     private DisplayState display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
@@ -25,6 +22,7 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
         workspace = new WorkspaceState();
         commandHistory = new CommandHistory();
         consoleReturn = new ArrayList<String>();
+        turtleController = new TurtleController();
     }
 
     public TurtleMap getTurtleMap (){
@@ -71,10 +69,6 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     public boolean isPenDown(Object id){
     	return turtleMap.getLineState(id).isPenDown();
     }
-    
-    
-    
-    
     
     public void setTurtle (Object ID){
         turtleMap.setCurrentID(ID);
@@ -127,6 +121,10 @@ public class Model implements TurtleCommandInterface, WorkspaceCommandInterface,
     	commandHistory.clear();
     	clearConsoleReturn();
     	workspace.clear();
+    }
+    
+    public void updateID (Object ID){
+        turtleMap.setCurrentID(ID);
     }
     
     

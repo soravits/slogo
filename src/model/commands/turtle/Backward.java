@@ -1,11 +1,8 @@
 package model.commands.turtle;
 
 import model.TurtleState;
-<<<<<<< HEAD:src/model/commands/Backward.java
 import model.interfaces.TurtleCommandInterface;
-=======
-import model.commands.turtle.Forward;
->>>>>>> master:src/model/commands/turtle/Backward.java
+
 
 public class Backward extends Forward {
 

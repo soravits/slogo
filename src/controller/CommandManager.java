@@ -9,36 +9,40 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import error.InvalidCommandException;
 import model.Model;
+import model.TurtleController;
 import model.abstractcommands.CommandInterface;
 
 public class CommandManager {
-	
-	public static final String COMMAND = "Command";
-	public static final String VARIABLE = "Variable";
-	public static final String CONSTANT = "Constant";
 
-	private CommandParser syntax;
+    public static final String COMMAND = "Command";
+    public static final String VARIABLE = "Variable";
+    public static final String CONSTANT = "Constant";
+
+    private CommandParser syntax;
     private CommandController commandController;
     private Model model;
-	private Map<String, Executor> executions;
+    private Map<String, Executor> executions;
     private CommandExecutor commandExecutor;
     private VariableExecutor variableExecutor;
     private ConstantExecutor constantExecutor;
     private Map<String, Node> userInstructions;
     private List<String> controlStructures;
     private List<String> turtleCommands;
+    
+    private TurtleController turtleController;
 
     public CommandManager(CommandParser syntax, CommandController commandController, Model model){
         this.syntax = syntax;
         this.commandController = commandController;
         this.model = model;
-		executions = new HashMap<String, Executor>();
+        executions = new HashMap<String, Executor>();
         userInstructions = new HashMap<String, Node>();
         commandExecutor = new CommandExecutor();
         variableExecutor = new VariableExecutor();
         constantExecutor = new ConstantExecutor();
         controlStructures = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
         turtleCommands = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
+        turtleController = new TurtleController();
         mapExecutions();
     }
 
@@ -53,7 +57,7 @@ public class CommandManager {
     public Map<String, Node> getUserInstructions(){
         return userInstructions;
     }
-    
+
     public List<String> getTurtleCommands(){
         return turtleCommands;
     }
@@ -86,4 +90,6 @@ public class CommandManager {
         }
         return controlStructures;
     }
+    
+    
 }

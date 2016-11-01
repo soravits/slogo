@@ -1,9 +1,8 @@
 package controller;
 import error.InvalidCommandException;
 import model.Model;
-import model.abstractcommands.Command;
-import model.abstractcommands.CommandInterface;
-import java.lang.reflect.Constructor;
+
+
 public class CommandExecutor extends Executor{
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException{
         if(commandManager.getControlStructures().contains(root.getValue())) {
