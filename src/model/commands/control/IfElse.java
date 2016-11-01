@@ -4,6 +4,7 @@ import controller.Node;
 import controller.Interpreter;
 import model.Model;
 import model.abstractcommands.ControlCommand;
+import model.interfaces.ControlCommandInterface;
 
 /**
  * Created by Soravit on 10/23/2016.
@@ -12,7 +13,7 @@ public class IfElse extends ControlCommand{
 
 	double bool;
 
-	public IfElse(Node root, CommandManager commandManager, Model model) throws Exception{
+	public IfElse(Node root, CommandManager commandManager, ControlCommandInterface model) throws Exception{
 		super(root, commandManager, model);
 		bool = executeTree(root.getChildren().get(0));
 	}

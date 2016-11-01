@@ -1,19 +1,20 @@
 package model.commands.turtle;
 
-import model.Model;
 import model.TurtleState;
-import model.commands.turtle.Forward;
+import model.interfaces.TurtleCommandInterface;
+
 
 public class Backward extends Forward {
 
-    public Backward (double[] parameters, Model model) {
+    public Backward (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
     
     public double[] calculateCoordinates(TurtleState turtle){
         double[] coords = new double[2];
-        coords[0] = -Math.sin(Math.toRadians(turtle.getTurtleAngle()))*this.getParams()[0];
-        coords[1] = -Math.cos(Math.toRadians(turtle.getTurtleAngle()))*this.getParams()[0];
+        double sumD = sumParams();
+        coords[0] = -Math.sin(Math.toRadians(turtle.getTurtleAngle()))*sumD;
+        coords[1] = -Math.cos(Math.toRadians(turtle.getTurtleAngle()))*sumD;
         return coords;
     }
 

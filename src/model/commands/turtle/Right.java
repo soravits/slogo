@@ -1,11 +1,11 @@
 package model.commands.turtle;
 
-import model.Model;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class Right extends TurtleCommand{
 
-    public Right (double[] parameters, Model model) {
+    public Right (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

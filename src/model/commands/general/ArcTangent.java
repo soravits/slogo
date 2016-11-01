@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class ArcTangent extends MathBoolCommand{
 
-    public ArcTangent (double[] parameter, Model model) {
+    public ArcTangent (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

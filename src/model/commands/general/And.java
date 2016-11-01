@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class And extends MathBoolCommand{
 
-    public And (double[] parameters, Model model) {
+    public And (double[] parameters, EmptyInterface model) {
         super(parameters, model);
     }
 

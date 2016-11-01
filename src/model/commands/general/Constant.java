@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class Constant extends MathBoolCommand {
 
-    public Constant (double[] parameter, Model model) {
+    public Constant (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

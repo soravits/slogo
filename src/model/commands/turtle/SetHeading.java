@@ -1,11 +1,11 @@
 package model.commands.turtle;
 
-import model.Model;
 import model.abstractcommands.TurtleCommand;
+import model.interfaces.TurtleCommandInterface;
 
 public class SetHeading extends TurtleCommand{
 
-    public SetHeading (double[] parameters, Model model) {
+    public SetHeading (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 

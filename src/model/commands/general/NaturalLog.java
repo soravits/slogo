@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class NaturalLog extends MathBoolCommand{
 
-    public NaturalLog (double[] parameter, Model model) {
+    public NaturalLog (double[] parameter, EmptyInterface model) {
         super(parameter, model);
     }
 

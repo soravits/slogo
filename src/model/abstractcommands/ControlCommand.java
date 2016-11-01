@@ -1,30 +1,27 @@
 package model.abstractcommands;
 
-import controller.CommandController;
 import controller.CommandManager;
 import controller.Node;
-import controller.Interpreter;
-import error.InvalidCommandException;
 import model.Model;
-import model.interfaces.WorkspaceCommandInterface;
+import model.interfaces.ControlCommandInterface;
 
 /**
  * Created by Soravit on 10/23/2016.
  */
 public abstract class ControlCommand implements CommandInterface {
 
-    private WorkspaceCommandInterface workspace;
+    private ControlCommandInterface controlCommand;
     private Node root;
     private CommandManager commandManager;
 
-    public ControlCommand(Node root, CommandManager commandManager, Model model){
-        workspace = model;
+    public ControlCommand(Node root, CommandManager commandManager, ControlCommandInterface model){
+        controlCommand = model;
         this.root = root;
         this.commandManager = commandManager;
     }
     
-    public WorkspaceCommandInterface getModel(){
-        return workspace;
+    public ControlCommandInterface getModel(){
+        return controlCommand;
     }
     
     public Node getRoot(){

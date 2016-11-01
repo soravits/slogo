@@ -1,11 +1,11 @@
 package model.commands.general;
 
-import model.Model;
 import model.abstractcommands.MathBoolCommand;
+import model.interfaces.EmptyInterface;
 
 public class NotEqual extends MathBoolCommand {
 
-    public NotEqual (double[] parameters, Model model) {
+    public NotEqual (double[] parameters, EmptyInterface model) {
         super(parameters, model);
     }
 

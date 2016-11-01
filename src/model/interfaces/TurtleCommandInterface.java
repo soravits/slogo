@@ -9,7 +9,7 @@ public interface TurtleCommandInterface {
     
     public LineState getLineState();
     
-    public Object getID();
+    public double getID();
     
     public double getNumberOfTurtles();
 }
