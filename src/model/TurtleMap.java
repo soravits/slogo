@@ -45,8 +45,8 @@ public class TurtleMap {
     }
     
     // TELL DIANE TO CALL THIS METHOD!!!!
-    public double[][] getLines() {
-        return turtleMap.get(currentID).getLines().getLastLineDrawn();
+    public double[][] getLines(double ID) {
+        return turtleMap.get(ID).getLines().getLastLineDrawn();
     }
 //    public Collection<LineModel> getLines(){
 //        return turtleMap.get(currentID).getLines().getLines();

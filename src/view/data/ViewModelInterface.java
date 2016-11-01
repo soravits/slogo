@@ -29,4 +29,6 @@ public interface ViewModelInterface{
     
     public void changeActiveTurtle(double ID);
     
+    public double[][] getLines (double ID);
+    
 }

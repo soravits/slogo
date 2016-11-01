@@ -16,9 +16,13 @@ public class LineState {
 
     private List<LineModel> lines;
     private boolean penDown;
+    private boolean isChanged;
+    private LineModel lastLine;
     
     public LineState(){
         lines = new ArrayList<LineModel>();
+        lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
+        lines.add(lastLine);
         penDown = true;
     }
 
@@ -29,11 +33,17 @@ public class LineState {
      */
     public void createLine (Position pos1, Position pos2) {
         if (penDown == true){
-            lines.add(new LineModel(pos1, pos2));
+        	LineModel line = new LineModel(pos1, pos2);
+            lines.add(line);
         }
     }
 
     public double[][] getLastLineDrawn(){
+    	if (lastLine.equals(lines.get(lines.size() - 1))){
+    		LineModel lineToDraw = new LineModel(lastLine.getPosition2(), lastLine.getPosition2());
+    		return lineToDraw.getLine();
+    	}
+    	lastLine = lines.get(lines.size() - 1);
         return lines.get(lines.size() - 1).getLine();
     }
     
