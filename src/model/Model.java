@@ -77,7 +77,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         return turtleMap.getLineState();
     }
     
-    public LineState getLineState (Double ID){
+    public LineState getLineState (double ID){
         return turtleMap.getLineState(ID);
     }
     
@@ -120,6 +120,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     
     
     public void updateID (double ID){
+
         turtleMap.setCurrentID(ID);
     }
 

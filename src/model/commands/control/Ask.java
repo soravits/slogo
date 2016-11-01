@@ -33,6 +33,7 @@ public class Ask extends ControlCommand{
             ret = executeTree(commandRoot.getChildren().get(j));
         }
         getModel().subtractNestedAsk();
+        getModel().setTell(true);
         return ret;
     }
 }

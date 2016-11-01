@@ -12,4 +12,5 @@ public interface TurtleCommandInterface {
     public double getID();
     
     public double getNumberOfTurtles();
+
 }
