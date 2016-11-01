@@ -93,8 +93,6 @@ public class TurtleScreen implements UIAttributes{
 	public void updateTurtles(){
 		resetTurtle();
 		
-		
-		
 		Collection<Double> ids = viewData.getIDs();
 		
 		updateViewMap(ids);
@@ -143,9 +141,22 @@ public class TurtleScreen implements UIAttributes{
 		stage.setX(originX + viewData.getTurtleX(id) + VIEW_TURTLE_STATE_WIDTH/2);
 		stage.setY(originY - viewData.getTurtleY(id) + VIEW_TURTLE_STATE_HEIGHT + TURTLE_SIZE*2);
 		setShowTurtleStateSettings(iv, stage);
+		setClickToChangeActiveState(iv, id);
+				
+		
 	}
 
+	private void setClickToChangeActiveState(ImageView iv, double id){
+		iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		    	
+				viewData.changeActiveTurtle(id);
 
+			    }
+			});
+	}
+	
 	private void setShowTurtleStateSettings(ImageView iv, Stage stage) {
 		iv.setOnMouseEntered(new EventHandler<MouseEvent>() {
 		    @Override
@@ -164,6 +175,7 @@ public class TurtleScreen implements UIAttributes{
 
 			    }
 			});
+		
 	}
 
 

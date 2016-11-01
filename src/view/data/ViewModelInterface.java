@@ -27,4 +27,6 @@ public interface ViewModelInterface{
     
     public boolean isPenDown(double id);
     
+    public void changeActiveTurtle(double ID);
+    
 }

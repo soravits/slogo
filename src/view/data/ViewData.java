@@ -55,6 +55,9 @@ public class ViewData {
     	return viewModelInterface.isPenDown(id);
     }
 	
+	public void changeActiveTurtle(double ID) {
+        viewModelInterface.changeActiveTurtle(ID);
+    }
 	
 	
 	public Collection<String> getConsoleReturn() {
