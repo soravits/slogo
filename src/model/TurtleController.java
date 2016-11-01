@@ -42,6 +42,15 @@ public class TurtleController implements TurtleControllerInterface {
         askTurtles.get(nestedAsk).clear();
     }
 
+    public void changeTurtleActive (double ID){
+        if (currentTellTurtles.contains(ID)){
+            currentTellTurtles.remove(ID);
+        }
+        else{
+            currentTellTurtles.add(ID);
+        }
+        
+    }
     @Override
     public void addTurtle(double ID){
             if (isTell) {

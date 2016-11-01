@@ -32,6 +32,7 @@ public class Ask extends ControlCommand{
         for(int j = 0 ; j < commandRoot.getChildren().size(); j++) {
             ret = executeTree(commandRoot.getChildren().get(j));
         }
+        getModel().setTell(true);
         getModel().subtractNestedAsk();
         return ret;
     }
