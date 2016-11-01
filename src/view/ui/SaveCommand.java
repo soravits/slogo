@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,15 +50,15 @@ public class SaveCommand implements UIAttributes {
 			 
             @Override
             public void handle(ActionEvent arg0) {
-            	//ArrayList<String> historyList = viewData.getHistoryList();
+            	Collection<String> historyList = viewData.getCommandHistory();
             	
             	//testing
-            	ArrayList<String> historyList = new ArrayList<String>();
+            	/*ArrayList<String> historyList = new ArrayList<String>();
             	historyList.add("set pim 30");
             	historyList.add("set diane 20");
-            	historyList.add("fd 100");
+            	historyList.add("fd 100");*/
             	
-            	String commandListString = "";
+            	String commandListString="";
             	for (String each:historyList) {
             		commandListString+=each;
             		commandListString+="\n";

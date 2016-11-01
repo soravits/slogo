@@ -13,9 +13,11 @@ import model.TurtleMap;
  */
 public class ViewData {
 	private ViewModelInterface viewModelInterface;
+	private String fullHistory;
 	
 	public ViewData() {
 		this.viewModelInterface=new Model();
+		this.fullHistory=new String("");
 	}
 	
 	public void sendCommand(String command,Controller controller) throws Exception {
@@ -26,9 +28,42 @@ public class ViewData {
 		this.viewModelInterface=Model;
 	}
 	
-	public TurtleMap getTurtleMap() {
+	public TurtleMap getTurtleMap(){
 		return viewModelInterface.getTurtleMap();
 	}
+
+	public Collection<Double> getIDs(){
+		return viewModelInterface.getIDs();
+	}
+	
+	public boolean getShowTurtle(double id){
+		return viewModelInterface.getShowTurtle(id);
+	}
+	
+	public double getTurtleAngle(double id){
+    	return viewModelInterface.getTurtleAngle(id);
+    }
+	
+	public double getTurtleX(double id){
+    	return viewModelInterface.getTurtleX(id);
+    }
+	
+	public double getTurtleY(double id){
+    	return viewModelInterface.getTurtleY(id);
+    }
+	
+	
+	public boolean isPenDown(double id){
+    	return viewModelInterface.isPenDown(id);
+    }
+	
+	public void changeActiveTurtle(double ID) {
+        viewModelInterface.changeActiveTurtle(ID);
+    }
+	
+	public double[][] getLines (double ID){
+        return viewModelInterface.getLines(ID);
+    }
 	
 	public Collection<String> getConsoleReturn() {
 		return viewModelInterface.getConsoleReturn();
@@ -41,4 +76,5 @@ public class ViewData {
 	public HashMap<String, Double> getWorkspace() {
 		return viewModelInterface.getWorkspace().getListOfVariables();
 	}
+
 }

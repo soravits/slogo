@@ -24,8 +24,6 @@ public class UI implements UIAttributes{
 	private TabPane tabPane = new TabPane();
 	private Group tabArea = new Group();
 	
-	
-	
 	private static final String CSS_FILE_NAME = "resources/UIStyling.css";
 	
 	/**

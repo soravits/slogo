@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 
 public class TurtleViewMap{
@@ -12,7 +13,7 @@ public class TurtleViewMap{
 	
 	public TurtleViewMap(){
 		turtleVisualMap = new HashMap<Object, TurtleViewAttributes>();
-		setAttributes(1);
+		//setAttributes(1);
 	}
 	
 	public Collection<Object> getIDs(){
@@ -23,7 +24,7 @@ public class TurtleViewMap{
 		return turtleVisualMap.get(id).getPenColor();
 	}
 	
-	public Image getImage(Object id){
+	public ImageView getImage(Object id){
 		return turtleVisualMap.get(id).getImage();
 	}
 	
@@ -36,7 +37,10 @@ public class TurtleViewMap{
 		turtleVisualMap.get(id).setPenColor(color);
 	}
 	
-	public void setImage(Object id, Image image){
+//	public void setImage(Object id, Image image){
+//		turtleVisualMap.get(id).setImage(image);
+//	}
+	public void setImage(Object id, ImageView image){
 		turtleVisualMap.get(id).setImage(image);
 	}
 	

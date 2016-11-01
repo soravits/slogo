@@ -12,15 +12,15 @@ import model.Model;
 import model.abstractcommands.CommandInterface;
 
 public class CommandManager {
-	
-	public static final String COMMAND = "Command";
-	public static final String VARIABLE = "Variable";
-	public static final String CONSTANT = "Constant";
 
-	private CommandParser syntax;
+    public static final String COMMAND = "Command";
+    public static final String VARIABLE = "Variable";
+    public static final String CONSTANT = "Constant";
+
+    private CommandParser syntax;
     private CommandController commandController;
     private Model model;
-	private Map<String, Executor> executions;
+    private Map<String, Executor> executions;
     private CommandExecutor commandExecutor;
     private VariableExecutor variableExecutor;
     private ConstantExecutor constantExecutor;
@@ -32,13 +32,13 @@ public class CommandManager {
         this.syntax = syntax;
         this.commandController = commandController;
         this.model = model;
-		executions = new HashMap<String, Executor>();
+        executions = new HashMap<String, Executor>();
         userInstructions = new HashMap<String, Node>();
         commandExecutor = new CommandExecutor();
         variableExecutor = new VariableExecutor();
         constantExecutor = new ConstantExecutor();
-        controlStructures = processControlStructures(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
-        turtleCommands = processTurtleStructures(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
+        controlStructures = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
+        turtleCommands = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
         mapExecutions();
     }
 
@@ -53,7 +53,7 @@ public class CommandManager {
     public Map<String, Node> getUserInstructions(){
         return userInstructions;
     }
-    
+
     public List<String> getTurtleCommands(){
         return turtleCommands;
     }
@@ -77,17 +77,7 @@ public class CommandManager {
         executions.put(CONSTANT, constantExecutor);
     }
 
-    private List<String> processControlStructures(String syntax) {
-        ArrayList<String> controlStructures = new ArrayList<String>();
-        ResourceBundle resources = ResourceBundle.getBundle(syntax);
-        Enumeration<String> iter = resources.getKeys();
-        while (iter.hasMoreElements()) {
-            controlStructures.add(iter.nextElement());
-        }
-        return controlStructures;
-    }
-    
-    private List<String> processTurtleStructures(String syntax){
+    private List<String> processCommandType(String syntax) {
         ArrayList<String> controlStructures = new ArrayList<String>();
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
