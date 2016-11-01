@@ -38,19 +38,16 @@ public class TurtleController implements TurtleControllerInterface {
         currentTellTurtles.clear();
     }
 
-    public void clearAskTurtles(){
-        askTurtles.get(nestedAsk).clear();
-    }
-
     public void changeTurtleActive (double ID){
         if (currentTellTurtles.contains(ID)){
             currentTellTurtles.remove(ID);
         }
         else{
             currentTellTurtles.add(ID);
-        }
-        
+        }  
     }
+    
+    
     @Override
     public void addTurtle(double ID){
             if (isTell) {
@@ -75,6 +72,7 @@ public class TurtleController implements TurtleControllerInterface {
      */
     @Override
     public void addNestedAsk(){
+        isTell = false;
         nestedAsk += 1;
         HashSet<Double> turtles = new HashSet<Double>();
         askTurtles.put(nestedAsk, turtles);
@@ -86,13 +84,9 @@ public class TurtleController implements TurtleControllerInterface {
     @Override
     public void subtractNestedAsk(){
         nestedAsk -= 1;
+        if (nestedAsk == -1){
+            isTell = true;
+        }
     }
 
-    public boolean isTell() {
-        return isTell;
-    }
-
-    public void setTell(boolean tell) {
-        isTell = tell;
-    }
 }

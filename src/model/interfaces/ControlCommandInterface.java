@@ -25,17 +25,4 @@ public interface ControlCommandInterface {
 
     void subtractNestedAsk ();
 
-    public boolean isTell();
-
-    public void setTell(boolean tell);
-
-    public void clearAskTurtles();
-
-    public Collection<Double> getIDs();
-
-    public void setTurtle(double ID);
-
-
-
-
 }
