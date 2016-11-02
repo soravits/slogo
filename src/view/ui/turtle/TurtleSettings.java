@@ -48,6 +48,7 @@ public class TurtleSettings implements UIAttributes{
 	private DisplayError displayError;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;
+	private CheckBox showActiveTurtle;
 	private Stage stage;
 	private Image turtleImage;
 	private TurtleScreen turtle;
@@ -204,7 +205,10 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	private void initActiveTurtleToggle(){
-		CheckBox showActiveTurtle = new CheckBox();
+		showActiveTurtle = new CheckBox();
+		
+		
+		
 		root.getChildren().add(uiBuilder.setControlLayout(showActiveTurtle, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*12, "turtlecontrol"));
 	}
@@ -216,7 +220,7 @@ public class TurtleSettings implements UIAttributes{
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
-			turtle.updateViewMapImages();
+			
 			turtle.getRoot();
 			
 		});	
@@ -256,12 +260,13 @@ public class TurtleSettings implements UIAttributes{
 			try {
 				BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
 				turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
-				
+				turtle.updateViewMapImages();
 				
 			} catch (IOException e) {
 				displayError.displayErrorDialogueBox(uiResources.getString("InvalidTurtleImage"));
 			}	
-		}	
+		}
+		
 			
 			
 		
