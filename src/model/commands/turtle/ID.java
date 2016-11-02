@@ -1,17 +1,17 @@
-package model.commands.general;
+package model.commands.turtle;
 
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
-public class Turtles extends TurtleCommand{
+public class ID extends TurtleCommand{
 
-    public Turtles (double[] parameters, TurtleCommandInterface model) {
+    public ID (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
 
     @Override
     public double execute () throws Exception {
-        return getModel().getNumberOfTurtles();
+        return getModel().getID();
     }
 
 }
