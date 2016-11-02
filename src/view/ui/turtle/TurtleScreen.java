@@ -85,10 +85,12 @@ public class TurtleScreen implements UIAttributes{
 	public TurtleSettings getTurtleSettings(){
 		return turtleSettings;
 	}
+	
+	
 		
 	public void updateTurtles(){		
 		Collection<Double> ids = viewData.getIDs();	
-		for (double id : ids){		
+		for (double id : ids){	
 			
 			updateViewMapKey(id);
 			setViewTurtleStateFromImage(id);	

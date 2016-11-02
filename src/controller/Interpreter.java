@@ -119,7 +119,7 @@ public class Interpreter {
 		while(!queue.isEmpty()){
 			Node tree = queue.poll();
 			trees.add(visitNode(queue, tree));
-            printTree(tree);
+                        printTree(tree);
 			commandManager.executeTree(tree);
 		}
 		return trees;
@@ -186,9 +186,15 @@ public class Interpreter {
             } else if (commandParser.isValid(value)) {
                 String commandName = commandParser.getSymbol(value);
                 int numParams;
-                if(queue.peek().getValue().equals(GROUP_START)){
-                    numParams = 1;
-                }else{
+                if (queue.size() > 0){
+                    if(queue.peek().getValue().equals(GROUP_START)){
+                        numParams = 1;
+                    }
+                    else{
+                        numParams = paramParser.getNumParams(commandName);
+                    }
+                }
+                else{
                     numParams = paramParser.getNumParams(commandName);
                 }
                 for (int i = 0; i < numParams; i++) {
@@ -199,6 +205,7 @@ public class Interpreter {
             }
             return root;
         }catch(Exception e){
+            e.printStackTrace();
             throw new InvalidParametersException(value);
         }
 	}

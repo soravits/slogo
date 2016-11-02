@@ -12,7 +12,7 @@ public class SetPalette extends DisplayCommand{
     @Override
     public double execute () throws Exception {
         double[] colors = {this.getParams()[1], this.getParams()[2], this.getParams()[3]};
-        getModel().getDisplay().setPaletteColors(this.getParams()[0], colors);
+        getModel().setPaletteColors(this.getParams()[0], colors);
         return this.getParams()[0];
     }
 

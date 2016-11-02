@@ -11,7 +11,7 @@ public class GetPenColor extends DisplayCommand{
 
     @Override
     public double execute () throws Exception {
-        return getModel().getDisplay().getPenColor();
+        return getModel().getPenColor();
     }
 
 }

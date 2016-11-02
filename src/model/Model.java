@@ -1,14 +1,18 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import model.interfaces.*;
+import java.util.Observable;
+import model.interfaces.ControlCommandInterface;
+import model.interfaces.DisplayCommandInterface;
+import model.interfaces.EmptyInterface;
+import model.interfaces.TurtleCommandInterface;
+import model.interfaces.WorkspaceCommandInterface;
 import view.data.ViewModelInterface;
 
-public class Model implements ControlCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
+public class Model extends Observable implements ControlCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
 
     private TurtleController turtleController;
-    private DisplayState display;
+    private DisplayCommandInterface display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
     private CommandHistory commandHistory;
@@ -100,13 +104,9 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     public Collection<String> getConsoleReturn(){
         return consoleReturn;
     }
-    
-    @Override
-    public DisplayState getDisplay () {
-        return display;
-    }
 
     public void updateConsoleReturn(Double value){
+        System.out.println("The value added to the console is " + value);
         consoleReturn.add(value.toString());
     }
     
@@ -162,17 +162,69 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         turtleController.subtractNestedAsk();
     }
 
-//    public boolean isTell() {
-//        return turtleController.isTell();
-//    }
-//
-//    public void setTell(boolean tell) {
-//        turtleController.setTell(tell);
-//    }
-//
-//    @Override
-//    public void clearAskTurtles() {
-//        turtleController.clearAskTurtles();
-//    }
+    public void updateView(){
+        setChanged();
+        notifyObservers();
+        clearConsoleReturn();
+    }
 
+    @Override
+    public double getBackGround () {
+        return display.getBackGround();
+    }
+
+    @Override
+    public void setBackGround (double back) {
+        display.setBackGround(back);
+    }
+
+    @Override
+    public double getPenColor () {
+        return display.getPenColor();
+    }
+
+    @Override
+    public void setPenColor (double pencolor) {
+        display.setPenColor(pencolor);   
+    }
+
+    @Override
+    public double getPenSize () {
+        return display.getPenSize();
+    }
+
+    @Override
+    public void setPenSize (double pensize) {
+        display.setPenSize(pensize);
+    }
+
+    @Override
+    public double getPaletteIndex () {
+        return display.getPaletteIndex();
+    }
+
+    @Override
+    public void setPaletteIndex (double paletteindex) {
+        display.setPaletteIndex(paletteindex);
+    }
+
+    @Override
+    public double getShape () {
+        return display.getShape();
+    }
+
+    @Override
+    public void setShape (double shp) {
+        display.setShape(shp);
+    }
+
+    @Override
+    public double[][] getPaletteColors () {
+        return display.getPaletteColors();
+    }
+
+    @Override
+    public void setPaletteColors (Double index, double[] paletteColor) {
+        display.setPaletteColors(index, paletteColor);
+    }  
 }

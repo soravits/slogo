@@ -11,7 +11,7 @@ public class SetShape extends DisplayCommand{
 
     @Override
     public double execute () throws Exception {
-        getModel().getDisplay().setShape(this.getParams()[0]);
+        getModel().setShape(this.getParams()[0]);
         return this.getParams()[0];
     }
 

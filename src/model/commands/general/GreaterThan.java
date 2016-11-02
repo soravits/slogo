@@ -11,14 +11,7 @@ public class GreaterThan extends MathBoolCommand{
 
     @Override
     public double execute () {
-        double first = this.getParams()[0];
-        for (double y : this.getParams()){
-            if (first <= y){
-                return 0;
-            }
-            first = y;
-        }
-        return 1;
+        return (this.getParams()[0] > this.getParams()[1]) ? 1 : 0;
     }
 
 }
