@@ -24,6 +24,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -322,9 +323,7 @@ public class TurtleSettings implements UIAttributes{
 		colorPalette.setOnAction((event) -> {
 			Stage stage = new Stage();
 			Group root = new Group();
-			
-			
-			
+					
 			for (Integer index: indexColorMap.keySet()){		
 				Rectangle rect = new Rectangle();
 				rect.setHeight(COLOR_RECT_HEIGHT);
@@ -352,7 +351,26 @@ public class TurtleSettings implements UIAttributes{
 		Button imagePalette = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*18, 
 				uiResources.getString("ImagePaletteButton"), "turtlecontrol");
 		imagePalette.setOnAction((event) -> {
+			Stage stage = new Stage();
+			Group root = new Group();
+					
+			for (Integer index: indexImageMap.keySet()){		
+				ImageView iv = new ImageView(indexImageMap.get(index));
+				iv.setX(PALETTE_X);
+				iv.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*2*(index-1));
+				iv.setFitHeight(COLOR_RECT_HEIGHT*2);
+				iv.setFitWidth(COLOR_RECT_HEIGHT*2);
+				
+				Text t = new Text(index.toString());
+				t.setX(PALETTE_X*2 + COLOR_RECT_WIDTH);
+				t.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*2*(index-1) + 20);
+				root.getChildren().addAll(t, iv);
+				
+			}
 			
+			Scene scene = new Scene(root, 200, 200);
+			stage.setScene(scene);
+			stage.show();
 		});	
 		
 		root.getChildren().add(imagePalette);
