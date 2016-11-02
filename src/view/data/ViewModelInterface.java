@@ -27,4 +27,10 @@ public interface ViewModelInterface{
     
     public boolean isPenDown(double id);
     
+    public void changeActiveTurtle(double ID);
+    
+    public double[][] getLines (double ID);
+    
+    public Collection<Double> getTurtlesToModify();
+    
 }

@@ -16,8 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.LineModel;
-import model.LineState;
 import view.data.ViewData;
 import view.ui.UIAttributes;
 import view.ui.UIBuilder;
@@ -43,6 +41,8 @@ public class TurtleScreen implements UIAttributes{
 	private static final int TURTLE_X = 10;
 	private static final int TURTLE_Y = 55;
 	private static final int TURTLE_SIZE = 20;
+	private static final int VIEW_TURTLE_STATE_HEIGHT = 120;
+	private static final int VIEW_TURTLE_STATE_WIDTH = 200;
 	
 	private int canvasWidth;
 	private int canvasHeight;
@@ -76,8 +76,7 @@ public class TurtleScreen implements UIAttributes{
 	public Pane getRoot(){
 		setCanvas();
 		return root;
-	}
-	
+	}	
 	
 	public int getCurrID(){
 		return currID;
@@ -86,26 +85,18 @@ public class TurtleScreen implements UIAttributes{
 	public TurtleSettings getTurtleSettings(){
 		return turtleSettings;
 	}
-	
 		
-	public void updateTurtles(){
-		resetTurtle();
-		
-		
-		
-		Collection<Double> ids = viewData.getIDs();
-		
-		updateViewMap(ids);
-		
-		for (double id : ids){
+	public void updateTurtles(){		
+		Collection<Double> ids = viewData.getIDs();	
+		for (double id : ids){		
 			
-			if (viewData.getShowTurtle(id)){
-				LineState lines = viewData.getTurtleMap().getLineState(id);
-				viewTurtlePath(lines);				
-				double posX = originX + viewData.getTurtleX(id);
-				double posY = originY - viewData.getTurtleY(id);
-				double angle = viewData.getTurtleAngle(id);				
-				viewTurtle(angle, posX, posY, id);
+			updateViewMapKey(id);
+			setViewTurtleStateFromImage(id);	
+			addTurtleToScene(id);			
+			drawTurtlePath(id);				
+			
+			if (viewData.getShowTurtle(id)){											
+				formatTurtle(id);
 			}		
 			else {
 				root.getChildren().remove(turtleViewMap.getImage(id));
@@ -113,65 +104,73 @@ public class TurtleScreen implements UIAttributes{
 		}	
 	}
 
-
-	private void updateViewMap(Collection<Double> ids) {
-		
-		for (double id : ids){
-			
-			if (!turtleViewMap.getIDs().contains(id)){
-				turtleViewMap.setAttributes(id);				
-			}
-			setImageViewSettings(id);
-			
-		}
-		
-		
+	private void updateViewMapKey(double id) {			
+		if (!turtleViewMap.getIDs().contains(id)){
+			turtleViewMap.setAttributes(id);							
+		}	
 	}
 
-
-	private void setImageViewSettings(double id) {
-		ImageView iv = turtleViewMap.getImage(id);
-		
+	private void addTurtleToScene(double id){
 		if (!root.getChildren().contains(turtleViewMap.getImage(id))){				
-			root.getChildren().add(iv);
+			root.getChildren().add(turtleViewMap.getImage(id));
 		}
+	}
+	
+	public void updateViewMapImages(){
+		for (double id : turtleViewMap.getIDs()){
+			if (viewData.getTurtlesToModify().contains(id)){
+				root.getChildren().remove(turtleViewMap.getImage(id));
+				turtleViewMap.setImage(id, new ImageView(turtleSettings.getTurtleImage()));
+				formatTurtle(id);
+				root.getChildren().add(turtleViewMap.getImage(id));
+				setViewTurtleStateFromImage(id);			
+			}		
+		}		
+	}
+
+	private void setViewTurtleStateFromImage(double id) {
+		ImageView iv = turtleViewMap.getImage(id);
 
 		Group root = getTurtleStateRoot(id);
-		Stage stage = getTurtleStateStage(id, root);				
+		Stage stage = getTurtleStateStage(id, root);	
+		stage.setX(originX + viewData.getTurtleX(id) + VIEW_TURTLE_STATE_WIDTH/2);
+		stage.setY(originY - viewData.getTurtleY(id) + VIEW_TURTLE_STATE_HEIGHT + TURTLE_SIZE*2);
 		setShowTurtleStateSettings(iv, stage);
+		setClickToChangeActiveState(iv, id);		
 	}
 
-
+	private void setClickToChangeActiveState(ImageView iv, double id){
+		iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {	    	
+				viewData.changeActiveTurtle(id);
+			    }
+			});
+	}
+	
 	private void setShowTurtleStateSettings(ImageView iv, Stage stage) {
 		iv.setOnMouseEntered(new EventHandler<MouseEvent>() {
 		    @Override
-		    public void handle(MouseEvent mouseEvent) {
-		    	
+		    public void handle(MouseEvent mouseEvent) {		    	
 				stage.show(); 
-
 			    }
-			});
-		
+			});		
 		iv.setOnMouseExited(new EventHandler<MouseEvent>() {
 		    @Override
 		    public void handle(MouseEvent mouseEvent) {
-		    	
 				stage.hide();
-
 			    }
-			});
+			});	
 	}
-
 
 	private Stage getTurtleStateStage(Double id, Group root) {
 		Stage stage = new Stage();
 		stage.setResizable(false);
-		Scene scene = new Scene(root, 200, 120);		
+		Scene scene = new Scene(root, VIEW_TURTLE_STATE_WIDTH, VIEW_TURTLE_STATE_HEIGHT);		
 		stage.setScene(scene);
 		stage.setTitle("Turtle " + id.toString());
 		return stage;
 	}
-
 
 	private Group getTurtleStateRoot(Double id) {
 		Group root = new Group();
@@ -186,13 +185,11 @@ public class TurtleScreen implements UIAttributes{
 		return root;
 	}
 
-
-	private void resetTurtle() {
+	public void resetTurtle() {
 		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
 		turtleView.beginPath();
 		turtleView.moveTo(originX, originY);
-	}
-	
+	}	
 	
 	private void makeCanvas(){				
 		Canvas turtleCanvas = new Canvas(canvasWidth, canvasHeight);
@@ -202,7 +199,6 @@ public class TurtleScreen implements UIAttributes{
 		root.getChildren().add(turtleCanvas);		
 	}
 	
-	
 	private void setCanvas(){
 		Paint color = turtleSettings.getBackgroundColor();		
 		BackgroundFill backgroundColor = new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY);
@@ -210,23 +206,21 @@ public class TurtleScreen implements UIAttributes{
 		root.setBackground(background);
 	}
 	
-
-	private void viewTurtlePath(LineState lines){
-		Collection<LineModel> linePoints = lines.getLines();
-		
-		for (LineModel line : linePoints){
-			
-			turtleView.strokeLine(
-					originX + line.getPosition1().getX(), 
-					originY - line.getPosition1().getY(),
-					originX + line.getPosition2().getX(),
-					originY - line.getPosition2().getY()
-			);				
-		}
+	private void drawTurtlePath(double id){	
+		double [][] line = viewData.getLines(id);			
+		turtleView.strokeLine(
+				originX + line[0][0], 
+				originY - line[0][1],
+				originX + line[1][0],
+				originY - line[1][1]
+		);						
 	}
-	
-	
-	private void viewTurtle(double angle, double posX, double posY, Object id){
+		
+	private void formatTurtle(double id){
+		double posX = originX + viewData.getTurtleX(id);
+		double posY = originY - viewData.getTurtleY(id);
+		double angle = viewData.getTurtleAngle(id);	
+		
 		ImageView iv = turtleViewMap.getImage(id);
 		iv.setRotate(angle);
 		iv.setFitWidth(TURTLE_SIZE);
@@ -234,6 +228,5 @@ public class TurtleScreen implements UIAttributes{
 		iv.setX(posX - TURTLE_SIZE/2);
 		iv.setY(posY - TURTLE_SIZE/2);
 	}	
-	
 	
 }

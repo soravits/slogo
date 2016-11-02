@@ -13,9 +13,11 @@ import model.TurtleMap;
  */
 public class ViewData {
 	private ViewModelInterface viewModelInterface;
+	private String fullHistory;
 	
 	public ViewData() {
 		this.viewModelInterface=new Model();
+		this.fullHistory=new String("");
 	}
 	
 	public void sendCommand(String command,Controller controller) throws Exception {
@@ -55,7 +57,17 @@ public class ViewData {
     	return viewModelInterface.isPenDown(id);
     }
 	
+	public void changeActiveTurtle(double ID) {
+        viewModelInterface.changeActiveTurtle(ID);
+    }
 	
+	public double[][] getLines (double ID){
+        return viewModelInterface.getLines(ID);
+    }
+	
+	public Collection<Double> getTurtlesToModify () {
+        return viewModelInterface.getTurtlesToModify();
+    }
 	
 	public Collection<String> getConsoleReturn() {
 		return viewModelInterface.getConsoleReturn();
@@ -68,4 +80,5 @@ public class ViewData {
 	public HashMap<String, Double> getWorkspace() {
 		return viewModelInterface.getWorkspace().getListOfVariables();
 	}
+
 }

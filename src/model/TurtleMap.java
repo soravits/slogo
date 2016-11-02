@@ -7,7 +7,7 @@ import java.util.Map;
 public class TurtleMap {
 
     private double currentID;
-    private HashMap<Double, TurtlePair> turtleMap;
+    private Map<Double, TurtlePair> turtleMap;
     
     public TurtleMap(){
         currentID = 1.0;
@@ -45,8 +45,8 @@ public class TurtleMap {
     }
     
     // TELL DIANE TO CALL THIS METHOD!!!!
-    public LineModel getLines() {
-        return turtleMap.get(currentID).getLines().getLastLineDrawn();
+    public double[][] getLines(double ID) {
+        return turtleMap.get(ID).getLines().getLastLineDrawn();
     }
 //    public Collection<LineModel> getLines(){
 //        return turtleMap.get(currentID).getLines().getLines();

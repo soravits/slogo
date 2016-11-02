@@ -12,6 +12,8 @@ import java.util.Collection;
 public interface ControlCommandInterface {
 
     public WorkspaceState getWorkspace ();
+    
+    Collection<Double> getIDs();
 
     void removeTellTurtle (double ID);
 
@@ -24,18 +26,5 @@ public interface ControlCommandInterface {
     void addNestedAsk ();
 
     void subtractNestedAsk ();
-
-    public boolean isTell();
-
-    public void setTell(boolean tell);
-
-    public void clearAskTurtles();
-
-    public Collection<Double> getIDs();
-
-    public void setTurtle(double ID);
-
-
-
 
 }

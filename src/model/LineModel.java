@@ -10,6 +10,13 @@ public class LineModel {
         position2 = pos2;
     }
     
+    public double[][] getLine() {
+        double[] point1 = {position1.getX(), position1.getY()};
+        double[] point2 = {position2.getX(), position2.getY()};
+        double[][] points = {point1, point2};
+        return points;
+    }
+    
     public Position getPosition1(){
         return position1;
     }
