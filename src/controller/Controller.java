@@ -58,7 +58,6 @@ public class Controller extends Observable implements Observer{
         view.updateViewModel(model);
         setChanged();
         notifyObservers();
-        //System.out.println("The controller updated teh model");
     }
    
 }

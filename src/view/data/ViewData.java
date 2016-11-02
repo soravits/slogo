@@ -85,15 +85,15 @@ public class ViewData {
 	}
 	
 	public double getPenColor () {
-        return getDisplayState().getPenColor();
+        return viewModelInterface.getPenColor();
     }
 	
 	public double getBackGround (){
-		return getDisplayState().getBackGround();
+		return viewModelInterface.getBackGround();
     }
 	
 	public double getPenSize () {
-		return getDisplayState().getPenSize();
+		return viewModelInterface.getPenSize();
     }
 	
 	public void setBackGround (int backIndex,Controller controller) throws Exception {
