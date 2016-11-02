@@ -41,7 +41,6 @@ public class UserInstructionExecutor extends Executor{
             }
             return ret;
         }catch(Exception e){
-            e.printStackTrace();
             throw new InvalidCommandException(root.getValue());
         }
     }
