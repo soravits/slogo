@@ -11,7 +11,7 @@ public class Tangent extends MathBoolCommand{
 
     @Override
     public double execute () throws Exception {
-        return Math.tan(Math.toRadians(this.getParams()[0]));
+        return Math.tan(Math.toRadians(normalizeAngle(this.getParams()[0])));
     }
 
 }

@@ -27,16 +27,11 @@ public class TurtleMap {
     	return turtleMap.keySet();
     }
     
-//    public Collection<TurtlePair> getTurtles(){
-//        return turtleMap.values();
-//    }
-    
     public TurtleState getTurtle(){
         return turtleMap.get(currentID).getTurtle();
     }
 
     public TurtleState getTurtle(double ID){
-        //currentID = ID;
         return turtleMap.get(ID).getTurtle();
     }
     
@@ -44,9 +39,6 @@ public class TurtleMap {
     public double[][] getLines(double ID) {
         return turtleMap.get(ID).getLines().getLastLineDrawn();
     }
-//    public Collection<LineModel> getLines(){
-//        return turtleMap.get(currentID).getLines().getLines();
-//    }
     
     public LineState getLineState(){
         return turtleMap.get(currentID).getLines();

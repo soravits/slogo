@@ -11,7 +11,7 @@ public class Cosine extends MathBoolCommand{
 
     @Override
     public double execute () throws Exception {
-        return Math.cos(Math.toRadians(this.getParams()[0]));
+        return Math.cos(Math.toRadians(normalizeAngle(this.getParams()[0])));
     }
 
 }
