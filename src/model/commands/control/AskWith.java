@@ -29,8 +29,8 @@ public class AskWith extends ControlCommand {
                 getModel().clearTellTurtles();
                 getModel().addTurtle(turtle);
             double x = executeTree(conditionRoot.getChildren().get(0));
-            System.out.println("turtle ID = " + turtle);
-            System.out.println("x" + x);
+//            System.out.println("turtle ID = " + turtle);
+//            System.out.println("x" + x);
             if(x != 0){
                     trueTurtles.add(turtle);
                 }

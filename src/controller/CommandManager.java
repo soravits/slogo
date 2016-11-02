@@ -27,6 +27,7 @@ public class CommandManager {
     private Map<String, Node> userInstructions;
     private List<String> controlStructures;
     private List<String> turtleCommands;
+    private List<String> displayCommands;
 
     public CommandManager(CommandParser syntax, CommandController commandController, Model model){
         this.syntax = syntax;
@@ -39,6 +40,7 @@ public class CommandManager {
         constantExecutor = new ConstantExecutor();
         controlStructures = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.CONTROL_STRUCTURES);
         turtleCommands = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.TURTLE_COMMANDS);
+        displayCommands = processCommandType(Interpreter.RESOURCE_PACKAGE + File.separator + Interpreter.DISPLAY_COMMANDS);
         mapExecutions();
     }
 
@@ -61,6 +63,10 @@ public class CommandManager {
     public double executeCommand(CommandInterface command) throws Exception {
         commandController.setCommand(command);
         return commandController.execute();
+    }
+
+    public List<String> getDisplayCommands(){
+        return displayCommands;
     }
 
     public void addInstruction(String commandName, Node root){
