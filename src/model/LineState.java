@@ -1,9 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,13 +13,10 @@ public class LineState {
 
     private List<LineModel> lines;
     private boolean penDown;
-    private boolean isChanged;
     private LineModel lastLine;
     
     public LineState(){
-        lines = new ArrayList<LineModel>();
-        lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
-        lines.add(lastLine);
+        clearLine();
         penDown = true;
     }
 
@@ -33,7 +27,7 @@ public class LineState {
      */
     public void createLine (Position pos1, Position pos2) {
         if (penDown == true){
-        	LineModel line = new LineModel(pos1, pos2);
+            LineModel line = new LineModel(pos1, pos2);
             lines.add(line);
         }
     }
@@ -48,17 +42,12 @@ public class LineState {
     }
     
     /**
-     * return Iterator for each line
-     */
-    public Collection<LineModel> getLines () {
-        return lines;
-    }
-
-    /**
      * Clear all of the points from the line
      */
     public void clearLine () {
-        lines.clear();
+        lines = new ArrayList<LineModel>();
+        lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
+        lines.add(lastLine);
     }
 
     /**

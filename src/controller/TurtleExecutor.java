@@ -18,16 +18,25 @@ public class TurtleExecutor extends Executor{
         setCommandInterface(TurtleCommandInterface.class);
         double ret = 0;
         if(!root.getIsFoundTurtleCommand()) {
-            for (int i = 0; i < root.getChildren().size(); i++) {
-                root.getChildren().get(i).setFoundTurtleCommand(true);
-            }
+            setFoundTurtle(root);
             for(double d : model.getTurtlesToModify()){
                 model.setTurtle(d);
                 ret = super.execute(root, executor, model);
             }
         }else{
             ret = super.execute(root, executor, model);
+            System.out.println(ret);
         }
         return ret;
+    }
+    
+    private void setFoundTurtle(Node root){
+        if (root.getChildren() == null){
+            return;
+        }
+        for (int i = 0; i < root.getChildren().size(); i++) {
+            root.getChildren().get(i).setFoundTurtleCommand(true);
+            setFoundTurtle(root.getChildren().get(i));
+        }
     }
 }
