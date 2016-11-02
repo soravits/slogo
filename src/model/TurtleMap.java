@@ -7,7 +7,7 @@ import java.util.Map;
 public class TurtleMap {
 
     private double currentID;
-    private HashMap<Double, TurtlePair> turtleMap;
+    private Map<Double, TurtlePair> turtleMap;
     
     public TurtleMap(){
         currentID = 1.0;
