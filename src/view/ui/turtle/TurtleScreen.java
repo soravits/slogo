@@ -140,21 +140,16 @@ public class TurtleScreen implements UIAttributes{
 	public void setActiveTurtleToggle(){
 			
 		boolean showActive = turtleSettings.getActiveTurtleToggle();
-		System.out.println(showActive);
 		
-		if (showActive){
-			for (double id : activeTurtles){
+		for (double id : turtleViewMap.getIDs()){
+			if (activeTurtles.contains(id) && showActive){
 				showActiveTurtle(id);
-				
 			}
-		}
-		else{
-			for (double id : turtleViewMap.getIDs()){
+			else{
 				dontShowActiveTurtle(id);
 			}
+			
 		}
-		
-		
 	}
 
 
@@ -205,6 +200,8 @@ public class TurtleScreen implements UIAttributes{
 		    @Override
 		    public void handle(MouseEvent mouseEvent) {	    	
 				viewData.changeActiveTurtle(id);
+				setActiveTurtleToggle();
+				getRoot();
 			    }
 			});
 	}
