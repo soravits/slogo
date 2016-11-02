@@ -82,11 +82,11 @@ public class CommandHistoryWindow implements UIAttributes{
 		Button button=new Button("Redo");
 		button.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {  
-		    	commandLine.setCommand(command);
+		    	//commandLine.setCommand(command);
 		    	try {
-					window.updateViewData();
+					window.updateViewData(command);
 					window.updateUI();
-					commandLine.setCommand("");
+					//commandLine.setCommand("");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

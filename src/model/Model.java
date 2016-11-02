@@ -12,7 +12,7 @@ import view.data.ViewModelInterface;
 public class Model extends Observable implements ControlCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
 
     private TurtleController turtleController;
-    private DisplayCommandInterface display;
+    private DisplayState display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
     private CommandHistory commandHistory;
@@ -226,5 +226,11 @@ public class Model extends Observable implements ControlCommandInterface, Worksp
     @Override
     public void setPaletteColors (Double index, double[] paletteColor) {
         display.setPaletteColors(index, paletteColor);
-    }  
+    }
+
+	@Override
+	public DisplayState getDisplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}  
 }
