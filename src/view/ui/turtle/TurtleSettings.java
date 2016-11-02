@@ -18,6 +18,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -215,6 +216,7 @@ public class TurtleSettings implements UIAttributes{
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
+			turtle.updateViewMapImages();
 			turtle.getRoot();
 			
 		});	
@@ -254,10 +256,16 @@ public class TurtleSettings implements UIAttributes{
 			try {
 				BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
 				turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
+				
+				
 			} catch (IOException e) {
-				displayError.displayErrorDialogueBox("File selected is not a valid image file");
+				displayError.displayErrorDialogueBox(uiResources.getString("InvalidTurtleImage"));
 			}	
 		}	
+			
+			
+		
+			
 	}
 	
 }
