@@ -24,15 +24,14 @@ public class Window implements UIAttributes{
 	private Workspace workspace;
 	private Stage stage;
 	private LoadCommand loadCommand;
-
+	private SaveCommand saveCommand;
 	private ViewData viewData;
 	private Controller controller;
 	
 	private int xSize, ySize;
 	
 	private Group root = new Group();
-	
-	
+
 	public Window(Stage stage, int xSize, int ySize){
 		this.stage = stage;
 		this.xSize = xSize;
@@ -46,7 +45,6 @@ public class Window implements UIAttributes{
 	public Group getRoot(){		
 		return root;
 	}
-	
 
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
@@ -57,9 +55,10 @@ public class Window implements UIAttributes{
 		workspace = new Workspace(xSize,this,commandLine);
 		console = new Console(ySize, xSize);
 		loadCommand = new LoadCommand(this);
+		saveCommand = new SaveCommand(this);
 		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot(),loadCommand.getRoot());
+				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
 
 		makeResetButton();
 	}
