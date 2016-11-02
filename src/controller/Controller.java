@@ -17,7 +17,7 @@ import java.util.Observer;
  *
  * @author Soravit
  */
-public class Controller implements Observer{
+public class Controller extends Observable implements Observer{
     private Model model;
     private Interpreter interpreter;
     private ViewData view;
@@ -56,6 +56,8 @@ public class Controller implements Observer{
     @Override
     public void update (Observable o, Object arg) {
         view.updateViewModel(model);
+        setChanged();
+        notifyObservers();
         System.out.println("The controller updated teh model");
     }
    

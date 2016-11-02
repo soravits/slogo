@@ -16,9 +16,7 @@ public class LineState {
     private LineModel lastLine;
     
     public LineState(){
-        lines = new ArrayList<LineModel>();
-        lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
-        lines.add(lastLine);
+        clearLine();
         penDown = true;
     }
 
@@ -47,7 +45,9 @@ public class LineState {
      * Clear all of the points from the line
      */
     public void clearLine () {
-        lines.clear();
+        lines = new ArrayList<LineModel>();
+        lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
+        lines.add(lastLine);
     }
 
     /**
