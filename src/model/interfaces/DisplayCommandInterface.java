@@ -22,7 +22,7 @@ public interface DisplayCommandInterface {
 
     void setShape (double shp);
 
-    double[][] getPaletteColors ();
+    int[][] getPaletteColors ();
 
-    void setPaletteColors (Double index, double[] paletteColor);
+    void setPaletteColors (int index, int[] paletteColor);
 }

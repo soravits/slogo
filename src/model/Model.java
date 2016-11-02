@@ -219,12 +219,12 @@ public class Model extends Observable implements ControlCommandInterface, Worksp
     }
 
     @Override
-    public double[][] getPaletteColors () {
+    public int[][] getPaletteColors () {
         return display.getPaletteColors();
     }
 
     @Override
-    public void setPaletteColors (Double index, double[] paletteColor) {
+    public void setPaletteColors (int index, int[] paletteColor) {
         display.setPaletteColors(index, paletteColor);
     }
 

@@ -56,9 +56,9 @@ public interface ViewModelInterface{
     
     public void setShape (double shp);
 
-    public double[][] getPaletteColors ();
+    public int[][] getPaletteColors ();
 
-    public void setPaletteColors (Double index, double[] paletteColor);
+    public void setPaletteColors (int index, int[] paletteColor);
     
     
 }

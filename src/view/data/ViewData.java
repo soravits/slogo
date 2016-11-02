@@ -96,15 +96,20 @@ public class ViewData {
 		return viewModelInterface.getPenSize();
     }
 	
-	public void setBackGround (int backIndex,Controller controller) throws Exception {
-        sendCommand("setbackground "+backIndex,controller);
+	public void setBackGround (int backIndex, Controller controller) throws Exception {
+		
+        sendCommand("setbackground " + backIndex, controller);
     }
+	
+	public void setPenSize (Double penSize, Controller controller) throws Exception {
+		sendCommand("setpensize " +penSize.toString(), controller);
+	}
 	
 	public void setPenColor (int pencolorIndex,Controller controller) throws Exception {
 		sendCommand("setpencolor "+pencolorIndex,controller);
     }
 	
-	public void setPenSize (double pensize,Controller controller) throws Exception{
+	public void setShape (double pensize,Controller controller) throws Exception{
 		sendCommand("setshape "+pensize,controller);
         //penSize = pensize;
     }
