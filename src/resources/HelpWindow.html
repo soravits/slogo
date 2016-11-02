@@ -72,6 +72,37 @@
 			<p><strong>SHOWING?, SHOWINGP</strong><br> 
 			Returns 1 if turtle is showing, 0 if it is hiding</p>
 			
+		<h2>Multiple Turtle Commands</h2>
+			<p><strong>ID</strong><br>
+			returns current active turtle's ID number<br>
+			note, there is technically only one "active turtle" at any 
+			given time since each command is run once for each active turtle, 
+			i.e., this value can always be used to identify the current turtle running the command</p>
+			
+			<p><strong>TURTLES</strong><br>
+			returns number of turtles created so far
+			
+			<p><strong>TELL</strong> [ <i>turtle(s)</i> ]<br>
+			sets turtles that will follow commands hereafter
+			returns last value in turtles list
+			note, if turtle has not previously existed, it is created and placed at the home location
+			note, if more than one turtle is active, commands run return value associated with the last active turtle
+			
+			<p><strong>ASK</strong> [ <i>turtle(s)</i> ] [ <i>commands</i> ]<br>
+			tell turtles given in first list to run commands given in the second list
+			returns result of last command run note, after commands are run, 
+			currently active list of turtles returns to that set by the last TELL command 
+			(or default active turtle if TELL never given) <br>
+			note, if more than one turtle is active, commands run return value associated with the last active turtle
+			
+			<p><strong>ASKWITH</strong [ <i>condition</i> ] [ <i>commands</i> ]<br>
+			tell turtles matching given condition to run commands given in the second list
+			returns result of last command run note, after commands are run, 
+			currently active list of turtles returns to that set by the last TELL command 
+			(or default active turtle if TELL never given) <br>
+			note, if more than one turtle is active, commands run return value associated with the last active turtle
+					
+			
 		<h2>Math Operations</h2>
 			
 			<p><strong>SUM <i>expr1 expr2</i>, + <i>expr1 expr2</i></strong><br> 
@@ -142,7 +173,36 @@
 			
 			<p><strong>NOT <i>test</i></strong><br> 
 			returns 1 if <i>test</i> is 0 and 0 if <i>test</i> is non-zero</p>
+			
+		<h2>Display Commands</h2>
 		
+			<p><strong>SETBACKGROUND, SETBG</strong> <i>index</i><br>
+			sets background color of screen to that represented by index
+			returns given index</p>
+			
+			<p><strong>SETPENCOLOR, SETPC</strong> <i>index</i><br>
+			sets color of the pen to that represented by index
+			returns given index</p>
+			
+			<p><strong>SETPENSIZE, SETPS</strong> <i>index</i><br>
+			sets size of the pen to be pixels thickness
+			returns given pixels</p>
+			
+			<p><strong>SETSHAPE, SETSH</strong> <i>index</i><br>
+			sets shape of turtle to that represented by index
+			returns given index</p>
+			
+			<p><strong>SETSHAPE, SETSH</strong> <i>index r g b</i><br>
+			sets color corresponding at given index to given r g b color values
+			returns given index
+			note, color component values are nonnegative integers less than 256 specifying an amount of red, green, and blue</p>
+		
+			<p><strong>PENCOLOR, PC</strong><br>
+			returns turtle's current color index</p>
+			
+			<p><strong>SHAPE, SH</strong><br>
+			returns turtle's current shape index</p>
+			
 		<h2>Variables, Control Structures, and User-Defined Commands</h2>
 		
 			<p><strong>MAKE <i>variable expr</i>, SET <i>variable expr</i></strong><br> 

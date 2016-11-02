@@ -8,7 +8,7 @@ import model.WorkspaceState;
 
 public interface ViewModelInterface{
     
-	public TurtleMap getTurtleMap();
+    public TurtleMap getTurtleMap();
 	
     public WorkspaceState getWorkspace ();
     
@@ -35,6 +35,30 @@ public interface ViewModelInterface{
     public Collection<Double> getTurtlesToModify();
     
     public DisplayState getDisplay();
+    
+    public double getBackGround ();
+    
+    public void setBackGround (double back);
+    
+    public double getPenColor ();
+    
+    public void setPenColor (double pencolor);
+    
+    public double getPenSize ();
+    
+    public void setPenSize (double pensize);
+
+    public double getPaletteIndex ();
+
+    public void setPaletteIndex (double paletteindex);
+
+    public double getShape ();
+    
+    public void setShape (double shp);
+
+    public double[][] getPaletteColors ();
+
+    public void setPaletteColors (Double index, double[] paletteColor);
     
     
 }

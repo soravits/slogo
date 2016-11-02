@@ -11,7 +11,7 @@ public class Sine extends MathBoolCommand{
 
     @Override
     public double execute () {
-        return Math.sin(Math.toRadians(this.getParams()[0]));
+        return Math.sin(Math.toRadians(normalizeAngle(this.getParams()[0])));
     }
 
 }
