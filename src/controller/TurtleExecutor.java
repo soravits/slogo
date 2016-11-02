@@ -16,16 +16,18 @@ public class TurtleExecutor extends Executor{
     public double execute(Node root, CommandManager executor, Model model) throws InvalidCommandException {
         setPackage(TURTLE_COMMAND_PACKAGE);
         setCommandInterface(TurtleCommandInterface.class);
+        System.out.println("Command being run is: " + root.getValue());
+        System.out.println("IsFoundTurtleCommand = " + root.getIsFoundTurtleCommand());
         double ret = 0;
         if(!root.getIsFoundTurtleCommand()) {
             setFoundTurtle(root);
             for(double d : model.getTurtlesToModify()){
+                System.out.println("Current Model is : " + d);
                 model.setTurtle(d);
                 ret = super.execute(root, executor, model);
             }
         }else{
             ret = super.execute(root, executor, model);
-            //System.out.println(ret);
         }
         return ret;
     }
