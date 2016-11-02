@@ -140,7 +140,7 @@ public class TurtleScreen implements UIAttributes{
 	public void setActiveTurtleToggle(){
 			
 		boolean showActive = turtleSettings.getActiveTurtleToggle();
-		System.out.println(showActive);
+		//System.out.println(showActive);
 		
 		if (showActive){
 			for (double id : activeTurtles){
