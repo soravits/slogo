@@ -4,5 +4,4 @@ import model.WorkspaceState;
 public interface WorkspaceCommandInterface {
 
     public WorkspaceState getWorkspace ();
-
 }

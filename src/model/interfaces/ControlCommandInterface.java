@@ -26,5 +26,4 @@ public interface ControlCommandInterface {
     void addNestedAsk ();
 
     void subtractNestedAsk ();
-
 }

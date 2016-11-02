@@ -20,11 +20,7 @@ public class MakeUserInstruction extends ControlCommand{
 	@Override
 	public double execute() {
 		try{
-			if(getRoot().getChildren().size() == 3){
-				commandName = getRoot().getChildren().get(0).getValue();
-			}else{
-				return 0;
-			}
+			commandName = getRoot().getChildren().get(0).getValue();
 			addInstruction(commandName, getRoot());
 			return 1;
 		}catch(Exception e){
