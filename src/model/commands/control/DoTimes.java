@@ -40,7 +40,8 @@ public class DoTimes extends ControlCommand{
         }
         if(exists){
             workspace.addVariable(variable, currValue);
-        }else{
+        }
+        else{
             workspace.removeVariable(variable);
         }
         return ret;

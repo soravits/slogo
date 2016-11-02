@@ -76,11 +76,6 @@ public class Position implements Cloneable{
         yPosition = 0;
     }
     
-    @Override
-    public String toString(){
-        return xPosition + " " + yPosition;
-    }
-    
     public double distance(double x, double y){
         return Math.sqrt(Math.pow(xPosition - x, 2) + Math.pow(yPosition - y, 2));
     }

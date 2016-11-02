@@ -17,11 +17,7 @@ public class TurtleMap {
     }
     
     public void addTurtle (Double ID){
-        for(Double o : turtleMap.keySet()){
-            //System.out.println(o);
-        }
         if (!turtleMap.containsKey(ID)){
-            //System.out.println(ID);
             TurtlePair turtle = new TurtlePair();
             turtleMap.put(ID, turtle);
         }
@@ -31,9 +27,9 @@ public class TurtleMap {
     	return turtleMap.keySet();
     }
     
-    public Collection<TurtlePair> getTurtles(){
-        return turtleMap.values();
-    }
+//    public Collection<TurtlePair> getTurtles(){
+//        return turtleMap.values();
+//    }
     
     public TurtleState getTurtle(){
         return turtleMap.get(currentID).getTurtle();
