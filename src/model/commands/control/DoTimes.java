@@ -27,11 +27,17 @@ public class DoTimes extends ControlCommand{
         double ret = 0;
         Node commandRoot = getRoot().getChildren().get(1);
         WorkspaceState workspace = this.getModel().getWorkspace();
+        Double currValue = workspace.getVariableValue(variable);
         for(double i = 1; i < limit; i++){
             for(double j = 0; j<commandRoot.getChildren().size(); j++){
                 ret = executeTree(commandRoot.getChildren().get((int) j));
                 workspace.addVariable(variable, i);
             }
+        }
+        if(currValue != null){
+            workspace.addVariable(variable, currValue);
+        }else{
+            workspace.removeVariable(variable);
         }
         return ret;
     }

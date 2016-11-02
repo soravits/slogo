@@ -13,7 +13,7 @@ public class MakeVariable extends ControlCommand{
     
     public MakeVariable (Node root, CommandManager commandManager, ControlCommandInterface model) {
         super(root, commandManager, model);
-        System.out.println("Hello");
+        //System.out.println("Hello");
         name = getRoot().getChildren().get(0).getValue();
     }
 

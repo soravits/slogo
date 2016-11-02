@@ -18,8 +18,16 @@ public class WorkspaceState {
         }
     }
 
+    public void removeVariable(Object name){
+        mapOfVariables.remove(name);
+    }
+
     public double getVariableValue(String name){
         return mapOfVariables.get(name);
+    }
+
+    public boolean variableExists(String name){
+        return mapOfVariables.containsKey(name);
     }
    
 
