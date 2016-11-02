@@ -31,4 +31,6 @@ public interface ViewModelInterface{
     
     public double[][] getLines (double ID);
     
+    public Collection<Double> getTurtlesToModify();
+    
 }

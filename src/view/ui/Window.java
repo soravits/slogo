@@ -10,7 +10,6 @@ import controller.Controller;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.Model;
 import view.data.ViewData;
 import view.ui.turtle.TurtleScreen;
 
@@ -68,7 +67,7 @@ public class Window implements UIAttributes{
 	private void makeResetButton(){
 		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
 		reset.setOnAction((event) -> {
-			//resetAll();		
+			turtleScreen.resetTurtle();		
 		});	
 		root.getChildren().add(reset);
 	}

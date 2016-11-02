@@ -63,6 +63,10 @@ public class ViewData {
         return viewModelInterface.getLines(ID);
     }
 	
+	public Collection<Double> getTurtlesToModify () {
+        return viewModelInterface.getTurtlesToModify();
+    }
+	
 	public Collection<String> getConsoleReturn() {
 		return viewModelInterface.getConsoleReturn();
 	}
