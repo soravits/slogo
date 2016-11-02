@@ -84,8 +84,9 @@ public class Window implements UIAttributes{
 	}
 	
 		
-	public void updateViewData() throws Exception {	
-		viewData.sendCommand(commandLine.getCommand(),controller);
+	public void updateViewData(String command) throws Exception {	
+		//viewData.sendCommand(commandLine.getCommand(),controller);
+		viewData.sendCommand(command,controller);
 	}
 	
 	public void updateUI() {

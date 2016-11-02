@@ -90,7 +90,8 @@ public class CommandLine implements UIAttributes{
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
 			try {
-				window.updateViewData();
+				//window.updateViewData();
+				window.updateViewData(this.getCommand());
 				window.updateUI();
 			} catch (Exception e) {
 				displayError.displayErrorDialogueBox(e.getMessage());

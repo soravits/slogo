@@ -92,10 +92,10 @@ public class Workspace implements UIAttributes{
 		Button button = new Button("Update");
 		button.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {  
-		    	commandLine.setCommand("set :"+varName+" "+space.getText());
+		    	//commandLine.setCommand("set :"+varName+" "+space.getText());
 		    	try {
-					window.updateViewData();
-					commandLine.setCommand("");
+					window.updateViewData("set :"+varName+" "+space.getText());
+					//commandLine.setCommand("");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
