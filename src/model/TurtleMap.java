@@ -40,8 +40,7 @@ public class TurtleMap {
     }
 
     public TurtleState getTurtle(double ID){
-        currentID = ID;
-        return turtleMap.get(currentID).getTurtle();
+        return turtleMap.get(ID).getTurtle();
     }
     
     // TELL DIANE TO CALL THIS METHOD!!!!
