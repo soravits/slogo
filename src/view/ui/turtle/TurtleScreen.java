@@ -7,12 +7,14 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,6 +39,7 @@ public class TurtleScreen implements UIAttributes{
 	private ViewData viewData;
 	private TurtleViewMap turtleViewMap = new TurtleViewMap();
 	private UIBuilder uiBuilder = new UIBuilder();
+	private Collection<Double> activeTurtles;
 	
 	private static final int TURTLE_X = 10;
 	private static final int TURTLE_Y = 55;
@@ -50,6 +53,7 @@ public class TurtleScreen implements UIAttributes{
 	private double originY;
 	private int currID;
 
+	
 	/*
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
 	 */
@@ -90,11 +94,19 @@ public class TurtleScreen implements UIAttributes{
 		
 	public void updateTurtles(){		
 		Collection<Double> ids = viewData.getIDs();	
+		activeTurtles = viewData.getTurtlesToModify();
+		
+		updateViewMapKey(ids);
+		setActiveTurtleToggle();
+		
 		for (double id : ids){	
 			
-			updateViewMapKey(id);
-			setViewTurtleStateFromImage(id);	
-			addTurtleToScene(id);			
+			
+			
+			setViewTurtleStateFromImage(id);
+			
+			addTurtleToScene(id);
+			
 			drawTurtlePath(id);				
 			
 			if (viewData.getShowTurtle(id)){											
@@ -106,30 +118,77 @@ public class TurtleScreen implements UIAttributes{
 		}	
 	}
 
-	private void updateViewMapKey(double id) {			
-		if (!turtleViewMap.getIDs().contains(id)){
-			turtleViewMap.setAttributes(id);							
-		}	
+	
+	public void resetTurtle() {
+		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
+		turtleView.beginPath();
+		turtleView.moveTo(originX, originY);
+	}	
+	
+	public void updateViewMapImages(){
+		for (double id : activeTurtles){
+			root.getChildren().remove(turtleViewMap.getImage(id));
+			turtleViewMap.setImage(id, new ImageView(turtleSettings.getTurtleImage()));
+			formatTurtle(id);
+			root.getChildren().add(turtleViewMap.getImage(id));
+			setViewTurtleStateFromImage(id);			
+					
+		}		
+	}
+
+	
+	public void setActiveTurtleToggle(){
+			
+		boolean showActive = turtleSettings.getActiveTurtleToggle();
+		System.out.println(showActive);
+		
+		if (showActive){
+			for (double id : activeTurtles){
+				showActiveTurtle(id);
+				
+			}
+		}
+		else{
+			for (double id : turtleViewMap.getIDs()){
+				dontShowActiveTurtle(id);
+			}
+		}
+		
+		
+	}
+
+
+	private void dontShowActiveTurtle(double id) {
+		turtleViewMap.getImage(id).setEffect(null);
+	}
+
+
+	private void showActiveTurtle(double id) {
+		DropShadow shadow = new DropShadow();
+		shadow.setColor(Color.AQUA);			
+		
+		ImageView iv = turtleViewMap.getImage(id);
+		iv.setEffect(shadow);
+	}
+	
+	private void updateViewMapKey(Collection<Double> ids) {			
+		
+		for (double id : ids){	
+		
+			if (!turtleViewMap.getIDs().contains(id)){
+				turtleViewMap.setAttributes(id);							
+			}	
+		}
 	}
 
 	private void addTurtleToScene(double id){
 		if (!root.getChildren().contains(turtleViewMap.getImage(id))){				
+			
 			root.getChildren().add(turtleViewMap.getImage(id));
 		}
 	}
 	
-	public void updateViewMapImages(){
-		for (double id : turtleViewMap.getIDs()){
-			if (viewData.getTurtlesToModify().contains(id)){
-				root.getChildren().remove(turtleViewMap.getImage(id));
-				turtleViewMap.setImage(id, new ImageView(turtleSettings.getTurtleImage()));
-				formatTurtle(id);
-				root.getChildren().add(turtleViewMap.getImage(id));
-				setViewTurtleStateFromImage(id);			
-			}		
-		}		
-	}
-
+	
 	private void setViewTurtleStateFromImage(double id) {
 		ImageView iv = turtleViewMap.getImage(id);
 
@@ -186,12 +245,7 @@ public class TurtleScreen implements UIAttributes{
 		root.getChildren().addAll(posX, posY, heading, penColor, penStatus);
 		return root;
 	}
-
-	public void resetTurtle() {
-		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
-		turtleView.beginPath();
-		turtleView.moveTo(originX, originY);
-	}	
+	
 	
 	private void makeCanvas(){				
 		Canvas turtleCanvas = new Canvas(canvasWidth, canvasHeight);
@@ -217,18 +271,33 @@ public class TurtleScreen implements UIAttributes{
 				originY - line[1][1]
 		);						
 	}
-		
+	
 	private void formatTurtle(double id){
+		ImageView iv = turtleViewMap.getImage(id);
+		
 		double posX = originX + viewData.getTurtleX(id);
 		double posY = originY - viewData.getTurtleY(id);
 		double angle = viewData.getTurtleAngle(id);	
 		
-		ImageView iv = turtleViewMap.getImage(id);
-		iv.setRotate(angle);
-		iv.setFitWidth(TURTLE_SIZE);
-		iv.setFitHeight(TURTLE_SIZE);
-		iv.setX(posX - TURTLE_SIZE/2);
-		iv.setY(posY - TURTLE_SIZE/2);
+		if (turtleIsOffCanvas(posX, posY)){
+			root.getChildren().remove(iv);
+		}
+		
+		else {
+			
+			iv.setRotate(angle);
+			iv.setFitWidth(TURTLE_SIZE);
+			iv.setFitHeight(TURTLE_SIZE);
+			iv.setX(posX - TURTLE_SIZE/2);
+			iv.setY(posY - TURTLE_SIZE/2);
+		}
+		
+		
+	}
+
+
+	private boolean turtleIsOffCanvas(double posX, double posY) {
+		return posX > canvasWidth || posX < 0 || posY > canvasHeight || posY < 0;
 	}	
 	
 }

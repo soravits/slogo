@@ -18,7 +18,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -48,6 +47,7 @@ public class TurtleSettings implements UIAttributes{
 	private DisplayError displayError;
 	private ComboBox<Color> backgroundComboBox;
 	private ComboBox<Color> penComboBox;
+	private CheckBox showActiveTurtle;
 	private Stage stage;
 	private Image turtleImage;
 	private TurtleScreen turtle;
@@ -68,6 +68,14 @@ public class TurtleSettings implements UIAttributes{
 		this.controlX = TURTLE_CANVAS_WIDTH + 20;
 		this.stage = stage;
 		this.turtle = turtle;
+		initBackgroundColorComboBox();
+		initPenColorComboBox();
+		initPenTypeComboBox();
+		initPenThicknessTextField();
+		initActiveTurtleToggle();
+		initColorPaletteButton();
+		initImagePaletteButton();
+		initImageButton();
 	}
 		
 	
@@ -76,13 +84,7 @@ public class TurtleSettings implements UIAttributes{
 	 * how the user can update turtle settings
 	 */
 	public Group getRoot(){
-		initBackgroundColorComboBox();
-		initPenColorComboBox();
-		initPenTypeComboBox();
-		initPenThicknessTextField();
-		initActiveTurtleToggle();
-		initColorPaletteButton();
-		initImagePaletteButton();
+		
 		root.getChildren().addAll(
 			uiBuilder.getText(controlX, FIRST_CONTROL_Y - TEXT_SPACING, uiResources.getString("TurtleBackgroundColor")),
 			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3 - TEXT_SPACING, uiResources.getString("TurtlePenColor")),
@@ -91,7 +93,7 @@ public class TurtleSettings implements UIAttributes{
 			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*12 - TEXT_SPACING, uiResources.getString("ActiveTurtleToggle"))
 		);
 		
-		initImageButton();
+		
 		return root;
 	}
 	
@@ -123,6 +125,12 @@ public class TurtleSettings implements UIAttributes{
 	public Image getTurtleImage(){
 		return turtleImage;
 	}
+	
+	
+	public boolean getActiveTurtleToggle(){
+		return showActiveTurtle.isSelected();
+	}
+	
 	
 	private void initBackgroundColorComboBox(){
 		backgroundComboBox = new ComboBox<Color>();
@@ -187,8 +195,7 @@ public class TurtleSettings implements UIAttributes{
 		
 		ObservableList<String> penTypeOptions = FXCollections.observableArrayList(uiResources.getString("SolidLine"), 
 				uiResources.getString("DashedLine"),uiResources.getString("DottedLine")); 
-				
-
+			
 		ComboBox<String> penTypeComboBox = new ComboBox<String>(penTypeOptions);
 		penTypeComboBox.setValue(uiResources.getString("SolidLine"));
 		
@@ -204,7 +211,19 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	private void initActiveTurtleToggle(){
-		CheckBox showActiveTurtle = new CheckBox();
+		showActiveTurtle = new CheckBox();
+		showActiveTurtle.setSelected(false);
+		
+		showActiveTurtle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {			
+				turtle.setActiveTurtleToggle();
+				
+				turtle.getRoot();
+			}
+		});		
+		
+		
 		root.getChildren().add(uiBuilder.setControlLayout(showActiveTurtle, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*12, "turtlecontrol"));
 	}
@@ -216,7 +235,7 @@ public class TurtleSettings implements UIAttributes{
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();
-			turtle.updateViewMapImages();
+			
 			turtle.getRoot();
 			
 		});	
@@ -256,12 +275,13 @@ public class TurtleSettings implements UIAttributes{
 			try {
 				BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
 				turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
-				
+				turtle.updateViewMapImages();
 				
 			} catch (IOException e) {
 				displayError.displayErrorDialogueBox(uiResources.getString("InvalidTurtleImage"));
 			}	
-		}	
+		}
+		
 			
 			
 		
