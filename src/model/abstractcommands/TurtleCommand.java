@@ -16,6 +16,7 @@ public abstract class TurtleCommand extends GeneralCommand implements CommandInt
     }
     
     public abstract double execute () throws Exception;
+    
 
     public double normalizeAngle(double angle){
         double normalizedAngle = angle % 360;

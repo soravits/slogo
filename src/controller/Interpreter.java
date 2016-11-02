@@ -19,6 +19,8 @@ public class Interpreter {
 	public static final String RESOURCE_PACKAGE = "resources/languages";
 	public static final String PARAMS = "Params";
 	public static final String SYNTAX = "Syntax";
+	public static final String GROUP_START = "(";
+	public static final String GROUP_END = ")";
 	public static final String LIST_START = "[";
 	public static final String LIST_END = "]";
 	public static final String DEFAULT_LANGUAGE = "English";
@@ -117,7 +119,7 @@ public class Interpreter {
 		while(!queue.isEmpty()){
 			Node tree = queue.poll();
 			trees.add(visitNode(queue, tree));
-            printTree(tree);
+                        printTree(tree);
 			commandManager.executeTree(tree);
 		}
 		return trees;
@@ -144,6 +146,27 @@ public class Interpreter {
         return node;
     }
 
+    private Node interpretGroupCommand(Queue<Node> queue) throws InvalidSyntaxException, InvalidParametersException {
+        double openBracketCount = 1;
+        double closedBracketCount = 0;
+        Node node = new Node(CONTROL_STRUCTURES);
+        Queue<Node> tempQueue = new LinkedList<Node>();
+        while(!queue.peek().getValue().equals(GROUP_END) || openBracketCount != closedBracketCount+1){
+            Node nextNode = queue.poll();
+            if(nextNode.getValue().equals(GROUP_START)){
+                openBracketCount++;
+            }else if(nextNode.getValue().equals(GROUP_END)){
+                closedBracketCount++;
+            }
+            tempQueue.add(nextNode);
+        }
+        queue.poll();
+        while(!tempQueue.isEmpty()){
+            node.addChild(visitNode(tempQueue, tempQueue.poll()));
+        }
+        return node;
+    }
+
 	private Node visitNode(Queue<Node> queue, Node root) throws InvalidSyntaxException, InvalidParametersException {
 		String value = root.getValue();
         if(syntaxParser.getSymbol(value).equals(CommandParser.ERROR)){
@@ -152,6 +175,8 @@ public class Interpreter {
         try {
             if (value.equals(LIST_START)) {
                 return interpretBracketCommands(queue);
+            }else if(value.equals(GROUP_START)){
+                return interpretGroupCommand(queue);
             } else if (commandManager.existsUserInstruction(value)) {
                 int numParams = commandManager.getUserInstructions().get(value).getChildren().get(1).getChildren().size();
                 for (int i = 0; i < numParams; i++) {
@@ -160,7 +185,18 @@ public class Interpreter {
                 }
             } else if (commandParser.isValid(value)) {
                 String commandName = commandParser.getSymbol(value);
-                int numParams = paramParser.getNumParams(commandName);
+                int numParams;
+                if (queue.size() > 0){
+                    if(queue.peek().getValue().equals(GROUP_START)){
+                        numParams = 1;
+                    }
+                    else{
+                        numParams = paramParser.getNumParams(commandName);
+                    }
+                }
+                else{
+                    numParams = paramParser.getNumParams(commandName);
+                }
                 for (int i = 0; i < numParams; i++) {
                     Node child = visitNode(queue, queue.poll());
                     root.addChild(child);
@@ -169,6 +205,7 @@ public class Interpreter {
             }
             return root;
         }catch(Exception e){
+            e.printStackTrace();
             throw new InvalidParametersException(value);
         }
 	}

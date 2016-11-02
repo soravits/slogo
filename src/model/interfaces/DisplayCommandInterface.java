@@ -1,8 +1,28 @@
 package model.interfaces;
 
-import model.DisplayState;
-
 public interface DisplayCommandInterface {
 
-    public DisplayState getDisplay();
+    double getBackGround ();
+
+    void setBackGround (double back);
+
+    double getPenColor ();
+
+    void setPenColor (double pencolor);
+
+    double getPenSize ();
+
+    void setPenSize (double pensize);
+
+    double getPaletteIndex ();
+
+    void setPaletteIndex (double paletteindex);
+
+    double getShape ();
+
+    void setShape (double shp);
+
+    double[][] getPaletteColors ();
+
+    void setPaletteColors (Double index, double[] paletteColor);
 }

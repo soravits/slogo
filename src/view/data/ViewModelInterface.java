@@ -2,6 +2,7 @@ package view.data;
 
 import java.util.Collection;
 
+import model.DisplayState;
 import model.TurtleMap;
 import model.WorkspaceState;
 
@@ -32,5 +33,8 @@ public interface ViewModelInterface{
     public double[][] getLines (double ID);
     
     public Collection<Double> getTurtlesToModify();
+    
+    public DisplayState getDisplay();
+    
     
 }

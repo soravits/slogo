@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import controller.Controller;
+import model.DisplayState;
 import model.Model;
 import model.TurtleMap;
 
@@ -13,11 +14,9 @@ import model.TurtleMap;
  */
 public class ViewData {
 	private ViewModelInterface viewModelInterface;
-	private String fullHistory;
 	
 	public ViewData() {
 		this.viewModelInterface=new Model();
-		this.fullHistory=new String("");
 	}
 	
 	public void sendCommand(String command,Controller controller) throws Exception {
@@ -80,5 +79,34 @@ public class ViewData {
 	public HashMap<String, Double> getWorkspace() {
 		return viewModelInterface.getWorkspace().getListOfVariables();
 	}
+	
+	public DisplayState getDisplayState() {
+		return viewModelInterface.getDisplay();
+	}
+	
+	public double getPenColor () {
+        return getDisplayState().getPenColor();
+    }
+	
+	public double getBackGround (){
+		return getDisplayState().getBackGround();
+    }
+	
+	public double getPenSize () {
+		return getDisplayState().getPenSize();
+    }
+	
+	public void setBackGround (int backIndex,Controller controller) throws Exception {
+        sendCommand("setbackground "+backIndex,controller);
+    }
+	
+	public void setPenColor (int pencolorIndex,Controller controller) throws Exception {
+		sendCommand("setpencolor "+pencolorIndex,controller);
+    }
+	
+	public void setPenSize (double pensize,Controller controller) throws Exception{
+		sendCommand("setshape "+pensize,controller);
+        //penSize = pensize;
+    }
 
 }

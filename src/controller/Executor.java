@@ -20,9 +20,16 @@ public abstract class Executor {
 
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException{
         try{
-            double[] doubles = new double[root.getChildren().size()];
-            for (int i = 0; i < root.getChildren().size(); i++) {
-                Node currNode = root.getChildren().get(i);
+            Node paramRoot = root;
+            double[] doubles;
+            if(root.getChildren().size() > 0 && root.getChildren().get(0).getValue().equals(Interpreter.CONTROL_STRUCTURES)){
+                paramRoot = root.getChildren().get(0);
+                doubles = new double[paramRoot.getChildren().size()];
+            }else{
+                doubles = new double[root.getChildren().size()];
+            }
+            for (int i = 0; i < paramRoot.getChildren().size(); i++) {
+                Node currNode = paramRoot.getChildren().get(i);
                 doubles[i] = commandManager.executeTree(currNode);
             }
             Class<?> command = Class.forName(commandPackage + root.getValue());
@@ -30,6 +37,7 @@ public abstract class Executor {
             Object t = constructor.newInstance(doubles, model);
             double x = commandManager.executeCommand((CommandInterface) t);
             model.updateConsoleReturn(x);
+            model.updateView();
             return x;
         }catch(Exception exception){
             exception.printStackTrace();
