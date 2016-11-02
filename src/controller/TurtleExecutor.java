@@ -25,7 +25,6 @@ public class TurtleExecutor extends Executor{
             }
         }else{
             ret = super.execute(root, executor, model);
-            //System.out.println(ret);
         }
         return ret;
     }
