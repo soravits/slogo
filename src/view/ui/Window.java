@@ -1,5 +1,8 @@
 package view.ui;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * 
  * @author Diane Hadley
@@ -13,7 +16,7 @@ import javafx.stage.Stage;
 import view.data.ViewData;
 import view.ui.turtle.TurtleScreen;
 
-public class Window implements UIAttributes{
+public class Window implements UIAttributes, Observer{
 	
 	private UIBuilder uiBuilder = new UIBuilder();
 	private HelpWindowUI helpWindowUI;
@@ -38,6 +41,7 @@ public class Window implements UIAttributes{
 		this.ySize = ySize;	
 		this.viewData = new ViewData();
 		this.controller = new Controller(viewData);
+		controller.addObserver(this);
 		buildRoot();
 	}
 	
@@ -84,8 +88,9 @@ public class Window implements UIAttributes{
 	}
 	
 		
-	public void updateViewData() throws Exception {	
-		viewData.sendCommand(commandLine.getCommand(),controller);
+	public void updateViewData(String command) throws Exception {	
+		//viewData.sendCommand(commandLine.getCommand(),controller);
+		viewData.sendCommand(command,controller);
 	}
 	
 	public void updateUI() {
@@ -94,6 +99,12 @@ public class Window implements UIAttributes{
 		workspace.updateWorkspace(viewData.getWorkspace());
 		turtleScreen.getRoot();	
 	}
+
+
+        @Override
+        public void update (Observable o, Object arg) {
+            updateUI();        
+        }
 	
 	
 }

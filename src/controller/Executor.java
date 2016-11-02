@@ -37,6 +37,7 @@ public abstract class Executor {
             Object t = constructor.newInstance(doubles, model);
             double x = commandManager.executeCommand((CommandInterface) t);
             model.updateConsoleReturn(x);
+            model.updateView();
             return x;
         }catch(Exception exception){
             exception.printStackTrace();
