@@ -261,6 +261,7 @@ public class TurtleScreen implements UIAttributes{
 	
 	private void drawTurtlePath(double id){	
 		double [][] line = viewData.getLines(id);			
+		//turtleView.setLineWidth(turtleSettings.getPenThickness());
 		turtleView.strokeLine(
 				originX + line[0][0], 
 				originY - line[0][1],

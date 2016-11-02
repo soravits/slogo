@@ -51,6 +51,7 @@ public class TurtleSettings implements UIAttributes{
 	private Stage stage;
 	private Image turtleImage;
 	private TurtleScreen turtle;
+	private TextField penThickness;
 	
 	
 	private static final int COLOR_RECT_WIDTH = 75;
@@ -58,6 +59,7 @@ public class TurtleSettings implements UIAttributes{
 	private static final int FIRST_CONTROL_Y = 80;
 	private static final int CONTROL_Y_SPACING = 18;
 	private static final int TEXT_SPACING = 6;
+	private static final double DEFAULT_THICKNESS = 1.0;
 	
 	
 	
@@ -68,32 +70,18 @@ public class TurtleSettings implements UIAttributes{
 		this.controlX = TURTLE_CANVAS_WIDTH + 20;
 		this.stage = stage;
 		this.turtle = turtle;
-		initBackgroundColorComboBox();
-		initPenColorComboBox();
-		initPenTypeComboBox();
-		initPenThicknessTextField();
-		initActiveTurtleToggle();
-		initColorPaletteButton();
-		initImagePaletteButton();
-		initImageButton();
+		initRoot();
 	}
+
+
+	
 		
 	
 	/*
 	 * returns the root with all visualizations of 
 	 * how the user can update turtle settings
 	 */
-	public Group getRoot(){
-		
-		root.getChildren().addAll(
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y - TEXT_SPACING, uiResources.getString("TurtleBackgroundColor")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3 - TEXT_SPACING, uiResources.getString("TurtlePenColor")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*6 - TEXT_SPACING, uiResources.getString("TurtlePenType")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*9 - TEXT_SPACING, uiResources.getString("TurtlePenThickness")),
-			uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*12 - TEXT_SPACING, uiResources.getString("ActiveTurtleToggle"))
-		);
-		
-		
+	public Group getRoot(){	
 		return root;
 	}
 	
@@ -127,9 +115,52 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	
+	public double getPenThickness(){
+		
+		String thicknessString = penThickness.getText();
+		
+		if (thicknessString == null){
+			return DEFAULT_THICKNESS;
+		}
+		
+		else {				
+			try {
+				double thickness = Double.parseDouble(thicknessString);
+				return thickness;
+			}catch(Exception e){
+				displayError.displayErrorDialogueBox(uiResources.getString("InvalidPenThickness"));			
+			}
+			
+		}	
+		return DEFAULT_THICKNESS;	
+		
+	}
+	
+	
+	
 	public boolean getActiveTurtleToggle(){
 		return showActiveTurtle.isSelected();
 	}
+	
+	
+	private void initRoot() {
+		initBackgroundColorComboBox();
+		initPenColorComboBox();
+		initPenTypeComboBox();
+		initPenThicknessTextField();
+		initActiveTurtleToggle();
+		initColorPaletteButton();
+		initImagePaletteButton();
+		initImageButton();
+		root.getChildren().addAll(
+				uiBuilder.getText(controlX, FIRST_CONTROL_Y - TEXT_SPACING, uiResources.getString("TurtleBackgroundColor")),
+				uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*3 - TEXT_SPACING, uiResources.getString("TurtlePenColor")),
+				uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*6 - TEXT_SPACING, uiResources.getString("TurtlePenType")),
+				uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*9 - TEXT_SPACING, uiResources.getString("TurtlePenThickness")),
+				uiBuilder.getText(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*12 - TEXT_SPACING, uiResources.getString("ActiveTurtleToggle"))
+			);
+	}
+	
 	
 	
 	private void initBackgroundColorComboBox(){
@@ -205,7 +236,8 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	private void initPenThicknessTextField(){
-		TextField penThickness = new TextField();
+		penThickness = new TextField();
+		
 		root.getChildren().add(uiBuilder.setControlLayout(penThickness, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*9, "turtlecontrol"));
 	}
@@ -234,12 +266,10 @@ public class TurtleSettings implements UIAttributes{
 		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*14, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
-			chooseImage();
-			
+			chooseImage();		
 			turtle.getRoot();
 			
-		});	
-		
+		});			
 		root.getChildren().addAll(image);
 	}
 	
