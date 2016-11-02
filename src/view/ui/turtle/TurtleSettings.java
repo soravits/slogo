@@ -163,7 +163,7 @@ public class TurtleSettings implements UIAttributes{
 				Color.DEEPSKYBLUE,
 				Color.PURPLE, Color.PINK, Color.CORAL,
 				Color.ALICEBLUE, Color.ANTIQUEWHITE, 
-				Color.AQUA, Color.AQUAMARINE, Color.AZURE);
+				Color.AQUAMARINE, Color.AZURE);
 	}
 	
 	private void createGraphicsForComboBox(ComboBox<Color> comboBox){
