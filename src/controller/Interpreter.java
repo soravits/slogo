@@ -72,9 +72,9 @@ public class Interpreter {
 		}
 		inputScanner.close();
 		List<Node> trees = interpretString(tokens);
-//		for(Node n:trees){
-//			printTree(n);
-//		}
+		for(Node n:trees){
+			printTree(n);
+		}
 	}
 
 	public void printTree(Node root){

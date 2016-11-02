@@ -21,7 +21,9 @@ public class TurtleExecutor extends Executor{
             setFoundTurtle(root);
             for(double d : model.getTurtlesToModify()){
                 model.setTurtle(d);
+                System.out.println(model.getID());
                 ret = super.execute(root, executor, model);
+                System.out.println(model.getID());
             }
         }else{
             ret = super.execute(root, executor, model);
