@@ -186,7 +186,7 @@ public class Interpreter {
             } else if (commandParser.isValid(value)) {
                 String commandName = commandParser.getSymbol(value);
                 int numParams;
-                if(queue.peek().getValue().equals(GROUP_START)){
+                if(queue.peek() != null && queue.peek().getValue().equals(GROUP_START)){
                     numParams = 1;
                 }else{
                     numParams = paramParser.getNumParams(commandName);
