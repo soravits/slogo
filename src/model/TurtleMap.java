@@ -36,6 +36,7 @@ public class TurtleMap {
     }
 
     public TurtleState getTurtle(double ID){
+        //currentID = ID;
         return turtleMap.get(ID).getTurtle();
     }
     

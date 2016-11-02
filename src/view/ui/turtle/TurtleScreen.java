@@ -1,6 +1,7 @@
 package view.ui.turtle;
 import java.util.Collection;
 
+import controller.Controller;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -58,10 +59,11 @@ public class TurtleScreen implements UIAttributes{
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
 	 */
 	
-	public TurtleScreen(Stage stage, ViewData viewData){
+	public TurtleScreen(Stage stage, ViewData viewData, Controller controller){
 		super();
-		this.turtleSettings = new TurtleSettings(stage, this);
 		this.viewData = viewData;
+		this.turtleSettings = new TurtleSettings(stage, this, viewData, controller);
+		
 		this.canvasWidth = TURTLE_CANVAS_WIDTH;
 		this.canvasHeight = TURTLE_CANVAS_HEIGHT;		
 		this.originX = canvasWidth/2;
@@ -100,9 +102,7 @@ public class TurtleScreen implements UIAttributes{
 		setActiveTurtleToggle();
 		
 		for (double id : ids){	
-			
-			
-			
+				
 			setViewTurtleStateFromImage(id);
 			
 			addTurtleToScene(id);
@@ -261,6 +261,7 @@ public class TurtleScreen implements UIAttributes{
 	
 	private void drawTurtlePath(double id){	
 		double [][] line = viewData.getLines(id);			
+		turtleView.setLineWidth(turtleSettings.getPenThickness());
 		turtleView.strokeLine(
 				originX + line[0][0], 
 				originY - line[0][1],

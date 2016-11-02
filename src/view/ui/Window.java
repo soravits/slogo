@@ -52,8 +52,9 @@ public class Window implements UIAttributes, Observer{
 
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage, viewData);	
-		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());		
+		turtleScreen = new TurtleScreen(stage, viewData, controller);	
+		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());	
+		
 		generalSettings = new GeneralSettings(controller);
 		commandLine = new CommandLine(ySize, this);		
 		workspace = new Workspace(xSize,this,commandLine);
@@ -89,7 +90,6 @@ public class Window implements UIAttributes, Observer{
 	
 		
 	public void updateViewData(String command) throws Exception {	
-		//viewData.sendCommand(commandLine.getCommand(),controller);
 		viewData.sendCommand(command,controller);
 	}
 	

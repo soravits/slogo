@@ -34,6 +34,7 @@ public class Controller extends Observable implements Observer{
      * @throws Exception 
      */
     public void processCommand(String input) throws InvalidCommandException, InvalidSyntaxException, InvalidParametersException {
+    	System.out.println("yoooooooooooooooooo");
     	model.clearConsoleReturn();
     	model.addCommand(input);
         interpreter.parseString(input);
