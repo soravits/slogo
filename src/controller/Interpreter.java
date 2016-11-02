@@ -26,6 +26,7 @@ public class Interpreter {
 	public static final String DEFAULT_LANGUAGE = "English";
     public static final String CONTROL_STRUCTURES = "Control";
     public static final String TURTLE_COMMANDS = "TurtleCommands";
+    public static final String DISPLAY_COMMANDS = "Display";
 
     private String language = DEFAULT_LANGUAGE;
 	private CommandParser commandParser;
@@ -119,7 +120,7 @@ public class Interpreter {
 		while(!queue.isEmpty()){
 			Node tree = queue.poll();
 			trees.add(visitNode(queue, tree));
-                        printTree(tree);
+                        //printTree(tree);
 			commandManager.executeTree(tree);
 		}
 		return trees;

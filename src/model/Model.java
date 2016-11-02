@@ -106,7 +106,7 @@ public class Model extends Observable implements ControlCommandInterface, Worksp
     }
 
     public void updateConsoleReturn(Double value){
-        System.out.println("The value added to the console is " + value);
+        //System.out.println("The value added to the console is " + value);
         consoleReturn.add(value.toString());
     }
     
