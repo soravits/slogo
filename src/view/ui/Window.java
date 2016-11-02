@@ -65,16 +65,8 @@ public class Window implements UIAttributes, Observer{
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
 
-		makeResetButton();
 	}
 	
-	private void makeResetButton(){
-		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
-		reset.setOnAction((event) -> {
-			turtleScreen.resetTurtle();		
-		});	
-		root.getChildren().add(reset);
-	}
 
 	public GeneralSettings getGeneralSettings(){
 		return generalSettings;
