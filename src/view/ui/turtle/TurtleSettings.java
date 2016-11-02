@@ -188,8 +188,7 @@ public class TurtleSettings implements UIAttributes{
 		
 		ObservableList<String> penTypeOptions = FXCollections.observableArrayList(uiResources.getString("SolidLine"), 
 				uiResources.getString("DashedLine"),uiResources.getString("DottedLine")); 
-				
-
+			
 		ComboBox<String> penTypeComboBox = new ComboBox<String>(penTypeOptions);
 		penTypeComboBox.setValue(uiResources.getString("SolidLine"));
 		
@@ -207,6 +206,13 @@ public class TurtleSettings implements UIAttributes{
 	private void initActiveTurtleToggle(){
 		showActiveTurtle = new CheckBox();
 		
+		showActiveTurtle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {			
+				turtle.setActiveTurtleToggle(newValue);
+				turtle.getRoot();
+			}
+		});		
 		
 		
 		root.getChildren().add(uiBuilder.setControlLayout(showActiveTurtle, controlX, 
