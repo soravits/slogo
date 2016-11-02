@@ -52,7 +52,7 @@ public class Window implements UIAttributes, Observer{
 
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage, viewData);	
+		turtleScreen = new TurtleScreen(stage, viewData, controller);	
 		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());	
 		
 		generalSettings = new GeneralSettings(controller);

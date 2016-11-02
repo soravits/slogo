@@ -9,7 +9,7 @@ public class DisplayState implements DisplayCommandInterface {
     private double penSize;
     private double shape;
     private double paletteIndex;
-    private double[][] paletteColors;
+    private int[][] paletteColors;
     
     public DisplayState() {
         backGround = 1;
@@ -17,7 +17,7 @@ public class DisplayState implements DisplayCommandInterface {
         shape = 1;
         penSize = 1;
         paletteIndex = 1;
-        paletteColors = new double[20][3];
+        paletteColors = new int[20][3];
     }
 
     /* (non-Javadoc)
@@ -104,7 +104,7 @@ public class DisplayState implements DisplayCommandInterface {
      * @see model.DisplayCommandInterface#getPaletteColors()
      */
     @Override
-    public double[][] getPaletteColors () {
+    public int[][] getPaletteColors () {
         return paletteColors;
     }
 
@@ -112,8 +112,8 @@ public class DisplayState implements DisplayCommandInterface {
      * @see model.DisplayCommandInterface#setPaletteColors(java.lang.Double, double[])
      */
     @Override
-    public void setPaletteColors (Double index, double[] paletteColor) {
-        paletteColors[index.intValue()] = paletteColor;
+    public void setPaletteColors (int index, int[] paletteColor) {
+        paletteColors[index] = paletteColor;
     }
     
 

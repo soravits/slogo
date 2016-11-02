@@ -14,5 +14,6 @@ public class SetBackground extends DisplayCommand{
         getModel().setBackGround(this.getParams()[0]);
         return this.getParams()[0];
     }
+    
 
 }
