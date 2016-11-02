@@ -12,6 +12,7 @@ public class Difference extends MathBoolCommand{
     @Override
     public double execute () throws Exception {
         double x = this.getParams()[0];
+        x *= 2;
         for (double i : this.getParams()){
             x -= i;
         }
