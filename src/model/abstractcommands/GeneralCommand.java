@@ -21,4 +21,12 @@ public abstract class GeneralCommand implements CommandInterface{
         }
         return sum;
     }
+    
+    public double normalizeAngle(double angle){
+        double normalizedAngle = angle % 360;
+        if (normalizedAngle < 0){
+            normalizedAngle += 360;
+        }
+        return normalizedAngle;
+    }
 }

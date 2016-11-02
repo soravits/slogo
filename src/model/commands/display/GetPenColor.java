@@ -1,4 +1,4 @@
-package model.commands.general;
+package model.commands.display;
 
 import model.abstractcommands.DisplayCommand;
 import model.interfaces.DisplayCommandInterface;
