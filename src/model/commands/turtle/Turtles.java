@@ -1,4 +1,4 @@
-package model.commands.general;
+package model.commands.turtle;
 
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
