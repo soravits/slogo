@@ -94,7 +94,7 @@ public class TurtleScreen implements UIAttributes{
 		
 	public void updateTurtles(){
 		//resetTurtle();
-		
+		System.out.println("The turtle position should have been updated");
 		Collection<Double> ids = viewData.getIDs();
 		
 		updateViewMap(ids);

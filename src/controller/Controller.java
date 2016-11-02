@@ -6,6 +6,8 @@ import model.Model;
 import view.data.ViewData;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 /**
  * The purpose of this class is to receive the data from the view and send it to the controller.Parser to be handled. It will
  * also take the tree that is returned by the interpreter and send it to the interpreter. Essentially, the controller.Controller
@@ -15,7 +17,7 @@ import java.io.IOException;
  *
  * @author Soravit
  */
-public class Controller {
+public class Controller implements Observer{
     private Model model;
     private Interpreter interpreter;
     private ViewData view;
@@ -23,6 +25,7 @@ public class Controller {
         this.view = view;
         model = new Model();
         interpreter = new Interpreter(model);
+        model.addObserver(this);
     }
     /**
      * This class takes the different data objects/variables packaged into the data object, modifies the controller.Parser and
@@ -50,4 +53,10 @@ public class Controller {
     private void updateView(){
         view.updateViewModel(model);
     }
+    @Override
+    public void update (Observable o, Object arg) {
+        view.updateViewModel(model);
+        System.out.println("The controller updated teh model");
+    }
+   
 }

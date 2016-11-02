@@ -1,11 +1,15 @@
 package model;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import model.interfaces.*;
+import java.util.Observable;
+import model.interfaces.ControlCommandInterface;
+import model.interfaces.DisplayCommandInterface;
+import model.interfaces.EmptyInterface;
+import model.interfaces.TurtleCommandInterface;
+import model.interfaces.WorkspaceCommandInterface;
 import view.data.ViewModelInterface;
 
-public class Model implements ControlCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
+public class Model extends Observable implements ControlCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
 
     private TurtleController turtleController;
     private DisplayState display;
@@ -33,6 +37,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     
     @Override
     public TurtleState getTurtle () {
+        updateView();
         return turtleMap.getTurtle();
     }
 
@@ -74,6 +79,7 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
     
     @Override
     public LineState getLineState () {
+        updateView();
         return turtleMap.getLineState();
     }
     
@@ -162,7 +168,11 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
         turtleController.subtractNestedAsk();
     }
 
-//    public boolean isTell() {
+    private void updateView(){
+        setChanged();
+        notifyObservers();
+    }
+    //    public boolean isTell() {
 //        return turtleController.isTell();
 //    }
 //
@@ -174,5 +184,5 @@ public class Model implements ControlCommandInterface, WorkspaceCommandInterface
 //    public void clearAskTurtles() {
 //        turtleController.clearAskTurtles();
 //    }
-
+  
 }
