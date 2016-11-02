@@ -96,12 +96,12 @@ public class ViewData {
 		return getDisplayState().getPenSize();
     }
 	
-	public void setBackGround (int back,Controller controller) throws Exception {
-        sendCommand("setbackground "+back,controller);
+	public void setBackGround (int backIndex,Controller controller) throws Exception {
+        sendCommand("setbackground "+backIndex,controller);
     }
 	
-	public void setPenColor (double pencolor,Controller controller) throws Exception {
-		sendCommand("setpencolor "+pencolor,controller);
+	public void setPenColor (int pencolorIndex,Controller controller) throws Exception {
+		sendCommand("setpencolor "+pencolorIndex,controller);
     }
 	
 	public void setPenSize (double pensize,Controller controller) throws Exception{
