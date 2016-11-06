@@ -14,14 +14,12 @@ public class Forward extends TurtleCommand{
 
     @Override
     public double execute () {
-        System.out.println("Turtle Going Forward is " + getModel().getID());
         TurtleState turtle = this.getModel().getTurtle();
         Position prevPosition = turtle.getPosition().clone();
         LineState lines = this.getModel().getLineState();
         double[] coords = calculateCoordinates(turtle);
         turtle.updateTurtlePosition(coords[0], coords[1]);
         lines.createLine(prevPosition, turtle.getPosition().clone());
-        System.out.println("Turtle current Y position is" + getModel().getTurtle().getTurtleY());
         return this.getParams()[0];
     }
     
