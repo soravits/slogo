@@ -9,10 +9,9 @@ import java.io.*;
 import java.util.*;
 
 /**
- * The purpose of this class is to take the string from the controller and
- * create an expression tree to be sent to the interpreter.
- *
- * @author Soravit
+ * The class is responsible for parsing user input from the front-end, creating expression trees of commands, and
+ * executing the commands by instantiating classes in the back-end.
+ * @author Soravit Sophastienphong
  */
 public class Interpreter {
 
@@ -28,6 +27,8 @@ public class Interpreter {
     public static final String TURTLE_COMMANDS = "TurtleCommands";
     public static final String DISPLAY_COMMANDS = "Display";
 
+    public static final char HASH = '#';
+
     private String language = DEFAULT_LANGUAGE;
 	private CommandParser commandParser;
 	private ParamParser paramParser;
@@ -36,6 +37,9 @@ public class Interpreter {
 	private CommandController commandController;
 	private CommandManager commandManager;
 
+    /**
+     * @param model A reference to the view's version of the model.
+     */
 	public Interpreter(Model model){
 		this.model = model;
 		commandParser = new CommandParser();
@@ -48,11 +52,21 @@ public class Interpreter {
 		syntaxParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
 	}
 
+    /**
+     * Sets the language used to interpret commands.
+     * @param language The name of the language.
+     */
 	public void setLanguage(String language){
 		this.language = language;
 		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
 	}
 
+    /**
+     * @param s The string of command(s)
+     * @throws InvalidSyntaxException If the syntax of a command is incorrect.
+     * @throws InvalidCommandException If an error exists that is related to the command's execution.
+     * @throws InvalidParametersException If there is an error with passing invalid parameters to a command.
+     */
 	public void parseString(String s) throws InvalidSyntaxException, InvalidCommandException, InvalidParametersException {
 		s = s.toLowerCase();
 		List<String> tokens = new ArrayList<String>();
@@ -60,7 +74,7 @@ public class Interpreter {
 		while(inputScanner.hasNextLine()){
 			String line = inputScanner.nextLine();
 			Scanner lineScanner = new Scanner(line);
-			if(!line.isEmpty() && line.charAt(0) == '#'){
+			if(!line.isEmpty() && line.charAt(0) == HASH){
 				continue;
 			}
 			else{
@@ -72,29 +86,22 @@ public class Interpreter {
 		}
 		inputScanner.close();
 		List<Node> trees = interpretString(tokens);
-		for(Node n:trees){
-			printTree(n);
-		}
 	}
 
-	public void printTree(Node root){
-		System.out.print("Node: " + root.getValue() + " Children: ");
-		for(int i = 0; i<root.getChildren().size(); i++){
-			System.out.print(root.getChildren().get(i).getValue() + " ");
-		}
-		if(root.getChildren().size() == 0){
-			System.out.print("None");
-		}
-		System.out.println();
-		for(int i = 0; i<root.getChildren().size(); i++){
-			printTree(root.getChildren().get(i));
-		}
-	}
-
+    /**
+     * @param s The string to be validated.
+     * @return True if the string could be a command based on its syntax.
+     */
     public boolean isValidCommandName(String s){
         return syntaxParser.getSymbol(s).equals(CommandManager.COMMAND);
     }
 
+    /**
+     * Reads a file and converts its contents to a string.
+     * @param fileName The name of the file.
+     * @return A string containing the contents of the file.
+     * @throws IOException If there is an error with reading the file.
+     */
     public String readFileToString(String fileName) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line = null;
@@ -108,6 +115,20 @@ public class Interpreter {
         // close the BufferedReader when we're done
         bufferedReader.close();
         return sb.toString();
+    }
+
+    private void printTree(Node root){
+        System.out.print("Node: " + root.getValue() + " Children: ");
+        for(int i = 0; i<root.getChildren().size(); i++){
+            System.out.print(root.getChildren().get(i).getValue() + " ");
+        }
+        if(root.getChildren().size() == 0){
+            System.out.print("None");
+        }
+        System.out.println();
+        for(int i = 0; i<root.getChildren().size(); i++){
+            printTree(root.getChildren().get(i));
+        }
     }
 
     private List<Node> interpretString(List<String> predicates) throws InvalidCommandException, InvalidSyntaxException, InvalidParametersException {

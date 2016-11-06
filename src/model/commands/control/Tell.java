@@ -6,8 +6,18 @@ import model.Model;
 import model.abstractcommands.ControlCommand;
 import model.interfaces.ControlCommandInterface;
 
+/**
+ * This class implement the Tell command that sets the turtles for which subsequent commands are run.
+ * @author Soravit Sophastienphong
+ */
 public class Tell extends ControlCommand {
 
+    /**
+     * Executes the command represented by the expression tree rooted at this control structure command.
+     * @param root The root of the tree.
+     * @return The double returned by the command.
+     * @throws Exception If any error occurs as a result of the execution of the command.
+     */
     public Tell(Node root, CommandManager commandManager, ControlCommandInterface model) {
         super(root, commandManager, model);
     }
