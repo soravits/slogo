@@ -8,6 +8,9 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+/**
+ * @author Robert C. Duvall
+ */
 
 public class CommandParser {
 

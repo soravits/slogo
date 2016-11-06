@@ -4,7 +4,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * Created by Soravit on 10/21/2016.
+ * This class is based on the CommandParser class written by Professor Duvall. It parses a properties file
+ * and maps commands to the number of parameters that they take.
+ * @author Soravit Sophastienpong, Robert C. Duvall
  */
 public class ParamParser {
 

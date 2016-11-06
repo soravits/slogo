@@ -7,12 +7,20 @@ import model.abstractcommands.ControlCommand;
 import model.interfaces.ControlCommandInterface;
 
 /**
- * Created by Soravit on 10/23/2016.
+ * This class implement the IfElse command that runs a set of commands if an expression returns a value not equal to
+ * zero and another set of commands if an expression returns zero.
+ * @author Soravit Sophastienphong
  */
 public class IfElse extends ControlCommand{
 
 	double bool;
 
+	/**
+	 * Executes the command represented by the expression tree rooted at this control structure command.
+	 * @param root The root of the tree.
+	 * @return The double returned by the command.
+	 * @throws Exception If any error occurs as a result of the execution of the command.
+	 */
 	public IfElse(Node root, CommandManager commandManager, ControlCommandInterface model) throws Exception{
 		super(root, commandManager, model);
 		bool = executeTree(root.getChildren().get(0));

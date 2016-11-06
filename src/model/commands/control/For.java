@@ -8,7 +8,9 @@ import model.abstractcommands.ControlCommand;
 import model.interfaces.ControlCommandInterface;
 
 /**
- * Created by Soravit on 10/23/2016.
+ * This class implements the For command that repeats a set of commands for each value in the specified range from
+ * one value incremented by a certain increment to another value.
+ * @author Soravit Sophastienphong
  */
 public class For extends ControlCommand{
 
@@ -17,6 +19,12 @@ public class For extends ControlCommand{
 	private double end;
 	private double increment;
 
+	/**
+	 * Executes the command represented by the expression tree rooted at this control structure command.
+	 * @param root The root of the tree.
+	 * @return The double returned by the command.
+	 * @throws Exception If any error occurs as a result of the execution of the command.
+	 */
 	public For(Node root, CommandManager commandManager, ControlCommandInterface model) throws Exception{
 		super(root,commandManager,model);
 		Node commandRoot = getRoot().getChildren().get(0);

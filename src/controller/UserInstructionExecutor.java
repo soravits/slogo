@@ -8,9 +8,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Soravit on 10/29/2016.
+ * This class is responsible for executing instructions defined previously defined by the user.
+ * @author Soravit Sophastienphong
  */
 public class UserInstructionExecutor extends Executor{
+
+    /**
+     * @param root The root of the expression tree of the command being executed.
+     * @param commandManager A reference to a CommandManager object from which data can be obtained about command types.
+     * @param model A reference to the current model.
+     * @return The double returned by the execution of the root.
+     * @throws InvalidCommandException If an error exists that is related to the command's execution.
+     */
     @Override
     public double execute(Node root, CommandManager commandManager, Model model) throws InvalidCommandException {
         try {

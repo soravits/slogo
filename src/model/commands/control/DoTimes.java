@@ -8,13 +8,21 @@ import model.abstractcommands.ControlCommand;
 import model.interfaces.ControlCommandInterface;
 
 /**
- * Created by Soravit on 10/23/2016.
+ * This class implements the DoTimes command that repeats a set of commands for each value specified in a range
+ * from 1 to a specified limit.
+ * @author Soravit Sophastienphong
  */
 public class DoTimes extends ControlCommand{
 
     private String variable;
     private double limit;
 
+    /**
+     * Executes the command represented by the expression tree rooted at this control structure command.
+     * @param root The root of the tree.
+     * @return The double returned by the command.
+     * @throws Exception If any error occurs as a result of the execution of the command.
+     */
     public DoTimes(Node root, CommandManager commandManager, ControlCommandInterface model) throws Exception{
         super(root,commandManager,model);
         Node commandRoot = getRoot().getChildren().get(0);

@@ -6,10 +6,17 @@ import model.abstractcommands.ControlCommand;
 import model.interfaces.ControlCommandInterface;
 
 /**
- * Created by Soravit on 10/31/2016.
+ * This class implements the Ask command that runs a set of commands on a specified list of turtles.
+ * @author Soravit Sophastienphong
  */
 public class Ask extends ControlCommand{
 
+    /**
+     * Executes the command represented by the expression tree rooted at this control structure command.
+     * @param root The root of the tree.
+     * @return The double returned by the command.
+     * @throws Exception If any error occurs as a result of the execution of the command.
+     */
     public Ask(Node root, CommandManager commandManager, ControlCommandInterface model) {
         super(root, commandManager, model);
     }

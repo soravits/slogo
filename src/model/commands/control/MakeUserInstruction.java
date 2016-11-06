@@ -7,12 +7,20 @@ import model.abstractcommands.ControlCommand;
 import model.interfaces.ControlCommandInterface;
 
 /**
- * Created by Soravit on 10/23/2016.
+ * This class implements the MakeUserInstruction commands that takes a set of parameters and commands to define
+ * a new command.
+ * @author Soravit Sophastienphong
  */
 public class MakeUserInstruction extends ControlCommand{
 
 	String commandName;
-	
+
+	/**
+	 * Executes the command represented by the expression tree rooted at this control structure command.
+	 * @param root The root of the tree.
+	 * @return The double returned by the command.
+	 * @throws Exception If any error occurs as a result of the execution of the command.
+	 */
 	public MakeUserInstruction(Node root, CommandManager commandManager, ControlCommandInterface model) throws Exception{
 		super(root,commandManager,model);
 	}
