@@ -26,7 +26,7 @@ import view.ui.UIBuilder;
 
 /**
  * The purpose of this class is to create the root that visualizes the turtle.
- * This root can then be passed to UI to be displayed in the scene
+ * This root can then be passed to Window to be displayed in the scene
  * 
  * @author Diane Hadley
  */
@@ -52,7 +52,6 @@ public class TurtleScreen implements UIAttributes{
 	private int canvasHeight;
 	private double originX;
 	private double originY;
-	private int currID;
 
 	
 	/*
@@ -69,7 +68,6 @@ public class TurtleScreen implements UIAttributes{
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;		
 		makeCanvas();
-		this.currID = 1;
 		updateTurtles();
 	
 	}
@@ -84,10 +82,9 @@ public class TurtleScreen implements UIAttributes{
 		return root;
 	}	
 	
-	public int getCurrID(){
-		return currID;
-	}
-	
+	/*
+	 * returns instance of TurtleSettings
+	 */
 	public TurtleSettings getTurtleSettings(){
 		return turtleSettings;
 	}
@@ -143,22 +140,22 @@ public class TurtleScreen implements UIAttributes{
 		
 		for (double id : turtleViewMap.getIDs()){
 			if (activeTurtles.contains(id) && showActive){
-				showActiveTurtle(id);
+				showAsActiveTurtle(id);
 			}
 			else{
-				dontShowActiveTurtle(id);
+				dontAsShowActiveTurtle(id);
 			}
 			
 		}
 	}
 
 
-	private void dontShowActiveTurtle(double id) {
+	private void dontAsShowActiveTurtle(double id) {
 		turtleViewMap.getImage(id).setEffect(null);
 	}
 
 
-	private void showActiveTurtle(double id) {
+	private void showAsActiveTurtle(double id) {
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.AQUA);			
 		
@@ -236,10 +233,9 @@ public class TurtleScreen implements UIAttributes{
 		Text posX = uiBuilder.getText(10, 20, "Position X: " + viewData.getTurtleX(id));
 		Text posY = uiBuilder.getText(10, 40, "Position Y: " + viewData.getTurtleY(id));
 		Text heading = uiBuilder.getText(10, 60, "Heading: " + viewData.getTurtleAngle(id));
-		Text penColor = uiBuilder.getText(10, 80, "Pen Color: " + turtleViewMap.getPenColor(id));
-		Text penStatus = uiBuilder.getText(10, 100, "Pen Down: " + viewData.isPenDown(id));
+		Text penStatus = uiBuilder.getText(10, 80, "Pen Down: " + viewData.isPenDown(id));
 		
-		root.getChildren().addAll(posX, posY, heading, penColor, penStatus);
+		root.getChildren().addAll(posX, posY, heading, penStatus);
 		return root;
 	}
 	
@@ -262,6 +258,7 @@ public class TurtleScreen implements UIAttributes{
 	private void drawTurtlePath(double id){	
 		double [][] line = viewData.getLines(id);			
 		turtleView.setLineWidth(turtleSettings.getPenThickness());
+		turtleView.setStroke(turtleSettings.getPenColor());
 		turtleView.strokeLine(
 				originX + line[0][0], 
 				originY - line[0][1],
@@ -288,9 +285,7 @@ public class TurtleScreen implements UIAttributes{
 			iv.setFitHeight(TURTLE_SIZE);
 			iv.setX(posX - TURTLE_SIZE/2);
 			iv.setY(posY - TURTLE_SIZE/2);
-		}
-		
-		
+		}	
 	}
 
 

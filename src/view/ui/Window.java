@@ -6,19 +6,18 @@ import java.util.Observer;
 /**
  * 
  * @author Diane Hadley
+ * 
  */
 
 
 import controller.Controller;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import view.data.ViewData;
 import view.ui.turtle.TurtleScreen;
 
 public class Window implements UIAttributes, Observer{
 	
-	private UIBuilder uiBuilder = new UIBuilder();
 	private HelpWindowUI helpWindowUI;
 	private TurtleScreen turtleScreen;
 	private GeneralSettings generalSettings;
@@ -65,16 +64,8 @@ public class Window implements UIAttributes, Observer{
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
 
-		makeResetButton();
 	}
 	
-	private void makeResetButton(){
-		Button reset = uiBuilder.makeButton(190, 515, uiResources.getString("ResetAll"), "generalcontrol");
-		reset.setOnAction((event) -> {
-			turtleScreen.resetTurtle();		
-		});	
-		root.getChildren().add(reset);
-	}
 
 	public GeneralSettings getGeneralSettings(){
 		return generalSettings;
@@ -101,10 +92,13 @@ public class Window implements UIAttributes, Observer{
 	}
 
 
-        @Override
-        public void update (Observable o, Object arg) {
-            updateUI();        
-        }
+    @Override
+    public void update (Observable o, Object arg) {
+        updateUI();        
+    }
+
 	
-	
+ 
+        
+        
 }

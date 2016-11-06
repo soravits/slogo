@@ -203,19 +203,7 @@ public class TurtleSettings implements UIAttributes{
 	private void initBackgroundColorComboBox(){
 		backgroundComboBox = new ComboBox<Color>();
 		makeColorComboBox(backgroundComboBox, Color.WHITE, 0);
-	}
-	
-	private void initPenColorComboBox(){
-		penComboBox = new ComboBox<Color>();
-		makeColorComboBox(penComboBox, Color.BLACK, 3);
-	}
-	
-	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int yMultiplier){	
-		addColorsToComboBox(comboBox);
-		createGraphicsForComboBox(comboBox);	
-		comboBox.setValue(initColor);
-		
-		comboBox.valueProperty().addListener(new ChangeListener<Color>() {
+		backgroundComboBox.valueProperty().addListener(new ChangeListener<Color>() {
 			@Override public void changed(ObservableValue color, Color c1, Color c2) {
 				try {
 					turtle.getRoot();
@@ -225,19 +213,27 @@ public class TurtleSettings implements UIAttributes{
 				}
 				
 			}
-		});		
+		});
+	}
+	
+	private void initPenColorComboBox(){
+		penComboBox = new ComboBox<Color>();
+		makeColorComboBox(penComboBox, Color.BLACK, 3);
+		
+	}
+	
+	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int yMultiplier){	
+		addColorsToComboBox(comboBox);
+		createGraphicsForComboBox(comboBox);	
+		comboBox.setValue(initColor);
+				
 		root.getChildren().add(uiBuilder.setControlLayout(comboBox, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*yMultiplier, "turtlecontrol"));		
 	}
 	
 	
 	private void addColorsToComboBox(ComboBox<Color> comboBox){
-		comboBox.getItems().addAll(Color.WHITE, Color.BLACK, Color.RED, 
-				Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, 
-				Color.DEEPSKYBLUE,
-				Color.PURPLE, Color.PINK, Color.CORAL,
-				Color.ALICEBLUE, Color.ANTIQUEWHITE, 
-				Color.AQUAMARINE, Color.AZURE);
+		comboBox.getItems().addAll(Color.BLACK, Color.RED, Color.ORANGE);
 	}
 	
 	private void createGraphicsForComboBox(ComboBox<Color> comboBox){
@@ -272,6 +268,13 @@ public class TurtleSettings implements UIAttributes{
 			
 		ComboBox<String> penTypeComboBox = new ComboBox<String>(penTypeOptions);
 		penTypeComboBox.setValue(uiResources.getString("SolidLine"));
+		
+		penTypeComboBox.valueProperty().addListener(new ChangeListener<String>() {
+			@Override public void changed(ObservableValue string, String s1, String s2) {
+				
+			}
+		});		
+		
 		
 		root.getChildren().add(uiBuilder.setControlLayout(penTypeComboBox, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*6, "turtlecontrol"));
