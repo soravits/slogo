@@ -4,6 +4,11 @@ import error.InvalidCommandException;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return the first input parameter divided by the product of the rest of the inputs
+ * @author Brian
+ *
+ */
 public class Quotient extends MathBoolCommand {
 
     public Quotient (double[] parameters, EmptyInterface model) {

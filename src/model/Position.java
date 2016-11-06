@@ -1,6 +1,11 @@
 
 package model;
 
+/**
+ * Allows for packaging/manipulation of x and y coordinates together for a turtle's location in the GUI
+ * @author Brian
+ *
+ */
 public class Position implements Cloneable{
     
     private double xPosition;

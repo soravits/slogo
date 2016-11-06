@@ -3,15 +3,9 @@ package model.interfaces;
 import java.util.Collection;
 
 /**
- * Created by Brian on 11/1/2016.
+ * Created by Brian on 11/1/2016. Specifies methods used for Executor classes to interact with the Turtle Controller
  */
 public interface TurtleControllerInterface {
-
-    /**
-     * Remove a turtle from the list of actively modified 'Tell' turtles
-     * @param ID
-     */
-    void removeTellTurtle (double ID);
 
     /**
      * Change the active state of a particular turtle from active to inactive or inactive to active

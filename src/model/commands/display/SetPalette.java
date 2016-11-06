@@ -3,6 +3,11 @@ package model.commands.display;
 import model.abstractcommands.DisplayCommand;
 import model.interfaces.DisplayCommandInterface;
 
+/**
+ * Command to set the palette index to the specified index
+ * @author Brian
+ *
+ */
 public class SetPalette extends DisplayCommand{
 
     public SetPalette (double[] parameters, DisplayCommandInterface model) {

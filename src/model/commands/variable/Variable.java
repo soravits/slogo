@@ -4,6 +4,11 @@ import model.WorkspaceState;
 import model.abstractcommands.CommandInterface;
 import model.interfaces.ControlCommandInterface;
 
+/**
+ * return the value associated with a variable name
+ * @author Brian
+ *
+ */
 public class Variable implements CommandInterface{
 
     private String variableName;

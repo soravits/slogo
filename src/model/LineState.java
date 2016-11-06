@@ -32,6 +32,12 @@ public class LineState {
         }
     }
 
+    /**
+     * 
+     * @return a 2x2 array of the points of the last line drawn. The format is [x1 y1][x2 y2], where x1
+     * and y1 are the x and y of the first point, and x2, y2 are the x and y coordinate of the point you
+     * are drawing the line to
+     */
     public double[][] getLastLineDrawn(){
     	if (lastLine.equals(lines.get(lines.size() - 1))){
     		LineModel lineToDraw = new LineModel(lastLine.getPosition2(), lastLine.getPosition2());

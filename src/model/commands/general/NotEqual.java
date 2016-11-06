@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return 1 if two arguments are not equal; 0 otherwise
+ * @author Brian
+ *
+ */
 public class NotEqual extends MathBoolCommand {
 
     public NotEqual (double[] parameters, EmptyInterface model) {

@@ -3,6 +3,11 @@ package model.commands.display;
 import model.abstractcommands.DisplayCommand;
 import model.interfaces.DisplayCommandInterface;
 
+/**
+ * Command to set the current pen size to the specified pixel width
+ * @author Brian
+ *
+ */
 public class SetPenSize extends DisplayCommand{
 
     public SetPenSize (double[] parameters, DisplayCommandInterface model) {

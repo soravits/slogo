@@ -7,7 +7,7 @@ import model.interfaces.ControlCommandInterface;
 
 /**
  * This class implements the Ask command that runs a set of commands on a specified list of turtles.
- * @author Soravit Sophastienphong
+ * @author Soravit Sophastienphong and Brian Keohane
  */
 public class Ask extends ControlCommand{
 

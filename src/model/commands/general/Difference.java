@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to return the first input number minus the sum of the next x inputs
+ * @author Brian
+ *
+ */
 public class Difference extends MathBoolCommand{
 
     public Difference (double[] parameters, EmptyInterface model) {

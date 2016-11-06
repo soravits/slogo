@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return the product of all input parameters
+ * @author Brian
+ *
+ */
 public class Product extends MathBoolCommand{
 
     public Product (double[] parameters, EmptyInterface model) {

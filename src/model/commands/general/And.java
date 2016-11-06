@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return 1 if no parameters are 0; 0 otherwise
+ * @author Brian
+ *
+ */
 public class And extends MathBoolCommand{
 
     public And (double[] parameters, EmptyInterface model) {

@@ -27,11 +27,6 @@ public class TurtleController implements TurtleControllerInterface {
         askTurtles = new HashMap<Integer, HashSet<Double>>();
     }
 
-    @Override
-    public void removeTellTurtle(double ID){
-        currentTellTurtles.remove(ID);
-    }
-
     
     @Override
     public void clearTellTurtles(){

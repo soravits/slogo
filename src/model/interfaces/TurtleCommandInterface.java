@@ -3,27 +3,32 @@ package model.interfaces;
 import model.LineState;
 import model.TurtleState;
 
+/**
+ * Specifies the methods needed by the Turtle Commands to access the Turtles and Lines in the Model
+ * @author Brian
+ *
+ */
 public interface TurtleCommandInterface {
 
     /**
      * 
      * @return current Turtle specified by the currentID in the TurtleMap
      */
-    public TurtleState getTurtle();
+    TurtleState getTurtle();
     
     /**
      * @return current LineState specified by the currentID in the TurtleMap
      */
-    public LineState getLineState();
+    LineState getLineState();
     
     /**
      * @return current ID of specified turtle in the TurtleMap
      */
-    public double getID();
+    double getID();
     
     /**
-     * @return
+     * @return number of turtles that currently exist in the workspace
      */
-    public double getNumberOfTurtles();
+    double getNumberOfTurtles();
 
 }

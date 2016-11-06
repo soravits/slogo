@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return the cosine of an angle (in degrees)
+ * @author Brian
+ *
+ */
 public class Cosine extends MathBoolCommand{
 
     public Cosine (double[] parameter, EmptyInterface model) {

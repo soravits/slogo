@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return 1 if the first input is less than the second input; 0 otherwise
+ * @author Brian
+ *
+ */
 public class LessThan extends MathBoolCommand{
 
     public LessThan (double[] parameters, EmptyInterface model) {
