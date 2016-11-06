@@ -2,7 +2,7 @@ package controller;
 
 import error.InvalidCommandException;
 import model.Model;
-import model.commands.general.Variable;
+import model.commands.variable.Variable;
 
 /**
  * This class is responsible for dealing with the execution of variables in the expression tree.

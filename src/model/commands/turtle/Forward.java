@@ -6,6 +6,11 @@ import model.TurtleState;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to move the current turtle forward by d at its current heading, returns d
+ * @author Brian
+ *
+ */
 public class Forward extends TurtleCommand{
 
     public Forward (double[] parameters, TurtleCommandInterface model) {
@@ -23,17 +28,17 @@ public class Forward extends TurtleCommand{
         return this.getParams()[0];
     }
     
+    /**
+     * Calculate the new coordinates of the turtle after moving forward by d at its current heading
+     * @param turtle
+     * @return the new coordinates for the Turtle
+     */
     public double[] calculateCoordinates(TurtleState turtle){
         double[] coords = new double[2];
         double sumFD = sumParams();
         coords[0] = Math.sin(Math.toRadians(turtle.getTurtleAngle()))*sumFD;
         coords[1] = Math.cos(Math.toRadians(turtle.getTurtleAngle()))*sumFD;
         return coords;
-    }
-    
-    public double undo(){
-        Backward back = new Backward(this.getParams(), getModel());
-        return back.execute();
     }
     
 

@@ -33,15 +33,13 @@ public class AskWith extends ControlCommand {
         Node commandRoot = getRoot().getChildren().get(1);
         Collection<Double> trueTurtles = new ArrayList<>();
         for(double turtle : getModel().getIDs()){
-                getModel().clearTellTurtles();
-                getModel().addTurtle(turtle);
+            getModel().clearTellTurtles();
+            getModel().addTurtle(turtle);
             double x = executeTree(conditionRoot.getChildren().get(0));
-//            System.out.println("turtle ID = " + turtle);
-//            System.out.println("x" + x);
             if(x != 0){
-                    trueTurtles.add(turtle);
-                }
-         }
+                trueTurtles.add(turtle);
+            }
+        }
         getModel().clearTellTurtles();
         for(double turtle : trueTurtles){
             getModel().addTurtle(turtle);

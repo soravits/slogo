@@ -3,6 +3,11 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to Return whether or not two arguments are equal
+ * @author Brian
+ *
+ */
 public class Equal extends MathBoolCommand {
 
     public Equal (double[] parameters, EmptyInterface model) {

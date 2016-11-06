@@ -1,7 +1,6 @@
 package view.data;
+import java.util.AbstractMap;
 import java.util.Collection;
-import java.util.HashMap;
-
 import controller.Controller;
 import model.DisplayState;
 import model.Model;
@@ -76,7 +75,7 @@ public class ViewData {
         return viewModelInterface.getCommandHistory();
     }
 	
-	public HashMap<String, Double> getWorkspace() {
+	public AbstractMap<String, Double> getWorkspace() {
 		return viewModelInterface.getWorkspace().getListOfVariables();
 	}
 	

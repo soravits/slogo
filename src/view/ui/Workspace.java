@@ -1,7 +1,7 @@
 package view.ui;
 
 
-import java.util.HashMap;
+import java.util.AbstractMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -51,7 +51,7 @@ public class Workspace implements UIAttributes{
 	
 	
 	
-	public void updateWorkspace(HashMap<String, Double> variableMap) {
+	public void updateWorkspace(AbstractMap<String, Double> variableMap) {
 		clearWorkspace();
 		for (String varName:variableMap.keySet()) {
 			Text varNameText=new Text(varName+" = ");

@@ -8,7 +8,7 @@ import model.interfaces.ControlCommandInterface;
 
 /**
  * This class implement the Tell command that sets the turtles for which subsequent commands are run.
- * @author Soravit Sophastienphong
+ * @author Soravit Sophastienphong and Brian Keohane
  */
 public class Tell extends ControlCommand {
 
