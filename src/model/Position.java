@@ -71,11 +71,16 @@ public class Position implements Cloneable{
      * Reset position to 0, 0
      * Called in constructor with no input arguments, can also be called by other classes
      */
-    public void resetPosition(){
+    private void resetPosition(){
         xPosition = 0;
         yPosition = 0;
     }
     
+    /**
+     * @param x
+     * @param y
+     * @return the distance between the current Position and a position specified by (x, y)
+     */
     public double distance(double x, double y){
         return Math.sqrt(Math.pow(xPosition - x, 2) + Math.pow(yPosition - y, 2));
     }

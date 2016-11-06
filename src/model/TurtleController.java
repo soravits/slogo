@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import model.interfaces.TurtleControllerInterface;
 
+/**
+ * Coordinates the current Turtles that are being actively modified as specified by the Tell, Ask, and Ask-With
+ * Commands. Able to handle nested Ask commands cleanly. Executor classes call these methods after parsing
+ * but before executing individual commands
+ * @author Brian
+ *
+ */
 public class TurtleController implements TurtleControllerInterface {
 
     private boolean isTell;
@@ -25,11 +32,13 @@ public class TurtleController implements TurtleControllerInterface {
         currentTellTurtles.remove(ID);
     }
 
+    
     @Override
     public void clearTellTurtles(){
         currentTellTurtles.clear();
     }
 
+    @Override
     public void changeTurtleActive (double ID){
         if (currentTellTurtles.contains(ID)){
             currentTellTurtles.remove(ID);
@@ -38,7 +47,6 @@ public class TurtleController implements TurtleControllerInterface {
             currentTellTurtles.add(ID);
         }
     }
-    
     
     @Override
     public void addTurtle(double ID){

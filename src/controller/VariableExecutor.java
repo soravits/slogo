@@ -2,7 +2,7 @@ package controller;
 
 import error.InvalidCommandException;
 import model.Model;
-import model.commands.general.Variable;
+import model.commands.variable.Variable;
 
 public class VariableExecutor extends Executor{
 
