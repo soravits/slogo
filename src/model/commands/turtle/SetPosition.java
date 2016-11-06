@@ -4,6 +4,11 @@ import model.TurtleState;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to set the turtle's position to an absolute (x, y) position. Return the distance moved
+ * @author Brian
+ *
+ */
 public class SetPosition extends TurtleCommand{
 
     public SetPosition (double[] parameters, TurtleCommandInterface model) {

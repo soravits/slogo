@@ -4,7 +4,8 @@ import model.interfaces.TurtleCommandInterface;
 
 /**
  * A superclass which specifies that all Turtle Commands should have access to only the TurtleStates
- * and LineStates of the model
+ * and LineStates of the model. All Turtle commands work on exclusively the current Turtle as specified
+ * by the TurtleMap inside of the model
  * @author Brian
  *
  */

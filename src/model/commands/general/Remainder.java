@@ -15,7 +15,10 @@ public class Remainder extends MathBoolCommand {
     }
 
     @Override
-    public double execute () {
+    public double execute () throws Exception{
+        if (this.getParams()[1] == 0.0){
+            throw new Exception();
+        }
         return (this.getParams()[0] % this.getParams()[1]);
     }
 

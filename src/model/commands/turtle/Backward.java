@@ -3,13 +3,20 @@ package model.commands.turtle;
 import model.TurtleState;
 import model.interfaces.TurtleCommandInterface;
 
-
+/**
+ * Move the current Turtle backwards by dist, return the distance moved by the Turtle
+ * @author Brian
+ *
+ */
 public class Backward extends Forward {
 
     public Backward (double[] parameters, TurtleCommandInterface model) {
         super(parameters, model);
     }
     
+    /**
+     * Return the new coordinates of the turtle after moving backwards
+     */
     public double[] calculateCoordinates(TurtleState turtle){
         double[] coords = new double[2];
         double sumD = sumParams();

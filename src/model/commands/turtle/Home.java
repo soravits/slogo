@@ -4,6 +4,11 @@ import model.Position;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to send the current turtle back to the origin; returns 1
+ * @author Brian
+ *
+ */
 public class Home extends TurtleCommand{
 
     public Home (double[] parameters, TurtleCommandInterface model) {
