@@ -9,13 +9,11 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 /**
- * The purpose of this class is to receive the data from the view and send it to the controller.Parser to be handled. It will
- * also take the tree that is returned by the interpreter and send it to the interpreter. Essentially, the controller.Controller
- * acts as a gateway to the back-end and facilitates the controller.Parser and Interpreter classes. Currently, it only
- * has an update function, but as the project progresses, it will likely assume more responsibility.
+ * This class is responsible for taking user input from the front-end and executing the command(s) represented
+ * by the input in the back-end. The public API provides ways to update the model, update the view, change the language
+ * of the interpreter, and execute input that's written in a file.
  *
- *
- * @author Soravit
+ * @author Soravit Sophastienphong
  */
 public class Controller extends Observable implements Observer{
     private Model model;
@@ -39,25 +37,38 @@ public class Controller extends Observable implements Observer{
         interpreter.parseString(input);
         updateView();
     }
+
+    /**
+     * Sets the language of the interpreter that parses the command.
+     * @param language The name of the language.
+     */
     public void setLanguage(String language){
     	interpreter.setLanguage(language);
     }
-    
-    public void reset(){
-    	model.clear();
-    	view.updateViewModel(model);
-    }
+
+    /**
+     *
+     * @param fileName
+     * @throws InvalidSyntaxException If the syntax of a command is incorrect.
+     * @throws InvalidCommandException If an error exists that is related to the command's execution.
+     * @throws IOException If there is an error with reading the file.
+     * @throws InvalidParametersException If there is an error with passing invalid parameters to a command.
+     */
     public void runFile(String fileName) throws InvalidSyntaxException, InvalidCommandException, IOException, InvalidParametersException {
         processCommand(interpreter.readFileToString(fileName));
     }
-    private void updateView(){
-        view.updateViewModel(model);
-    }
+
+    /**
+     * Updates the view based on the current model.
+     */
     @Override
     public void update (Observable o, Object arg) {
         view.updateViewModel(model);
         setChanged();
         notifyObservers();
     }
-   
+
+    private void updateView(){
+        view.updateViewModel(model);
+    }
 }
