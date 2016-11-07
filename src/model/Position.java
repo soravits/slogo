@@ -22,8 +22,8 @@ public class Position implements Cloneable{
      * @param y
      */
     public Position(double x, double y){
-        xPosition = x;
-        yPosition = y;
+        this.xPosition = x;
+        this.yPosition = y;
     }
     
     /**
@@ -77,8 +77,8 @@ public class Position implements Cloneable{
      * Called in constructor with no input arguments, can also be called by other classes
      */
     private void resetPosition(){
-        xPosition = 0;
-        yPosition = 0;
+        this.xPosition = 0;
+        this.yPosition = 0;
     }
     
     /**

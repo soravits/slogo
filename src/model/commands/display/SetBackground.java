@@ -16,7 +16,7 @@ public class SetBackground extends DisplayCommand{
 
     @Override
     public double execute () throws Exception {
-        getModel().setBackGround(this.getParams()[0]);
+        this.getModel().setBackGround(this.getParams()[0]);
         return this.getParams()[0];
     }
     

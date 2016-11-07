@@ -16,7 +16,7 @@ public class SetPenColor extends DisplayCommand{
 
     @Override
     public double execute () throws Exception {
-        getModel().setPenColor(this.getParams()[0]);
+        this.getModel().setPenColor(this.getParams()[0]);
         return this.getParams()[0];
     }
 

@@ -16,8 +16,8 @@ public class TurtleMap {
     private Map<Double, TurtlePair> turtleMap;
     
     public TurtleMap(){
-        currentID = 1.0;
-        turtleMap = new HashMap<Double, TurtlePair>();
+        this.currentID = 1.0;
+        this.turtleMap = new HashMap<Double, TurtlePair>();
         TurtlePair firstPair = new TurtlePair();
         turtleMap.put(currentID, firstPair);
     }

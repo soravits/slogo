@@ -16,7 +16,7 @@ public class ShowTurtle extends TurtleCommand{
 
     @Override
     public double execute () {
-        getModel().getTurtle().setShowTurtle(true);
+        this.getModel().getTurtle().setShowTurtle(true);
         return 1;
     }
     

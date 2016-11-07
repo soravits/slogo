@@ -27,12 +27,12 @@ public class Model extends Observable implements ControlCommandInterface, EmptyI
     private Collection<String> consoleReturn;
 
     public Model(){
-        display = new DisplayState();
-        turtleMap = new TurtleMap();
-        workspace = new WorkspaceState();
-        commandHistory = new ArrayList<String>();
-        consoleReturn = new ArrayList<String>();
-        turtleController = new TurtleController();
+        this.display = new DisplayState();
+        this.turtleMap = new TurtleMap();
+        this.workspace = new WorkspaceState();
+        this.commandHistory = new ArrayList<String>();
+        this.consoleReturn = new ArrayList<String>();
+        this.turtleController = new TurtleController();
     }
 
     @Override

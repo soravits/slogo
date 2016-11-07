@@ -14,7 +14,7 @@ public class WorkspaceState {
     private HashMap<String, Double> mapOfVariables;
     
     public WorkspaceState(){
-        mapOfVariables = new HashMap<String, Double>();
+        this.mapOfVariables = new HashMap<String, Double>();
     }
 
     /**

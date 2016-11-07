@@ -16,7 +16,7 @@ public class GetShape extends DisplayCommand{
 
     @Override
     public double execute () throws Exception {
-        return getModel().getShape();
+        return this.getModel().getShape();
     }
    
 

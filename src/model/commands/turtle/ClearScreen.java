@@ -15,7 +15,7 @@ public class ClearScreen extends Home{
     
     @Override
     public double execute(){
-        getModel().getLineState().clearLine();
+        this.getModel().getLineState().clearLine();
         return moveToZero();
     }
 

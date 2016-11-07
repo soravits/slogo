@@ -20,11 +20,11 @@ public class TurtleController implements TurtleControllerInterface {
     private HashMap<Integer, HashSet<Double>> askTurtles;
 
     public TurtleController(){
-        isTell = true;
-        nestedAsk = -1;
-        currentTellTurtles = new HashSet<Double>();
+        this.isTell = true;
+        this.nestedAsk = -1;
+        this.currentTellTurtles = new HashSet<Double>();
         currentTellTurtles.add(1.0);
-        askTurtles = new HashMap<Integer, HashSet<Double>>();
+        this.askTurtles = new HashMap<Integer, HashSet<Double>>();
     }
 
     

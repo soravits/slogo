@@ -16,7 +16,7 @@ public class IsShowing extends TurtleCommand {
 
     @Override
     public double execute () {
-        return (getModel().getTurtle().getShowTurtle()) ? 1 : 0;
+        return (this.getModel().getTurtle().getShowTurtle()) ? 1 : 0;
     }
 
 }
