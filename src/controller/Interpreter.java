@@ -15,14 +15,14 @@ import java.util.*;
  */
 public class Interpreter {
 
-	public static final String RESOURCE_PACKAGE = "resources/languages";
-	public static final String PARAMS = "Params";
-	public static final String SYNTAX = "Syntax";
-	public static final String GROUP_START = "(";
-	public static final String GROUP_END = ")";
-	public static final String LIST_START = "[";
-	public static final String LIST_END = "]";
-	public static final String DEFAULT_LANGUAGE = "English";
+    public static final String RESOURCE_PACKAGE = "resources/languages";
+    public static final String PARAMS = "Params";
+    public static final String SYNTAX = "Syntax";
+    public static final String GROUP_START = "(";
+    public static final String GROUP_END = ")";
+    public static final String LIST_START = "[";
+    public static final String LIST_END = "]";
+    public static final String DEFAULT_LANGUAGE = "English";
     public static final String CONTROL_STRUCTURES = "Control";
     public static final String TURTLE_COMMANDS = "TurtleCommands";
     public static final String DISPLAY_COMMANDS = "Display";
@@ -30,36 +30,36 @@ public class Interpreter {
     public static final char HASH = '#';
 
     private String language = DEFAULT_LANGUAGE;
-	private CommandParser commandParser;
-	private ParamParser paramParser;
-	private CommandParser syntaxParser;
-	private Model model;
-	private CommandController commandController;
-	private CommandManager commandManager;
+    private CommandParser commandParser;
+    private ParamParser paramParser;
+    private CommandParser syntaxParser;
+    private Model model;
+    private CommandController commandController;
+    private CommandManager commandManager;
 
     /**
      * @param model A reference to the view's version of the model.
      */
-	public Interpreter(Model model){
-		this.model = model;
-		commandParser = new CommandParser();
-		paramParser = new ParamParser();
-		syntaxParser = new CommandParser();
-		commandController = new CommandController();
-		commandManager = new CommandManager(syntaxParser, commandController, model);
-		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
-		paramParser.addMappings(RESOURCE_PACKAGE + File.separator + PARAMS);
-		syntaxParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
-	}
+    public Interpreter(Model model){
+        this.model = model;
+        commandParser = new CommandParser();
+        paramParser = new ParamParser();
+        syntaxParser = new CommandParser();
+        commandController = new CommandController();
+        commandManager = new CommandManager(syntaxParser, commandController, model);
+        commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
+        paramParser.addMappings(RESOURCE_PACKAGE + File.separator + PARAMS);
+        syntaxParser.addPatterns(RESOURCE_PACKAGE + File.separator + SYNTAX);
+    }
 
     /**
      * Sets the language used to interpret commands.
      * @param language The name of the language.
      */
-	public void setLanguage(String language){
-		this.language = language;
-		commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
-	}
+    public void setLanguage(String language){
+        this.language = language;
+        commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
+    }
 
     /**
      * @param s The string of command(s)
@@ -67,26 +67,26 @@ public class Interpreter {
      * @throws InvalidCommandException If an error exists that is related to the command's execution.
      * @throws InvalidParametersException If there is an error with passing invalid parameters to a command.
      */
-	public void parseString(String s) throws InvalidSyntaxException, InvalidCommandException, InvalidParametersException {
-		s = s.toLowerCase();
-		List<String> tokens = new ArrayList<String>();
-		Scanner inputScanner = new Scanner(s);
-		while(inputScanner.hasNextLine()){
-			String line = inputScanner.nextLine();
-			Scanner lineScanner = new Scanner(line);
-			if(!line.isEmpty() && line.charAt(0) == HASH){
-				continue;
-			}
-			else{
-				while(lineScanner.hasNext()){
-					tokens.add(lineScanner.next());
-				}
-			}
-			lineScanner.close();
-		}
-		inputScanner.close();
-		List<Node> trees = interpretString(tokens);
-	}
+    public void parseString(String s) throws InvalidSyntaxException, InvalidCommandException, InvalidParametersException {
+        s = s.toLowerCase();
+        List<String> tokens = new ArrayList<String>();
+        Scanner inputScanner = new Scanner(s);
+        while(inputScanner.hasNextLine()){
+            String line = inputScanner.nextLine();
+            Scanner lineScanner = new Scanner(line);
+            if(!line.isEmpty() && line.charAt(0) == HASH){
+                continue;
+            }
+            else{
+                while(lineScanner.hasNext()){
+                    tokens.add(lineScanner.next());
+                }
+            }
+            lineScanner.close();
+        }
+        inputScanner.close();
+        List<Node> trees = interpretString(tokens);
+    }
 
     /**
      * @param s The string to be validated.
@@ -132,22 +132,22 @@ public class Interpreter {
     }
 
     private List<Node> interpretString(List<String> predicates) throws InvalidCommandException, InvalidSyntaxException, InvalidParametersException {
-		List<Node> trees = new ArrayList<Node>();
-		Queue<Node> queue = new LinkedList<Node>();
-		for(int i = 0; i < predicates.size(); i++){
-			Node node = new Node(predicates.get(i));
-			queue.add(node);
-		}
-		while(!queue.isEmpty()){
-			Node tree = queue.poll();
-			trees.add(visitNode(queue, tree));
-                        //printTree(tree);
-			commandManager.executeTree(tree);
-		}
-		return trees;
-	}
+        List<Node> trees = new ArrayList<Node>();
+        Queue<Node> queue = new LinkedList<Node>();
+        for(int i = 0; i < predicates.size(); i++){
+            Node node = new Node(predicates.get(i));
+            queue.add(node);
+        }
+        while(!queue.isEmpty()){
+            Node tree = queue.poll();
+            trees.add(visitNode(queue, tree));
+            //printTree(tree);
+            commandManager.executeTree(tree);
+        }
+        return trees;
+    }
 
-	private Node interpretBracketCommands(Queue<Node> queue) throws InvalidSyntaxException, InvalidParametersException {
+    private Node interpretBracketCommands(Queue<Node> queue) throws InvalidSyntaxException, InvalidParametersException {
         double openBracketCount = 1;
         double closedBracketCount = 0;
         Node node = new Node(CONTROL_STRUCTURES);
@@ -189,8 +189,8 @@ public class Interpreter {
         return node;
     }
 
-	private Node visitNode(Queue<Node> queue, Node root) throws InvalidSyntaxException, InvalidParametersException {
-		String value = root.getValue();
+    private Node visitNode(Queue<Node> queue, Node root) throws InvalidSyntaxException, InvalidParametersException {
+        String value = root.getValue();
         if(syntaxParser.getSymbol(value).equals(CommandParser.ERROR)){
             throw new InvalidSyntaxException(value);
         }
@@ -211,8 +211,8 @@ public class Interpreter {
                 if(queue.peek() != null && queue.peek().getValue().equals(GROUP_START)){
                     numParams = 1;
                 }else{
-                        numParams = paramParser.getNumParams(commandName);
-                    }
+                    numParams = paramParser.getNumParams(commandName);
+                }
                 for (int i = 0; i < numParams; i++) {
                     Node child = visitNode(queue, queue.poll());
                     root.addChild(child);
@@ -224,5 +224,5 @@ public class Interpreter {
             e.printStackTrace();
             throw new InvalidParametersException(value);
         }
-	}
+    }
 }
