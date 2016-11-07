@@ -4,6 +4,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.text.Text;
 
+/**
+ * The purpose of this class is to provide methods that format text and controls in order to reduce
+ * repeated code that would result from the many controls and Text instances used in the view
+ * 
+ * @author Diane
+ * 
+ */
+
 public class UIBuilder{	
 	
 	public Text getText(int x, int y, String t){

@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.imageio.ImageIO;
-
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,7 +41,6 @@ import view.ui.UIBuilder;
  * The purpose of this class is to display the interface the user can use to change settings
  * and to return the results of these settings
  * 
- * 
  * @author Diane Hadley
  *
  */
@@ -60,13 +57,12 @@ public class TurtleSettings implements UIAttributes{
 	private Stage stage;
 	private Image turtleImage;
 	private TurtleScreen turtle;
-	private TextField penThickness;
+	private TextField penThicknessTextField;
 	private ViewData viewData;
 	private Controller controller;
 	
 	private Map<Integer, Color> indexColorMap;
-	private Map<Integer, Image> indexImageMap;
-	
+	private Map<Integer, Image> indexImageMap;	
 	
 	private static final int COLOR_RECT_WIDTH = 75;
 	private static final int COLOR_RECT_HEIGHT = 20;
@@ -77,8 +73,7 @@ public class TurtleSettings implements UIAttributes{
 	private static final int START_PALETTE_Y = 10;
 	private static final int PALETTE_Y_MULTIPLIER = 30;
 	private static final int PALETTE_X = 10;
-	
-	
+	private static final int PALETTE_WINDOW_SIZE = 200;
 	
 	private int controlX;
 	
@@ -94,10 +89,6 @@ public class TurtleSettings implements UIAttributes{
 		initRoot();
 	}
 
-
-	
-		
-	
 	/*
 	 * returns the root with all visualizations of 
 	 * how the user can update turtle settings
@@ -116,53 +107,56 @@ public class TurtleSettings implements UIAttributes{
 		return color;
 	}
 	
-	
 	/*
 	 * returns the selected pen color
 	 */
 	public Color getPenColor(){
 		Color color = penComboBox.getSelectionModel().getSelectedItem();
-		return color;
-		
+		return color;		
 	}
 	
 	
 	/*
 	 * returns an image that was selected by the user
 	 */
-
 	public Image getTurtleImage(){
 		return turtleImage;
 	}
 	
-	
-	public double getPenThickness(){
-		
-		String thicknessString = penThickness.getText();
+	/*
+	 * returns a double that determines the thickness of the 
+	 * pen that draws the turtle's path
+	 */
+	public double getPenThickness(){	
+		String thicknessString = penThicknessTextField.getText();
 		if (thicknessString.equals("")){
 			return viewData.getPenSize();
 		}	
 		else {				
 			try {
-				double thickness = Double.parseDouble(thicknessString);
-				if (thickness == viewData.getPenSize()){
-					return thickness;
-				}
-				viewData.setPenSize(thickness, controller);
-				return thickness;
+				return setPenThickness(thicknessString);
 			}catch(Exception e){
 				displayError.displayErrorDialogueBox(uiResources.getString("InvalidPenThickness"));			
 			}			
 		}
 		return DEFAULT_THICKNESS;	
 	}
-	
-	
-	
+
+	/*
+	 * return boolean to determine if user can graphically see which
+	 * turtles are active
+	 */
 	public boolean getActiveTurtleToggle(){
 		return showActiveTurtle.isSelected();
 	}
 	
+	private double setPenThickness(String thicknessString) throws Exception {
+		double thickness = Double.parseDouble(thicknessString);
+		if (thickness != viewData.getPenSize()){
+			viewData.setPenSize(thickness, controller);
+		}				
+		return thickness;
+	}
 	
 	private void initColorMap(){
 		indexColorMap = new HashMap<Integer, Color>();
@@ -177,8 +171,6 @@ public class TurtleSettings implements UIAttributes{
 		indexImageMap.put(2, new Image(getClass().getClassLoader().getResourceAsStream("resources/fish_happy.png")));
 		indexImageMap.put(3, new Image(getClass().getClassLoader().getResourceAsStream("resources/frog.png")));	
 	}
-	
-	
 	
 	private void initRoot() {
 		initBackgroundColorComboBox();
@@ -198,8 +190,6 @@ public class TurtleSettings implements UIAttributes{
 			);
 	}
 	
-	
-	
 	private void initBackgroundColorComboBox(){
 		backgroundComboBox = new ComboBox<Color>();
 		makeColorComboBox(backgroundComboBox, Color.WHITE, 0);
@@ -218,8 +208,7 @@ public class TurtleSettings implements UIAttributes{
 	
 	private void initPenColorComboBox(){
 		penComboBox = new ComboBox<Color>();
-		makeColorComboBox(penComboBox, Color.BLACK, 3);
-		
+		makeColorComboBox(penComboBox, Color.BLACK, 3);	
 	}
 	
 	private void makeColorComboBox(ComboBox<Color> comboBox, Color initColor, int yMultiplier){	
@@ -264,34 +253,27 @@ public class TurtleSettings implements UIAttributes{
 	private void initPenTypeComboBox(){
 		
 		ObservableList<String> penTypeOptions = FXCollections.observableArrayList(uiResources.getString("SolidLine"), 
-				uiResources.getString("DashedLine"),uiResources.getString("DottedLine")); 
-			
+				uiResources.getString("DashedLine"),uiResources.getString("DottedLine")); 		
 		ComboBox<String> penTypeComboBox = new ComboBox<String>(penTypeOptions);
-		penTypeComboBox.setValue(uiResources.getString("SolidLine"));
-		
+		penTypeComboBox.setValue(uiResources.getString("SolidLine"));		
 		penTypeComboBox.valueProperty().addListener(new ChangeListener<String>() {
 			@Override public void changed(ObservableValue string, String s1, String s2) {
 				
 			}
 		});		
-		
-		
 		root.getChildren().add(uiBuilder.setControlLayout(penTypeComboBox, controlX, 
-				FIRST_CONTROL_Y + CONTROL_Y_SPACING*6, "turtlecontrol"));
-		
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*6, "turtlecontrol"));		
 	}
 	
 	private void initPenThicknessTextField(){
-		penThickness = new TextField();
-		
-		root.getChildren().add(uiBuilder.setControlLayout(penThickness, controlX, 
+		penThicknessTextField = new TextField();		
+		root.getChildren().add(uiBuilder.setControlLayout(penThicknessTextField, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*9, "turtlecontrol"));
 	}
 	
 	private void initActiveTurtleToggle(){
 		showActiveTurtle = new CheckBox();
-		showActiveTurtle.setSelected(false);
-		
+		showActiveTurtle.setSelected(false);	
 		showActiveTurtle.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {			
@@ -299,55 +281,49 @@ public class TurtleSettings implements UIAttributes{
 				
 				turtle.getRoot();
 			}
-		});		
-		
-		
+		});					
 		root.getChildren().add(uiBuilder.setControlLayout(showActiveTurtle, controlX, 
 				FIRST_CONTROL_Y + CONTROL_Y_SPACING*12, "turtlecontrol"));
 	}
 	
 	
-	private void initImageButton(){
-		
+	private void initImageButton(){		
 		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*14, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
 			chooseImage();		
-			turtle.getRoot();
-			
+			turtle.getRoot();		
 		});			
 		root.getChildren().addAll(image);
 	}
 	
 	private void initColorPaletteButton(){
-
 		Button colorPalette = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*16, 
 				uiResources.getString("ColorPaletteButton"), "turtlecontrol");
 		colorPalette.setOnAction((event) -> {
 			Stage stage = new Stage();
-			Group root = new Group();
-					
+			Group root = new Group();				
 			for (Integer index: indexColorMap.keySet()){		
-				Rectangle rect = new Rectangle();
-				rect.setHeight(COLOR_RECT_HEIGHT);
-				rect.setWidth(COLOR_RECT_WIDTH);
-				rect.setX(PALETTE_X);
-				rect.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*(index-1));
-				rect.setFill(indexColorMap.get(index));
-				Text t = new Text(index.toString());
-				t.setX(PALETTE_X*2 + COLOR_RECT_WIDTH);
-				t.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*(index-1) + 15);
-				root.getChildren().addAll(t, rect);
-				
+				displayColorAndIndex(root, index);			
 			}
-			
-			Scene scene = new Scene(root, 200, 200);
+			Scene scene = new Scene(root, PALETTE_WINDOW_SIZE, PALETTE_WINDOW_SIZE);
 			stage.setScene(scene);
 			stage.show();
-			
 		});	
-		
 		root.getChildren().add(colorPalette);
+	}
+
+	private void displayColorAndIndex(Group root, Integer index) {
+		Rectangle rect = new Rectangle();
+		rect.setHeight(COLOR_RECT_HEIGHT);
+		rect.setWidth(COLOR_RECT_WIDTH);
+		rect.setX(PALETTE_X);
+		rect.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*(index-1));
+		rect.setFill(indexColorMap.get(index));
+		Text t = new Text(index.toString());
+		t.setX(PALETTE_X*2 + COLOR_RECT_WIDTH);
+		t.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*(index-1) + 15);
+		root.getChildren().addAll(t, rect);
 	}
 	
 	private void initImagePaletteButton(){
@@ -355,29 +331,28 @@ public class TurtleSettings implements UIAttributes{
 				uiResources.getString("ImagePaletteButton"), "turtlecontrol");
 		imagePalette.setOnAction((event) -> {
 			Stage stage = new Stage();
-			Group root = new Group();
-					
+			Group root = new Group();					
 			for (Integer index: indexImageMap.keySet()){		
-				ImageView iv = new ImageView(indexImageMap.get(index));
-				iv.setX(PALETTE_X);
-				iv.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*2*(index-1));
-				iv.setFitHeight(COLOR_RECT_HEIGHT*2);
-				iv.setFitWidth(COLOR_RECT_HEIGHT*2);
-				
-				Text t = new Text(index.toString());
-				t.setX(PALETTE_X*2 + COLOR_RECT_WIDTH);
-				t.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*2*(index-1) + 20);
-				root.getChildren().addAll(t, iv);
-				
-			}
-			
-			Scene scene = new Scene(root, 200, 200);
+				displayImageAndIndex(root, index);			
+			}		
+			Scene scene = new Scene(root, PALETTE_WINDOW_SIZE, PALETTE_WINDOW_SIZE);
 			stage.setScene(scene);
 			stage.show();
-		});	
-		
+		});		
 		root.getChildren().add(imagePalette);
 		
+	}
+
+	private void displayImageAndIndex(Group root, Integer index) {
+		ImageView iv = new ImageView(indexImageMap.get(index));
+		iv.setX(PALETTE_X);
+		iv.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*2*(index-1));
+		iv.setFitHeight(COLOR_RECT_HEIGHT*2);
+		iv.setFitWidth(COLOR_RECT_HEIGHT*2);		
+		Text t = new Text(index.toString());
+		t.setX(PALETTE_X*2 + COLOR_RECT_WIDTH);
+		t.setY(START_PALETTE_Y + PALETTE_Y_MULTIPLIER*2*(index-1) + 20);
+		root.getChildren().addAll(t, iv);
 	}
 	
 	private void chooseImage(){
@@ -395,11 +370,7 @@ public class TurtleSettings implements UIAttributes{
 			} catch (IOException e) {
 				displayError.displayErrorDialogueBox(uiResources.getString("InvalidTurtleImage"));
 			}	
-		}
-		
-			
-			
-		
+		}	
 			
 	}
 	

@@ -8,7 +8,7 @@ import view.DisplayError;
 
 /**
  *The purpose of this class is to create the root that visualizes the commandLine
- *and to return the input in the command line as a list of commands so that
+ *and to return the input in the command line as a string so that
  *they can be executed
  *
  * @author Diane Hadley
@@ -35,6 +35,11 @@ public class CommandLine implements UIAttributes{
 	
 	private Window window;
 	
+	
+	/**
+	 * Instantiates CommandLine by determining the size and location of the command line,
+	 * creating the text area that is the command line, 
+	 */
 	public CommandLine(int sceneHeight, Window window){
 		super();
 		this.commandLineHeight = sceneHeight - TURTLE_CANVAS_HEIGHT - 145;
@@ -49,18 +54,18 @@ public class CommandLine implements UIAttributes{
 	}
 	
 	
-	/*
+	/**
 	 * returns root with all visualization of commandLine
 	 * 
 	 */	
-	public Group getRoot(){
-		
+	public Group getRoot(){	
 		return root;
 	}
 	
 	
-	/*
-	 * returns list of objects which are each a line of input in the command line
+	/**
+	 * returns user input in the command line text area 
+	 * as a string
 	 */
 
 	public String getCommand(){
@@ -81,25 +86,33 @@ public class CommandLine implements UIAttributes{
 		Button history = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING, buttonsY, 
 				uiResources.getString("History"), "generalcontrol");
 		history.setOnAction((event) -> {
-				CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(window,this,COMMAND_HISTORY_WINDOW_Y,COMMAND_HISTORY_WINDOW_X);
-				commandHistoryWindow.updateCommandHistory(window.getViewData().getCommandHistory());
-				commandHistoryWindow.show();
-		});	
-		
+				showCommandHistory();
+		});			
 		Button submit = uiBuilder.makeButton(FIRST_BUTTON_X + BUTTON_SPACING*2, buttonsY, 
 				uiResources.getString("Submit"), "generalcontrol");
 		submit.setOnAction((event) -> {
-			try {
-				//window.updateViewData();
-				window.updateViewData(this.getCommand());
-				window.updateUI();
-			} catch (Exception e) {
-				displayError.displayErrorDialogueBox(e.getMessage());
-			}
+			submitCommandToModel();
 			textArea.setText("");
 		});	
 		
 		root.getChildren().addAll(history, submit);
+	}
+
+
+	private void showCommandHistory() {
+		CommandHistoryWindow commandHistoryWindow = new CommandHistoryWindow(window,this,COMMAND_HISTORY_WINDOW_Y,COMMAND_HISTORY_WINDOW_X);
+		commandHistoryWindow.updateCommandHistory(window.getViewData().getCommandHistory());
+		commandHistoryWindow.show();
+	}
+
+
+	private void submitCommandToModel() {
+		try {
+			window.updateViewData(this.getCommand());
+			window.updateUI();
+		} catch (Exception e) {
+			displayError.displayErrorDialogueBox(e.getMessage());
+		}
 	}
 	
 	public void setCommand(String command) {

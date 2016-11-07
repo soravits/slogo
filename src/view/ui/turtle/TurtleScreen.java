@@ -98,14 +98,10 @@ public class TurtleScreen implements UIAttributes{
 		updateViewMapKey(ids);
 		setActiveTurtleToggle();
 		
-		for (double id : ids){	
-				
+		for (double id : ids){					
 			setViewTurtleStateFromImage(id);
-			
 			addTurtleToScene(id);
-			
 			drawTurtlePath(id);				
-			
 			if (viewData.getShowTurtle(id)){											
 				formatTurtle(id);
 			}		
@@ -230,10 +226,10 @@ public class TurtleScreen implements UIAttributes{
 	private Group getTurtleStateRoot(Double id) {
 		Group root = new Group();
 		
-		Text posX = uiBuilder.getText(10, 20, "Position X: " + viewData.getTurtleX(id));
-		Text posY = uiBuilder.getText(10, 40, "Position Y: " + viewData.getTurtleY(id));
-		Text heading = uiBuilder.getText(10, 60, "Heading: " + viewData.getTurtleAngle(id));
-		Text penStatus = uiBuilder.getText(10, 80, "Pen Down: " + viewData.isPenDown(id));
+		Text posX = uiBuilder.getText(10, 20, uiResources.getString("ShowTurtleStatePositionX") + viewData.getTurtleX(id));
+		Text posY = uiBuilder.getText(10, 40, uiResources.getString("ShowTurtleStatePositionY") + viewData.getTurtleY(id));
+		Text heading = uiBuilder.getText(10, 60, uiResources.getString("ShowTurtleStateHeading") + viewData.getTurtleAngle(id));
+		Text penStatus = uiBuilder.getText(10, 80, uiResources.getString("ShowTurtleStatePenDown") + viewData.isPenDown(id));
 		
 		root.getChildren().addAll(posX, posY, heading, penStatus);
 		return root;
@@ -276,16 +272,19 @@ public class TurtleScreen implements UIAttributes{
 		
 		if (turtleIsOffCanvas(posX, posY)){
 			root.getChildren().remove(iv);
-		}
-		
-		else {
-			
-			iv.setRotate(angle);
-			iv.setFitWidth(TURTLE_SIZE);
-			iv.setFitHeight(TURTLE_SIZE);
-			iv.setX(posX - TURTLE_SIZE/2);
-			iv.setY(posY - TURTLE_SIZE/2);
 		}	
+		else {		
+			drawTurtle(iv, posX, posY, angle);
+		}	
+	}
+
+
+	private void drawTurtle(ImageView iv, double posX, double posY, double angle) {
+		iv.setRotate(angle);
+		iv.setFitWidth(TURTLE_SIZE);
+		iv.setFitHeight(TURTLE_SIZE);
+		iv.setX(posX - TURTLE_SIZE/2);
+		iv.setY(posY - TURTLE_SIZE/2);
 	}
 
 
