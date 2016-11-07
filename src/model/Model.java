@@ -36,11 +36,6 @@ public class Model extends Observable implements ControlCommandInterface, EmptyI
     }
 
     @Override
-    public TurtleMap getTurtleMap (){
-        return turtleMap;
-    }
-
-    @Override
     public double getNumberOfTurtles (){
         return turtleMap.getIDs().size();
     }

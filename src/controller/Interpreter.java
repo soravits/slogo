@@ -1,12 +1,18 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
 import error.InvalidCommandException;
 import error.InvalidParametersException;
 import error.InvalidSyntaxException;
 import model.Model;
-
-import java.io.*;
-import java.util.*;
 
 /**
  * The class is responsible for parsing user input from the front-end, creating expression trees of commands, and

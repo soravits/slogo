@@ -12,104 +12,101 @@ import model.TurtleMap;
  * @author Pim
  */
 public class ViewData {
-	private ViewModelInterface viewModelInterface;
-	
-	public ViewData() {
-		this.viewModelInterface=new Model();
-	}
-	
-	public void sendCommand(String command,Controller controller) throws Exception {
-		controller.processCommand(command);	
-	}
-	
-	public void updateViewModel(Model Model) {
-		this.viewModelInterface=Model;
-	}
-	
-	public TurtleMap getTurtleMap(){
-		return viewModelInterface.getTurtleMap();
-	}
+    private ViewModelInterface viewModelInterface;
 
-	public Collection<Double> getIDs(){
-		return viewModelInterface.getIDs();
-	}
-	
-	public boolean getShowTurtle(double id){
-		return viewModelInterface.getShowTurtle(id);
-	}
-	
-	public double getTurtleAngle(double id){
-    	return viewModelInterface.getTurtleAngle(id);
+    public ViewData() {
+        this.viewModelInterface=new Model();
     }
-	
-	public double getTurtleX(double id){
-    	return viewModelInterface.getTurtleX(id);
+
+    public void sendCommand(String command,Controller controller) throws Exception {
+        controller.processCommand(command);	
     }
-	
-	public double getTurtleY(double id){
-    	return viewModelInterface.getTurtleY(id);
+
+    public void updateViewModel(Model Model) {
+        this.viewModelInterface=Model;
     }
-	
-	
-	public boolean isPenDown(double id){
-    	return viewModelInterface.isPenDown(id);
+
+
+    public Collection<Double> getIDs(){
+        return viewModelInterface.getIDs();
     }
-	
-	public void changeActiveTurtle(double ID) {
+
+    public boolean getShowTurtle(double id){
+        return viewModelInterface.getShowTurtle(id);
+    }
+
+    public double getTurtleAngle(double id){
+        return viewModelInterface.getTurtleAngle(id);
+    }
+
+    public double getTurtleX(double id){
+        return viewModelInterface.getTurtleX(id);
+    }
+
+    public double getTurtleY(double id){
+        return viewModelInterface.getTurtleY(id);
+    }
+
+
+    public boolean isPenDown(double id){
+        return viewModelInterface.isPenDown(id);
+    }
+
+    public void changeActiveTurtle(double ID) {
         viewModelInterface.changeActiveTurtle(ID);
     }
-	
-	public double[][] getLines (double ID){
+
+    public double[][] getLines (double ID){
         return viewModelInterface.getLines(ID);
     }
-	
-	public Collection<Double> getTurtlesToModify () {
+
+    public Collection<Double> getTurtlesToModify () {
         return viewModelInterface.getTurtlesToModify();
     }
-	
-	public Collection<String> getConsoleReturn() {
-		return viewModelInterface.getConsoleReturn();
-	}
-	
-	public Collection<String> getCommandHistory() {
+
+    public Collection<String> getConsoleReturn() {
+        return viewModelInterface.getConsoleReturn();
+    }
+
+    public Collection<String> getCommandHistory() {
         return viewModelInterface.getCommandHistory();
     }
-	
-	public AbstractMap<String, Double> getWorkspace() {
-		return viewModelInterface.getWorkspace().getListOfVariables();
-	}
-	
-	public DisplayState getDisplayState() {
-		return viewModelInterface.getDisplay();
-	}
-	
-	public double getPenColor () {
+
+    public AbstractMap<String, Double> getWorkspace() {
+        return viewModelInterface.getWorkspace().getListOfVariables();
+    }
+
+    public DisplayState getDisplayState() {
+        return viewModelInterface.getDisplay();
+    }
+
+    public double getPenColor () {
         return viewModelInterface.getPenColor();
     }
-	
-	public double getBackGround (){
-		return viewModelInterface.getBackGround();
+
+    public double getBackGround (){
+        return viewModelInterface.getBackGround();
     }
-	
-	public double getPenSize () {
-		return viewModelInterface.getPenSize();
+
+    public double getPenSize () {
+        return viewModelInterface.getPenSize();
     }
-	
-	public void setBackGround (int backIndex, Controller controller) throws Exception {
-		
+
+    public void setBackGround (int backIndex, Controller controller) throws Exception {
+
         sendCommand("setbackground " + backIndex, controller);
     }
-	
-	public void setPenSize (Double penSize, Controller controller) throws Exception {
-		sendCommand("setpensize " +penSize.toString(), controller);
-	}
-	
-	public void setPenColor (int pencolorIndex,Controller controller) throws Exception {
-		sendCommand("setpencolor "+pencolorIndex,controller);
+
+    public void setPenSize (Double penSize, Controller controller) throws Exception {
+        sendCommand("setpensize " +penSize.toString(), controller);
     }
-	
-	public void setShape (double pensize,Controller controller) throws Exception{
-		sendCommand("setshape "+pensize,controller);
+
+    public void setPenColor (int pencolorIndex,Controller controller) throws Exception {
+        sendCommand("setpencolor "+pencolorIndex,controller);
+    }
+
+    public void setShape (double pensize,Controller controller) throws Exception{
+        sendCommand("setshape "+pensize,controller);
         //penSize = pensize;
     }
 

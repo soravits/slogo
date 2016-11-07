@@ -4,19 +4,17 @@ package view.ui;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import view.data.ViewData;
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import controller.Controller;
+import view.data.ViewData;
 
 public class SaveCommand implements UIAttributes {
 	private static int BUTTON_X = 480;

@@ -7,8 +7,6 @@ import model.TurtleMap;
 import model.WorkspaceState;
 
 public interface ViewModelInterface{
-    
-    public TurtleMap getTurtleMap();
 	
     public WorkspaceState getWorkspace ();
     
