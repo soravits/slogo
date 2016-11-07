@@ -20,7 +20,7 @@ public abstract class DisplayCommand extends GeneralCommand{
     /**
      * @return DisplayCommandInterface of the model
      */
-    public DisplayCommandInterface getModel(){
+    protected DisplayCommandInterface getModel(){
         return display;
     }
     

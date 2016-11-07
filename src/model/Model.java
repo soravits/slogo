@@ -152,7 +152,7 @@ public class Model extends Observable implements ControlCommandInterface, EmptyI
 
     @Override
     public void changeActiveTurtle(double ID) {
-        turtleController.changeTurtleActive(ID);
+        turtleController.changeActiveTurtle(ID);
     }
 
     @Override
@@ -260,5 +260,6 @@ public class Model extends Observable implements ControlCommandInterface, EmptyI
     private void clearConsoleReturn(){
         consoleReturn.clear();
     }
+
 
 }

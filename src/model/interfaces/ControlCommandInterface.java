@@ -9,7 +9,7 @@ import model.WorkspaceState;
  * @author Brian
  *
  */
-public interface ControlCommandInterface {
+public interface ControlCommandInterface extends TurtleControllerInterface {
 
     /**
      * @return workspace of current variables that have been set via commands in the shell
@@ -25,25 +25,25 @@ public interface ControlCommandInterface {
      * Clear the entire list of current active turtles
      */
     void clearTellTurtles ();
-
-    /**
-     * Add a turtle to the active list
-     * @param ID : ID number of turtle
-     */
-    void addTurtle(double ID);
-
-    /**
-     * @return A collection of the ID's of the current active list of Turtles
-     */
-    Collection<Double> getTurtlesToModify ();
-
-    /**
-     * Add a list of Turtles to be temporarily active during an "Ask" command
-     */
-    void addNestedAsk ();
-
-    /**
-     * Subtract a list of turtles that is no longer active after leaving an "Ask" command
-     */
-    void subtractNestedAsk ();
+//
+//    /**
+//     * Add a turtle to the active list
+//     * @param ID : ID number of turtle
+//     */
+//    void addTurtle(double ID);
+//
+//    /**
+//     * @return A collection of the ID's of the current active list of Turtles
+//     */
+//    Collection<Double> getTurtlesToModify ();
+//
+//    /**
+//     * Add a list of Turtles to be temporarily active during an "Ask" command
+//     */
+//    void addNestedAsk ();
+//
+//    /**
+//     * Subtract a list of turtles that is no longer active after leaving an "Ask" command
+//     */
+//    void subtractNestedAsk ();
 }

@@ -34,7 +34,7 @@ public class TurtleController implements TurtleControllerInterface {
     }
 
     @Override
-    public void changeTurtleActive (double ID){
+    public void changeActiveTurtle (double ID){
         if (currentTellTurtles.contains(ID)){
             currentTellTurtles.remove(ID);
         }

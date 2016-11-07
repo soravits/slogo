@@ -1,0 +1,7 @@
+to dash [ :count :size ]
+[
+  repeat :count
+  [
+    pu fd :size pd fd :size
+  ]
+]

@@ -20,7 +20,7 @@ public abstract class MathBoolCommand extends GeneralCommand implements CommandI
     /**
      * @return an empty interface to be ignored by each of the math/boolean commands
      */
-    public EmptyInterface getModel(){
+    protected EmptyInterface getModel(){
         return emptyModel;
     }
     

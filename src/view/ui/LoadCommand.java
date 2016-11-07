@@ -47,7 +47,8 @@ public class LoadCommand implements UIAttributes{
             	FileChooser fileChooser = new FileChooser();
         		fileChooser.setTitle("Choose File");
         		ExtensionFilter filter = new ExtensionFilter("TXT files (*.txt)", "*.txt"); 	//http://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html
-        		fileChooser.getExtensionFilters().add(filter);
+        		ExtensionFilter filterLogo = new ExtensionFilter("LOGO", "*.logo*");
+        		fileChooser.getExtensionFilters().addAll(filter, filterLogo);
         		File selectedFile = fileChooser.showOpenDialog(stage);
         		
         		try {
