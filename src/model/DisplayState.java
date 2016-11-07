@@ -17,13 +17,16 @@ public class DisplayState implements DisplayCommandInterface {
     private double paletteIndex;
     private int[][] paletteColors;
     
+    private final int MAX_NUMBER_OF_PALETTES = 20;
+    private final int RGB_SIZE = 3;
+    
     public DisplayState() {
         backGround = 1;
         penColor = 1;
         shape = 1;
         penSize = 1;
         paletteIndex = 1;
-        paletteColors = new int[20][3];
+        paletteColors = new int[MAX_NUMBER_OF_PALETTES][RGB_SIZE];
     }
 
     @Override

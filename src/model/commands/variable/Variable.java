@@ -13,7 +13,7 @@ public class Variable implements CommandInterface{
 
     private String variableName;
     private ControlCommandInterface listOfVars;
-    
+
     public Variable (String varName, ControlCommandInterface model) {
         listOfVars = model;
         variableName = varName;
@@ -23,7 +23,7 @@ public class Variable implements CommandInterface{
     public double execute() {
         WorkspaceState workspace = listOfVars.getWorkspace();
         if(!workspace.getListOfVariables().containsKey(variableName)){
-        workspace.addVariable(variableName, 0.0);
+            workspace.addVariable(variableName, 0.0);
         }
         return workspace.getVariableValue(variableName);
     }
