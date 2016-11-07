@@ -16,7 +16,7 @@ public class Heading extends TurtleCommand{
 
     @Override
     public double execute () throws Exception {
-        return getModel().getTurtle().getTurtleAngle();
+        return this.getModel().getTurtle().getTurtleAngle();
     }
 
 }

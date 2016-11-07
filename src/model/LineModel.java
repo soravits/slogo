@@ -12,8 +12,8 @@ public class LineModel {
     Position position2;
     
     public LineModel(Position pos1, Position pos2){
-        position1 = pos1;
-        position2 = pos2;
+        this.position1 = pos1;
+        this.position2 = pos2;
     }
     
     /**

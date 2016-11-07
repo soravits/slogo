@@ -16,7 +16,7 @@ public class Left extends TurtleCommand{
 
     @Override
     public double execute () {
-        getModel().getTurtle().addTurtleAngle(-normalizeAngle(this.getParams()[0]));
+        this.getModel().getTurtle().addTurtleAngle(-normalizeAngle(this.getParams()[0]));
         return this.getParams()[0];
     }    
 

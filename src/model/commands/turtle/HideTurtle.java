@@ -16,7 +16,7 @@ public class HideTurtle extends TurtleCommand{
 
     @Override
     public double execute () {
-        getModel().getTurtle().setShowTurtle(false);
+        this.getModel().getTurtle().setShowTurtle(false);
         return 1;
     }
     

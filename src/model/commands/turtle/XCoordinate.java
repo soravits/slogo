@@ -16,7 +16,7 @@ public class XCoordinate extends TurtleCommand {
 
     @Override
     public double execute () {
-        return getModel().getTurtle().getTurtleX();
+        return this.getModel().getTurtle().getTurtleX();
     }
 
 }

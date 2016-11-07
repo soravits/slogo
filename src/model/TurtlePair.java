@@ -13,8 +13,8 @@ public class TurtlePair {
     private TurtleState turtle;
     
     public TurtlePair(){
-        turtle = new TurtleState();
-        lines = new LineState();
+        this.turtle = new TurtleState();
+        this.lines = new LineState();
     }
 
     /**

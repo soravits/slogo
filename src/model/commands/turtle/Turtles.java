@@ -16,7 +16,7 @@ public class Turtles extends TurtleCommand{
 
     @Override
     public double execute () throws Exception {
-        return getModel().getNumberOfTurtles();
+        return this.getModel().getNumberOfTurtles();
     }
 
 }

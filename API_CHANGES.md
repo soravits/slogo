@@ -25,7 +25,7 @@ Methods added beyond the basic getters and setters for workspace, Turtles, Comma
 	8. void setPaletteIndex (double paletteindex);
 	9. double getShape ();
 	10. void setShape (double shp);
-	11. int[][] getPaletteColors ();
+	11. int()() getPaletteColors ();
 	12. void setPaletteColors (int index, int[] paletteColor);
 	
 These API's were decided on later in the project after determining how to best implement the extensions from a design perspective
@@ -42,7 +42,7 @@ The following methods were added to the Model so that the View could access the 
 
 public void changeActiveTurtle(double ID);
 
-public double'[][]' getLines (double ID);
+public double()() getLines (double ID);
 
 public Collection<Double> getTurtlesToModify();
 
@@ -68,7 +68,7 @@ public double getShape ();
 
 public void setShape (double shp);
 
-public int[][] getPaletteColors ();
+public int()() getPaletteColors ();
 
 public void setPaletteColors (int index, int[] paletteColor);
     

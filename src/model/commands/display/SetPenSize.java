@@ -16,7 +16,7 @@ public class SetPenSize extends DisplayCommand{
 
     @Override
     public double execute () throws Exception {
-        getModel().setPenSize(this.getParams()[0]);
+        this.getModel().setPenSize(this.getParams()[0]);
         return this.getParams()[0];
     }
 

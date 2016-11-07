@@ -16,7 +16,7 @@ public class PenDown extends TurtleCommand{
 
     @Override
     public double execute () {
-        getModel().getLineState().setPenDown(true);
+        this.getModel().getLineState().setPenDown(true);
         return 1;
     }
     

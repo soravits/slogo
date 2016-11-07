@@ -16,7 +16,7 @@ public class IsPenDown extends TurtleCommand{
 
     @Override
     public double execute () throws Exception {
-        return (getModel().getLineState().isPenDown()) ? 1 : 0;
+        return (this.getModel().getLineState().isPenDown()) ? 1 : 0;
     }
 
 }

@@ -21,12 +21,12 @@ public class DisplayState implements DisplayCommandInterface {
     private final int RGB_SIZE = 3;
     
     public DisplayState() {
-        backGround = 1;
-        penColor = 1;
-        shape = 1;
-        penSize = 1;
-        paletteIndex = 1;
-        paletteColors = new int[MAX_NUMBER_OF_PALETTES][RGB_SIZE];
+        this.backGround = 1;
+        this.penColor = 1;
+        this.shape = 1;
+        this.penSize = 1;
+        this.paletteIndex = 1;
+        this.paletteColors = new int[MAX_NUMBER_OF_PALETTES][RGB_SIZE];
     }
 
     @Override

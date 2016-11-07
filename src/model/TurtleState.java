@@ -13,15 +13,15 @@ public class TurtleState {
     private boolean turtleShow;
 
     public TurtleState(){
-        turtlePosition = new Position();
-        turtleAngle = 0;
-        turtleShow = true;
+        this.turtlePosition = new Position();
+        this.turtleAngle = 0;
+        this.turtleShow = true;
     }
 
     public TurtleState(Position position, double angle, boolean isShowing){
-        turtlePosition = position;
-        turtleAngle = angle;
-        turtleShow = isShowing;
+        this.turtlePosition = position;
+        this.turtleAngle = angle;
+        this.turtleShow = isShowing;
     }
     
     /**
