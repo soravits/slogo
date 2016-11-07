@@ -1,3 +1,13 @@
+// This entire file is part of my masterpiece
+// Brian Keohane
+
+/* This interface is part of my masterpiece because it standardizes the way in which commands are executed.
+ * Regardless of the type of command implemented, the Command Controller simply has to call command.execute()
+ * and it knows that the correct function will occur. This helps hide the implementation of each individual
+ * command from the Command Controller. The public void undo() method was the only other method that I would
+ * have added to the interface (had I had time to implement this feature). This would essentially perform each command
+ * "in reverse."
+ */
 package model.abstractcommands;
 
 /**

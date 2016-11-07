@@ -16,11 +16,11 @@ public class Home extends TurtleCommand{
     }
 
     @Override
-    public double execute () throws Exception {
+    public double execute () {
         return moveToZero();
     }
     
-    public double moveToZero(){
+    protected double moveToZero(){
         Position pos1 = this.getModel().getTurtle().getPosition().clone();
         double distance = pos1.distance(0, 0);
         this.getModel().getTurtle().setTurtlePosition(0, 0);

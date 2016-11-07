@@ -117,8 +117,7 @@ public class CommandManager {
      * @throws Exception If an error exists that is related to the command's execution.
      */
     public double executeCommand(CommandInterface command) throws Exception {
-        commandController.setCommand(command);
-        return commandController.executeCommand();
+        return commandController.executeCommand(command);
     }
 
     private void mapExecutions(){
