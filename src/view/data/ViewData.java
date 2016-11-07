@@ -11,6 +11,9 @@ import model.TurtleMap;
  *View External API is mainly responsible of sending data to the back end. 
  * @author Pim
  */
+
+//This entire file is my masterpiece. - Pim Chuaylua pc131
+
 public class ViewData {
 	private ViewModelInterface viewModelInterface;
 	
@@ -110,7 +113,6 @@ public class ViewData {
 	
 	public void setShape (double pensize,Controller controller) throws Exception{
 		sendCommand("setshape "+pensize,controller);
-        //penSize = pensize;
     }
 
 }

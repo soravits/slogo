@@ -56,10 +56,11 @@ public class Window implements UIAttributes, Observer{
 		
 		generalSettings = new GeneralSettings(controller);
 		commandLine = new CommandLine(ySize, this);		
-		workspace = new Workspace(xSize,this,commandLine);
+		workspace = new Workspace(this);
 		console = new Console(ySize, xSize);
 		loadCommand = new LoadCommand(this);
-		saveCommand = new SaveCommand(this);
+		saveCommand = new SaveCommand(viewData);
+		
 		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());

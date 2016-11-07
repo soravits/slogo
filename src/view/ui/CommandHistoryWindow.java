@@ -11,70 +11,72 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CommandHistoryWindow implements UIAttributes{
-	private int height;
-	private int width;
-	Stage stage;
-	Group group;
-	Scene scene;
-	TextArea commandList;
-	VBox VBox;
-	private Window window;
-	private CommandLine commandLine;
-	final ScrollBar sc = new ScrollBar();
+//This entire file is my masterpiece. - Pim Chuaylua pc131
 
-	CommandHistoryWindow(Window window,CommandLine commandLine,int height, int width) {
+public class CommandHistoryWindow implements UIAttributes{
+	private Stage stage;
+	private Group group;
+	private Scene scene;
+	private VBox vbox;
+	private Window window;
+	
+	private static final int WINDOW_HEIGHT = 600;
+	private static final int WINDOW_WIDTH = 300;
+	private static final int VBOX_FIRST_X = 10;
+	public static final int VBOX_PADDING = 20;
+	public static final int HBOX_PADDING = 10;
+
+	CommandHistoryWindow(Window window) {
 		super();
 		this.stage=new Stage();
-		this.commandList = new TextArea();
-		this.height=height;
-		this.width=width;
 		this.group=new Group();
-		this.scene=new Scene(group,width,height);
-		this.VBox=new VBox(20);
+		this.scene=new Scene(group,WINDOW_WIDTH,WINDOW_HEIGHT);
+		this.vbox=new VBox(VBOX_PADDING);
 		this.window = window;
-		this.commandLine=commandLine;
-		init();
+		initWindow();
 	}
 	
-	public void init() {
-        VBox.setPadding(new Insets(20));
+	private void initWindow() {
+        vbox.setPadding(new Insets(VBOX_PADDING));
+        vbox.setLayoutX(VBOX_FIRST_X);
+        vbox.setSpacing(VBOX_PADDING-10);
+        
         stage.setResizable(false);
         stage.setTitle("History");
-        stage.setWidth(width);
-        stage.setHeight(height);
-        group.getChildren().addAll(sc,VBox);
+        stage.setWidth(WINDOW_WIDTH);
+        stage.setHeight(WINDOW_HEIGHT);
+
+        ScrollBar scrollBar = new ScrollBar();
+        scrollBar.setLayoutX(scene.getWidth()-scrollBar.getWidth());
+        scrollBar.setMin(0);
+        scrollBar.setOrientation(Orientation.VERTICAL);
+        scrollBar.setPrefHeight(WINDOW_HEIGHT);
+        scrollBar.setMax(WINDOW_HEIGHT);
         
-        VBox.setLayoutX(5);
-        VBox.setSpacing(10);
- 
-        sc.setLayoutX(scene.getWidth()-sc.getWidth());
-        sc.setMin(0);
-        sc.setOrientation(Orientation.VERTICAL);
-        sc.setPrefHeight(height);
-        sc.setMax(height);
-        
-        sc.valueProperty().addListener(new ChangeListener<Number>() {
+        scrollBar.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
                 Number old_val, Number new_val) {
-                    VBox.setLayoutY(-new_val.doubleValue());
+                    vbox.setLayoutY(-new_val.doubleValue());
                 }
         });
         
+        group.getChildren().addAll(scrollBar,vbox);
+        
 	}
+	
+	
 	
 	public void updateCommandHistory(Collection<String> commandHistory) {
 		for (String command:commandHistory) {
-			HBox HBox = new HBox(10);
-			HBox.getChildren().add(new Text(command));
-			HBox.getChildren().add(getRedoButton(command));
-			VBox.getChildren().add(HBox);
+			HBox hbox = new HBox(HBOX_PADDING);
+			hbox.getChildren().add(new Text(command));
+			hbox.getChildren().add(getRedoButton(command));
+			vbox.getChildren().add(hbox);
 		}
 	}
 	
@@ -82,11 +84,9 @@ public class CommandHistoryWindow implements UIAttributes{
 		Button button=new Button("Redo");
 		button.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {  
-		    	//commandLine.setCommand(command);
 		    	try {
 					window.updateViewData(command);
 					window.updateUI();
-					//commandLine.setCommand("");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

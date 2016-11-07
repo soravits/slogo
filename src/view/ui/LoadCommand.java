@@ -13,6 +13,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+//This entire file is my code masterpiece - Pim Chuaylua pc131
+
 public class LoadCommand implements UIAttributes{
 	private static int BUTTON_X = 320;
 	private static int BUTTON_Y = 10;
@@ -27,14 +29,14 @@ public class LoadCommand implements UIAttributes{
 		this.stage = new Stage();
 		this.window = window;
 		this.controller = window.getController();
-		makeButton();
+		initLoadCommandButton();
 	}
 	
 	public Button getRoot() {
 		return loadButton;
 	}
 	
-	public void makeButton() {
+	public void initLoadCommandButton() {
 		loadButton = new Button(uiResources.getString("LoadCommand"));
 		loadButton.setLayoutX(BUTTON_X);
 		loadButton.setLayoutY(BUTTON_Y);

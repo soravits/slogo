@@ -9,6 +9,7 @@ public interface UIAttributes{
 	public static final int WORKSPACE_HEIGHT = 400;
 	public static final int COMMAND_LINE_WIDTH = 670;
 	
+	
 	public static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	
 	public static final ResourceBundle uiResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
