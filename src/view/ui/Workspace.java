@@ -84,7 +84,7 @@ public class Workspace implements UIAttributes{
 		button.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {  
 		    	try {
-					window.updateViewData("set :"+varName+" "+space.getText());
+					window.updateViewData("set " + varName + " " + space.getText());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
