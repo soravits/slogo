@@ -21,7 +21,7 @@ public abstract class TurtleCommand extends GeneralCommand implements CommandInt
     /**
      * @return an interface that limits turtle commands to access to only LineStates and TurtleStates
      */
-    public TurtleCommandInterface getModel(){
+    protected TurtleCommandInterface getModel(){
         return turtleModel;
     }
     

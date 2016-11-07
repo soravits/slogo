@@ -1,0 +1,5 @@
+tell [ 1 2 ]
+# Differentiate location of the turtles (2 is further up)
+fd * id 50
+# Turtle 1 should turn around and move 100 forward with no line
+askwith [ equal? ycor 50 ] [ pu rt 180 fd 100 ]

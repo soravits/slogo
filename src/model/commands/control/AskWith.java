@@ -1,15 +1,11 @@
 package model.commands.control;
 
-import controller.CommandManager;
-import controller.Node;
-import model.Model;
-import model.TurtlePair;
-import model.abstractcommands.ControlCommand;
-import model.interfaces.ControlCommandInterface;
-
-import javax.sound.sampled.Control;
 import java.util.ArrayList;
 import java.util.Collection;
+import controller.CommandManager;
+import controller.Node;
+import model.abstractcommands.ControlCommand;
+import model.interfaces.ControlCommandInterface;
 
 /**
  * This class implements the AskWith command that runs a set of commands on turtles meeting the specified condition.

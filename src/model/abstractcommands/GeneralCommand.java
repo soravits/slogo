@@ -17,7 +17,7 @@ public abstract class GeneralCommand implements CommandInterface{
     /**
      * @return the array of input doubles
      */
-    public double[] getParams(){
+    protected double[] getParams(){
         return params;
     }
     
@@ -27,7 +27,7 @@ public abstract class GeneralCommand implements CommandInterface{
     /**
      * @return sum of all of the parameters in the input array
      */
-    public double sumParams(){
+    protected double sumParams(){
         double sum = 0;
         for (double x : params){
             sum += x;
@@ -39,7 +39,7 @@ public abstract class GeneralCommand implements CommandInterface{
      * @param angle : nominal angle that determines direction which a turtle faces
      * @return an equivalent angle between 0 and 360 degrees
      */
-    public double normalizeAngle(double angle){
+    protected double normalizeAngle(double angle){
         double normalizedAngle = angle % 360;
         if (normalizedAngle < 0){
             normalizedAngle += 360;

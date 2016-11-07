@@ -1,0 +1,5 @@
+tell [ 1 2 3 ]
+pu fd * id 40
+ask [ 1 2 ] 
+# turtle 1 should move forward 20, turtle 2 should be stationary, both turn right
+[ fd 20 ask [ 1 ] [ bk 20 ] rt 60 ]

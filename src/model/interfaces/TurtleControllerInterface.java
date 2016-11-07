@@ -11,7 +11,7 @@ public interface TurtleControllerInterface {
      * Change the active state of a particular turtle from active to inactive or inactive to active
      * @param ID
      */
-    void changeTurtleActive(double ID);
+    void changeActiveTurtle(double ID);
     
     /**
      * Clear list of actively modified 'Tell' turtles
