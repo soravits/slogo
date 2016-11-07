@@ -7,7 +7,7 @@
 * https://www.tutorialspoint.com/design_pattern/command_pattern.htm (Brian)
 * https://docs.oracle.com/javase/tutorial/java/IandI/interfaceAsType.html (Brian)
 * http://stackoverflow.com/questions/13744450/when-should-we-use-observer-and-observable (Brian)
-* ADD THE REST HERE
+* http://stackoverflow.com/questions/4555009/if-i-call-an-interface-method-will-it-get-the-method-body-from-implementation-c/4555112#4555112 (Pim)
 
 ### Files used to start program: Main (in 'main' package)
 ### Files used to test the program:
@@ -20,7 +20,8 @@
 2. To change the pen thickness, type a double (ex: 3.0) into the 'Pen Thickness' box. On the next turtle commands, the box will be checked for the value and pen thickness will be updated to the correct pixel size.
 3. After checking "Show Active Turtle", each of the active turtles becomes highlighted in a blue-ish glow. You can toggle whether or not the turtle is active by clicking on the turtle in the GUI.
 4. Unlimited Parameter parsing takes a slightly different syntax. Instead of '( sum 10 20 30 40 )', the syntax that works for us is 'sum ( 10 20 30 40 )'
-4. ADD MORE EXAMPLES
+5. Upload/Save commands work only with text files
+6. ADD MORE EXAMPLES
 
 ### Any known bugs, crashes or problems with the code's functionality:
 1. None of the display commands actually update the front-end visuals (ex: setpencolor 4 will not change the actual pen color used within the GUI), but they will correctly update the back-end model.
@@ -28,9 +29,11 @@
 turtles to the home position.
 3. Functions become globally defined; Once a function is defined, it cannot be overwritten. So if you run
 a program that creates 'to square [ :dist :x ] ....', then creating another square function will cause problems running the program. 
-4. ADD MORE BUGS THAT YOU GUYS KNOW ABOUT
+4. When pressing Redo button, the console print multiple lines of the same results.
+5. ADD MORE BUGS THAT YOU GUYS KNOW ABOUT
 
 ### Any Extra Features included in the project:
-1. ADD ANY EXTRA FEATURES WE ADDED
+2. ADD ANY EXTRA FEATURES WE ADDED
 
 ### Impressions of the Assignment to help improve it in the future:
+1. Learning about multiple design patterns to update model and view: observer pattern and binding
