@@ -3,6 +3,11 @@ package model.commands.turtle;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to turn the turtle to face towards a specified (x, y) position; return the number of degrees turned
+ * @author Brian
+ *
+ */
 public class SetTowards extends TurtleCommand{
 
     public SetTowards (double[] parameters, TurtleCommandInterface model) {

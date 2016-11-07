@@ -6,139 +6,159 @@ import model.interfaces.ControlCommandInterface;
 import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
-import model.interfaces.WorkspaceCommandInterface;
 import view.data.ViewModelInterface;
 
-public class Model extends Observable implements ControlCommandInterface, WorkspaceCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
+/**
+ * Observable collection of the different components of the back-end datat stored for use by both the 
+ * Front-End and the controller. Multiple interfaces implemented in order to hide implementation from
+ * classes that do not need access to the full model. Contains an instance of:
+ *      TurtleController, TurtleMap, DisplayState, WorkspaceState, and collections of the commands
+ *      called and the console return outputs to be printed
+ * @author Brian
+ *
+ */
+public class Model extends Observable implements ControlCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
 
     private TurtleController turtleController;
     private DisplayState display;
     private TurtleMap turtleMap;
     private WorkspaceState workspace;
-    private CommandHistory commandHistory;
+    private Collection<String> commandHistory;
     private Collection<String> consoleReturn;
 
     public Model(){
-        display = new DisplayState();
-        turtleMap = new TurtleMap();
-        workspace = new WorkspaceState();
-        commandHistory = new CommandHistory();
-        consoleReturn = new ArrayList<String>();
-        turtleController = new TurtleController();
+        this.display = new DisplayState();
+        this.turtleMap = new TurtleMap();
+        this.workspace = new WorkspaceState();
+        this.commandHistory = new ArrayList<String>();
+        this.consoleReturn = new ArrayList<String>();
+        this.turtleController = new TurtleController();
     }
 
+    @Override
     public TurtleMap getTurtleMap (){
         return turtleMap;
     }
-    
+
+    @Override
     public double getNumberOfTurtles (){
         return turtleMap.getIDs().size();
     }
-    
+
     @Override
     public TurtleState getTurtle () {
         return turtleMap.getTurtle();
     }
-
-    public TurtleState getTurtle (double ID){
-        return turtleMap.getTurtle(ID);
-    }
     
+    @Override
     public double getID () {
         return turtleMap.getCurrentID();
     }
-    
+
+    @Override
     public Collection<Double> getIDs(){
-    	return turtleMap.getIDs();
+        return turtleMap.getIDs();
     }
-    
+
+    @Override
     public boolean getShowTurtle(double id){
-    	return turtleMap.getTurtle(id).getShowTurtle();
+        return turtleMap.getTurtle(id).getShowTurtle();
     }
-    
+
+    @Override
     public double getTurtleAngle(double id){
-    	return turtleMap.getTurtle(id).getTurtleAngle();
+        return turtleMap.getTurtle(id).getTurtleAngle();
     }
-    
+
+    @Override
     public double getTurtleX(double id){
-    	return turtleMap.getTurtle(id).getTurtleX();
+        return turtleMap.getTurtle(id).getTurtleX();
     }
-    
+
+    @Override
     public double getTurtleY(double id){
-    	return turtleMap.getTurtle(id).getTurtleY();
+        return turtleMap.getTurtle(id).getTurtleY();
     }
-    
+
+    @Override
     public boolean isPenDown(double id){
-    	return turtleMap.getLineState(id).isPenDown();
+        return turtleMap.getLineState(id).isPenDown();
     }
-    
+
+
+    /**
+     * Set the current ID of the Turtle Map to the input ID
+     * @param ID is ID of the current turtle being actively changed in the map
+     */
     public void setTurtle (double ID){
         turtleMap.setCurrentID(ID);
     }
-    
+
     @Override
     public LineState getLineState () {
         return turtleMap.getLineState();
     }
+
     
     public LineState getLineState (double ID){
         return turtleMap.getLineState(ID);
     }
-    
+
+    @Override
     public double[][] getLines (double ID){
         return turtleMap.getLines(ID);
     }
-    
+
+    @Override
     public WorkspaceState getWorkspace () {
         return workspace;
     }
-    
+
+    @Override
     public Collection<String> getCommandHistory() {
-        return commandHistory.getCommandHistory();
+        return commandHistory;
     }
-    
+
+    /**
+     * Add a command to the model's command history
+     * @param command : String detailing the command that has been passed to the parser
+     */
     public void addCommand(String command){
-        commandHistory.addCommand(command);
+        commandHistory.add(command);
     }
-    
+
+    @Override
     public Collection<String> getConsoleReturn(){
         return consoleReturn;
     }
 
+    /**
+     * Add a new return value to the collection of values to be returned
+     * @param value
+     */
     public void updateConsoleReturn(Double value){
-        //System.out.println("The value added to the console is " + value);
         consoleReturn.add(value.toString());
     }
-    
-    public void clearConsoleReturn(){
-        consoleReturn.clear();
-    }
-    
-    public void clear(){
-    	turtleMap.clear();
-    	commandHistory.clear();
-    	clearConsoleReturn();
-    	workspace.clear();
-    }
-    
-    public void changeActiveTurtle(double ID) {
-        turtleController.changeTurtleActive(ID);
-    }
-    
-    public void updateID (double ID){
 
-        turtleMap.setCurrentID(ID);
+    /**
+     * clear all of the data from the model and start back in an initialized state
+     */
+    public void clear(){
+        turtleMap.clear();
+        commandHistory.clear();
+        clearConsoleReturn();
+        workspace.clear();
+    }
+
+    @Override
+    public void changeActiveTurtle(double ID) {
+        turtleController.changeActiveTurtle(ID);
     }
 
     @Override
     public void addTurtle (double ID) {
         turtleMap.addTurtle(ID);
         turtleController.addTurtle(ID);
-    }
-
-    @Override
-    public void removeTellTurtle (double ID) {
-        turtleController.removeTellTurtle(ID);
     }
 
     @Override
@@ -162,6 +182,9 @@ public class Model extends Observable implements ControlCommandInterface, Worksp
         turtleController.subtractNestedAsk();
     }
 
+    /**
+     * Notifies the controller that the model has been changed; cleans out the console return
+     */
     public void updateView(){
         setChanged();
         notifyObservers();
@@ -228,9 +251,15 @@ public class Model extends Observable implements ControlCommandInterface, Worksp
         display.setPaletteColors(index, paletteColor);
     }
 
-	@Override
-	public DisplayState getDisplay() {
-		// TODO Auto-generated method stub
-		return null;
-	}  
+    @Override
+    public DisplayState getDisplay() {
+        return display;
+    }  
+    
+
+    private void clearConsoleReturn(){
+        consoleReturn.clear();
+    }
+
+
 }

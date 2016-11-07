@@ -3,6 +3,11 @@ package model.commands.turtle;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to return the y-coordinate of the current active turtle
+ * @author Brian
+ *
+ */
 public class YCoordinate extends TurtleCommand {
 
     public YCoordinate (double[] parameters, TurtleCommandInterface model) {
@@ -11,7 +16,7 @@ public class YCoordinate extends TurtleCommand {
 
     @Override
     public double execute () {
-        return getModel().getTurtle().getTurtleY();
+        return this.getModel().getTurtle().getTurtleY();
     }
 
 }

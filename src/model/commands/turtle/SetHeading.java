@@ -3,6 +3,11 @@ package model.commands.turtle;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to Set the turtle's absolute angle to the specified degree; return the change in angle
+ * @author Brian
+ *
+ */
 public class SetHeading extends TurtleCommand{
 
     public SetHeading (double[] parameters, TurtleCommandInterface model) {

@@ -1,5 +1,11 @@
 package model.abstractcommands;
 
+/**
+ * All commands take an array of doubles as an input parameter; abstract class utilized by other types of
+ * abstract Command classes as a starting point for Command functionality
+ * @author Brian
+ *
+ */
 public abstract class GeneralCommand implements CommandInterface{
 
     private double[] params;
@@ -8,13 +14,20 @@ public abstract class GeneralCommand implements CommandInterface{
         params = parameters;
     }
     
-    public double[] getParams(){
+    /**
+     * @return the array of input doubles
+     */
+    protected double[] getParams(){
         return params;
     }
+    
     @Override
     public abstract double execute () throws Exception;
 
-    public double sumParams(){
+    /**
+     * @return sum of all of the parameters in the input array
+     */
+    protected double sumParams(){
         double sum = 0;
         for (double x : params){
             sum += x;
@@ -22,7 +35,11 @@ public abstract class GeneralCommand implements CommandInterface{
         return sum;
     }
     
-    public double normalizeAngle(double angle){
+    /**
+     * @param angle : nominal angle that determines direction which a turtle faces
+     * @return an equivalent angle between 0 and 360 degrees
+     */
+    protected double normalizeAngle(double angle){
         double normalizedAngle = angle % 360;
         if (normalizedAngle < 0){
             normalizedAngle += 360;

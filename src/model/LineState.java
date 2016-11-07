@@ -17,7 +17,7 @@ public class LineState {
     
     public LineState(){
         clearLine();
-        penDown = true;
+        this.penDown = true;
     }
 
     /**
@@ -32,6 +32,12 @@ public class LineState {
         }
     }
 
+    /**
+     * 
+     * @return a 2x2 array of the points of the last line drawn. The format is [x1 y1][x2 y2], where x1
+     * and y1 are the x and y of the first point, and x2, y2 are the x and y coordinate of the point you
+     * are drawing the line to
+     */
     public double[][] getLastLineDrawn(){
     	if (lastLine.equals(lines.get(lines.size() - 1))){
     		LineModel lineToDraw = new LineModel(lastLine.getPosition2(), lastLine.getPosition2());
@@ -45,8 +51,8 @@ public class LineState {
      * Clear all of the points from the line
      */
     public void clearLine () {
-        lines = new ArrayList<LineModel>();
-        lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
+        this.lines = new ArrayList<LineModel>();
+        this.lastLine = new LineModel(new Position(0, 0), new Position(0, 0));
         lines.add(lastLine);
     }
 

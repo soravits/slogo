@@ -1,6 +1,11 @@
 
 package model;
 
+/**
+ * Allows for packaging/manipulation of x and y coordinates together for a turtle's location in the GUI
+ * @author Brian
+ *
+ */
 public class Position implements Cloneable{
     
     private double xPosition;
@@ -17,8 +22,8 @@ public class Position implements Cloneable{
      * @param y
      */
     public Position(double x, double y){
-        xPosition = x;
-        yPosition = y;
+        this.xPosition = x;
+        this.yPosition = y;
     }
     
     /**
@@ -71,16 +76,16 @@ public class Position implements Cloneable{
      * Reset position to 0, 0
      * Called in constructor with no input arguments, can also be called by other classes
      */
-    public void resetPosition(){
-        xPosition = 0;
-        yPosition = 0;
+    private void resetPosition(){
+        this.xPosition = 0;
+        this.yPosition = 0;
     }
     
-    @Override
-    public String toString(){
-        return xPosition + " " + yPosition;
-    }
-    
+    /**
+     * @param x
+     * @param y
+     * @return the distance between the current Position and a position specified by (x, y)
+     */
     public double distance(double x, double y){
         return Math.sqrt(Math.pow(xPosition - x, 2) + Math.pow(yPosition - y, 2));
     }

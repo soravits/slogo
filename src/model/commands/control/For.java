@@ -39,9 +39,8 @@ public class For extends ControlCommand{
 		double ret = 0;
 		Node commandRoot = getRoot().getChildren().get(1);
         WorkspaceState workspace = this.getModel().getWorkspace();
-        boolean exists = workspace.variableExists(variable);
         double currValue = 0;
-        if(exists) {
+        if(workspace.variableExists(variable)) {
             currValue = workspace.getVariableValue(variable);
         }
         workspace.addVariable(variable, start);
@@ -51,7 +50,7 @@ public class For extends ControlCommand{
         	workspace.addVariable(variable, i);
         	}
         }
-        if(exists){
+        if(workspace.variableExists(variable)){
             workspace.addVariable(variable, currValue);
         }else{
             workspace.removeVariable(variable);

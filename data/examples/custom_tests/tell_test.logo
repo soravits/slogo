@@ -1,0 +1,7 @@
+fd 50
+tell [ 1 2 ]
+fd * id rt 30
+tell [ 2 3 ]
+fd * id rt 30
+tell [ 3 4 ]
+fd * id rt 30

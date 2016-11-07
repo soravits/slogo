@@ -1,9 +1,13 @@
 package model.commands.general;
 
-import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
-public class LessThan extends MathBoolCommand{
+/**
+ * Command to Return 1 if the first input is less than the second input; 0 otherwise
+ * @author Brian
+ *
+ */
+public class LessThan extends Equal{
 
     public LessThan (double[] parameters, EmptyInterface model) {
         super(parameters, model);        
@@ -11,14 +15,12 @@ public class LessThan extends MathBoolCommand{
 
     @Override
     public double execute () {
-        double first = this.getParams()[0];
-        for (double y : this.getParams()){
-            if (first >= y){
-                return 0;
-            }
-            first = y;
-        }
-        return 1;
+        return loopAll();
+    }
+    
+    @Override
+    protected boolean compareArgs(double x, double y){
+        return x >= y;
     }
 
 }

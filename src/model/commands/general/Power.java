@@ -2,6 +2,12 @@ package model.commands.general;
 import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
+/**
+ * Command to return the first input raised to the power of the second input, which is then raised
+ * to the power of the third input (if applicable), which is then....
+ * @author Brian
+ *
+ */
 public class Power extends MathBoolCommand{
 
     public Power (double[] parameters, EmptyInterface model) {

@@ -1,15 +1,11 @@
 package model.commands.control;
 
-import controller.CommandManager;
-import controller.Node;
-import model.Model;
-import model.TurtlePair;
-import model.abstractcommands.ControlCommand;
-import model.interfaces.ControlCommandInterface;
-
-import javax.sound.sampled.Control;
 import java.util.ArrayList;
 import java.util.Collection;
+import controller.CommandManager;
+import controller.Node;
+import model.abstractcommands.ControlCommand;
+import model.interfaces.ControlCommandInterface;
 
 /**
  * This class implements the AskWith command that runs a set of commands on turtles meeting the specified condition.
@@ -33,15 +29,13 @@ public class AskWith extends ControlCommand {
         Node commandRoot = getRoot().getChildren().get(1);
         Collection<Double> trueTurtles = new ArrayList<>();
         for(double turtle : getModel().getIDs()){
-                getModel().clearTellTurtles();
-                getModel().addTurtle(turtle);
+            getModel().clearTellTurtles();
+            getModel().addTurtle(turtle);
             double x = executeTree(conditionRoot.getChildren().get(0));
-//            System.out.println("turtle ID = " + turtle);
-//            System.out.println("x" + x);
             if(x != 0){
-                    trueTurtles.add(turtle);
-                }
-         }
+                trueTurtles.add(turtle);
+            }
+        }
         getModel().clearTellTurtles();
         for(double turtle : trueTurtles){
             getModel().addTurtle(turtle);

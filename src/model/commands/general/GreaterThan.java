@@ -1,9 +1,13 @@
 package model.commands.general;
 
-import model.abstractcommands.MathBoolCommand;
 import model.interfaces.EmptyInterface;
 
-public class GreaterThan extends MathBoolCommand{
+/**
+ * Command to Return 1 if the first input is greater than the second input; 0 otherwise
+ * @author Brian
+ *
+ */
+public class GreaterThan extends Equal{
 
     public GreaterThan (double[] parameters, EmptyInterface model) {
         super(parameters, model);
@@ -11,7 +15,12 @@ public class GreaterThan extends MathBoolCommand{
 
     @Override
     public double execute () {
-        return (this.getParams()[0] > this.getParams()[1]) ? 1 : 0;
+        return loopAll();
+    }
+    
+    @Override
+    protected boolean compareArgs(double x, double y){
+        return x <= y;
     }
 
 }

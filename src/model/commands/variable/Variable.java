@@ -1,15 +1,20 @@
-package model.commands.general;
+package model.commands.variable;
 
 import model.WorkspaceState;
 import model.abstractcommands.CommandInterface;
-import model.interfaces.WorkspaceCommandInterface;
+import model.interfaces.ControlCommandInterface;
 
+/**
+ * return the value associated with a variable name
+ * @author Brian
+ *
+ */
 public class Variable implements CommandInterface{
 
     private String variableName;
-    private WorkspaceCommandInterface listOfVars;
-    
-    public Variable (String varName, WorkspaceCommandInterface model) {
+    private ControlCommandInterface listOfVars;
+
+    public Variable (String varName, ControlCommandInterface model) {
         listOfVars = model;
         variableName = varName;
     }
@@ -18,7 +23,7 @@ public class Variable implements CommandInterface{
     public double execute() {
         WorkspaceState workspace = listOfVars.getWorkspace();
         if(!workspace.getListOfVariables().containsKey(variableName)){
-        workspace.addVariable(variableName, 0.0);
+            workspace.addVariable(variableName, 0.0);
         }
         return workspace.getVariableValue(variableName);
     }

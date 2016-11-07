@@ -2,11 +2,11 @@ package model.abstractcommands;
 
 import controller.CommandManager;
 import controller.Node;
-import model.Model;
 import model.interfaces.ControlCommandInterface;
 
 /**
  * This is a superclass that defines initial variables and methods to be used by specific control structure commands.
+ * @author Soravit
  */
 public abstract class ControlCommand implements CommandInterface {
 
@@ -28,14 +28,14 @@ public abstract class ControlCommand implements CommandInterface {
     /**
      * @return An interface containing the methods needed by control structure commands.
      */
-    public ControlCommandInterface getModel(){
+    protected ControlCommandInterface getModel(){
         return controlCommand;
     }
 
     /**
      * @return The root of the expression tree representing the control structure command
      */
-    public Node getRoot(){
+    protected Node getRoot(){
     	return root;
     }
 

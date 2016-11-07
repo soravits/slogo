@@ -3,6 +3,11 @@ package model.commands.turtle;
 import model.abstractcommands.TurtleCommand;
 import model.interfaces.TurtleCommandInterface;
 
+/**
+ * Command to turn the turtle to the right by the specified number of degrees; returns the number of degrees turned
+ * @author Brian
+ *
+ */
 public class Right extends TurtleCommand{
 
     public Right (double[] parameters, TurtleCommandInterface model) {
@@ -11,7 +16,7 @@ public class Right extends TurtleCommand{
 
     @Override
     public double execute () {
-        getModel().getTurtle().addTurtleAngle(normalizeAngle(this.getParams()[0]));
+        this.getModel().getTurtle().addTurtleAngle(normalizeAngle(this.getParams()[0]));
         return this.getParams()[0];
     }
     
