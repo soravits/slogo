@@ -54,7 +54,7 @@ public class TurtleScreen implements UIAttributes{
 	private double originY;
 
 	
-	/*
+	/**
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
 	 */
 	
@@ -73,7 +73,7 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	
-	/*
+	/**
 	 * returns root with all visualization of turtle
 	 * 
 	 */	
@@ -82,7 +82,7 @@ public class TurtleScreen implements UIAttributes{
 		return root;
 	}	
 	
-	/*
+	/**
 	 * returns instance of TurtleSettings
 	 */
 	public TurtleSettings getTurtleSettings(){
@@ -90,7 +90,9 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	
-		
+	/**
+	 * Sets turtles and lines to reflect initial turtle state and then changes made by command 
+	 */
 	public void updateTurtles(){		
 		Collection<Double> ids = viewData.getIDs();	
 		activeTurtles = viewData.getTurtlesToModify();
@@ -111,13 +113,18 @@ public class TurtleScreen implements UIAttributes{
 		}	
 	}
 
-	
+	/**
+	 * Clears lines drawn by turtles and moves to origin
+	 */
 	public void resetTurtle() {
 		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
 		turtleView.beginPath();
 		turtleView.moveTo(originX, originY);
 	}	
 	
+	/**
+	 * updates the image and formatting of each ImageView stored with each turtle index
+	 */
 	public void updateViewMapImages(){
 		for (double id : activeTurtles){
 			root.getChildren().remove(turtleViewMap.getImage(id));
@@ -129,7 +136,10 @@ public class TurtleScreen implements UIAttributes{
 		}		
 	}
 
-	
+	/**
+	 * Graphically displays active turtles if toggle is true and removes
+	 * active turtle visualization if toggle is false
+	 */
 	public void setActiveTurtleToggle(){
 			
 		boolean showActive = turtleSettings.getActiveTurtleToggle();

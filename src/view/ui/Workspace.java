@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import view.ui.commands.CommandLine;
 
 /**
  * The purpose of this class is to create the root that visualizes the workspace where
@@ -40,7 +41,7 @@ public class Workspace implements UIAttributes{
 	}
 	
 	
-	/*
+	/**
 	 * returns root with all visualization of the workspace
 	 * 
 	 */	
@@ -50,7 +51,11 @@ public class Workspace implements UIAttributes{
 	
 	
 	
-	
+	/**
+	 * @param variableMap
+	 * 
+	 * updates the workspace to show all variables the user has stored
+	 */
 	public void updateWorkspace(AbstractMap<String, Double> variableMap) {
 		clearWorkspace();
 		for (String varName:variableMap.keySet()) {
@@ -65,7 +70,7 @@ public class Workspace implements UIAttributes{
 		}
 	}
 	
-	public void clearWorkspace() {
+	private void clearWorkspace() {
 		VBox.getChildren().clear();
 	}
 	

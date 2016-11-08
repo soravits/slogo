@@ -1,9 +1,12 @@
-package view.ui;
+package view.ui.commands;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import view.DisplayError;
+import view.ui.UIAttributes;
+import view.ui.UIBuilder;
+import view.ui.Window;
 
 
 /**

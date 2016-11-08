@@ -89,7 +89,7 @@ public class TurtleSettings implements UIAttributes{
 		initRoot();
 	}
 
-	/*
+	/**
 	 * returns the root with all visualizations of 
 	 * how the user can update turtle settings
 	 */
@@ -98,7 +98,7 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	
-	/*
+	/**
 	 * returns the selected color of the background
 	 * 
 	 */
@@ -107,7 +107,7 @@ public class TurtleSettings implements UIAttributes{
 		return color;
 	}
 	
-	/*
+	/**
 	 * returns the selected pen color
 	 */
 	public Color getPenColor(){
@@ -116,14 +116,14 @@ public class TurtleSettings implements UIAttributes{
 	}
 	
 	
-	/*
+	/**
 	 * returns an image that was selected by the user
 	 */
 	public Image getTurtleImage(){
 		return turtleImage;
 	}
 	
-	/*
+	/**
 	 * returns a double that determines the thickness of the 
 	 * pen that draws the turtle's path
 	 */
@@ -142,7 +142,7 @@ public class TurtleSettings implements UIAttributes{
 		return DEFAULT_THICKNESS;	
 	}
 
-	/*
+	/**
 	 * return boolean to determine if user can graphically see which
 	 * turtles are active
 	 */
