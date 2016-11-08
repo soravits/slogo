@@ -1,6 +1,5 @@
 package view.ui.turtle;
 import java.util.Collection;
-
 import controller.Controller;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,14 +22,11 @@ import view.data.ViewData;
 import view.ui.UIAttributes;
 import view.ui.UIBuilder;
 
-
 /**
  * The purpose of this class is to create the root that visualizes the turtle.
  * This root can then be passed to Window to be displayed in the scene
- * 
  * @author Diane Hadley
  */
-
 
 public class TurtleScreen implements UIAttributes{
 	
@@ -52,30 +48,24 @@ public class TurtleScreen implements UIAttributes{
 	private int canvasHeight;
 	private double originX;
 	private double originY;
-
 	
 	/**
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
-	 */
-	
+	 */	
 	public TurtleScreen(Stage stage, ViewData viewData, Controller controller){
 		super();
 		this.viewData = viewData;
-		this.turtleSettings = new TurtleSettings(stage, this, viewData, controller);
-		
+		this.turtleSettings = new TurtleSettings(stage, this, viewData, controller);		
 		this.canvasWidth = TURTLE_CANVAS_WIDTH;
 		this.canvasHeight = TURTLE_CANVAS_HEIGHT;		
 		this.originX = canvasWidth/2;
 		this.originY = canvasHeight/2;		
 		makeCanvas();
 		updateTurtles();
-	
-	}
-	
+	}	
 	
 	/**
 	 * returns root with all visualization of turtle
-	 * 
 	 */	
 	public Pane getRoot(){
 		setCanvas();
@@ -87,8 +77,7 @@ public class TurtleScreen implements UIAttributes{
 	 */
 	public TurtleSettings getTurtleSettings(){
 		return turtleSettings;
-	}
-	
+	}	
 	
 	/**
 	 * Sets turtles and lines to reflect initial turtle state and then changes made by command 
@@ -96,10 +85,8 @@ public class TurtleScreen implements UIAttributes{
 	public void updateTurtles(){		
 		Collection<Double> ids = viewData.getIDs();	
 		activeTurtles = viewData.getTurtlesToModify();
-		
 		updateViewMapKey(ids);
-		setActiveTurtleToggle();
-		
+		setActiveTurtleToggle();	
 		for (double id : ids){					
 			setViewTurtleStateFromImage(id);
 			addTurtleToScene(id);
@@ -131,8 +118,7 @@ public class TurtleScreen implements UIAttributes{
 			turtleViewMap.setImage(id, new ImageView(turtleSettings.getTurtleImage()));
 			formatTurtle(id);
 			root.getChildren().add(turtleViewMap.getImage(id));
-			setViewTurtleStateFromImage(id);			
-					
+			setViewTurtleStateFromImage(id);								
 		}		
 	}
 
@@ -140,39 +126,31 @@ public class TurtleScreen implements UIAttributes{
 	 * Graphically displays active turtles if toggle is true and removes
 	 * active turtle visualization if toggle is false
 	 */
-	public void setActiveTurtleToggle(){
-			
-		boolean showActive = turtleSettings.getActiveTurtleToggle();
-		
+	public void setActiveTurtleToggle(){			
+		boolean showActive = turtleSettings.getActiveTurtleToggle();		
 		for (double id : turtleViewMap.getIDs()){
 			if (activeTurtles.contains(id) && showActive){
 				showAsActiveTurtle(id);
 			}
 			else{
 				dontAsShowActiveTurtle(id);
-			}
-			
+			}		
 		}
 	}
-
 
 	private void dontAsShowActiveTurtle(double id) {
 		turtleViewMap.getImage(id).setEffect(null);
 	}
 
-
 	private void showAsActiveTurtle(double id) {
 		DropShadow shadow = new DropShadow();
-		shadow.setColor(Color.AQUA);			
-		
+		shadow.setColor(Color.AQUA);					
 		ImageView iv = turtleViewMap.getImage(id);
 		iv.setEffect(shadow);
 	}
 	
 	private void updateViewMapKey(Collection<Double> ids) {			
-		
-		for (double id : ids){	
-		
+		for (double id : ids){		
 			if (!turtleViewMap.getIDs().contains(id)){
 				turtleViewMap.setAttributes(id);							
 			}	
@@ -180,16 +158,13 @@ public class TurtleScreen implements UIAttributes{
 	}
 
 	private void addTurtleToScene(double id){
-		if (!root.getChildren().contains(turtleViewMap.getImage(id))){				
-			
+		if (!root.getChildren().contains(turtleViewMap.getImage(id))){							
 			root.getChildren().add(turtleViewMap.getImage(id));
 		}
 	}
-	
-	
+		
 	private void setViewTurtleStateFromImage(double id) {
 		ImageView iv = turtleViewMap.getImage(id);
-
 		Group root = getTurtleStateRoot(id);
 		Stage stage = getTurtleStateStage(id, root);	
 		stage.setX(originX + viewData.getTurtleX(id) + VIEW_TURTLE_STATE_WIDTH/2);
@@ -234,13 +209,11 @@ public class TurtleScreen implements UIAttributes{
 	}
 
 	private Group getTurtleStateRoot(Double id) {
-		Group root = new Group();
-		
+		Group root = new Group();	
 		Text posX = uiBuilder.getText(10, 20, uiResources.getString("ShowTurtleStatePositionX") + viewData.getTurtleX(id));
 		Text posY = uiBuilder.getText(10, 40, uiResources.getString("ShowTurtleStatePositionY") + viewData.getTurtleY(id));
 		Text heading = uiBuilder.getText(10, 60, uiResources.getString("ShowTurtleStateHeading") + viewData.getTurtleAngle(id));
-		Text penStatus = uiBuilder.getText(10, 80, uiResources.getString("ShowTurtleStatePenDown") + viewData.isPenDown(id));
-		
+		Text penStatus = uiBuilder.getText(10, 80, uiResources.getString("ShowTurtleStatePenDown") + viewData.isPenDown(id));		
 		root.getChildren().addAll(posX, posY, heading, penStatus);
 		return root;
 	}
@@ -274,12 +247,10 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	private void formatTurtle(double id){
-		ImageView iv = turtleViewMap.getImage(id);
-		
+		ImageView iv = turtleViewMap.getImage(id);		
 		double posX = originX + viewData.getTurtleX(id);
 		double posY = originY - viewData.getTurtleY(id);
-		double angle = viewData.getTurtleAngle(id);	
-		
+		double angle = viewData.getTurtleAngle(id);			
 		if (turtleIsOffCanvas(posX, posY)){
 			root.getChildren().remove(iv);
 		}	
@@ -288,7 +259,6 @@ public class TurtleScreen implements UIAttributes{
 		}	
 	}
 
-
 	private void drawTurtle(ImageView iv, double posX, double posY, double angle) {
 		iv.setRotate(angle);
 		iv.setFitWidth(TURTLE_SIZE);
@@ -296,10 +266,8 @@ public class TurtleScreen implements UIAttributes{
 		iv.setX(posX - TURTLE_SIZE/2);
 		iv.setY(posY - TURTLE_SIZE/2);
 	}
-
-
+	
 	private boolean turtleIsOffCanvas(double posX, double posY) {
 		return posX > canvasWidth || posX < 0 || posY > canvasHeight || posY < 0;
-	}	
-	
+	}		
 }
