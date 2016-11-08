@@ -1,4 +1,4 @@
-package view.ui;
+package view.ui.commands;
 
 
 import java.io.File;
@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import view.data.ViewData;
+import view.ui.UIAttributes;
+import view.ui.Window;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -17,6 +19,12 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import controller.Controller;
+
+/**
+ * 
+ * @author Pim
+ *
+ */
 
 public class SaveCommand implements UIAttributes {
 	private static int BUTTON_X = 480;
@@ -27,7 +35,7 @@ public class SaveCommand implements UIAttributes {
 	private Controller controller;
 	private ViewData viewData;
 	
-	SaveCommand(Window window) {
+	public SaveCommand(Window window) {
 		this.root = new Group();
 		this.window = window;
 		this.viewData = window.getViewData();

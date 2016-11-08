@@ -2,19 +2,23 @@ package view.ui;
 
 import java.util.Observable;
 import java.util.Observer;
+import controller.Controller;
+import javafx.scene.Group;
+import javafx.stage.Stage;
+import view.data.ViewData;
+import view.ui.commands.CommandLine;
+import view.ui.commands.LoadCommand;
+import view.ui.commands.SaveCommand;
+import view.ui.turtle.TurtleScreen;
 
 /**
+ * The purpose of this class is to build the root that fills the scene the user
+ * sees and to update both the user interface and the class ViewData
  * 
  * @author Diane Hadley
  * 
  */
 
-
-import controller.Controller;
-import javafx.scene.Group;
-import javafx.stage.Stage;
-import view.data.ViewData;
-import view.ui.turtle.TurtleScreen;
 
 public class Window implements UIAttributes, Observer{
 	
@@ -44,11 +48,55 @@ public class Window implements UIAttributes, Observer{
 		buildRoot();
 	}
 	
-	
+	/**
+	 * returns root with all elements of the ui that a user will see
+	 * for one workspace/tab
+	 */
 	public Group getRoot(){		
 		return root;
 	}
 
+	/**
+	 * returns an instance of Controller
+	 */
+	public Controller getController() {
+		return controller;
+	}
+	
+	/**
+	 *returns an instance of ViewData
+	 */
+	public ViewData getViewData() {
+		return viewData;
+	}
+	
+	/**
+	 * calls a method in ViewData that will process the command
+	 * upon receiving a string of the command and an instance of the controller
+	 * 
+	 */
+	public void updateViewData(String command) throws Exception {	
+		viewData.sendCommand(command,controller);
+	}
+	
+	/**
+	 * calls all methods that update the user interface
+	 */
+	public void updateUI() {
+		turtleScreen.updateTurtles();
+		console.updateConsole(viewData.getConsoleReturn());
+		workspace.updateWorkspace(viewData.getWorkspace());
+		turtleScreen.getRoot();	
+	}
+
+	/**
+	 * calls updateUI()
+	 */
+    @Override
+    public void update (Observable o, Object arg) {
+        updateUI();        
+    }
+	
 	private void buildRoot() {
 		helpWindowUI = new HelpWindowUI();
 		turtleScreen = new TurtleScreen(stage, viewData, controller);	
@@ -67,35 +115,7 @@ public class Window implements UIAttributes, Observer{
 	}
 	
 
-	public GeneralSettings getGeneralSettings(){
-		return generalSettings;
-	}
 	
-	public Controller getController() {
-		return controller;
-	}
-	
-	public ViewData getViewData() {
-		return viewData;
-	}
-	
-		
-	public void updateViewData(String command) throws Exception {	
-		viewData.sendCommand(command,controller);
-	}
-	
-	public void updateUI() {
-		turtleScreen.updateTurtles();
-		console.updateConsole(viewData.getConsoleReturn());
-		workspace.updateWorkspace(viewData.getWorkspace());
-		turtleScreen.getRoot();	
-	}
-
-
-    @Override
-    public void update (Observable o, Object arg) {
-        updateUI();        
-    }
 
 	
  

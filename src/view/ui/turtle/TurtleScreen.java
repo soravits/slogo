@@ -54,7 +54,7 @@ public class TurtleScreen implements UIAttributes{
 	private double originY;
 
 	
-	/*
+	/**
 	 * initiates TurtleCanvas and sets instance of TurtleSettings
 	 */
 	
@@ -73,7 +73,7 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	
-	/*
+	/**
 	 * returns root with all visualization of turtle
 	 * 
 	 */	
@@ -82,7 +82,7 @@ public class TurtleScreen implements UIAttributes{
 		return root;
 	}	
 	
-	/*
+	/**
 	 * returns instance of TurtleSettings
 	 */
 	public TurtleSettings getTurtleSettings(){
@@ -90,7 +90,9 @@ public class TurtleScreen implements UIAttributes{
 	}
 	
 	
-		
+	/**
+	 * Sets turtles and lines to reflect initial turtle state and then changes made by command 
+	 */
 	public void updateTurtles(){		
 		Collection<Double> ids = viewData.getIDs();	
 		activeTurtles = viewData.getTurtlesToModify();
@@ -98,14 +100,10 @@ public class TurtleScreen implements UIAttributes{
 		updateViewMapKey(ids);
 		setActiveTurtleToggle();
 		
-		for (double id : ids){	
-				
+		for (double id : ids){					
 			setViewTurtleStateFromImage(id);
-			
 			addTurtleToScene(id);
-			
 			drawTurtlePath(id);				
-			
 			if (viewData.getShowTurtle(id)){											
 				formatTurtle(id);
 			}		
@@ -115,13 +113,18 @@ public class TurtleScreen implements UIAttributes{
 		}	
 	}
 
-	
+	/**
+	 * Clears lines drawn by turtles and moves to origin
+	 */
 	public void resetTurtle() {
 		turtleView.clearRect(TURTLE_X, TURTLE_Y, canvasWidth, canvasHeight);
 		turtleView.beginPath();
 		turtleView.moveTo(originX, originY);
 	}	
 	
+	/**
+	 * updates the image and formatting of each ImageView stored with each turtle index
+	 */
 	public void updateViewMapImages(){
 		for (double id : activeTurtles){
 			root.getChildren().remove(turtleViewMap.getImage(id));
@@ -133,7 +136,10 @@ public class TurtleScreen implements UIAttributes{
 		}		
 	}
 
-	
+	/**
+	 * Graphically displays active turtles if toggle is true and removes
+	 * active turtle visualization if toggle is false
+	 */
 	public void setActiveTurtleToggle(){
 			
 		boolean showActive = turtleSettings.getActiveTurtleToggle();
@@ -230,10 +236,10 @@ public class TurtleScreen implements UIAttributes{
 	private Group getTurtleStateRoot(Double id) {
 		Group root = new Group();
 		
-		Text posX = uiBuilder.getText(10, 20, "Position X: " + viewData.getTurtleX(id));
-		Text posY = uiBuilder.getText(10, 40, "Position Y: " + viewData.getTurtleY(id));
-		Text heading = uiBuilder.getText(10, 60, "Heading: " + viewData.getTurtleAngle(id));
-		Text penStatus = uiBuilder.getText(10, 80, "Pen Down: " + viewData.isPenDown(id));
+		Text posX = uiBuilder.getText(10, 20, uiResources.getString("ShowTurtleStatePositionX") + viewData.getTurtleX(id));
+		Text posY = uiBuilder.getText(10, 40, uiResources.getString("ShowTurtleStatePositionY") + viewData.getTurtleY(id));
+		Text heading = uiBuilder.getText(10, 60, uiResources.getString("ShowTurtleStateHeading") + viewData.getTurtleAngle(id));
+		Text penStatus = uiBuilder.getText(10, 80, uiResources.getString("ShowTurtleStatePenDown") + viewData.isPenDown(id));
 		
 		root.getChildren().addAll(posX, posY, heading, penStatus);
 		return root;
@@ -276,16 +282,19 @@ public class TurtleScreen implements UIAttributes{
 		
 		if (turtleIsOffCanvas(posX, posY)){
 			root.getChildren().remove(iv);
-		}
-		
-		else {
-			
-			iv.setRotate(angle);
-			iv.setFitWidth(TURTLE_SIZE);
-			iv.setFitHeight(TURTLE_SIZE);
-			iv.setX(posX - TURTLE_SIZE/2);
-			iv.setY(posY - TURTLE_SIZE/2);
 		}	
+		else {		
+			drawTurtle(iv, posX, posY, angle);
+		}	
+	}
+
+
+	private void drawTurtle(ImageView iv, double posX, double posY, double angle) {
+		iv.setRotate(angle);
+		iv.setFitWidth(TURTLE_SIZE);
+		iv.setFitHeight(TURTLE_SIZE);
+		iv.setX(posX - TURTLE_SIZE/2);
+		iv.setY(posY - TURTLE_SIZE/2);
 	}
 
 

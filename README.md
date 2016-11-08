@@ -3,6 +3,12 @@
 ### Date Started: October 11, 2016
 ### Date Completed: November 1, 2016
 ### Estimate of Total number of man/woman-hours spent on the project: 110 hours
+### Roles:
+ * Brian:
+ * Soravit:
+ * Diane: Built user interface, helped with a few methods in external APIs to get the front end all the information it needed, coded turtle visualization, coded display of errors, and wrote HTML help page. In the second spring, completed extensions to see state of the turtle, see a palette of images/colors and associated numbers, select active turtles graphically and toggle if user can see which are active, and create multiple workspaces.
+ * Pim:
+
 ### Sources cited:
 * https://www.tutorialspoint.com/design_pattern/command_pattern.htm (Brian)
 * https://docs.oracle.com/javase/tutorial/java/IandI/interfaceAsType.html (Brian)
@@ -21,6 +27,7 @@
 3. After checking "Show Active Turtle", each of the active turtles becomes highlighted in a blue-ish glow. You can toggle whether or not the turtle is active by clicking on the turtle in the GUI.
 4. Unlimited Parameter parsing takes a slightly different syntax. Instead of '( sum 10 20 30 40 )', the syntax that works for us is 'sum ( 10 20 30 40 )'
 5. Upload/Save commands work only with text files
+6. Hover mouse over turtles to see their states
 6. ADD MORE EXAMPLES
 
 ### Any known bugs, crashes or problems with the code's functionality:
@@ -30,9 +37,11 @@ turtles to the home position.
 3. Functions become globally defined; Once a function is defined, it cannot be overwritten. So if you run
 a program that creates 'to square [ :dist :x ] ....', then creating another square function will cause problems running the program. 
 4. When pressing Redo button, the console print multiple lines of the same results.
+5. Combo box to change pen type is not functional
 5. ADD MORE BUGS THAT YOU GUYS KNOW ABOUT
 
 ### Any Extra Features included in the project:
+1. User can see turtle state by hovering mouse over the turtle image (it was only required that the user be able to see the turtle state graphically)
 2. ADD ANY EXTRA FEATURES WE ADDED
 
 ### Impressions of the Assignment to help improve it in the future:

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 /**
  * The purpose of this class is to create the root that visualizes 
  * how the user gets to the help window.
- * This root can then be passed to UI to be displayed in the scene
+ * This root can then be passed to Window to be displayed in the scene
  * 
  * @author Diane Hadley
  */
