@@ -4,10 +4,10 @@
 ### Date Completed: November 1, 2016
 ### Estimate of Total number of man/woman-hours spent on the project: 110 hours
 ### Roles:
- * Brian:
+ * Brian: Wrote Model and commands (and command hierarchy)
  * Soravit: Implemented the controller as an interface between the front-end and back-end, coded the parsing user input, coded the creation of expression trees, coded the execution of commands represented by expression trees with reflection, implemented control commands (any basic and extensions command with brackets in syntax), implemented error-checking, implemented file-saving/file-reading extension, implemented variable scope, recursion and unlimited parameter extensions, helped with multiple turtles
  * Diane: Built user interface, helped with a few methods in external APIs to get the front end all the information it needed, coded turtle visualization, coded display of errors, and wrote HTML help page. In the second spring, completed extensions to see state of the turtle, see a palette of images/colors and associated numbers, select active turtles graphically and toggle if user can see which are active, and create multiple workspaces.
- * Pim:
+ * Pim: Wrote ViewData and ViewModelInterface. Worked on Workspace class. Wrote CommandHistoryWindow, LoadCommand, and SaveCommand.
 
 ### Sources cited:
 * https://www.tutorialspoint.com/design_pattern/command_pattern.htm (Brian)
@@ -23,6 +23,7 @@
 
 ### Data or Resource Files required by the project: 
 1. All of the files in the languages folder - newly added ones include TurtleCommands.properties, Control.properties, and Params.properties
+2. All files in resources folder, including DisplayedText.properties, HelpWindpw.html, HelpWindowStyling.css, UIStyling.css, and three image files.
 
 ### Any information about using the program:
 1. Instead of pressing enter after entering all of the text required in the command line, press "Submit Commands"
