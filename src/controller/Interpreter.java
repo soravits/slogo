@@ -86,7 +86,7 @@ public class Interpreter {
             lineScanner.close();
         }
         inputScanner.close();
-        List<Node> trees = interpretString(tokens);
+        interpretString(tokens);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Interpreter {
         }
     }
 
-    private List<Node> interpretString(List<String> predicates) throws InvalidCommandException, InvalidSyntaxException, InvalidParametersException {
+    private void interpretString(List<String> predicates) throws InvalidCommandException, InvalidSyntaxException, InvalidParametersException {
         List<Node> trees = new ArrayList<Node>();
         Queue<Node> queue = new LinkedList<Node>();
         for(int i = 0; i < predicates.size(); i++){
@@ -144,7 +144,6 @@ public class Interpreter {
             trees.add(visitNode(queue, tree));
             commandManager.executeTree(tree);
         }
-        return trees;
     }
 
     private Node interpretBracketCommands(Queue<Node> queue) throws InvalidSyntaxException, InvalidParametersException {
@@ -221,7 +220,6 @@ public class Interpreter {
             }
             return root;
         }catch(Exception e){
-            e.printStackTrace();
             throw new InvalidParametersException(value);
         }
     }
