@@ -4,7 +4,6 @@ import error.InvalidCommandException;
 import model.Model;
 import model.abstractcommands.CommandInterface;
 import model.interfaces.EmptyInterface;
-import model.interfaces.TurtleCommandInterface;
 
 import java.lang.reflect.Constructor;
 
@@ -46,6 +45,7 @@ public abstract class Executor {
             model.updateView();
             return x;
         }catch(Exception exception){
+            exception.printStackTrace();
             throw new InvalidCommandException(root.getValue());
         }
     }
