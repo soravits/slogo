@@ -58,6 +58,7 @@ public class Interpreter {
      */
     public void setLanguage(String language){
         this.language = language;
+        commandParser.removeAllPatterns();
         commandParser.addPatterns(RESOURCE_PACKAGE + File.separator + language);
     }
 
@@ -141,7 +142,6 @@ public class Interpreter {
         while(!queue.isEmpty()){
             Node tree = queue.poll();
             trees.add(visitNode(queue, tree));
-            //printTree(tree);
             commandManager.executeTree(tree);
         }
         return trees;
