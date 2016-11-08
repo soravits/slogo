@@ -56,9 +56,29 @@ public class Window implements UIAttributes, Observer{
 		return root;
 	}
 
-	/**
-	 * returns an instance of Controller
-	 */
+	private void buildRoot() {
+		helpWindowUI = new HelpWindowUI();
+		turtleScreen = new TurtleScreen(stage, viewData, controller);	
+		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());	
+		
+		generalSettings = new GeneralSettings(controller);
+		commandLine = new CommandLine(ySize, this);		
+		workspace = new Workspace(this);
+		console = new Console(ySize, xSize);
+		loadCommand = new LoadCommand(this);
+		saveCommand = new SaveCommand(viewData);
+		
+		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
+				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
+				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
+
+	}
+	
+
+	public GeneralSettings getGeneralSettings(){
+		return generalSettings;
+	}
+	
 	public Controller getController() {
 		return controller;
 	}
@@ -97,28 +117,7 @@ public class Window implements UIAttributes, Observer{
         updateUI();        
     }
 	
-	private void buildRoot() {
-		helpWindowUI = new HelpWindowUI();
-		turtleScreen = new TurtleScreen(stage, viewData, controller);	
-		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());	
-		
-		generalSettings = new GeneralSettings(controller);
-		commandLine = new CommandLine(ySize, this);		
-		workspace = new Workspace(xSize,this,commandLine);
-		console = new Console(ySize, xSize);
-		loadCommand = new LoadCommand(this);
-		saveCommand = new SaveCommand(this);
-		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
-				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
 
-	}
-	
-
-	
-
-	
- 
         
         
 }
