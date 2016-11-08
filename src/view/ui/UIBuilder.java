@@ -1,3 +1,7 @@
+// This entire file is part of my masterpiece.
+// DIANE HADLEY
+
+
 package view.ui;
 
 import javafx.scene.control.Button;
@@ -8,6 +12,8 @@ import javafx.scene.text.Text;
  * The purpose of this class is to provide methods that format text and controls in order to reduce
  * repeated code that would result from the many controls and Text instances used in the view
  * 
+ * I think it is well designed because it reduces code in a very simple, clean, and easy to use way
+ * 
  * @author Diane Hadley
  * 
  */
@@ -17,6 +23,9 @@ public class UIBuilder{
 	/**
 	 * Creates a Text object and sets its contents and location
 	 * returns the Text object
+	 * @param x
+	 * @param y
+	 * @param t
 	 */
 	public Text getText(int x, int y, String t){
 		Text text = new Text(t);
