@@ -32,7 +32,46 @@ These API's were decided on later in the project after determining how to best i
   
 
  **2. View Internal**
- -Added a UIBuilder class that has standardized methods for formatting parts of the UI. This was a major but not code-intensive change, since it standardized a way of customizing the UI with only a couple of public methods. This is beneficial because it removes a ton of duplicated code and allows different classes to easily modify the UI without writing the same code.
+ 1. Added a UIBuilder class that has standardized methods for formatting parts of the UI. This was a major but not code-intensive change, since it standardized a way of customizing the UI with only a couple of public methods. This is beneficial because it removes a ton of duplicated code and allows different classes to easily modify the UI without writing the same code. Added public methods:
+     - getText
+     - setControlLayout
+     - makeButton.
+     
+2. Turtle class changed to TurtleScreen. Added public methods:
+     - getTurtleSettings() because I decided to instantiate TurtleSettings in TurtleScreen rather than with the other user interface classes in order to give TurtleScreen better access to its settings
+     - updateTurtles() resetTurtle() were made public because when designing our API we took into account sending data to the back end but not how we were going to update the front end after 
+     - updateViewMapImages() was added to assist with the extension of having multiple turtles (which therefore required mapping a turtle's index to the image assigned to it)
+     - setActiveTurtleToggle() was added to assist with the extension of graphically showing which turtles are active by being called when the value of a check box in TurtleSettings is changed
+
+3. TurtleSettings: Added public methods:
+     - getPenThickness() was added to assist with the extension of allowing the user to change pen thickness
+     - getActiveTurtleToggle() was added to assist with the extension of graphically showing which turtles are active
+
+4. Added TurtleViewMap class to assist with the extension of having multiple turtles. Public methods include:
+     - getIDs()
+     - getImage()
+     - setAttributes()
+     - setImage()
+
+5. Workspace: Added public methods:
+     - updateWorkspace() was added because when designing our API we took into account sending data to the back end but not how we were going to update the front end after
+
+6. Added Window class to assist with extension of having multiple workspaces. Public methods include:
+     - getRoot()
+     - getController() and getViewData() were added because we didn't have a good idea of what our view external API was going to look like when writing out design
+     - updateUI() and update() were added because when designing our API we took into account sending data to the back end but not how we were going to update the front end after
+
+7. Console: Added public methods:
+     - updateConsole() was added because when designing our API we took into account sending data to the back end but not how we were going to update the front end after
+
+8. GeneralSettings: Removed public method getLanguage() by having the controller observe the value of the language combo box
+
+9. Added CommandHistoryWindow class
+
+10. Added LoadCommand and SaveCommand classes
+ 
+
+ 
 
 **3. Model External**
 -Modified the Controller class to be the only public API in the controller that is responsible for updating the model and the view. This is a minor design change, since we were already planning to only give restricted public access to the controller. It is beneficial in encapsulating the data in the controller.
