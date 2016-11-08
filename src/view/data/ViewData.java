@@ -19,8 +19,7 @@ public class ViewData {
 	}
 	
 	public void sendCommand(String command,Controller controller) throws Exception {
-		System.out.println(command);
-		controller.processCommand(command);	
+		controller.processCommand(command);
 	}
 	
 	public void updateViewModel(Model Model) {

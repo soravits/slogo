@@ -26,9 +26,9 @@ public class CommandManager {
     private CommandController commandController;
     private Model model;
     private Map<String, Executor> executions;
-    private CommandExecutor commandExecutor;
-    private VariableExecutor variableExecutor;
-    private ConstantExecutor constantExecutor;
+    private Executor commandExecutor;
+    private Executor variableExecutor;
+    private Executor constantExecutor;
     private Map<String, Node> userInstructions;
     private List<String> controlStructures;
     private List<String> turtleCommands;
