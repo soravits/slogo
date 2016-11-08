@@ -6,7 +6,7 @@ import javafx.scene.control.TextArea;
 
 /**
  * The purpose of this class is to create the root that visualizes the console.
- * This root can then be passed to UI to be displayed in the scene
+ * This root can then be passed to Window to be displayed in the scene
  * 
  * @author Diane Hadley, Pim Chuaylua
  */
@@ -33,12 +33,22 @@ public class Console implements UIAttributes{
 		this.consoleY = WORKSPACE_HEIGHT + 110;
 	}
 	
+	
+	/**
+	 * returns root with all visualization of console
+	 * 
+	 */	
+
 	public Group getRoot(){		
 		initConsole();
 		root.getChildren().add(uiBuilder.getText(consoleX, consoleY - 10, uiResources.getString("Console")));
 		return root;
 	}
 	
+	/**
+	 * @param consoleResults
+	 * Updates console to display results of command
+	 */
 	public void updateConsole(Collection<String> consoleResults) {
 		for (String command:consoleResults) {
 			console.appendText(command+"\n");

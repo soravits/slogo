@@ -45,10 +45,17 @@ public class Workspace implements UIAttributes{
 		initWorkspace();
 	}
 	
+
 	public Group getRoot(){
 		return root;
 	}
 	
+	/**
+	 * @param variableMap
+	 * 
+	 * updates the workspace to show all variables the user has stored
+	 */
+
 	private void initWorkspace(){
 		vbox.setPadding(new Insets(VBOX_PADDING));
 		vbox.setLayoutX(WORKSPACE_X);
@@ -68,7 +75,7 @@ public class Workspace implements UIAttributes{
 		button.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {  
 		    	try {
-					window.updateViewData("set :"+varName+" "+space.getText());
+					window.updateViewData("set " + varName + " " + space.getText());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

@@ -1,4 +1,4 @@
-package view.ui;
+package view.ui.commands;
 
 
 import java.io.File;
@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import view.data.ViewData;
+import view.ui.UIAttributes;
+import view.ui.Window;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -18,14 +20,23 @@ import javafx.stage.Stage;
 
 //This entire file is my code masterpiece - Pim Chuaylua pc131
 
+
+/**This class is to provide a button to be added to the UI to save the history on command on text file
+ * 
+ * @author Pim
+ *
+ */
+
+
 public class SaveCommand implements UIAttributes {
 	private static int BUTTON_X = 480;
 	private static int BUTTON_Y = 10;
 	private Group root;
 	private Button saveButton;
 	private ViewData viewData;
-	
-	SaveCommand(ViewData viewData) {
+
+
+	public SaveCommand(ViewData viewData) {
 		this.root = new Group();
 		this.viewData = viewData;
 		initSaveCommandButton();

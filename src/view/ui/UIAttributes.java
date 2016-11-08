@@ -2,6 +2,13 @@ package view.ui;
 
 import java.util.ResourceBundle;
 
+/**
+ * The purpose of this interface is to store constants that most view classes use 
+ * 
+ * @author Diane Hadley
+ *
+ */
+
 public interface UIAttributes{
 	
 	public static final int TURTLE_CANVAS_HEIGHT = 450;

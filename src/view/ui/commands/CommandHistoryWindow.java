@@ -1,4 +1,4 @@
-package view.ui;
+package view.ui.commands;
 
 import java.util.Collection;
 import javafx.beans.value.ChangeListener;
@@ -15,6 +15,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import view.ui.UIAttributes;
+import view.ui.Window;
+
+/**
+ * 
+ * @author Pim
+ *
+ */
 
 //This entire file is my masterpiece. - Pim Chuaylua pc131
 
