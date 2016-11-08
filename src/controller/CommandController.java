@@ -29,7 +29,6 @@ public class CommandController {
     /**
      * Add the command to the stack of command; useful for undoing commands if needed.
      * Executes the command, which updates the model and returns the needed output
-     * @param command : the specific command to be executed next based on the Execution Tree
      * @return the double associated with the command's output
      * @throws Exception for a variety of reasons (divide by zero, tan of 90, etc)
      */
