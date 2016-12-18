@@ -1,11 +1,13 @@
 package model;
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Observable;
 import model.interfaces.ControlCommandInterface;
 import model.interfaces.DisplayCommandInterface;
 import model.interfaces.EmptyInterface;
 import model.interfaces.TurtleCommandInterface;
+import java.util.List;
 import view.data.ViewModelInterface;
 
 /**
@@ -19,6 +21,7 @@ import view.data.ViewModelInterface;
  */
 public class Model extends Observable implements ControlCommandInterface, EmptyInterface, DisplayCommandInterface, ViewModelInterface, TurtleCommandInterface{
 
+    private List<TurtleState> stamps;
     private TurtleController turtleController;
     private DisplayState display;
     private TurtleMap turtleMap;
@@ -33,6 +36,7 @@ public class Model extends Observable implements ControlCommandInterface, EmptyI
         this.commandHistory = new ArrayList<String>();
         this.consoleReturn = new ArrayList<String>();
         this.turtleController = new TurtleController();
+        this.stamps = new ArrayList<TurtleState>();
     }
 
     @Override
@@ -256,6 +260,10 @@ public class Model extends Observable implements ControlCommandInterface, EmptyI
         return display;
     }  
     
+    @Override
+    public List<TurtleState> getStamps () {
+        return stamps;
+    }
 
     private void clearConsoleReturn(){
         consoleReturn.clear();

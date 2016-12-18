@@ -1,10 +1,14 @@
 package view.data;
 import java.util.AbstractMap;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import controller.Controller;
 import model.DisplayState;
 import model.Model;
+import model.Position;
 import model.TurtleMap;
+import model.TurtleState;
 
 
 /**
@@ -112,5 +116,9 @@ public class ViewData {
 		sendCommand("setshape "+pensize,controller);
         //penSize = pensize;
     }
+	
+	public List<TurtleState> getStamps(){
+	    return viewModelInterface.getStamps();
+	}
 
 }

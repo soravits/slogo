@@ -6,8 +6,9 @@ package model;
 * @author Brian
 *
 */
-public class TurtleState {
+public class TurtleState implements Cloneable{
 
+    private int turtleImageIndex;
     private Position turtlePosition;
     private double turtleAngle;
     private boolean turtleShow;
@@ -16,12 +17,14 @@ public class TurtleState {
         this.turtlePosition = new Position();
         this.turtleAngle = 0;
         this.turtleShow = true;
+        this.turtleImageIndex = 1;
     }
 
-    public TurtleState(Position position, double angle, boolean isShowing){
+    public TurtleState(Position position, double angle, boolean isShowing, int imageIndex){
         this.turtlePosition = position;
         this.turtleAngle = angle;
         this.turtleShow = isShowing;
+        this.turtleImageIndex = imageIndex;
     }
     
     /**
@@ -103,5 +106,19 @@ public class TurtleState {
      */
     public boolean getShowTurtle () {
         return turtleShow;
+    }
+    
+    public int getImageIndex(){
+        return turtleImageIndex;
+    }
+    
+    public void setImageIndex(int index){
+        this.turtleImageIndex = index;
+    }
+    
+    @Override
+    public TurtleState clone(){
+        final TurtleState clonedTurtle = new TurtleState(turtlePosition, turtleAngle, turtleShow, turtleImageIndex);
+        return clonedTurtle;        
     }
 }

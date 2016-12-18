@@ -1,5 +1,6 @@
 package model.interfaces;
 
+import java.util.List;
 import model.LineState;
 import model.TurtleState;
 
@@ -30,5 +31,10 @@ public interface TurtleCommandInterface {
      * @return number of turtles that currently exist in the workspace
      */
     double getNumberOfTurtles();
+    
+    /**
+     * @return current list of stamps in the model
+     */
+    List<TurtleState> getStamps();
 
 }

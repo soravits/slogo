@@ -1,9 +1,10 @@
 package view.data;
 
 import java.util.Collection;
-
+import java.util.List;
 import model.DisplayState;
 import model.TurtleMap;
+import model.TurtleState;
 import model.WorkspaceState;
 
 public interface ViewModelInterface{
@@ -60,5 +61,5 @@ public interface ViewModelInterface{
 
     public void setPaletteColors (int index, int[] paletteColor);
     
-    
+    public List<TurtleState> getStamps();
 }
