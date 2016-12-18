@@ -17,66 +17,57 @@ import javafx.scene.text.Text;
  * users can see the variables that are stored.
  * This root can then be passed to Window to be displayed in the scene
  * 
- * @author Diane Hadley, Pim
+ * @author Diane Hadley, Pim Chuaylua
  */
+
+//This entire file is my code masterpiece - Pim Chuaylua pc131
 
 public class Workspace implements UIAttributes{
 	
-	private Group root = new Group();
-	private UIBuilder uiBuilder = new UIBuilder();
-	private int workspaceX;	
-	private VBox VBox;
+	private Group root;
+	private UIBuilder uiBuilder;
+	private VBox vbox;
 	private Window window;
 	
+	private static final int WORKSPACE_X = TURTLE_CANVAS_WIDTH + 160;
 	private static final int WORKSPACE_Y = 55;
+	private static final int SPACE_WIDTH = 50;
+	private static final int HBOX_WIDTH = 10;
+	public static final int VBOX_PADDING = 20;
+	public static final int HBOX_PADDING = 10;
 	
-	
-	public Workspace(int sceneWidth, Window window, CommandLine commandLine){
+	public Workspace(Window window){
 		super();
+		this.root = new Group();
+		this.uiBuilder = new UIBuilder();
 		this.window = window;
-		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
-		this.VBox=new VBox(20);
+		this.vbox=new VBox(VBOX_PADDING);
 		initWorkspace();
 	}
 	
-	
-	/*
-	 * returns root with all visualization of the workspace
-	 * 
-	 */	
+
 	public Group getRoot(){
 		return root;
 	}
 	
-	
-	
-	
-	public void updateWorkspace(AbstractMap<String, Double> variableMap) {
-		clearWorkspace();
-		for (String varName:variableMap.keySet()) {
-			Text varNameText=new Text(varName+" = ");
-			Double value=variableMap.get(varName);
-			HBox HBox = new HBox(10);
-			TextField space = new TextField();
-			space.setPrefWidth(50);
-			space.setText(""+value);
-			HBox.getChildren().addAll(varNameText, space, getSubmitButton(varName,space));
-			VBox.getChildren().add(HBox);
-		}
-	}
-	
-	public void clearWorkspace() {
-		VBox.getChildren().clear();
-	}
-	
+	/**
+	 * @param variableMap
+	 * 
+	 * updates the workspace to show all variables the user has stored
+	 */
+
 	private void initWorkspace(){
-		VBox.setPadding(new Insets(20));
-		VBox.setLayoutX(workspaceX);
-		VBox.setLayoutY(WORKSPACE_Y);
-		root.getChildren().add(VBox);
+		vbox.setPadding(new Insets(VBOX_PADDING));
+		vbox.setLayoutX(WORKSPACE_X);
+		vbox.setLayoutY(WORKSPACE_Y);
+		root.getChildren().add(vbox);
 		root.getChildren().add(
-				uiBuilder.getText(workspaceX, WORKSPACE_Y - 10, uiResources.getString("Workspace"))
+				uiBuilder.getText(WORKSPACE_X, WORKSPACE_Y - 10, uiResources.getString("Workspace"))
 		);
+	}
+	
+	private void clearWorkspace() {
+		vbox.getChildren().clear();
 	}
 	
 	private Button getSubmitButton(String varName, TextField space) {
@@ -84,12 +75,34 @@ public class Workspace implements UIAttributes{
 		button.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {  
 		    	try {
-					window.updateViewData("set :"+varName+" "+space.getText());
+					window.updateViewData("set " + varName + " " + space.getText());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 		    }
 		});
+		
 		return button;
+	}
+	
+	public void updateWorkspace(AbstractMap<String, Double> variableMap) {
+		
+		clearWorkspace();
+		
+		for (String varName:variableMap.keySet()) {
+			
+			Text varNameText = new Text(varName+" = ");
+			Double value = variableMap.get(varName);
+			
+			
+			TextField space = new TextField();
+			space.setPrefWidth(SPACE_WIDTH);
+			space.setText(""+value);
+			
+			HBox hbox = new HBox(HBOX_WIDTH);
+			hbox.getChildren().addAll(varNameText, space, getSubmitButton(varName,space));
+			
+			vbox.getChildren().add(hbox);
+		}
 	}
 }

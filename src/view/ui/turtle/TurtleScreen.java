@@ -28,14 +28,11 @@ import view.data.ViewData;
 import view.ui.UIAttributes;
 import view.ui.UIBuilder;
 
-
 /**
  * The purpose of this class is to create the root that visualizes the turtle.
  * This root can then be passed to Window to be displayed in the scene
- * 
  * @author Diane Hadley
  */
-
 
 public class TurtleScreen implements UIAttributes{
 

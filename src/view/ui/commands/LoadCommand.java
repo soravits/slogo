@@ -1,4 +1,4 @@
-package view.ui;
+package view.ui.commands;
 import java.io.File;
 import java.io.IOException;
 import controller.Controller;
@@ -11,7 +11,16 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import view.ui.UIAttributes;
+import view.ui.Window;
 import javafx.stage.Stage;
+
+/**This class is to provide a button to be added to the UI to load command on text file
+ * 
+ * @author Pim Chuaylua
+ *
+ */
+
 
 public class LoadCommand implements UIAttributes{
 	private static int BUTTON_X = 320;
@@ -22,19 +31,19 @@ public class LoadCommand implements UIAttributes{
 	private Window window;
 	private Controller controller;
 	
-	LoadCommand(Window window) {
+	public LoadCommand(Window window) {
 		this.root = new Group();
 		this.stage = new Stage();
 		this.window = window;
 		this.controller = window.getController();
-		makeButton();
+		initLoadCommandButton();
 	}
 	
 	public Button getRoot() {
 		return loadButton;
 	}
 	
-	public void makeButton() {
+	public void initLoadCommandButton() {
 		loadButton = new Button(uiResources.getString("LoadCommand"));
 		loadButton.setLayoutX(BUTTON_X);
 		loadButton.setLayoutY(BUTTON_Y);

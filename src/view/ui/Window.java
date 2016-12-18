@@ -2,19 +2,23 @@ package view.ui;
 
 import java.util.Observable;
 import java.util.Observer;
+import controller.Controller;
+import javafx.scene.Group;
+import javafx.stage.Stage;
+import view.data.ViewData;
+import view.ui.commands.CommandLine;
+import view.ui.commands.LoadCommand;
+import view.ui.commands.SaveCommand;
+import view.ui.turtle.TurtleScreen;
 
 /**
+ * The purpose of this class is to build the root that fills the scene the user
+ * sees and to update both the user interface and the class ViewData
  * 
  * @author Diane Hadley
  * 
  */
 
-
-import controller.Controller;
-import javafx.scene.Group;
-import javafx.stage.Stage;
-import view.data.ViewData;
-import view.ui.turtle.TurtleScreen;
 
 public class Window implements UIAttributes, Observer{
 	
@@ -44,7 +48,10 @@ public class Window implements UIAttributes, Observer{
 		buildRoot();
 	}
 	
-	
+	/**
+	 * returns root with all elements of the ui that a user will see
+	 * for one workspace/tab
+	 */
 	public Group getRoot(){		
 		return root;
 	}
@@ -56,10 +63,11 @@ public class Window implements UIAttributes, Observer{
 		
 		generalSettings = new GeneralSettings(controller);
 		commandLine = new CommandLine(ySize, this);		
-		workspace = new Workspace(xSize,this,commandLine);
+		workspace = new Workspace(this);
 		console = new Console(ySize, xSize);
 		loadCommand = new LoadCommand(this);
-		saveCommand = new SaveCommand(this);
+		saveCommand = new SaveCommand(viewData);
+		
 		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
 				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
@@ -75,15 +83,25 @@ public class Window implements UIAttributes, Observer{
 		return controller;
 	}
 	
+	/**
+	 *returns an instance of ViewData
+	 */
 	public ViewData getViewData() {
 		return viewData;
 	}
 	
-		
+	/**
+	 * calls a method in ViewData that will process the command
+	 * upon receiving a string of the command and an instance of the controller
+	 * 
+	 */
 	public void updateViewData(String command) throws Exception {	
 		viewData.sendCommand(command,controller);
 	}
 	
+	/**
+	 * calls all methods that update the user interface
+	 */
 	public void updateUI() {
 		turtleScreen.updateTurtles();
 		console.updateConsole(viewData.getConsoleReturn());
@@ -91,14 +109,15 @@ public class Window implements UIAttributes, Observer{
 		turtleScreen.getRoot();	
 	}
 
-
+	/**
+	 * calls updateUI()
+	 */
     @Override
     public void update (Observable o, Object arg) {
         updateUI();        
     }
-
 	
- 
+
         
         
 }

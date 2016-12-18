@@ -36,7 +36,7 @@ public class GeneralSettings implements UIAttributes{
 	}
 
 
-	/*
+	/**
 	 * returns the root with all visualizations of 
 	 * how the user can update settings
 	 */
@@ -44,16 +44,6 @@ public class GeneralSettings implements UIAttributes{
 		makeLanguageComboBox();
 		return root;
 	}
-
-
-
-//	/*
-//	 * returns the selected language
-//	 */
-//	public String getLanguage(){
-//		return languageComboBox.getValue();
-//	}
-
 
 	private void makeLanguageComboBox(){
 		ObservableList<String> languageOptions = FXCollections.observableArrayList(
