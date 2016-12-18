@@ -2,6 +2,7 @@ package view.ui.turtle;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,6 +53,10 @@ public class TurtleViewMap{
 	 */
 	public void setImage(Double id, ImageView image){
 		turtleVisualMap.put(id, image);
+	}
+
+	public Map<Double, ImageView> getMap(){
+		return  turtleVisualMap;
 	}
 	
 }

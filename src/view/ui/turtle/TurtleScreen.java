@@ -1,5 +1,7 @@
 package view.ui.turtle;
 import java.util.Collection;
+import java.util.Map;
+
 import controller.Controller;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -62,7 +64,11 @@ public class TurtleScreen implements UIAttributes{
 		this.originY = canvasHeight/2;		
 		makeCanvas();
 		updateTurtles();
-	}	
+	}
+
+	public Map<Double, ImageView> getTurtleMap(){
+		return turtleViewMap.getMap();
+	}
 	
 	/**
 	 * returns root with all visualization of turtle

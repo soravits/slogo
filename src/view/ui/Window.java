@@ -33,6 +33,7 @@ public class Window implements UIAttributes, Observer{
 	private SaveCommand saveCommand;
 	private ViewData viewData;
 	private Controller controller;
+	private TurtleIcons turtleIcons;
 	
 	private int xSize, ySize;
 	
@@ -60,25 +61,21 @@ public class Window implements UIAttributes, Observer{
 		helpWindowUI = new HelpWindowUI();
 		turtleScreen = new TurtleScreen(stage, viewData, controller);	
 		root.getChildren().add(turtleScreen.getTurtleSettings().getRoot());	
-		
+		turtleIcons = new TurtleIcons(turtleScreen.getTurtleMap());
 		generalSettings = new GeneralSettings(controller);
-		commandLine = new CommandLine(ySize, this);		
+		commandLine = new CommandLine(ySize, this);
 		workspace = new Workspace(this);
 		console = new Console(ySize, xSize);
 		loadCommand = new LoadCommand(this);
 		saveCommand = new SaveCommand(viewData);
-		
-		root.getChildren().addAll(turtleScreen.getRoot(), helpWindowUI.getRoot(),
+
+		root.getChildren().addAll(turtleScreen.getRoot(), turtleIcons.getRoot(),
 				generalSettings.getRoot(), commandLine.getRoot(), workspace.getRoot(), 
-				console.getRoot(),loadCommand.getRoot(),saveCommand.getRoot());
+				console.getRoot(),loadCommand.getRoot(), saveCommand.getRoot());
 
 	}
 	
 
-	public GeneralSettings getGeneralSettings(){
-		return generalSettings;
-	}
-	
 	public Controller getController() {
 		return controller;
 	}
@@ -106,8 +103,9 @@ public class Window implements UIAttributes, Observer{
 		turtleScreen.updateTurtles();
 		console.updateConsole(viewData.getConsoleReturn());
 		workspace.updateWorkspace(viewData.getWorkspace());
-		turtleScreen.getRoot();	
-	}
+		turtleScreen.getRoot();
+        turtleIcons.update();
+    }
 
 	/**
 	 * calls updateUI()
