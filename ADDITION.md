@@ -11,6 +11,8 @@ It took me less time than expected. I spent maybe 45 minutes total being reintro
 
 I guess I got it on the first try. I test a lot as I code so it wasn't working the very first time I ran it (ex. just testing that a stage popped up when I clicked the button). At the point when I expected it to work, it did work.
 
+The addition can be seen by clicking the button "View Turtle Images"
+
 ###Analysis
 
 It was a lot worse than I remembered. 
