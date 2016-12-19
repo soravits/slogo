@@ -51,8 +51,6 @@ public class Workspace implements UIAttributes{
 	}
 	
 	/**
-	 * @param variableMap
-	 * 
 	 * updates the workspace to show all variables the user has stored
 	 */
 

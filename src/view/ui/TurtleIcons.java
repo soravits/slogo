@@ -11,9 +11,15 @@ import java.io.File;
 import java.util.Map;
 
 /**
- * Created by Soravit on 12/17/2016.
+ * @author Soravit
  */
+
 public class TurtleIcons {
+
+    private static double IMAGE_SPACING = 20;
+    private static double SCROLLPANE_HEIGHT = 50;
+    private static double SCROLLPANE_WIDTH = 130;
+    private static double IMAGE_WIDTH = 25;
 
     private Group root;
     private ScrollPane scrollPane;
@@ -27,10 +33,10 @@ public class TurtleIcons {
         root = new Group();
         box = new HBox();
         scrollPane = new ScrollPane();
-        box.setSpacing(20);
+        box.setSpacing(IMAGE_SPACING);
         scrollPane.setContent(box);
-        scrollPane.setPrefWidth(130);
-        scrollPane.setPrefHeight(50);
+        scrollPane.setPrefWidth(SCROLLPANE_WIDTH);
+        scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         root.getChildren().add(scrollPane);
         update();
     }
@@ -43,7 +49,7 @@ public class TurtleIcons {
         box.getChildren().clear();
         for(Map.Entry<Double, ImageView> entry : turtleMap.entrySet()){
             ImageView imageView = new ImageView(entry.getValue().getImage());
-            imageView.setFitWidth(25);
+            imageView.setFitWidth(IMAGE_WIDTH);
             imageView.setPreserveRatio(true);
             imageView.setOnMouseClicked(event -> {
                 changeImage(imageView);
