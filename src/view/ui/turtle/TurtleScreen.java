@@ -1,5 +1,6 @@
 package view.ui.turtle;
 import java.util.Collection;
+import java.util.List;
 
 import controller.Controller;
 import javafx.event.EventHandler;
@@ -89,6 +90,14 @@ public class TurtleScreen implements UIAttributes{
 		return turtleSettings;
 	}
 	
+	public TurtleViewMap getTurtleViewMap(){
+		return turtleViewMap;
+	}
+	
+	public Collection<Double> getActiveIds(){
+		return activeTurtles;
+	}
+	
 	
 	/**
 	 * Sets turtles and lines to reflect initial turtle state and then changes made by command 
@@ -125,8 +134,8 @@ public class TurtleScreen implements UIAttributes{
 	/**
 	 * updates the image and formatting of each ImageView stored with each turtle index
 	 */
-	public void updateViewMapImages(){
-		for (double id : activeTurtles){
+	public void updateViewMapImages(Collection<Double> idsToChange){
+		for (double id : idsToChange){
 			root.getChildren().remove(turtleViewMap.getImage(id));
 			turtleViewMap.setImage(id, new ImageView(turtleSettings.getTurtleImage()));
 			formatTurtle(id);

@@ -3,6 +3,9 @@ package view.ui.turtle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -23,6 +26,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -73,7 +78,7 @@ public class TurtleSettings implements UIAttributes{
 	private static final int START_PALETTE_Y = 10;
 	private static final int PALETTE_Y_MULTIPLIER = 30;
 	private static final int PALETTE_X = 10;
-	private static final int PALETTE_WINDOW_SIZE = 200;
+	private static final int POPUP_WINDOW_SIZE = 400;
 	
 	private int controlX;
 	
@@ -86,6 +91,7 @@ public class TurtleSettings implements UIAttributes{
 		this.controller = controller;
 		initColorMap();
 		initImageMap();
+		initViewTurtleImagesButton();
 		initRoot();
 	}
 
@@ -190,6 +196,43 @@ public class TurtleSettings implements UIAttributes{
 			);
 	}
 	
+	private void initViewTurtleImagesButton(){
+		Button viewTurtleButton = uiBuilder.makeButton(
+				controlX, 
+				FIRST_CONTROL_Y + CONTROL_Y_SPACING*20, 
+				uiResources.getString("AllImagesButton"),
+				"turtlecontrol");
+		viewTurtleButton.setOnAction(e -> showTurtleImages());
+		root.getChildren().add(viewTurtleButton);
+	}
+	
+	private void showTurtleImages(){
+		Stage imageStage = new Stage();
+		VBox root = new VBox(10);
+		Scene imageScene = new Scene(root, POPUP_WINDOW_SIZE, POPUP_WINDOW_SIZE);
+		imageStage.setScene(imageScene);
+		TurtleViewMap turtleViewMap = turtle.getTurtleViewMap();
+		for (double id: turtleViewMap.getIDs()){
+			HBox row = new HBox(30);
+			Text t = new Text(Double.toString(id));
+			ImageView iv = new ImageView(turtleViewMap.getImage(id).getImage());
+			iv.setFitWidth(20);
+			iv.setFitHeight(20);
+			Collection<Double> idToChange = new ArrayList<Double>(Arrays.asList(id));
+			iv.setOnMouseClicked(e -> changeImageFromPopUp(idToChange, imageStage));			
+			row.getChildren().addAll(t, iv);
+			root.getChildren().add(row);		
+		}
+		imageStage.show();
+		
+	}
+	
+	private void changeImageFromPopUp(Collection<Double> idToChange, Stage s){		
+		chooseImage(idToChange);
+		s.close();
+		showTurtleImages();
+	}
+	
 	private void initBackgroundColorComboBox(){
 		backgroundComboBox = new ComboBox<Color>();
 		makeColorComboBox(backgroundComboBox, Color.WHITE, 0);
@@ -291,7 +334,7 @@ public class TurtleSettings implements UIAttributes{
 		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*14, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
-			chooseImage();		
+			chooseImage(turtle.getActiveIds());		
 			turtle.getRoot();		
 		});			
 		root.getChildren().addAll(image);
@@ -306,7 +349,7 @@ public class TurtleSettings implements UIAttributes{
 			for (Integer index: indexColorMap.keySet()){		
 				displayColorAndIndex(root, index);			
 			}
-			Scene scene = new Scene(root, PALETTE_WINDOW_SIZE, PALETTE_WINDOW_SIZE);
+			Scene scene = new Scene(root, POPUP_WINDOW_SIZE, POPUP_WINDOW_SIZE);
 			stage.setScene(scene);
 			stage.show();
 		});	
@@ -335,7 +378,7 @@ public class TurtleSettings implements UIAttributes{
 			for (Integer index: indexImageMap.keySet()){		
 				displayImageAndIndex(root, index);			
 			}		
-			Scene scene = new Scene(root, PALETTE_WINDOW_SIZE, PALETTE_WINDOW_SIZE);
+			Scene scene = new Scene(root, POPUP_WINDOW_SIZE, POPUP_WINDOW_SIZE);
 			stage.setScene(scene);
 			stage.show();
 		});		
@@ -355,7 +398,8 @@ public class TurtleSettings implements UIAttributes{
 		root.getChildren().addAll(t, iv);
 	}
 	
-	private void chooseImage(){
+	
+	private void chooseImage(Collection<Double> idsToChange){
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle(uiResources.getString("NewImageTitle"));
 		ExtensionFilter filter = new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"); 	//http://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html
@@ -365,7 +409,7 @@ public class TurtleSettings implements UIAttributes{
 			try {
 				BufferedImage bufferedImage = ImageIO.read(selectedFile);	//http://java-buddy.blogspot.com/2013/01/use-javafx-filechooser-to-open-image.html
 				turtleImage = SwingFXUtils.toFXImage(bufferedImage, null);
-				turtle.updateViewMapImages();
+				turtle.updateViewMapImages(idsToChange);
 				
 			} catch (IOException e) {
 				displayError.displayErrorDialogueBox(uiResources.getString("InvalidTurtleImage"));

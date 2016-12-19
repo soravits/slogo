@@ -35,7 +35,7 @@ public class Workspace implements UIAttributes{
 	public Workspace(int sceneWidth, Window window, CommandLine commandLine){
 		super();
 		this.window = window;
-		this.workspaceX = TURTLE_CANVAS_WIDTH + 160;
+		this.workspaceX = TURTLE_CANVAS_WIDTH + 190;
 		this.VBox=new VBox(20);
 		initWorkspace();
 	}
