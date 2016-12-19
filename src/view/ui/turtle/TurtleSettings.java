@@ -291,10 +291,14 @@ public class TurtleSettings implements UIAttributes{
 		Button image = uiBuilder.makeButton(controlX, FIRST_CONTROL_Y + CONTROL_Y_SPACING*14, 
 				uiResources.getString("Image"), "turtlecontrol");
 		image.setOnAction((event) -> {
-			chooseImage();		
-			turtle.getRoot();		
+			changeImage();	
 		});			
 		root.getChildren().addAll(image);
+	}
+	
+	public void changeImage() {
+		chooseImage();		
+		turtle.getRoot();	
 	}
 	
 	private void initColorPaletteButton(){

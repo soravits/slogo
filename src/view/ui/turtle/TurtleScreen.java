@@ -170,7 +170,8 @@ public class TurtleScreen implements UIAttributes{
 		stage.setX(originX + viewData.getTurtleX(id) + VIEW_TURTLE_STATE_WIDTH/2);
 		stage.setY(originY - viewData.getTurtleY(id) + VIEW_TURTLE_STATE_HEIGHT + TURTLE_SIZE*2);
 		setShowTurtleStateSettings(iv, stage);
-		setClickToChangeActiveState(iv, id);		
+		setClickToChangeActiveState(iv, id);
+		setClickToChooseImage(iv, id);
 	}
 
 	private void setClickToChangeActiveState(ImageView iv, double id){
@@ -180,6 +181,15 @@ public class TurtleScreen implements UIAttributes{
 				viewData.changeActiveTurtle(id);
 				setActiveTurtleToggle();
 				getRoot();
+			    }
+			});
+	}
+	
+	private void setClickToChooseImage(ImageView iv, double id){
+		iv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {	    	
+		    	turtleSettings.changeImage();
 			    }
 			});
 	}
