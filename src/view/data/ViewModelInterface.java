@@ -5,7 +5,7 @@ import java.util.Collection;
 import model.DisplayState;
 import model.TurtleMap;
 import model.WorkspaceState;
-
+//This entire file is my masterpiece. - Pim Chuaylua pc131
 public interface ViewModelInterface{
     
     public TurtleMap getTurtleMap();

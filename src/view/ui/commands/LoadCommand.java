@@ -15,11 +15,12 @@ import view.ui.UIAttributes;
 import view.ui.Window;
 import javafx.stage.Stage;
 
-/**
+/**This class is to provide a button to be added to the UI to load command on text file
  * 
- * @author Pim
+ * @author Pim Chuaylua
  *
  */
+
 
 public class LoadCommand implements UIAttributes{
 	private static int BUTTON_X = 320;
@@ -35,14 +36,14 @@ public class LoadCommand implements UIAttributes{
 		this.stage = new Stage();
 		this.window = window;
 		this.controller = window.getController();
-		makeButton();
+		initLoadCommandButton();
 	}
 	
 	public Button getRoot() {
 		return loadButton;
 	}
 	
-	public void makeButton() {
+	public void initLoadCommandButton() {
 		loadButton = new Button(uiResources.getString("LoadCommand"));
 		loadButton.setLayoutX(BUTTON_X);
 		loadButton.setLayoutY(BUTTON_Y);

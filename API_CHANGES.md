@@ -140,6 +140,64 @@ the addition of the other methods.
 -The core back-end is working on using interfacing to hide model data from the commands
 -The controller is working on creating a class hierarchy for defining the way different commands are parsed.
 
+**Final API**
+1. public methods in ViewDataInterface for the view to get data from the model but without being able to access the whole model
+    public TurtleMap getTurtleMap();
+	
+    public WorkspaceState getWorkspace ();
+    
+    public Collection<String> getCommandHistory();
+    
+    public Collection<String> getConsoleReturn();
+    
+    public Collection<Double> getIDs();
+    
+    public boolean getShowTurtle(double id);
+    
+    public double getTurtleAngle(double id);
+    
+    public double getTurtleX(double id);
+    
+    public double getTurtleY(double id);
+    
+    public boolean isPenDown(double id);
+    
+    public void changeActiveTurtle(double ID);
+    
+    public double[][] getLines (double ID);
+    
+    public Collection<Double> getTurtlesToModify();
+    
+    public DisplayState getDisplay();
+    
+    public double getBackGround ();
+    
+    public void setBackGround (double back);
+    
+    public double getPenColor ();
+    
+    public void setPenColor (double pencolor);
+    
+    public double getPenSize ();
+    
+    public void setPenSize (double pensize);
+
+    public double getPaletteIndex ();
+
+    public void setPaletteIndex (double paletteindex);
+
+    public double getShape ();
+    
+    public void setShape (double shp);
+
+    public int[][] getPaletteColors ();
+
+    public void setPaletteColors (int index, int[] paletteColor);
+2. public methods in ViewData to send command from the UI to controller and for the controlle to update the UI
+    public void sendCommand(String command,Controller controller)
+	
+	public void updateViewModel(Model Model) 
+
 Sections We Refactored during the Lab
 -We mostly did research during the lab for the changes we mentioned above that we plan to make
 
